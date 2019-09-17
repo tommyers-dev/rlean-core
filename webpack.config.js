@@ -1,9 +1,9 @@
-// webpack.config.js
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
+  mode: 'none',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'index.js',

@@ -1,6 +1,6 @@
 {
   "name": "react-ent",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React Enterprise Framework with Hooks",
   "main": "./index.js",
   "scripts": {
