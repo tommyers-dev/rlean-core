@@ -1,0 +1,47 @@
+{
+  "name": "react-ent",
+  "version": "1.0.0",
+  "description": "React Enterprise Framework with Hooks",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pntse/react-ent.git"
+  },
+  "keywords": [
+    "react",
+    "framework",
+    "enterprise",
+    "hooks"
+  ],
+  "author": "pntse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pntse/react-ent/issues"
+  },
+  "homepage": "https://github.com/pntse/react-ent#readme",
+  "peerDependencies": {
+    "react": "^16.9.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "localforage": "^1.7.3",
+    "react": "^16.9.0",
+    "webpack": "^4.40.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "webpack-cli": "^3.3.9"
+  }
+}
