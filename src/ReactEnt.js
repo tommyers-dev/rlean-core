@@ -1,5 +1,5 @@
 class ReactEnt {
-  init(config) {
+  async init(config) {
     this.config = config;
   }
 }

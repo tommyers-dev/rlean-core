@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { useStateValue } from '../core';
 import { request } from '../_internal/request';
 import { Store } from '../core';
-import { inspectClass } from 'framework/helpers/inspectClass';
-import { Compare } from '../helpers';
+import { inspectClass, Compare } from '../helpers';
 
 /**
  * useGet description here

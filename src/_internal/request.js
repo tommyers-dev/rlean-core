@@ -1,14 +1,11 @@
 import axios from 'axios';
-import { ReactEnt } from '../';
+import ReactEnt from '../ReactEnt';
+import { get } from '../helpers';
 
 export const request = async (payload, nullableParams, method) => {
-  // const headers = {
-  //   Authorization: `Bearer ${getToken()}`
-  // };
-
-  const headers = ReactEnt.config.api.headers;
-  const apiWrapper = ReactEnt.config.api.fetchWrapper;
-  const uri = ReactEnt.config.api.uri;
+  const headers = get(ReactEnt, 'config.api.headers', {});
+  const apiWrapper = get(ReactEnt, 'config.api.fetchWrapper', null);
+  const uri = get(ReactEnt, 'config.api.uri', '');
 
   // Replaces all the :key instances with the actual values given
   let path = payload.path
@@ -41,7 +38,11 @@ export const request = async (payload, nullableParams, method) => {
 
   switch (method) {
     case 'get':
-      return await apiWrapper(axios, uri + path, { headers });
+      if (apiWrapper) {
+        return await apiWrapper(axios, uri + path, { headers });
+      }
+
+      return await axios.get(uri + path, { headers });
     case 'post':
       return await axios({
         method: 'POST',

@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { useStateValue } from '../core';
 import { Store } from '../core';
-import { inspectClass } from 'framework/helpers/inspectClass';
-import Compare from '../helpers/Compare';
-import { request } from '../helpers/request';
-import { deepCopy } from 'framework/helpers/deepCopy';
+import { Compare, inspectClass, deepCopy } from '../helpers';
+import { request } from '../_internal/request';
 
 // TODO: Remove and create post method
 export default async function usePost(model, params, type = null) {

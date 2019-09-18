@@ -1,12 +1,9 @@
-import { ReactEnt } from '../';
+import ReactEnt from '../ReactEnt';
+import { get } from '../helpers';
 
-const combineState = () => {
+export const initialState = () => {
   // TODO: sort objects a - z
-  let models = {};
-
-  if (ReactEnt.config !== undefined && ReactEnt.config.models !== undefined) {
-    models = ReactEnt.config.models;
-  }
+  const models = get(ReactEnt, 'config.models', {});
 
   const objects = Object.values(models);
   let combinedInitialState = {};
@@ -17,5 +14,3 @@ const combineState = () => {
 
   return combinedInitialState;
 };
-
-export const initialState = combineState();
