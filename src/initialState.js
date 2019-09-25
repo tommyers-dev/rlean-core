@@ -1,5 +1,5 @@
-import ReactEnt from '../ReactEnt';
-import { get } from '../helpers';
+import { ReactEnt } from './';
+import { get } from '@react-ent/utils';
 
 export const initialState = () => {
   // TODO: sort objects a - z

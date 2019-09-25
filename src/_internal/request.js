@@ -1,10 +1,10 @@
 import axios from 'axios';
 import ReactEnt from '../ReactEnt';
-import { get } from '../helpers';
+import { get } from '@react-ent/utils';
+import { methods } from './methods';
 
 export const request = async (payload, nullableParams, method) => {
   const headers = get(ReactEnt, 'config.api.headers', {});
-  const apiWrapper = get(ReactEnt, 'config.api.fetchWrapper', null);
   const uri = get(ReactEnt, 'config.api.uri', '');
 
   // Replaces all the :key instances with the actual values given
@@ -37,49 +37,19 @@ export const request = async (payload, nullableParams, method) => {
   }
 
   switch (method) {
-    case 'get':
-      if (apiWrapper) {
-        return await apiWrapper(axios, uri + path, { headers });
-      }
-
+    case methods.GET:
       return await axios.get(uri + path, { headers });
-    case 'post':
+    case methods.POST:
+    case methods.DELETE:
+    case methods.PUT:
+    case methods.PATCH:
       return await axios({
-        method: 'POST',
+        method: method,
         url: uri + path,
         headers: headers,
         data: payload.body
       });
-    case 'put':
-      // TODO: implement put
-      break;
-    case 'delete':
-      // TODO: implement delete
-      break;
     default:
       return;
   }
-
-  // TODO: create config file that sets the fetch method so we can access it here
-
-  // create an error handler for api calls. dispatch an action to set a code
-  // that will get picked up by middleware and redirect to a configured page.
-  // if (typeof response !== 'undefined') {
-  //   switch (response.status) {
-  //     case 200:
-  //       return response.data;
-  //     case 401:
-  //     case 403:
-  //       // should dispatch an action
-  //       return 'access denied';
-  //     case 404:
-  //     case 500:
-  //     case 503:
-  //       return 'internal error';
-  //     default:
-  //       return 'unknown error';
-  //   }
-  // }
-
-  // return 'internal error';
 };

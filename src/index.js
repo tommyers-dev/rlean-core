@@ -1,9 +1,14 @@
+import { del } from './del';
+import { initialState } from './initialState';
+import { Model } from './Model';
+import { patch } from './patch';
+import { post } from './post';
+import { put } from './put';
 import ReactEnt from './ReactEnt';
-import Store from './core/Store';
-import { StateContext, StateProvider, useStateValue } from './core/State';
-import useGet from './hooks/useGet';
+import { reducer } from './reducer';
+import { save } from './save';
+import { StateContext, StateProvider, useStateValue } from './State';
+import Store from './Store';
+import useGet from './useGet';
 
-export * from './core/Model';
-export { Store, StateContext, StateProvider, useStateValue, ReactEnt, useGet };
-export * from './core/initialState';
-export * from './core/reducer';
+export { del, initialState, Model, patch, post, put, ReactEnt, reducer, save, StateContext, StateProvider, Store, useGet, useStateValue };

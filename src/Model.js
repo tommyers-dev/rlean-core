@@ -23,6 +23,10 @@ export class Model extends Object {
     return null;
   }
 
+  get patchUri() {
+    return null;
+  }
+
   get nullableParams() {
     return false;
   }
@@ -48,15 +52,25 @@ export class Model extends Object {
    * values from the database and will do a deepCompare to check for changes.
    * If there are changes, it will dispatch an action to update the object.
    */
-  get optimizeLoading() {
+  get progressiveLoading() {
     return false;
   }
 
   /**
-   * If set, will create a timer in a web worker that will re-sync the data.
+   * If set, will create a timer (TODO: in a web worker) that will re-sync the data.
    * Should be in milliseconds.
    */
   get syncInterval() {
+    return null;
+  }
+
+  /**
+   * If set, will make a call to the API after a certain amount of time (in milliseconds)
+   * has elapsed. If the time has not elapsed, it will use the store. This will not
+   * cause the data to refresh has soon as the time has elapsed, but new component
+   * renders will trigger a new API call.
+   */
+  get syncAfterTimeElapsed() {
     return null;
   }
 

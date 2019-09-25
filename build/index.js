@@ -91,30 +91,34 @@ module.exports =
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReactEnt", function() { return _ReactEnt__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+/* harmony import */ var _initialState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return _initialState__WEBPACK_IMPORTED_MODULE_0__["initialState"]; });
 
-/* harmony import */ var _core_Store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return _core_Store__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return _Model__WEBPACK_IMPORTED_MODULE_1__["Model"]; });
 
-/* harmony import */ var _core_State__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return _core_State__WEBPACK_IMPORTED_MODULE_2__["StateContext"]; });
+/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReactEnt", function() { return _ReactEnt__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return _core_State__WEBPACK_IMPORTED_MODULE_2__["StateProvider"]; });
+/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return _reducer__WEBPACK_IMPORTED_MODULE_3__["reducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return _core_State__WEBPACK_IMPORTED_MODULE_2__["useStateValue"]; });
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "save", function() { return _save__WEBPACK_IMPORTED_MODULE_4__["save"]; });
 
-/* harmony import */ var _hooks_useGet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useGet", function() { return _hooks_useGet__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _State__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return _State__WEBPACK_IMPORTED_MODULE_5__["StateContext"]; });
 
-/* harmony import */ var _core_Model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return _core_Model__WEBPACK_IMPORTED_MODULE_4__["Model"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return _State__WEBPACK_IMPORTED_MODULE_5__["StateProvider"]; });
 
-/* harmony import */ var _core_initialState__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return _core_initialState__WEBPACK_IMPORTED_MODULE_5__["initialState"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return _State__WEBPACK_IMPORTED_MODULE_5__["useStateValue"]; });
 
-/* harmony import */ var _core_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(16);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return _core_reducer__WEBPACK_IMPORTED_MODULE_6__["reducer"]; });
+/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return _Store__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
+/* harmony import */ var _useGet__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(12);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useGet", function() { return _useGet__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+
 
 
 
@@ -127,6 +131,895 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var initialState = function initialState() {
+  // TODO: sort objects a - z
+  var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["get"])(___WEBPACK_IMPORTED_MODULE_0__["ReactEnt"], 'config.models', {});
+  var objects = Object.values(models);
+  var combinedInitialState = {};
+
+  for (var i = 0; i < objects.length; i++) {
+    Object.assign(combinedInitialState, objects[i].prototype.initialState);
+  }
+
+  return combinedInitialState;
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Compare__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Compare", function() { return _Compare__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _deepCopy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "deepCopy", function() { return _deepCopy__WEBPACK_IMPORTED_MODULE_1__["deepCopy"]; });
+
+/* harmony import */ var _formatPhoneNumber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "formatPhoneNumber", function() { return _formatPhoneNumber__WEBPACK_IMPORTED_MODULE_2__["formatPhoneNumber"]; });
+
+/* harmony import */ var _get__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "get", function() { return _get__WEBPACK_IMPORTED_MODULE_3__["get"]; });
+
+/* harmony import */ var _has__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "has", function() { return _has__WEBPACK_IMPORTED_MODULE_4__["has"]; });
+
+/* harmony import */ var _makeCamelCaseNormal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeCamelCaseNormal", function() { return _makeCamelCaseNormal__WEBPACK_IMPORTED_MODULE_5__["makeCamelCaseNormal"]; });
+
+/* harmony import */ var _objectIndexOf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "objectIndexOf", function() { return _objectIndexOf__WEBPACK_IMPORTED_MODULE_6__["objectIndexOf"]; });
+
+/* harmony import */ var _removeDuplicates__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeDuplicates", function() { return _removeDuplicates__WEBPACK_IMPORTED_MODULE_7__["removeDuplicates"]; });
+
+/* harmony import */ var _removeNonNumericChars__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeNonNumericChars", function() { return _removeNonNumericChars__WEBPACK_IMPORTED_MODULE_8__["removeNonNumericChars"]; });
+
+/* harmony import */ var _uuid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(10);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "uuid", function() { return _uuid__WEBPACK_IMPORTED_MODULE_9__["uuid"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _deepCopy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var Compare =
+/*#__PURE__*/
+function () {
+  function Compare() {
+    var _this = this;
+
+    _classCallCheck(this, Compare);
+
+    _defineProperty(this, "deepCompare", function (a, b) {
+      var strictEquality = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+      var _resetLog = _this._resetLog,
+          _incrementDepth = _this._incrementDepth,
+          _pass = _this._pass,
+          _fail = _this._fail;
+      /* #region  Reset log if necessary */
+
+      _resetLog();
+      /* #endregion */
+
+      /* #region  Track recursion depth */
+
+
+      _incrementDepth();
+      /* #endregion */
+
+      /* #region  Undefined */
+
+
+      if (a === undefined && b === undefined) {
+        // both values are undefined, so pass
+        return _pass();
+      } else if (a === undefined || b === undefined) {
+        return _fail(a, b, 'One of the values is undefined');
+      }
+      /* #endregion */
+
+      /* #region  Nulls */
+
+
+      if (a === null && b === null) {
+        // both values are null, so pass
+        return _pass();
+      } else if (a === null || b === null) {
+        // only one value is null
+        return _fail(a, b, 'One of the values is null');
+      }
+      /* #endregion */
+
+      /* #region  Function comparison */
+
+
+      if (typeof a === 'function' && typeof b === 'function') {
+        var isEqual = a.toString() === b.toString();
+
+        if (!isEqual) {
+          return _fail(a, b, 'Functions are not equal');
+        }
+
+        return _pass();
+      } else if (typeof a === 'function' || typeof b === 'function') {
+        return _fail(a, b, 'The values are not the same type');
+      }
+      /* #endregion */
+
+      /* #region  Neither values are objects */
+
+
+      if (_typeof(a) !== 'object' && _typeof(b) !== 'object') {
+        // Values are not objects so do a simple comparison without type checking
+        // unless strictEquality is true.
+        var _isEqual = a == b;
+
+        var isStrictEqual = a === b;
+
+        if (strictEquality && !isStrictEqual) {
+          var msg = _isEqual ? 'The values are different types' : 'The values are not equal';
+          return _fail(a, b, msg);
+        } else if (!_isEqual) {
+          return _fail(a, b, 'The values are not equal');
+        }
+
+        return _pass();
+      } else if (_typeof(a) !== 'object' || _typeof(b) !== 'object') {
+        return _fail(a, b, 'The values are different types');
+      }
+      /* #endregion */
+
+      /* #region  values are objects so we should deepCopy before going further */
+
+
+      a = Object(_deepCopy__WEBPACK_IMPORTED_MODULE_0__["deepCopy"])(a);
+      b = Object(_deepCopy__WEBPACK_IMPORTED_MODULE_0__["deepCopy"])(b);
+      /* #endregion */
+
+      /* #region  Verify the objects have the same prototype chains */
+
+      if (a.constructor !== b.constructor) {
+        return _fail(a, b, 'The objects have different proptype chains');
+      }
+      /* #endregion */
+
+      /* #region  Date comparison */
+
+
+      if (a instanceof Date && b instanceof Date) {
+        // compare dates
+        var _isEqual2 = new Date(a.getTime()).toString() === new Date(b.getTime()).toString();
+
+        if (!_isEqual2) {
+          return _fail(a, b, 'The dates are not equal');
+        }
+
+        return _pass();
+      } else if (a instanceof Date || b instanceof Date) {
+        // only one value is a Date
+        return _fail(a, b, 'The values are not the same type');
+      }
+      /* #endregion */
+
+      /* #region  Array comparison */
+
+
+      if (a instanceof Array && b instanceof Array) {
+        // Check array lengths. If not of equal length, then return false.
+        if (a.length !== b.length) {
+          return _fail(a, b, 'The arrays are different lengths');
+        }
+
+        for (var aI = a.length - 1; aI >= 0; --aI) {
+          /* #region  What's going on here... */
+          // Iterate through the first array, getting the value at each index.
+          // Find that value in the other array.
+          // If it's an object, need to search for that object,
+          // iterate through the second array doing a deepCompare.
+          // Splice from first array. if match is found in second array,
+          // then splice from that array.
+          // After the first array has been iterated over,
+          // do a comparison of the array lengths to determine if the arrays are equal.
+
+          /* #endregion */
+          var x = a[aI];
+
+          if (_typeof(x) === 'object') {
+            _this.depthTracking.path.push("[".concat(aI, "]"));
+
+            for (var bI = b.length - 1; bI >= 0; --bI) {
+              var _isEqual3 = _this.deepCompare(x, b[bI], strictEquality).isEqual;
+
+              if (_isEqual3) {
+                b.splice(bI, 1);
+                break;
+              }
+            }
+
+            a.splice(aI, 1);
+
+            if (a.length !== b.length) {
+              return _fail(a, b, 'The arrays contain different values');
+            } else {
+              _this.depthTracking.path.splice(_this.depthTracking.path.length - 1, 1);
+            }
+          } else if (typeof x === 'function') {
+            for (var _bI = b.length - 1; _bI >= 0; --_bI) {
+              var _isEqual4 = x.toString() === b[_bI].toString();
+
+              if (_isEqual4) {
+                b.splice(_bI, 1);
+                break;
+              }
+            }
+
+            a.splice(aI, 1);
+          } else if (strictEquality) {
+            // Search for that value in the other array and get the index.
+            var _bI2 = b.indexOf(x);
+
+            if (_bI2 === -1) {
+              // Value didn't exist. Exit comparison.
+              return _fail(a, b, 'Value in first array did not exist in second array');
+            } else {
+              // Value exists. Remove both values from arrays.
+              a.splice(aI, 1);
+              b.splice(_bI2, 1);
+            }
+          } else {
+            for (var _bI3 = b.length - 1; _bI3 >= 0; --_bI3) {
+              var _isEqual5 = x == b[_bI3];
+
+              if (_isEqual5) {
+                // Remove value from b if there is a match.
+                b.splice(_bI3, 1);
+                break;
+              }
+            } // Remove value from a regardless of match.
+
+
+            a.splice(aI, 1);
+          }
+        } // After first array is empty, check against length of second array.
+        // if lengths are not equal, then arrays are not equal.
+
+
+        if (a.length !== b.length) {
+          return _fail(a, b, 'Value in second array did not exist in first array');
+        } // Arrays were the same length.
+
+
+        return _pass();
+      } else if (a instanceof Array || b instanceof Array) {
+        // Values are different types. Exit comparison.
+        return _fail(a, b, 'The values are not the same type');
+      }
+      /* #endregion */
+
+      /* #region  Object comparison */
+
+
+      if (a instanceof Object && b instanceof Object) {
+        // First check for an equal number of properties.
+        if (Object.keys(a).length !== Object.keys(b).length) {
+          return _fail(a, b, 'The objects have different properties');
+        }
+
+        for (var propertyName in a) {
+          /* #region  What's going on here... */
+          // Need to type check these.
+          // If the property is an object then call deepCompare
+          // to break down the object a little further.
+          // If not an object, handle function and primitive comparisons right here.
+
+          /* #endregion */
+          if (_typeof(a[propertyName]) === 'object' && _typeof(b[propertyName]) === 'object') {
+            _this.depthTracking.path.push(propertyName);
+
+            var _isEqual6 = _this.deepCompare(a[propertyName], b[propertyName], strictEquality).isEqual;
+
+            if (!_isEqual6) {
+              return _fail(a, b, "The objects' properties have different values");
+            } else {
+              _this.depthTracking.path.splice(_this.depthTracking.path.length - 1, 1);
+            }
+          } else if (_typeof(a[propertyName]) === 'object' || _typeof(b[propertyName]) === 'object') {
+            return _fail(a, b, 'Only one of the properties is an object');
+          } else if (typeof a[propertyName] === 'function' && typeof b[propertyName] === 'function') {
+            if (a[propertyName].toString() !== b[propertyName].toString()) {
+              return _fail(a, b, 'The functions are different');
+            }
+          } else if (typeof a[propertyName] === 'function' || typeof b[propertyName] === 'function') {
+            return _fail(a, b, 'Only one of the values is a function');
+          } else if (strictEquality && a[propertyName] !== b[propertyName]) {
+            var _msg = a[propertyName] == b[propertyName] ? 'The values are different types' : 'The values are not equal';
+
+            return _fail(a, b, _msg);
+          } else if (a[propertyName] != b[propertyName]) {
+            return _fail(a, b, 'The values are not equal');
+          }
+        }
+
+        return _pass();
+      } else if (a instanceof Object || b instanceof Object) {
+        // Values are different types.
+        return _fail(a, b, 'Only one of the values is an object');
+      }
+      /* #endregion */
+
+    });
+
+    _defineProperty(this, "consoleLog", function () {
+      var shouldLog = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      if (shouldLog && typeof _this.log.message !== 'undefined') {
+        console.log("######## %cdeepCompare inequality found! ".concat(_this.log.message, ": %c").concat(_this.log.path, " %c").concat(JSON.stringify(_this.log.a), "%c, %c").concat(JSON.stringify(_this.log.b), "%c"), _this.standardStyles, _this.pathStyles, _this.errorStyles, _this.standardStyles, _this.errorStyles, _this.standardStyles);
+      }
+
+      return _this;
+    });
+
+    _defineProperty(this, "assert", function (assertTrue) {
+      if (assertTrue && _this.value !== assertTrue) {
+        console.error("######## %cdeepCompare inequality found! ".concat(_this.log.message, ": %c").concat(_this.log.path, " %c").concat(JSON.stringify(_this.log.a), "%c, %c").concat(JSON.stringify(_this.log.b), "%c"), _this.standardStyles, _this.pathStyles, _this.errorStyles, _this.standardStyles, _this.errorStyles, _this.standardStyles);
+      } else if (!assertTrue && _this.value !== assertTrue) {
+        console.error("######## deepCompare error! The values are equal but expected inequality.");
+      }
+
+      return _this;
+    });
+
+    _defineProperty(this, "attachLogger", function (clientLogger) {
+      var enableLogger = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+      if (typeof clientLogger === 'function' && typeof _this.clientLogger === 'undefined' && enableLogger && typeof _this.log.message !== 'undefined') {
+        clientLogger("######## deepCompare inequality found! ".concat(_this.log.message, ": ").concat(_this.log.path, " ").concat(JSON.stringify(_this.log.a), ", ").concat(JSON.stringify(_this.log.b)));
+      }
+
+      return _this;
+    });
+
+    _defineProperty(this, "_fail", function (a, b, message) {
+      _this._logOutput(a, b, message);
+
+      _this._decrementDepth();
+
+      _this.value = false;
+      return _this;
+    });
+
+    _defineProperty(this, "_pass", function () {
+      _this._decrementDepth();
+
+      _this.value = true;
+      return _this;
+    });
+
+    _defineProperty(this, "_logOutput", function (a, b, message) {
+      // Only capture the first error, not the errors further up.
+      if (typeof _this.log.message === 'undefined') {
+        var path = '';
+
+        if (_this.depthTracking.path.length > 0) {
+          path = "obj.".concat(_this.depthTracking.path.join('.'));
+          path = path.replace(/(?:\.\[)/g, '[');
+        }
+
+        _this.log.message = message;
+        _this.log.a = a;
+        _this.log.b = b;
+        _this.log.path = path;
+      }
+    });
+
+    _defineProperty(this, "_incrementDepth", function () {
+      if (typeof _this.depthTracking.depth === 'undefined') {
+        _this.depthTracking.depth = 0;
+        _this.depthTracking.path = [];
+      } else {
+        _this.depthTracking.depth++;
+      }
+    });
+
+    _defineProperty(this, "_decrementDepth", function () {
+      if (typeof _this.depthTracking.depth !== 'undefined' && _this.depthTracking.depth > 0) {
+        _this.depthTracking.depth--;
+      }
+    });
+
+    _defineProperty(this, "_resetLog", function () {
+      if (typeof _this.depthTracking.depth === 'undefined' || _this.depthTracking.depth === 0) {
+        _this.log = {};
+      }
+    });
+
+    this.value = null;
+    this.depthTracking = {};
+    this.log = {};
+    this.errorStyles = 'color:red;';
+    this.standardStyles = 'color:black;';
+    this.pathStyles = 'font-style:italic;color:blue;';
+  }
+  /**
+   * Must be called at the end of the chain to return the result of the comparison.
+   */
+
+
+  _createClass(Compare, [{
+    key: "isEqual",
+    get: function get() {
+      return this.value;
+    }
+    /**
+     * Set strictEquality to false to coerce conversion if values are different types. Defaults to true.
+     *
+     * @param {*} a
+     * @param {*} b
+     * @param {boolean} strictEquality
+     */
+
+    /* #endregion */
+
+  }]);
+
+  return Compare;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (new Compare());
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deepCopy", function() { return deepCopy; });
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var deepCopy = function deepCopy(obj) {
+  if (_typeof(obj) !== 'object' || obj === null) {
+    return obj;
+  }
+
+  if (obj instanceof Date) {
+    return new Date(obj.getTime());
+  }
+
+  if (obj instanceof Array) {
+    return obj.reduce(function (arr, item, i) {
+      arr[i] = deepCopy(item);
+      return arr;
+    }, []);
+  }
+
+  if (obj instanceof Object) {
+    return Object.keys(obj).reduce(function (newObj, key) {
+      newObj[key] = deepCopy(obj[key]);
+      return newObj;
+    }, {});
+  }
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatPhoneNumber", function() { return formatPhoneNumber; });
+/* harmony import */ var _removeNonNumericChars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+
+var formatPhoneNumber = function formatPhoneNumber(phoneNumber) {
+  phoneNumber = typeof phoneNumber === 'number' ? phoneNumber.toString() : phoneNumber;
+
+  if (phoneNumber.length < 10) {
+    console.warn('phone-number needs to be at least 10 digits long');
+    return;
+  }
+
+  var strippedNumber = Object(_removeNonNumericChars__WEBPACK_IMPORTED_MODULE_0__["removeNonNumericChars"])(phoneNumber);
+  return "(".concat(strippedNumber.slice(0, 3), ") ").concat(strippedNumber.slice(3, 6), "-").concat(strippedNumber.slice(6, 10));
+};
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeNonNumericChars", function() { return removeNonNumericChars; });
+var removeNonNumericChars = function removeNonNumericChars(value) {
+  return value.replace(/\D/g, '');
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get", function() { return get; });
+var get = function get(obj, path, defaultValue) {
+  return path.split('.').reduce(function (a, c) {
+    return a != null && typeof a != 'undefined' && a[c] != null && typeof a[c] != 'undefined' ? a[c] : defaultValue != null ? defaultValue : null;
+  }, obj);
+};
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "has", function() { return has; });
+/* harmony import */ var _get__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+
+var has = function has(obj, path) {
+  var value = Object(_get__WEBPACK_IMPORTED_MODULE_0__["get"])(obj, path);
+  return value == null ? false : true;
+};
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeCamelCaseNormal", function() { return makeCamelCaseNormal; });
+var makeCamelCaseNormal = function makeCamelCaseNormal(value) {
+  return value.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
+    return str.toUpperCase();
+  });
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "objectIndexOf", function() { return objectIndexOf; });
+/* harmony import */ var _Compare__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+/**
+ * Returns an object's index in an array of objects.
+ *
+ * @param {array} arr
+ * @param {object} obj
+ */
+
+var objectIndexOf = function objectIndexOf(arr, obj) {
+  for (var i = 0; i < arr.length; i++) {
+    if (_Compare__WEBPACK_IMPORTED_MODULE_0__["default"].deepCompare(arr[i], obj).isEqual) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeDuplicates", function() { return removeDuplicates; });
+/* harmony import */ var _objectIndexOf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+
+var removeDuplicates = function removeDuplicates(arr) {
+  var newArr = [];
+
+  for (var i = 0; i < arr.length; i++) {
+    var index = Object(_objectIndexOf__WEBPACK_IMPORTED_MODULE_0__["objectIndexOf"])(newArr, arr[i]);
+
+    if (index === -1) {
+      newArr.push(arr[i]);
+    }
+  }
+
+  return newArr;
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uuid", function() { return uuid; });
+var uuid = function uuid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0,
+        v = c == 'x' ? r : r & 0x3 | 0x8;
+    return v.toString(16);
+  });
+};
+
+/***/ })
+/******/ ]);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return Model; });
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var Model =
+/*#__PURE__*/
+function (_Object) {
+  _inherits(Model, _Object);
+
+  function Model() {
+    _classCallCheck(this, Model);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Model).apply(this, arguments));
+  }
+
+  _createClass(Model, [{
+    key: "reducer",
+    value: function reducer() {
+      this["throw"]('reducer(state, action)');
+    }
+    /**
+     * This is your main action. This is what will be called to update your
+     * object in state. Type is not needed if there is only one type in
+     * your model.
+     *
+     * @param {Object} stateObj
+     * @param {string} type
+     */
+
+  }, {
+    key: "updateState",
+    value: function updateState(stateObj, type) {
+      this["throw"]('updateState(stateObj, type)');
+    }
+  }, {
+    key: "throw",
+    value: function _throw(functionName) {
+      throw new Error("Model error: ".concat(functionName, " must be implemented in the derived class."));
+    }
+  }, {
+    key: "types",
+    get: function get() {
+      return this["throw"]('types getter');
+    }
+  }, {
+    key: "initialState",
+    get: function get() {
+      return this["throw"]('initialState getter');
+    }
+  }, {
+    key: "getUri",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "postUri",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "putUri",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "deleteUri",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "nullableParams",
+    get: function get() {
+      return false;
+    }
+    /**
+     * If false, data isn't stored to storage. Api is called every time.
+     * This will override preferStore (because there's no store)
+     */
+
+  }, {
+    key: "persistData",
+    get: function get() {
+      return true;
+    }
+    /**
+     * Will rely on storage instead of calling the API repeatedly.
+     * This will override optimizeLoading.
+     */
+
+  }, {
+    key: "preferStore",
+    get: function get() {
+      return false;
+    }
+    /**
+     * Will return data in storage while the API retrieves the updated
+     * values from the database and will do a deepCompare to check for changes.
+     * If there are changes, it will dispatch an action to update the object.
+     */
+
+  }, {
+    key: "progressiveLoading",
+    get: function get() {
+      return false;
+    }
+    /**
+     * If set, will create a timer in a web worker that will re-sync the data.
+     * Should be in milliseconds.
+     */
+
+  }, {
+    key: "syncInterval",
+    get: function get() {
+      return null;
+    }
+  }]);
+
+  return Model;
+}(_wrapNativeSuper(Object));
+
+/***/ }),
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -182,12 +1075,171 @@ function () {
 /* harmony default export */ __webpack_exports__["default"] = (new ReactEnt());
 
 /***/ }),
-/* 2 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var localforage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+var reducer = function reducer(_ref, action) {
+  var state = _extends({}, _ref);
+
+  // TODO: sort objects a - z
+  var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["get"])(___WEBPACK_IMPORTED_MODULE_0__["ReactEnt"], 'config.models', {});
+  var objects = Object.values(models);
+  var combinedReducer = {};
+
+  for (var i = 0; i < objects.length; i++) {
+    var key = Object.keys(objects[i].prototype.initialState)[0].toString();
+    var value = state[key];
+    Object.assign(combinedReducer, _defineProperty({}, key, objects[i].prototype.reducer(value, action)));
+  }
+
+  var nextState = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(state);
+  var stateKey = Object.keys(action)[1].toString();
+  var stateValue = action[stateKey];
+  nextState[stateKey] = stateValue;
+
+  if (Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["get"])(___WEBPACK_IMPORTED_MODULE_0__["ReactEnt"], 'config.logToConsole', true)) {
+    console.log("dispatching", action);
+    console.log("next state", nextState);
+  }
+
+  return combinedReducer;
+};
+
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "save", function() { return save; });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/**
+ * Save an object to state, and optionally to store if persistData
+ * is true (default). Don't check if current state and new value are different
+ * so if there is an infinite loop, the developer will know right away in the
+ * console log.
+ *
+ * @param {Object} model
+ * @param {Object} newValue
+ * @param {function} dispatch
+ * @param {string} type
+ */
+
+var save =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(model, newValue, dispatch) {
+    var type,
+        persistData,
+        key,
+        _args = arguments;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            type = _args.length > 3 && _args[3] !== undefined ? _args[3] : null;
+            persistData = model.persistData;
+
+            if (!(newValue === undefined)) {
+              _context.next = 4;
+              break;
+            }
+
+            return _context.abrupt("return");
+
+          case 4:
+            if (!persistData) {
+              _context.next = 8;
+              break;
+            }
+
+            key = Object.keys(model.initialState)[0].toString();
+            _context.next = 8;
+            return ___WEBPACK_IMPORTED_MODULE_0__["Store"].set(key, newValue);
+
+          case 8:
+            _context.t0 = dispatch;
+            _context.next = 11;
+            return model.updateState(newValue, type);
+
+          case 11:
+            _context.t1 = _context.sent;
+            _context.next = 14;
+            return (0, _context.t0)(_context.t1);
+
+          case 14:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function save(_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return StateContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return StateProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return useStateValue; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+
+
+var StateContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])();
+var StateProvider = function StateProvider(_ref) {
+  var children = _ref.children;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StateContext.Provider, {
+    value: Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(___WEBPACK_IMPORTED_MODULE_1__["reducer"], Object(___WEBPACK_IMPORTED_MODULE_1__["initialState"])())
+  }, children);
+};
+var useStateValue = function useStateValue() {
+  return Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(StateContext);
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("react");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var localforage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
 /* harmony import */ var localforage__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(localforage__WEBPACK_IMPORTED_MODULE_0__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -477,7 +1529,7 @@ function () {
 /* harmony default export */ __webpack_exports__["default"] = (new Store());
 
 /***/ }),
-/* 3 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var require;var require;/*!
@@ -3278,10 +4330,10 @@ module.exports = localforage_js;
 },{"3":3}]},{},[4])(4)
 });
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
 
 /***/ }),
-/* 4 */
+/* 11 */
 /***/ (function(module, exports) {
 
 var g;
@@ -3307,895 +4359,19 @@ module.exports = g;
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return StateContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return StateProvider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return useStateValue; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-
-
-var StateContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])();
-var StateProvider = function StateProvider(_ref) {
-  var children = _ref.children;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StateContext.Provider, {
-    value: Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(___WEBPACK_IMPORTED_MODULE_1__["reducer"], Object(___WEBPACK_IMPORTED_MODULE_1__["initialState"])())
-  }, children);
-};
-var useStateValue = function useStateValue() {
-  return Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(StateContext);
-};
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("react");
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return _Store__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-/* harmony import */ var _State__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return _State__WEBPACK_IMPORTED_MODULE_1__["StateContext"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return _State__WEBPACK_IMPORTED_MODULE_1__["StateProvider"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return _State__WEBPACK_IMPORTED_MODULE_1__["useStateValue"]; });
-
-/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return _Model__WEBPACK_IMPORTED_MODULE_2__["Model"]; });
-
-/* harmony import */ var _initialState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return _initialState__WEBPACK_IMPORTED_MODULE_3__["initialState"]; });
-
-/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(16);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return _reducer__WEBPACK_IMPORTED_MODULE_4__["reducer"]; });
-
-
-
-
-
-
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return Model; });
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
-
-function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
-
-function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-var Model =
-/*#__PURE__*/
-function (_Object) {
-  _inherits(Model, _Object);
-
-  function Model() {
-    _classCallCheck(this, Model);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Model).apply(this, arguments));
-  }
-
-  _createClass(Model, [{
-    key: "reducer",
-    value: function reducer() {
-      this["throw"]('reducer(state, action)');
-    }
-    /**
-     * This is your main action. This is what will be called to update your
-     * object in state. Type is not needed if there is only one type in
-     * your model.
-     *
-     * @param {Object} stateObj
-     * @param {string} type
-     */
-
-  }, {
-    key: "updateState",
-    value: function updateState(stateObj, type) {
-      this["throw"]('updateState(stateObj, type)');
-    }
-  }, {
-    key: "throw",
-    value: function _throw(functionName) {
-      throw new Error("Model error: ".concat(functionName, " must be implemented in the derived class."));
-    }
-  }, {
-    key: "types",
-    get: function get() {
-      return this["throw"]('types getter');
-    }
-  }, {
-    key: "initialState",
-    get: function get() {
-      return this["throw"]('initialState getter');
-    }
-  }, {
-    key: "getUri",
-    get: function get() {
-      return null;
-    }
-  }, {
-    key: "postUri",
-    get: function get() {
-      return null;
-    }
-  }, {
-    key: "putUri",
-    get: function get() {
-      return null;
-    }
-  }, {
-    key: "deleteUri",
-    get: function get() {
-      return null;
-    }
-  }, {
-    key: "nullableParams",
-    get: function get() {
-      return false;
-    }
-    /**
-     * If false, data isn't stored to storage. Api is called every time.
-     * This will override preferStore (because there's no store)
-     */
-
-  }, {
-    key: "persistData",
-    get: function get() {
-      return true;
-    }
-    /**
-     * Will rely on storage instead of calling the API repeatedly.
-     * This will override optimizeLoading.
-     */
-
-  }, {
-    key: "preferStore",
-    get: function get() {
-      return false;
-    }
-    /**
-     * Will return data in storage while the API retrieves the updated
-     * values from the database and will do a deepCompare to check for changes.
-     * If there are changes, it will dispatch an action to update the object.
-     */
-
-  }, {
-    key: "optimizeLoading",
-    get: function get() {
-      return false;
-    }
-    /**
-     * If set, will create a timer in a web worker that will re-sync the data.
-     * Should be in milliseconds.
-     */
-
-  }, {
-    key: "syncInterval",
-    get: function get() {
-      return null;
-    }
-  }]);
-
-  return Model;
-}(_wrapNativeSuper(Object));
-
-/***/ }),
-/* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
-/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
-
-
-var initialState = function initialState() {
-  // TODO: sort objects a - z
-  var models = Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.models', {});
-  var objects = Object.values(models);
-  var combinedInitialState = {};
-
-  for (var i = 0; i < objects.length; i++) {
-    Object.assign(combinedInitialState, objects[i].prototype.initialState);
-  }
-
-  return combinedInitialState;
-};
-
-/***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Compare__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Compare", function() { return _Compare__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-/* harmony import */ var _deepCopy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "deepCopy", function() { return _deepCopy__WEBPACK_IMPORTED_MODULE_1__["deepCopy"]; });
-
-/* harmony import */ var _get__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "get", function() { return _get__WEBPACK_IMPORTED_MODULE_2__["get"]; });
-
-/* harmony import */ var _has__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "has", function() { return _has__WEBPACK_IMPORTED_MODULE_3__["has"]; });
-
-/* harmony import */ var _inspectClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(15);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inspectClass", function() { return _inspectClass__WEBPACK_IMPORTED_MODULE_4__["inspectClass"]; });
-
-
-
-
-
-
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _deepCopy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var Compare =
-/*#__PURE__*/
-function () {
-  function Compare() {
-    _classCallCheck(this, Compare);
-
-    this.value = null;
-    this.depthTracking = {};
-    this.log = {};
-    this.errorStyles = 'color:red;';
-    this.standardStyles = 'color:black;';
-    this.pathStyles = 'font-style:italic;color:blue;';
-  }
-  /**
-   * Must be called at the end of the chain to return the result of the comparison.
-   */
-
-
-  _createClass(Compare, [{
-    key: "deepCompare",
-
-    /**
-     * Set strictEquality to false to coerce conversion if values are different types. Defaults to true.
-     *
-     * @param {*} a
-     * @param {*} b
-     * @param {boolean} strictEquality
-     */
-    value: function deepCompare(a, b) {
-      var strictEquality = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-      var _resetLog = this._resetLog,
-          _incrementDepth = this._incrementDepth,
-          _pass = this._pass,
-          _fail = this._fail;
-      /* #region  Reset log if necessary */
-
-      _resetLog();
-      /* #endregion */
-
-      /* #region  Track recursion depth */
-
-
-      _incrementDepth();
-      /* #endregion */
-
-      /* #region  Undefined */
-
-
-      if (a === undefined && b === undefined) {
-        // both values are undefined, so pass
-        return _pass();
-      } else if (a === undefined || b === undefined) {
-        return _fail(a, b, 'One of the values is undefined');
-      }
-      /* #endregion */
-
-      /* #region  Nulls */
-
-
-      if (a === null && b === null) {
-        // both values are null, so pass
-        return _pass();
-      } else if (a === null || b === null) {
-        // only one value is null
-        return _fail(a, b, 'One of the values is null');
-      }
-      /* #endregion */
-
-      /* #region  Function comparison */
-
-
-      if (typeof a === 'function' && typeof b === 'function') {
-        var isEqual = a.toString() === b.toString();
-
-        if (!isEqual) {
-          return _fail(a, b, 'Functions are not equal');
-        }
-
-        return _pass();
-      } else if (typeof a === 'function' || typeof b === 'function') {
-        return _fail(a, b, 'The values are not the same type');
-      }
-      /* #endregion */
-
-      /* #region  Neither values are objects */
-
-
-      if (_typeof(a) !== 'object' && _typeof(b) !== 'object') {
-        // Values are not objects so do a simple comparison without type checking
-        // unless strictEquality is true.
-        var _isEqual = a == b;
-
-        var isStrictEqual = a === b;
-
-        if (strictEquality && !isStrictEqual) {
-          var msg = _isEqual ? 'The values are different types' : 'The values are not equal';
-          return _fail(a, b, msg);
-        } else if (!_isEqual) {
-          return _fail(a, b, 'The values are not equal');
-        }
-
-        return _pass();
-      } else if (_typeof(a) !== 'object' || _typeof(b) !== 'object') {
-        return _fail(a, b, 'The values are different types');
-      }
-      /* #endregion */
-
-      /* #region  values are objects so we should deepCopy before going further */
-
-
-      a = Object(_deepCopy__WEBPACK_IMPORTED_MODULE_0__["deepCopy"])(a);
-      b = Object(_deepCopy__WEBPACK_IMPORTED_MODULE_0__["deepCopy"])(b);
-      /* #endregion */
-
-      /* #region  Verify the objects have the same prototype chains */
-
-      if (a.constructor !== b.constructor) {
-        return _fail(a, b, 'The objects have different proptype chains');
-      }
-      /* #endregion */
-
-      /* #region  Date comparison */
-
-
-      if (a instanceof Date && b instanceof Date) {
-        // compare dates
-        var _isEqual2 = new Date(a.getTime()).toString() === new Date(b.getTime()).toString();
-
-        if (!_isEqual2) {
-          return _fail(a, b, 'The dates are not equal');
-        }
-
-        return _pass();
-      } else if (a instanceof Date || b instanceof Date) {
-        // only one value is a Date
-        return _fail(a, b, 'The values are not the same type');
-      }
-      /* #endregion */
-
-      /* #region  Array comparison */
-
-
-      if (a instanceof Array && b instanceof Array) {
-        // Check array lengths. If not of equal length, then return false.
-        if (a.length !== b.length) {
-          return _fail(a, b, 'The arrays are different lengths');
-        }
-
-        for (var aI = a.length - 1; aI >= 0; --aI) {
-          /* #region  What's going on here... */
-          // Iterate through the first array, getting the value at each index.
-          // Find that value in the other array.
-          // If it's an object, need to search for that object,
-          // iterate through the second array doing a deepCompare.
-          // Splice from first array. if match is found in second array,
-          // then splice from that array.
-          // After the first array has been iterated over,
-          // do a comparison of the array lengths to determine if the arrays are equal.
-
-          /* #endregion */
-          var x = a[aI];
-
-          if (_typeof(x) === 'object') {
-            this.depthTracking.path.push("[".concat(aI, "]"));
-
-            for (var bI = b.length - 1; bI >= 0; --bI) {
-              var _isEqual3 = this.deepCompare(x, b[bI], strictEquality);
-
-              if (_isEqual3) {
-                b.splice(bI, 1);
-                break;
-              }
-            }
-
-            a.splice(aI, 1);
-
-            if (a.length !== b.length) {
-              return _fail(a, b, 'The arrays contain different values');
-            } else {
-              this.depthTracking.path.splice(this.depthTracking.path.length - 1, 1);
-            }
-          } else if (typeof x === 'function') {
-            for (var _bI = b.length - 1; _bI >= 0; --_bI) {
-              var _isEqual4 = x.toString() === b[_bI].toString();
-
-              if (_isEqual4) {
-                b.splice(_bI, 1);
-                break;
-              }
-            }
-
-            a.splice(aI, 1);
-          } else if (strictEquality) {
-            // Search for that value in the other array and get the index.
-            var _bI2 = b.indexOf(x);
-
-            if (_bI2 === -1) {
-              // Value didn't exist. Exit comparison.
-              return _fail(a, b, 'Value in first array did not exist in second array');
-            } else {
-              // Value exists. Remove both values from arrays.
-              a.splice(aI, 1);
-              b.splice(_bI2, 1);
-            }
-          } else {
-            for (var _bI3 = b.length - 1; _bI3 >= 0; --_bI3) {
-              var _isEqual5 = x == b[_bI3];
-
-              if (_isEqual5) {
-                // Remove value from b if there is a match.
-                b.splice(_bI3, 1);
-                break;
-              }
-            } // Remove value from a regardless of match.
-
-
-            a.splice(aI, 1);
-          }
-        } // After first array is empty, check against length of second array.
-        // if lengths are not equal, then arrays are not equal.
-
-
-        if (a.length !== b.length) {
-          return _fail(a, b, 'Value in second array did not exist in first array');
-        } // Arrays were the same length.
-
-
-        return _pass();
-      } else if (a instanceof Array || b instanceof Array) {
-        // Values are different types. Exit comparison.
-        return _fail(a, b, 'The values are not the same type');
-      }
-      /* #endregion */
-
-      /* #region  Object comparison */
-
-
-      if (a instanceof Object && b instanceof Object) {
-        // First check for an equal number of properties.
-        if (Object.keys(a).length !== Object.keys(b).length) {
-          return _fail(a, b, 'The objects have different properties');
-        }
-
-        for (var propertyName in a) {
-          /* #region  What's going on here... */
-          // Need to type check these.
-          // If the property is an object then call deepCompare
-          // to break down the object a little further.
-          // If not an object, handle function and primitive comparisons right here.
-
-          /* #endregion */
-          if (_typeof(a[propertyName]) === 'object' && _typeof(b[propertyName]) === 'object') {
-            this.depthTracking.path.push(propertyName);
-
-            var _isEqual6 = this.deepCompare(a[propertyName], b[propertyName], strictEquality);
-
-            if (!_isEqual6) {
-              return _fail(a, b, "The objects' properties have different values");
-            } else {
-              this.depthTracking.path.splice(this.depthTracking.path.length - 1, 1);
-            }
-          } else if (_typeof(a[propertyName]) === 'object' || _typeof(b[propertyName]) === 'object') {
-            return _fail(a, b, 'Only one of the properties is an object');
-          } else if (typeof a[propertyName] === 'function' && typeof b[propertyName] === 'function') {
-            if (a[propertyName].toString() !== b[propertyName].toString()) {
-              return _fail(a, b, 'The functions are different');
-            }
-          } else if (typeof a[propertyName] === 'function' || typeof b[propertyName] === 'function') {
-            return _fail(a, b, 'Only one of the values is a function');
-          } else if (strictEquality && a[propertyName] !== b[propertyName]) {
-            var _msg = a[propertyName] == b[propertyName] ? 'The values are different types' : 'The values are not equal';
-
-            return _fail(a, b, _msg);
-          } else if (a[propertyName] != b[propertyName]) {
-            return _fail(a, b, 'The values are not equal');
-          }
-        }
-
-        return _pass();
-      } else if (a instanceof Object || b instanceof Object) {
-        // Values are different types.
-        return _fail(a, b, 'Only one of the values is an object');
-      }
-      /* #endregion */
-
-    }
-    /**
-     * Will log details to the console if an inequality is found.
-     *
-     * @param {boolean} shouldLog
-     */
-
-  }, {
-    key: "consoleLog",
-    value: function consoleLog() {
-      var shouldLog = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
-      if (shouldLog && typeof this.log.message !== 'undefined') {
-        console.log("######## %cdeepCompare inequality found! ".concat(this.log.message, ": %c").concat(this.log.path, " %c").concat(JSON.stringify(this.log.a), "%c, %c").concat(JSON.stringify(this.log.b), "%c"), this.standardStyles, this.pathStyles, this.errorStyles, this.standardStyles, this.errorStyles, this.standardStyles);
-      }
-
-      return this;
-    }
-    /**
-     * Will log details of comparison as a console error if result doesn't match the assertTrue boolean.
-     *
-     * @param {boolean} assertTrue
-     */
-
-  }, {
-    key: "assert",
-    value: function assert(assertTrue) {
-      if (assertTrue && this.value !== assertTrue) {
-        console.error("######## %cdeepCompare inequality found! ".concat(this.log.message, ": %c").concat(this.log.path, " %c").concat(JSON.stringify(this.log.a), "%c, %c").concat(JSON.stringify(this.log.b), "%c"), this.standardStyles, this.pathStyles, this.errorStyles, this.standardStyles, this.errorStyles, this.standardStyles);
-      } else if (!assertTrue && this.value !== assertTrue) {
-        console.error("######## deepCompare error! The values are equal but expected inequality.");
-      }
-
-      return this;
-    }
-    /**
-     * Allows for the use of a third party logger function.
-     *
-     * @param {function} clientLogger
-     * @param {boolean} enableLogger
-     */
-
-  }, {
-    key: "attachLogger",
-    value: function attachLogger(clientLogger) {
-      var enableLogger = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-
-      if (typeof clientLogger === 'function' && typeof this.clientLogger === 'undefined' && enableLogger && typeof this.log.message !== 'undefined') {
-        clientLogger("######## deepCompare inequality found! ".concat(this.log.message, ": ").concat(this.log.path, " ").concat(JSON.stringify(this.log.a), ", ").concat(JSON.stringify(this.log.b)));
-      }
-
-      return this;
-    }
-    /* #region  Private methods */
-
-    /**
-     * Fail the comparison, log the error message and inequal values,
-     * and decrement the recursion depth before returning to previous level.
-     *
-     * @param {*} a
-     * @param {*} b
-     * @param {string} message
-     */
-
-  }, {
-    key: "_fail",
-    value: function _fail(a, b, message) {
-      this._logOutput(a, b, message);
-
-      this._decrementDepth();
-
-      this.value = false;
-      return this;
-    }
-    /**
-     * Pass the comparison and decrement the recursion depth before returning to previous level.
-     */
-
-  }, {
-    key: "_pass",
-    value: function _pass() {
-      this._decrementDepth();
-
-      this.value = true;
-      return this;
-    }
-    /**
-     * @param {*} a
-     * @param {*} b
-     * @param {string} message
-     */
-
-  }, {
-    key: "_logOutput",
-    value: function _logOutput(a, b, message) {
-      // Only capture the first error, not the errors further up.
-      if (typeof this.log.message === 'undefined') {
-        var path = '';
-
-        if (this.depthTracking.path.length > 0) {
-          path = "obj.".concat(this.depthTracking.path.join('.'));
-          path = path.replace(/(?:\.\[)/g, '[');
-        }
-
-        this.log.message = message;
-        this.log.a = a;
-        this.log.b = b;
-        this.log.path = path;
-      }
-    }
-    /**
-     * Increment depth after drilling down to a new level.
-     */
-
-  }, {
-    key: "_incrementDepth",
-    value: function _incrementDepth() {
-      if (typeof this.depthTracking.depth === 'undefined') {
-        this.depthTracking.depth = 0;
-        this.depthTracking.path = [];
-      } else {
-        this.depthTracking.depth++;
-      }
-    }
-    /**
-     * Decrement depth before returning to a previous level.
-     * If at the highest level and an error message exists, log the error.
-     */
-
-  }, {
-    key: "_decrementDepth",
-    value: function _decrementDepth() {
-      if (typeof this.depthTracking.depth !== 'undefined' && this.depthTracking.depth > 0) {
-        this.depthTracking.depth--;
-      }
-    }
-    /**
-     * Should reset the log object if necessary.
-     */
-
-  }, {
-    key: "_resetLog",
-    value: function _resetLog() {
-      if (typeof this.depthTracking.depth === 'undefined' || this.depthTracking.depth === 0) {
-        this.log = {};
-      }
-    }
-    /* #endregion */
-
-  }, {
-    key: "isEqual",
-    get: function get() {
-      return this.value;
-    }
-  }]);
-
-  return Compare;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (new Compare());
-
-/***/ }),
 /* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deepCopy", function() { return deepCopy; });
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-var deepCopy = function deepCopy(obj) {
-  if (_typeof(obj) !== 'object' || obj === null) {
-    return obj;
-  }
-
-  if (obj instanceof Date) {
-    return new Date(obj.getTime());
-  }
-
-  if (obj instanceof Array) {
-    return obj.reduce(function (arr, item, i) {
-      arr[i] = deepCopy(item);
-      return arr;
-    }, []);
-  }
-
-  if (obj instanceof Object) {
-    return Object.keys(obj).reduce(function (newObj, key) {
-      newObj[key] = deepCopy(obj[key]);
-      return newObj;
-    }, {});
-  }
-};
-
-/***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get", function() { return get; });
-var get = function get(obj, path, defaultValue) {
-  return path.split('.').reduce(function (a, c) {
-    return a != null && typeof a != 'undefined' && a[c] != null && typeof a[c] != 'undefined' ? a[c] : defaultValue != null ? defaultValue : null;
-  }, obj);
-};
-
-/***/ }),
-/* 14 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "has", function() { return has; });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
-
-var has = function has(obj, path) {
-  var value = Object(___WEBPACK_IMPORTED_MODULE_0__["get"])(obj, path);
-  return value == null ? false : true;
-};
-
-/***/ }),
-/* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inspectClass", function() { return inspectClass; });
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-var inspectClass = function inspectClass(obj) {
-  var objClass, className;
-  var classProto;
-  var methods = [];
-  var attributes = {};
-  var t;
-
-  try {
-    if (typeof obj != 'function') {
-      objClass = obj.constructor;
-    } else {
-      objClass = obj;
-    }
-
-    className = objClass.name;
-    classProto = objClass.prototype;
-    Object.getOwnPropertyNames(classProto).forEach(function (m) {
-      t = _typeof(classProto[m]);
-
-      if (t === 'function') {
-        methods.push(m);
-      } else {
-        attributes[m] = classProto[m];
-      }
-    });
-  } catch (err) {
-    className = 'undefined';
-  }
-
-  return {
-    ClassName: className,
-    Methods: methods,
-    Attributes: attributes
-  };
-};
-
-/***/ }),
-/* 16 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
-/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-
-
-
-var reducer = function reducer(_ref, action) {
-  var state = _extends({}, _ref);
-
-  // TODO: sort objects a - z
-  var models = Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.models', {});
-  var objects = Object.values(models);
-  var combinedReducer = {};
-
-  for (var i = 0; i < objects.length; i++) {
-    var key = Object.keys(objects[i].prototype.initialState)[0].toString();
-    var value = state[key];
-    Object.assign(combinedReducer, _defineProperty({}, key, objects[i].prototype.reducer(value, action)));
-  }
-
-  var nextState = Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(state);
-  var stateKey = Object.keys(action)[1].toString();
-  var stateValue = action[stateKey];
-  nextState[stateKey] = stateValue;
-
-  if (Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.logToConsole', true)) {
-    console.log("dispatching", action);
-    console.log("next state", nextState);
-  }
-
-  return combinedReducer;
-};
-
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useGet; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _internal_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
-function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _internal_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(13);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_3__);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -4213,29 +4389,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-
 /**
- * useGet description here
+ * Custom hook to populate the model's state from an API and/or
+ * from the store.
  *
- * @param {Object} model
- * @param {Object} stateValue
- * @param {object} params
- * @param {Array} dependencies
- * @param {string} type
+ * @param {Object} [model={}] An instance of the model whose state needs to be populated.
+ * @param {Object} [params={}] Optional params object if an API call needs to be made.
+ * @param {Array} [dependencies=[]] Optional dependencies for the useGet to fire again.
+ * @param {string} [type=''] An type if the model has multiple types.
+ * @example
+ *
+ * useGet(new Model());
+ *
+ * useGet(new Model(), {id: someStateValue.id}, [someStateValue], new Model().types.SET_VALUE);
  */
 
-function useGet(_x, _x2, _x3) {
+function useGet(_x) {
   return _useGet.apply(this, arguments);
 }
 
 function _useGet() {
   _useGet = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee4(model, stateValue, params) {
-    var dependencies,
+  regeneratorRuntime.mark(function _callee4(model) {
+    var params,
+        dependencies,
         type,
         _useStateValue,
         _useStateValue2,
+        state,
         dispatch,
         _args4 = arguments;
 
@@ -4243,13 +4425,10 @@ function _useGet() {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            dependencies = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : [];
-            type = _args4.length > 4 ? _args4[4] : undefined;
-            _useStateValue = Object(_core__WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2);
-
-            _objectDestructuringEmpty(_useStateValue2[0]);
-
-            dispatch = _useStateValue2[1]; // TODO: For all API calls, create a queue for all unresolved calls. Maybe we can use localStorage for this.
+            params = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : {};
+            dependencies = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : [];
+            type = _args4.length > 3 ? _args4[3] : undefined;
+            _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _extends({}, _useStateValue2[0]), dispatch = _useStateValue2[1]; // TODO: For all API calls, create a queue for all unresolved calls. Maybe we can use localStorage for this.
             // This will keep us from making multiple calls due to rerenders if a call is already in progress. If
             // a call is in progress, don't make the call. When a call is resolved, remove it from the queue.
 
@@ -4263,13 +4442,14 @@ function _useGet() {
                 /*#__PURE__*/
                 regeneratorRuntime.mark(function _callee3() {
                   var isSync,
-                      obj,
                       persistData,
                       preferStore,
-                      optimizeLoading,
+                      progressiveLoading,
                       syncInterval,
                       nullableParams,
                       getUri,
+                      key,
+                      stateValue,
                       storeValue,
                       callApi,
                       _callApi,
@@ -4283,105 +4463,124 @@ function _useGet() {
                             _callApi = _asyncToGenerator(
                             /*#__PURE__*/
                             regeneratorRuntime.mark(function _callee2() {
-                              var payload, response, valueToCompare, isEqual;
+                              var isEqual, payload, response, valueToCompare, _isEqual;
+
                               return regeneratorRuntime.wrap(function _callee2$(_context2) {
                                 while (1) {
                                   switch (_context2.prev = _context2.next) {
                                     case 0:
-                                      if (!(persistData && preferStore && typeof storeValue !== 'undefined' && storeValue !== null && storeValue !== stateValue)) {
-                                        _context2.next = 10;
+                                      // TODO: isEqual call instead of storeValue !== stateValue.
+                                      isEqual = _react_ent_utils__WEBPACK_IMPORTED_MODULE_3__["Compare"].deepCompare(storeValue, stateValue).isEqual;
+
+                                      if (!(persistData && preferStore && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual)) {
+                                        _context2.next = 11;
                                         break;
                                       }
 
                                       _context2.t0 = dispatch;
-                                      _context2.next = 4;
+                                      _context2.next = 5;
                                       return model.updateState(storeValue);
 
-                                    case 4:
+                                    case 5:
                                       _context2.t1 = _context2.sent;
-                                      _context2.next = 7;
+                                      _context2.next = 8;
                                       return (0, _context2.t0)(_context2.t1);
 
-                                    case 7:
+                                    case 8:
                                       return _context2.abrupt("return");
 
-                                    case 10:
-                                      if (!(persistData && optimizeLoading && typeof storeValue !== 'undefined' && storeValue !== null && storeValue !== stateValue)) {
-                                        _context2.next = 17;
+                                    case 11:
+                                      if (!(persistData && progressiveLoading && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual)) {
+                                        _context2.next = 18;
                                         break;
                                       }
 
                                       _context2.t2 = dispatch;
-                                      _context2.next = 14;
+                                      _context2.next = 15;
                                       return model.updateState(storeValue);
 
-                                    case 14:
+                                    case 15:
                                       _context2.t3 = _context2.sent;
-                                      _context2.next = 17;
+                                      _context2.next = 18;
                                       return (0, _context2.t2)(_context2.t3);
 
-                                    case 17:
+                                    case 18:
                                       if (model.getUri) {
-                                        _context2.next = 19;
+                                        _context2.next = 27;
                                         break;
                                       }
 
+                                      if (!(persistData && !isEqual)) {
+                                        _context2.next = 26;
+                                        break;
+                                      }
+
+                                      _context2.t4 = dispatch;
+                                      _context2.next = 23;
+                                      return model.updateState(storeValue);
+
+                                    case 23:
+                                      _context2.t5 = _context2.sent;
+                                      _context2.next = 26;
+                                      return (0, _context2.t4)(_context2.t5);
+
+                                    case 26:
                                       return _context2.abrupt("return");
 
-                                    case 19:
+                                    case 27:
                                       // TODO: body needs to be an option in addition to query
                                       payload = {
                                         path: getUri,
                                         query: params
                                       };
-                                      _context2.next = 22;
+                                      _context2.next = 30;
                                       return Object(_internal_request__WEBPACK_IMPORTED_MODULE_2__["request"])(payload, nullableParams, 'get');
 
-                                    case 22:
+                                    case 30:
                                       response = _context2.sent;
 
                                       if (!response) {
-                                        _context2.next = 38;
+                                        _context2.next = 46;
                                         break;
                                       }
 
                                       if (!isSync) {
-                                        _context2.next = 29;
+                                        _context2.next = 37;
                                         break;
                                       }
 
                                       // If persistData is true, then compare against the stored value, otherwise just
                                       // compare against the value in state.
                                       valueToCompare = persistData ? storeValue : stateValue;
-                                      isEqual = _helpers__WEBPACK_IMPORTED_MODULE_3__["Compare"].deepCompare(response.data, valueToCompare).isEqual;
+                                      _isEqual = _react_ent_utils__WEBPACK_IMPORTED_MODULE_3__["Compare"].deepCompare(response.data, valueToCompare).isEqual;
 
-                                      if (!isEqual) {
-                                        _context2.next = 29;
+                                      if (!_isEqual) {
+                                        _context2.next = 37;
                                         break;
                                       }
 
                                       return _context2.abrupt("return");
 
-                                    case 29:
+                                    case 37:
                                       if (!persistData) {
-                                        _context2.next = 32;
+                                        _context2.next = 40;
                                         break;
                                       }
 
-                                      _context2.next = 32;
-                                      return _core__WEBPACK_IMPORTED_MODULE_1__["Store"].set(obj.ClassName, response.data);
+                                      _context2.next = 40;
+                                      return ___WEBPACK_IMPORTED_MODULE_1__["Store"].set(key, response.data);
 
-                                    case 32:
-                                      _context2.t4 = dispatch;
-                                      _context2.next = 35;
+                                    case 40:
+                                      _context2.t6 = dispatch;
+                                      _context2.next = 43;
                                       return model.updateState(response.data);
 
-                                    case 35:
-                                      _context2.t5 = _context2.sent;
-                                      _context2.next = 38;
-                                      return (0, _context2.t4)(_context2.t5);
+                                    case 43:
+                                      _context2.t7 = _context2.sent;
+                                      _context2.next = 46;
+                                      return (0, _context2.t6)(_context2.t7);
 
-                                    case 38:
+                                    case 46:
                                     case "end":
                                       return _context2.stop();
                                   }
@@ -4396,28 +4595,29 @@ function _useGet() {
                           };
 
                           isSync = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : false;
-                          obj = Object(_helpers__WEBPACK_IMPORTED_MODULE_3__["inspectClass"])(model);
                           persistData = model.persistData;
                           preferStore = model.preferStore;
-                          optimizeLoading = model.optimizeLoading;
+                          progressiveLoading = model.progressiveLoading;
                           syncInterval = model.syncInterval;
                           nullableParams = model.nullableParams;
                           getUri = model.getUri;
-                          _context3.next = 12;
-                          return _core__WEBPACK_IMPORTED_MODULE_1__["Store"].get(obj.ClassName);
+                          key = Object.keys(model.initialState)[0].toString();
+                          stateValue = state[key];
+                          _context3.next = 13;
+                          return ___WEBPACK_IMPORTED_MODULE_1__["Store"].get(key);
 
-                        case 12:
+                        case 13:
                           storeValue = _context3.sent;
 
                           if (isSync) {
-                            _context3.next = 16;
+                            _context3.next = 17;
                             break;
                           }
 
-                          _context3.next = 16;
+                          _context3.next = 17;
                           return callApi();
 
-                        case 16:
+                        case 17:
                           if (typeof syncInterval === 'number') {
                             setTimeout(
                             /*#__PURE__*/
@@ -4444,7 +4644,7 @@ function _useGet() {
                             })), syncInterval);
                           }
 
-                        case 17:
+                        case 18:
                         case "end":
                           return _context3.stop();
                       }
@@ -4457,7 +4657,7 @@ function _useGet() {
               fetchData(); // eslint-disable-next-line react-hooks/exhaustive-deps
             }, dependencies);
 
-          case 6:
+          case 5:
           case "end":
             return _context4.stop();
         }
@@ -4468,16 +4668,17 @@ function _useGet() {
 }
 
 /***/ }),
-/* 18 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "request", function() { return request; });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
+/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -4496,9 +4697,9 @@ function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            headers = Object(_helpers__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.headers', {});
-            apiWrapper = Object(_helpers__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.fetchWrapper', null);
-            uri = Object(_helpers__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.uri', ''); // Replaces all the :key instances with the actual values given
+            headers = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.headers', {});
+            apiWrapper = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.fetchWrapper', null);
+            uri = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.uri', ''); // Replaces all the :key instances with the actual values given
 
             path = payload.path.split('/').map(function (section, index) {
               if (section.includes(':')) {
@@ -4607,23 +4808,23 @@ function () {
 }();
 
 /***/ }),
-/* 19 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(20);
+module.exports = __webpack_require__(15);
 
 /***/ }),
-/* 20 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
-var bind = __webpack_require__(22);
-var Axios = __webpack_require__(24);
-var mergeConfig = __webpack_require__(42);
-var defaults = __webpack_require__(30);
+var utils = __webpack_require__(16);
+var bind = __webpack_require__(17);
+var Axios = __webpack_require__(19);
+var mergeConfig = __webpack_require__(37);
+var defaults = __webpack_require__(25);
 
 /**
  * Create an instance of Axios
@@ -4656,15 +4857,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(43);
-axios.CancelToken = __webpack_require__(44);
-axios.isCancel = __webpack_require__(29);
+axios.Cancel = __webpack_require__(38);
+axios.CancelToken = __webpack_require__(39);
+axios.isCancel = __webpack_require__(24);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(45);
+axios.spread = __webpack_require__(40);
 
 module.exports = axios;
 
@@ -4673,14 +4874,14 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 21 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var bind = __webpack_require__(22);
-var isBuffer = __webpack_require__(23);
+var bind = __webpack_require__(17);
+var isBuffer = __webpack_require__(18);
 
 /*global toString:true*/
 
@@ -5014,7 +5215,7 @@ module.exports = {
 
 
 /***/ }),
-/* 22 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5032,7 +5233,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 23 */
+/* 18 */
 /***/ (function(module, exports) {
 
 /*!
@@ -5049,17 +5250,17 @@ module.exports = function isBuffer (obj) {
 
 
 /***/ }),
-/* 24 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
-var buildURL = __webpack_require__(25);
-var InterceptorManager = __webpack_require__(26);
-var dispatchRequest = __webpack_require__(27);
-var mergeConfig = __webpack_require__(42);
+var utils = __webpack_require__(16);
+var buildURL = __webpack_require__(20);
+var InterceptorManager = __webpack_require__(21);
+var dispatchRequest = __webpack_require__(22);
+var mergeConfig = __webpack_require__(37);
 
 /**
  * Create a new instance of Axios
@@ -5142,13 +5343,13 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 25 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
+var utils = __webpack_require__(16);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -5220,13 +5421,13 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 26 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
+var utils = __webpack_require__(16);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -5279,18 +5480,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 27 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
-var transformData = __webpack_require__(28);
-var isCancel = __webpack_require__(29);
-var defaults = __webpack_require__(30);
-var isAbsoluteURL = __webpack_require__(40);
-var combineURLs = __webpack_require__(41);
+var utils = __webpack_require__(16);
+var transformData = __webpack_require__(23);
+var isCancel = __webpack_require__(24);
+var defaults = __webpack_require__(25);
+var isAbsoluteURL = __webpack_require__(35);
+var combineURLs = __webpack_require__(36);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -5372,13 +5573,13 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 28 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
+var utils = __webpack_require__(16);
 
 /**
  * Transform the data for a request or a response
@@ -5399,7 +5600,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 29 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5411,14 +5612,14 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 30 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(21);
-var normalizeHeaderName = __webpack_require__(32);
+var utils = __webpack_require__(16);
+var normalizeHeaderName = __webpack_require__(27);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -5435,10 +5636,10 @@ function getDefaultAdapter() {
   // Only Node.JS has a process variable that is of [[Class]] process
   if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(33);
+    adapter = __webpack_require__(28);
   } else if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(33);
+    adapter = __webpack_require__(28);
   }
   return adapter;
 }
@@ -5514,10 +5715,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(31)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)))
 
 /***/ }),
-/* 31 */
+/* 26 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -5707,13 +5908,13 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 32 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
+var utils = __webpack_require__(16);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -5726,18 +5927,18 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 33 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
-var settle = __webpack_require__(34);
-var buildURL = __webpack_require__(25);
-var parseHeaders = __webpack_require__(37);
-var isURLSameOrigin = __webpack_require__(38);
-var createError = __webpack_require__(35);
+var utils = __webpack_require__(16);
+var settle = __webpack_require__(29);
+var buildURL = __webpack_require__(20);
+var parseHeaders = __webpack_require__(32);
+var isURLSameOrigin = __webpack_require__(33);
+var createError = __webpack_require__(30);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -5829,7 +6030,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(39);
+      var cookies = __webpack_require__(34);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -5907,13 +6108,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 34 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(35);
+var createError = __webpack_require__(30);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -5939,13 +6140,13 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 35 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(36);
+var enhanceError = __webpack_require__(31);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -5964,7 +6165,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 36 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6013,13 +6214,13 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 37 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
+var utils = __webpack_require__(16);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -6073,13 +6274,13 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 38 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
+var utils = __webpack_require__(16);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -6148,13 +6349,13 @@ module.exports = (
 
 
 /***/ }),
-/* 39 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
+var utils = __webpack_require__(16);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -6208,7 +6409,7 @@ module.exports = (
 
 
 /***/ }),
-/* 40 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6229,7 +6430,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 41 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6250,13 +6451,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 42 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(21);
+var utils = __webpack_require__(16);
 
 /**
  * Config-specific merge-function which creates a new config-object
@@ -6308,7 +6509,7 @@ module.exports = function mergeConfig(config1, config2) {
 
 
 /***/ }),
-/* 43 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6334,13 +6535,13 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 44 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(43);
+var Cancel = __webpack_require__(38);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -6398,7 +6599,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 45 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

@@ -1,5 +1,5 @@
-import ReactEnt from '../ReactEnt';
-import { deepCopy, get } from '../helpers';
+import { deepCopy, get } from '@react-ent/utils';
+import { ReactEnt } from './';
 
 export const reducer = ({ ...state }, action) => {
   // TODO: sort objects a - z
