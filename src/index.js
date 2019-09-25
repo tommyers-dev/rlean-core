@@ -1,9 +1,9 @@
-import { del } from './del';
+import del from './del';
 import { initialState } from './initialState';
 import { Model } from './Model';
-import { patch } from './patch';
-import { post } from './post';
-import { put } from './put';
+import patch from './patch';
+import post from './post';
+import put from './put';
 import ReactEnt from './ReactEnt';
 import { reducer } from './reducer';
 import { save } from './save';
