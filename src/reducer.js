@@ -1,8 +1,8 @@
 import { deepCopy, get } from '@react-ent/utils';
 import { ReactEnt } from './';
+import { IsLoading, LastUpdated } from './_internal';
 
 export const reducer = ({ ...state }, action) => {
-  // TODO: sort objects a - z
   const models = get(ReactEnt, 'config.models', {});
   const objects = Object.values(models);
   let combinedReducer = {};
@@ -12,6 +12,10 @@ export const reducer = ({ ...state }, action) => {
     const value = state[key];
     Object.assign(combinedReducer, { [key]: objects[i].prototype.reducer(value, action) });
   }
+
+  // Add IsLoading and LastUpdated reducers to main reducer.
+  Object.assign(combinedReducer, { isLoading: new IsLoading().reducer(state['isLoading'], action) });
+  Object.assign(combinedReducer, { lastUpdated: new LastUpdated().reducer(state['lastUpdated'], action) });
 
   let nextState = deepCopy(state);
   const stateKey = Object.keys(action)[1].toString();

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Compare } from '@react-ent/utils';
-import { request, methods } from './_internal';
+import { Compare, deepCopy } from '@react-ent/utils';
+import { request, methods, IsLoading, LastUpdated } from './_internal';
 import { useStateValue, Store } from './';
 
 /**
@@ -20,20 +20,21 @@ import { useStateValue, Store } from './';
 export default async function useGet(model, params = {}, dependencies = [], type) {
   const [{ ...state }, dispatch] = useStateValue();
 
-  // TODO: For all API calls, create a queue for all unresolved calls. Maybe we can use localStorage for this.
-  // This will keep us from making multiple calls due to rerenders if a call is already in progress. If
-  // a call is in progress, don't make the call. When a call is resolved, remove it from the queue.
   useEffect(() => {
     async function fetchData(isSync = false) {
       const persistData = model.persistData;
       const preferStore = model.preferStore;
       const progressiveLoading = model.progressiveLoading;
       const syncInterval = model.syncInterval;
+      const syncAfterTimeElapsed = model.syncAfterTimeElapsed;
       const nullableParams = model.nullableParams;
       const getUri = model.getUri;
       const key = Object.keys(model.initialState)[0].toString();
       const stateValue = state[key];
       const storeValue = await Store.get(key);
+      const oIsLoading = new IsLoading();
+      const oLastUpdated = new LastUpdated();
+      const { isLoading, lastUpdated } = state;
 
       async function callApi() {
         const isEqual = Compare.deepCompare(storeValue, stateValue).isEqual;
@@ -58,6 +59,29 @@ export default async function useGet(model, params = {}, dependencies = [], type
           return;
         }
 
+        // If syncAfterTimeElapsed is true, verify that the time elapsed
+        // exceeds the threshold before continuing.
+        if (syncAfterTimeElapsed) {
+          const timestamp = lastUpdated[key];
+          const now = new Date();
+          const timeElapsed = timestamp + syncAfterTimeElapsed;
+
+          // Don't make API call.
+          if (timeElapsed < now && storeValue) {
+            await dispatch(await model.updateState(storeValue));
+
+            return;
+          }
+        }
+
+        // Update isLoading object if necessary. Should not update if progressiveLoading
+        // is true and we have a value in the store.
+        if (!isSync && (!progressiveLoading || storeValue === 'undefined' || storeValue === null)) {
+          let isLoadingCopy = deepCopy(isLoading);
+          isLoadingCopy[key] = true;
+          await dispatch(await oIsLoading.updateState(Object.assign({}, isLoadingCopy)));
+        }
+
         const payload = {
           path: getUri,
           query: params
@@ -67,12 +91,12 @@ export default async function useGet(model, params = {}, dependencies = [], type
 
         if (response) {
           // If isSync, do a deepCompare of the result with what's in state, or state and store.
-          if (isSync) {
+          if (isSync || ((progressiveLoading && (persistData && typeof storeValue !== 'undefined' && storeValue !== null)) || !persistData)) {
             // If persistData is true, then compare against the stored value, otherwise just
             // compare against the value in state.
             const valueToCompare = persistData ? storeValue : stateValue;
-
             const isEqual = Compare.deepCompare(response.data, valueToCompare).isEqual;
+
             if (isEqual) return;
           }
 
@@ -83,6 +107,19 @@ export default async function useGet(model, params = {}, dependencies = [], type
 
           // Set value in state.
           await dispatch(await model.updateState(response.data));
+
+          // Update isLoading object if necessary. Should not update if progressiveLoading
+          // is true and we have a value in the store.
+          if (!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null)) {
+            let isLoadingCopy = deepCopy(isLoading);
+            isLoadingCopy[key] = false;
+            await dispatch(await oIsLoading.updateState(Object.assign({}, isLoadingCopy)));
+          }
+
+          // Update lastUpdated flag
+          let lastUpdatedCopy = deepCopy(lastUpdated);
+          lastUpdatedCopy[key] = new Date();
+          await dispatch(await oLastUpdated.updateState(Object.assign({}, lastUpdatedCopy)));
         }
       }
 

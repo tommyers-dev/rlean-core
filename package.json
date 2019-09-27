@@ -1,6 +1,6 @@
 {
   "name": "@react-ent/core",
-  "version": "0.1.12",
+  "version": "0.1.29",
   "description": "React Enterprise Framework with Hooks",
   "main": "build/index.js",
   "scripts": {
