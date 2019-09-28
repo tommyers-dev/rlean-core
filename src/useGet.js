@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Compare, deepCopy } from '@react-ent/utils';
 import { request, methods, IsLoading, LastUpdated } from './_internal';
 import { useStateValue, Store } from './';
@@ -20,6 +20,14 @@ import { useStateValue, Store } from './';
 export default async function useGet(model, params = {}, dependencies = [], type) {
   const [{ ...state }, dispatch] = useStateValue();
 
+  const { isLoading, lastUpdated } = state;
+
+  const isLoadingRef = useRef();
+  const lastUpdatedRef = useRef();
+
+  isLoadingRef.current = isLoading;
+  lastUpdatedRef.current = lastUpdated;
+
   useEffect(() => {
     async function fetchData(isSync = false) {
       const persistData = model.persistData;
@@ -34,7 +42,6 @@ export default async function useGet(model, params = {}, dependencies = [], type
       const storeValue = await Store.get(key);
       const oIsLoading = new IsLoading();
       const oLastUpdated = new LastUpdated();
-      const { isLoading, lastUpdated } = state;
 
       async function callApi() {
         const isEqual = Compare.deepCompare(storeValue, stateValue).isEqual;
@@ -77,7 +84,7 @@ export default async function useGet(model, params = {}, dependencies = [], type
         // Update isLoading object if necessary. Should not update if progressiveLoading
         // is true and we have a value in the store.
         if (!isSync && (!progressiveLoading || storeValue === 'undefined' || storeValue === null)) {
-          let isLoadingCopy = deepCopy(isLoading);
+          let isLoadingCopy = deepCopy(isLoadingRef.current);
           isLoadingCopy[key] = true;
           await dispatch(await oIsLoading.updateState(Object.assign({}, isLoadingCopy)));
         }
@@ -111,13 +118,13 @@ export default async function useGet(model, params = {}, dependencies = [], type
           // Update isLoading object if necessary. Should not update if progressiveLoading
           // is true and we have a value in the store.
           if (!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null)) {
-            let isLoadingCopy = deepCopy(isLoading);
+            let isLoadingCopy = deepCopy(isLoadingRef.current);
             isLoadingCopy[key] = false;
             await dispatch(await oIsLoading.updateState(Object.assign({}, isLoadingCopy)));
           }
 
           // Update lastUpdated flag
-          let lastUpdatedCopy = deepCopy(lastUpdated);
+          let lastUpdatedCopy = deepCopy(lastUpdatedRef.current);
           lastUpdatedCopy[key] = new Date();
           await dispatch(await oLastUpdated.updateState(Object.assign({}, lastUpdatedCopy)));
         }

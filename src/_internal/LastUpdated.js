@@ -30,7 +30,7 @@ export class LastUpdated extends Model {
 
   reducer(state, action) {
     switch (action.type) {
-      case new LastUpdated().types.SET_LAST_UPDATED:
+      case this.types.SET_LAST_UPDATED:
         return {
           ...state,
           ...action.lastUpdated
@@ -43,7 +43,7 @@ export class LastUpdated extends Model {
 
   async updateState(lastUpdated, type) {
     return {
-      type: new LastUpdated().types.SET_LAST_UPDATED,
+      type: this.types.SET_LAST_UPDATED,
       lastUpdated
     };
   }

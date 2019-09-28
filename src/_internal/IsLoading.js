@@ -37,7 +37,7 @@ export class IsLoading extends Model {
 
   reducer(state, action) {
     switch (action.type) {
-      case new IsLoading().types.SET_IS_LOADING:
+      case this.types.SET_IS_LOADING:
         return {
           ...state,
           ...action.isLoading
@@ -50,7 +50,7 @@ export class IsLoading extends Model {
 
   async updateState(isLoading, type) {
     return {
-      type: new IsLoading().types.SET_IS_LOADING,
+      type: this.types.SET_IS_LOADING,
       isLoading
     };
   }

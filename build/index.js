@@ -347,7 +347,7 @@ function (_Model) {
     key: "reducer",
     value: function reducer(state, action) {
       switch (action.type) {
-        case new IsLoading().types.SET_IS_LOADING:
+        case this.types.SET_IS_LOADING:
           return _objectSpread({}, state, {}, action.isLoading);
 
         default:
@@ -365,7 +365,7 @@ function (_Model) {
             switch (_context.prev = _context.next) {
               case 0:
                 return _context.abrupt("return", {
-                  type: new IsLoading().types.SET_IS_LOADING,
+                  type: this.types.SET_IS_LOADING,
                   isLoading: isLoading
                 });
 
@@ -374,7 +374,7 @@ function (_Model) {
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, this);
       }));
 
       function updateState(_x, _x2) {
@@ -1362,7 +1362,7 @@ function (_Model) {
     key: "reducer",
     value: function reducer(state, action) {
       switch (action.type) {
-        case new LastUpdated().types.SET_LAST_UPDATED:
+        case this.types.SET_LAST_UPDATED:
           return _objectSpread({}, state, {}, action.lastUpdated);
 
         default:
@@ -1380,7 +1380,7 @@ function (_Model) {
             switch (_context.prev = _context.next) {
               case 0:
                 return _context.abrupt("return", {
-                  type: new LastUpdated().types.SET_LAST_UPDATED,
+                  type: this.types.SET_LAST_UPDATED,
                   lastUpdated: lastUpdated
                 });
 
@@ -1389,7 +1389,7 @@ function (_Model) {
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, this);
       }));
 
       function updateState(_x, _x2) {
@@ -7102,6 +7102,10 @@ function _useGet() {
         _useStateValue2,
         state,
         dispatch,
+        isLoading,
+        lastUpdated,
+        isLoadingRef,
+        lastUpdatedRef,
         _args4 = arguments;
 
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
@@ -7112,6 +7116,11 @@ function _useGet() {
             dependencies = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : [];
             type = _args4.length > 3 ? _args4[3] : undefined;
             _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_3__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _extends({}, _useStateValue2[0]), dispatch = _useStateValue2[1];
+            isLoading = state.isLoading, lastUpdated = state.lastUpdated;
+            isLoadingRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+            lastUpdatedRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+            isLoadingRef.current = isLoading;
+            lastUpdatedRef.current = lastUpdated;
             Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
               function fetchData() {
                 return _fetchData.apply(this, arguments);
@@ -7134,8 +7143,6 @@ function _useGet() {
                       storeValue,
                       oIsLoading,
                       oLastUpdated,
-                      isLoading,
-                      lastUpdated,
                       callApi,
                       _callApi,
                       _args3 = arguments;
@@ -7244,7 +7251,7 @@ function _useGet() {
                                         break;
                                       }
 
-                                      isLoadingCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoading);
+                                      isLoadingCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoadingRef.current);
                                       isLoadingCopy[key] = true;
                                       _context2.t8 = dispatch;
                                       _context2.next = 45;
@@ -7313,7 +7320,7 @@ function _useGet() {
                                         break;
                                       }
 
-                                      _isLoadingCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoading);
+                                      _isLoadingCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoadingRef.current);
                                       _isLoadingCopy[key] = false;
                                       _context2.t12 = dispatch;
                                       _context2.next = 73;
@@ -7326,7 +7333,7 @@ function _useGet() {
 
                                     case 76:
                                       // Update lastUpdated flag
-                                      lastUpdatedCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdated);
+                                      lastUpdatedCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdatedRef.current);
                                       lastUpdatedCopy[key] = new Date();
                                       _context2.t14 = dispatch;
                                       _context2.next = 81;
@@ -7368,17 +7375,16 @@ function _useGet() {
                           storeValue = _context3.sent;
                           oIsLoading = new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]();
                           oLastUpdated = new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]();
-                          isLoading = state.isLoading, lastUpdated = state.lastUpdated;
 
                           if (isSync) {
-                            _context3.next = 21;
+                            _context3.next = 20;
                             break;
                           }
 
-                          _context3.next = 21;
+                          _context3.next = 20;
                           return callApi();
 
-                        case 21:
+                        case 20:
                           if (typeof syncInterval === 'number') {
                             setTimeout(
                             /*#__PURE__*/
@@ -7405,7 +7411,7 @@ function _useGet() {
                             })), syncInterval);
                           }
 
-                        case 22:
+                        case 21:
                         case "end":
                           return _context3.stop();
                       }
@@ -7418,7 +7424,7 @@ function _useGet() {
               fetchData(); // eslint-disable-next-line react-hooks/exhaustive-deps
             }, dependencies);
 
-          case 5:
+          case 10:
           case "end":
             return _context4.stop();
         }
