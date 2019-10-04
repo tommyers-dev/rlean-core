@@ -118,21 +118,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _remove__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(43);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return _remove__WEBPACK_IMPORTED_MODULE_8__["remove"]; });
 
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(44);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "save", function() { return _save__WEBPACK_IMPORTED_MODULE_9__["save"]; });
+/* harmony import */ var _removeAll__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(44);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeAll", function() { return _removeAll__WEBPACK_IMPORTED_MODULE_9__["removeAll"]; });
 
-/* harmony import */ var _State__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(45);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return _State__WEBPACK_IMPORTED_MODULE_10__["StateContext"]; });
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(45);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "save", function() { return _save__WEBPACK_IMPORTED_MODULE_10__["save"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return _State__WEBPACK_IMPORTED_MODULE_10__["StateProvider"]; });
+/* harmony import */ var _State__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(46);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return _State__WEBPACK_IMPORTED_MODULE_11__["StateContext"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return _State__WEBPACK_IMPORTED_MODULE_10__["useStateValue"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return _State__WEBPACK_IMPORTED_MODULE_11__["StateProvider"]; });
 
-/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(47);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return _Store__WEBPACK_IMPORTED_MODULE_11__["default"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return _State__WEBPACK_IMPORTED_MODULE_11__["useStateValue"]; });
 
-/* harmony import */ var _useGet__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(50);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useGet", function() { return _useGet__WEBPACK_IMPORTED_MODULE_12__["default"]; });
+/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(48);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return _Store__WEBPACK_IMPORTED_MODULE_12__["default"]; });
+
+/* harmony import */ var _useGet__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(51);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useGet", function() { return _useGet__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+
+/* harmony import */ var _Utility__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(52);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Utility", function() { return _Utility__WEBPACK_IMPORTED_MODULE_14__["Utility"]; });
+
+
 
 
 
@@ -177,37 +185,38 @@ function _del() {
   _del = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(model, params) {
-    var o, deletetUri, nullableParams, payload;
+    var o, deletePath, nullableParams, apiUriOverride, payload;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
-            deletetUri = model.deletetUri;
+            deletePath = model.deletePath;
             nullableParams = model.nullableParams;
+            apiUriOverride = model.apiUriOverride;
 
-            if (!(deletetUri !== null)) {
-              _context.next = 10;
+            if (!(deletePath !== null)) {
+              _context.next = 11;
               break;
             }
 
             payload = {
-              path: deletetUri,
+              path: deletePath,
               body: Object.assign({}, params)
             };
-            _context.next = 7;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].DELETE);
+            _context.next = 8;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].DELETE, apiUriOverride);
 
-          case 7:
+          case 8:
             return _context.abrupt("return", _context.sent);
 
-          case 10:
-            console.error("The ".concat(o.ClassName, " model is missing the deleteUri attribute."));
-
           case 11:
-            return _context.abrupt("return");
+            console.error("The ".concat(o.ClassName, " object is missing the deletePath attribute."));
 
           case 12:
+            return _context.abrupt("return");
+
+          case 13:
           case "end":
             return _context.stop();
         }
@@ -392,9 +401,9 @@ function (_Model) {
       var isLoading = {};
 
       for (var i = 0; i < objects.length; i++) {
-        var key = Object.keys(objects[i].prototype.initialState)[0].toString(); // Add to isLoading if there is a getUri.
+        var key = Object.keys(objects[i].prototype.initialState)[0].toString(); // Add to isLoading if there is a getPath.
 
-        if (objects[i].prototype.getUri) {
+        if (objects[i].prototype.getPath) {
           Object.assign(isLoading, _defineProperty({}, key, false));
         }
       }
@@ -503,27 +512,27 @@ function (_Object) {
       return this["throw"]('initialState getter');
     }
   }, {
-    key: "getUri",
+    key: "getPath",
     get: function get() {
       return null;
     }
   }, {
-    key: "postUri",
+    key: "postPath",
     get: function get() {
       return null;
     }
   }, {
-    key: "putUri",
+    key: "putPath",
     get: function get() {
       return null;
     }
   }, {
-    key: "deleteUri",
+    key: "deletePath",
     get: function get() {
       return null;
     }
   }, {
-    key: "patchUri",
+    key: "patchPath",
     get: function get() {
       return null;
     }
@@ -531,6 +540,16 @@ function (_Object) {
     key: "nullableParams",
     get: function get() {
       return false;
+    }
+    /**
+     * If set, the api call will use the apiUriOverride path
+     * instead of the path provided by the config.
+     */
+
+  }, {
+    key: "apiUriOverride",
+    get: function get() {
+      return null;
     }
     /**
      * If false, data isn't stored to storage. Api is called every time.
@@ -1407,9 +1426,9 @@ function (_Model) {
       var lastUpdated = {};
 
       for (var i = 0; i < objects.length; i++) {
-        var key = Object.keys(objects[i].prototype.initialState)[0].toString(); // Add to lastUpdated if there is a getUri.
+        var key = Object.keys(objects[i].prototype.initialState)[0].toString(); // Add to lastUpdated if there is a getPath.
 
-        if (objects[i].prototype.getUri) {
+        if (objects[i].prototype.getPath) {
           Object.assign(lastUpdated, _defineProperty({}, key, null));
         }
       }
@@ -1471,16 +1490,23 @@ var request =
 function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(payload, nullableParams, method) {
+  regeneratorRuntime.mark(function _callee(payload, nullableParams, method, apiUriOverride) {
     var headers, uri, path, query, key;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             headers = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.headers', {});
-            uri = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.uri', ''); // Replaces all the :key instances with the actual values given
+            uri = apiUriOverride ? apiUriOverride : Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.uri', '');
+            path = payload.path;
 
-            path = payload.path.split('/').map(function (section, index) {
+            if (!payload.query) {
+              _context.next = 17;
+              break;
+            }
+
+            // Replaces all the :key instances with the actual values given
+            path = path.split('/').map(function (section, index) {
               if (section.includes(':')) {
                 var key = section.match(/:(.*)/).pop();
                 return section.replace(':' + key, payload.query[key]);
@@ -1488,58 +1514,52 @@ function () {
 
               return section;
             }).join('/');
-
-            if (!payload.query) {
-              _context.next = 16;
-              break;
-            }
-
             query = [];
             _context.t0 = regeneratorRuntime.keys(payload.query);
 
-          case 6:
+          case 7:
             if ((_context.t1 = _context.t0()).done) {
-              _context.next = 15;
+              _context.next = 16;
               break;
             }
 
             key = _context.t1.value;
 
             if (!(typeof payload.query[key] !== 'undefined' && (payload.query[key] !== null || nullableParams))) {
-              _context.next = 12;
+              _context.next = 13;
               break;
             }
 
             query.push("".concat(key, "=").concat(payload.query[key]));
-            _context.next = 13;
+            _context.next = 14;
             break;
-
-          case 12:
-            return _context.abrupt("return");
 
           case 13:
-            _context.next = 6;
-            break;
+            return _context.abrupt("return");
 
-          case 15:
-            path += '?' + query.join('&');
+          case 14:
+            _context.next = 7;
+            break;
 
           case 16:
+            path += '?' + query.join('&');
+
+          case 17:
             _context.t2 = method;
-            _context.next = _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].GET ? 19 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].POST ? 22 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].DELETE ? 22 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PUT ? 22 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PATCH ? 22 : 25;
+            _context.next = _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].GET ? 20 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].POST ? 23 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].DELETE ? 23 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PUT ? 23 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PATCH ? 23 : 26;
             break;
 
-          case 19:
-            _context.next = 21;
+          case 20:
+            _context.next = 22;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(uri + path, {
               headers: headers
             });
 
-          case 21:
+          case 22:
             return _context.abrupt("return", _context.sent);
 
-          case 22:
-            _context.next = 24;
+          case 23:
+            _context.next = 25;
             return axios__WEBPACK_IMPORTED_MODULE_0___default()({
               method: method,
               url: uri + path,
@@ -1547,13 +1567,13 @@ function () {
               data: payload.body
             });
 
-          case 24:
+          case 25:
             return _context.abrupt("return", _context.sent);
 
-          case 25:
+          case 26:
             return _context.abrupt("return");
 
-          case 26:
+          case 27:
           case "end":
             return _context.stop();
         }
@@ -1561,7 +1581,7 @@ function () {
     }, _callee);
   }));
 
-  return function request(_x, _x2, _x3) {
+  return function request(_x, _x2, _x3, _x4) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -3503,37 +3523,38 @@ function _patch() {
   _patch = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(model, params) {
-    var o, patchUri, nullableParams, payload;
+    var o, patchPath, nullableParams, apiUriOverride, payload;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
-            patchUri = model.patchUri;
+            patchPath = model.patchPath;
             nullableParams = model.nullableParams;
+            apiUriOverride = model.apiUriOverride;
 
-            if (!(patchUri !== null)) {
-              _context.next = 10;
+            if (!(patchPath !== null)) {
+              _context.next = 11;
               break;
             }
 
             payload = {
-              path: patchUri,
+              path: patchPath,
               body: Object.assign({}, params)
             };
-            _context.next = 7;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PATCH);
+            _context.next = 8;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PATCH, apiUriOverride);
 
-          case 7:
+          case 8:
             return _context.abrupt("return", _context.sent);
 
-          case 10:
-            console.error("The ".concat(o.ClassName, " model is missing the patchUri attribute."));
-
           case 11:
-            return _context.abrupt("return");
+            console.error("The ".concat(o.ClassName, " object is missing the patchPath attribute."));
 
           case 12:
+            return _context.abrupt("return");
+
+          case 13:
           case "end":
             return _context.stop();
         }
@@ -3563,45 +3584,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  * @param {Object} params
  */
 
-function post(_x, _x2) {
+function post(_x) {
   return _post.apply(this, arguments);
 }
 
 function _post() {
   _post = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, params) {
-    var o, postUri, nullableParams, payload;
+  regeneratorRuntime.mark(function _callee(model) {
+    var params,
+        o,
+        postPath,
+        nullableParams,
+        apiUriOverride,
+        body,
+        payload,
+        _args = arguments;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            params = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
-            postUri = model.postUri;
+            postPath = model.postPath;
             nullableParams = model.nullableParams;
+            apiUriOverride = model.apiUriOverride;
 
-            if (!(postUri !== null)) {
-              _context.next = 10;
+            if (!(postPath !== null)) {
+              _context.next = 13;
               break;
             }
 
+            body = params ? Object.assign({}, params) : {};
             payload = {
-              path: postUri,
-              body: Object.assign({}, params)
+              path: postPath,
+              body: body
             };
-            _context.next = 7;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].POST);
-
-          case 7:
-            return _context.abrupt("return", _context.sent);
+            _context.next = 10;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].POST, apiUriOverride);
 
           case 10:
-            console.error("The ".concat(o.ClassName, " model is missing the postUri attribute."));
+            return _context.abrupt("return", _context.sent);
 
-          case 11:
+          case 13:
+            console.error("The ".concat(o.ClassName, " object is missing the postPath attribute."));
+
+          case 14:
             return _context.abrupt("return");
 
-          case 12:
+          case 15:
           case "end":
             return _context.stop();
         }
@@ -3639,37 +3670,38 @@ function _put() {
   _put = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(model, params) {
-    var o, putUri, nullableParams, payload;
+    var o, putPath, nullableParams, apiUriOverride, payload;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
-            putUri = model.putUri;
+            putPath = model.putPath;
             nullableParams = model.nullableParams;
+            apiUriOverride = model.apiUriOverride;
 
-            if (!(putUri !== null)) {
-              _context.next = 10;
+            if (!(putPath !== null)) {
+              _context.next = 11;
               break;
             }
 
             payload = {
-              path: putUri,
+              path: putPath,
               body: Object.assign({}, params)
             };
-            _context.next = 7;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PUT);
+            _context.next = 8;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PUT, apiUriOverride);
 
-          case 7:
+          case 8:
             return _context.abrupt("return", _context.sent);
 
-          case 10:
-            console.error("The ".concat(o.ClassName, " model is missing the putUri attribute."));
-
           case 11:
-            return _context.abrupt("return");
+            console.error("The ".concat(o.ClassName, " object is missing the putPath attribute."));
 
           case 12:
+            return _context.abrupt("return");
+
+          case 13:
           case "end":
             return _context.stop();
         }
@@ -3809,6 +3841,49 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeAll", function() { return removeAll; });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/**
+ * Clear all data from the store and from session.
+ */
+
+var removeAll =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee() {
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            ___WEBPACK_IMPORTED_MODULE_0__["Store"].clear();
+            sessionStorage.clear();
+
+          case 2:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function removeAll() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+/* 45 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "save", function() { return save; });
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3886,7 +3961,7 @@ function () {
 }();
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3894,7 +3969,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return StateContext; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return StateProvider; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return useStateValue; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 
@@ -3911,18 +3986,18 @@ var useStateValue = function useStateValue() {
 };
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 module.exports = require("react");
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var localforage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(48);
+/* harmony import */ var localforage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(49);
 /* harmony import */ var localforage__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(localforage__WEBPACK_IMPORTED_MODULE_0__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -4212,7 +4287,7 @@ function () {
 /* harmony default export */ __webpack_exports__["default"] = (new Store());
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var require;var require;/*!
@@ -7013,10 +7088,10 @@ module.exports = localforage_js;
 },{"3":3}]},{},[4])(4)
 });
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(49)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(50)))
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports) {
 
 var g;
@@ -7042,13 +7117,13 @@ module.exports = g;
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useGet; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
 /* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
@@ -7078,13 +7153,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  *
  * @param {Object} [model={}] An instance of the model whose state needs to be populated.
  * @param {Object} [params={}] Optional params object if an API call needs to be made.
- * @param {Array} [dependencies=[]] Optional dependencies for the useGet to fire again.
  * @param {string} [type=''] An type if the model has multiple types.
  * @example
  *
  * useGet(new Model());
  *
- * useGet(new Model(), {id: someStateValue.id}, [someStateValue], new Model().types.SET_VALUE);
+ * useGet(new Model(), {id: someStateValue.id}, new Model().types.SET_VALUE);
  */
 
 function useGet(_x) {
@@ -7096,7 +7170,6 @@ function _useGet() {
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee4(model) {
     var params,
-        dependencies,
         type,
         _useStateValue,
         _useStateValue2,
@@ -7113,8 +7186,7 @@ function _useGet() {
         switch (_context4.prev = _context4.next) {
           case 0:
             params = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : {};
-            dependencies = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : [];
-            type = _args4.length > 3 ? _args4[3] : undefined;
+            type = _args4.length > 2 ? _args4[2] : undefined;
             _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_3__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _extends({}, _useStateValue2[0]), dispatch = _useStateValue2[1];
             isLoading = state.isLoading, lastUpdated = state.lastUpdated;
             isLoadingRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
@@ -7137,7 +7209,8 @@ function _useGet() {
                       syncInterval,
                       syncAfterTimeElapsed,
                       nullableParams,
-                      getUri,
+                      apiUriOverride,
+                      getPath,
                       key,
                       stateValue,
                       storeValue,
@@ -7196,7 +7269,7 @@ function _useGet() {
                                       return (0, _context2.t2)(_context2.t3);
 
                                     case 18:
-                                      if (model.getUri) {
+                                      if (model.getPath) {
                                         _context2.next = 27;
                                         break;
                                       }
@@ -7264,11 +7337,11 @@ function _useGet() {
 
                                     case 48:
                                       payload = {
-                                        path: getUri,
+                                        path: getPath,
                                         query: params
                                       };
                                       _context2.next = 51;
-                                      return Object(_internal__WEBPACK_IMPORTED_MODULE_2__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_2__["methods"].GET);
+                                      return Object(_internal__WEBPACK_IMPORTED_MODULE_2__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_2__["methods"].GET, apiUriOverride);
 
                                     case 51:
                                       response = _context2.sent;
@@ -7365,26 +7438,27 @@ function _useGet() {
                           syncInterval = model.syncInterval;
                           syncAfterTimeElapsed = model.syncAfterTimeElapsed;
                           nullableParams = model.nullableParams;
-                          getUri = model.getUri;
+                          apiUriOverride = model.apiUriOverride;
+                          getPath = model.getPath;
                           key = Object.keys(model.initialState)[0].toString();
                           stateValue = state[key];
-                          _context3.next = 14;
+                          _context3.next = 15;
                           return ___WEBPACK_IMPORTED_MODULE_3__["Store"].get(key);
 
-                        case 14:
+                        case 15:
                           storeValue = _context3.sent;
                           oIsLoading = new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]();
                           oLastUpdated = new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]();
 
                           if (isSync) {
-                            _context3.next = 20;
+                            _context3.next = 21;
                             break;
                           }
 
-                          _context3.next = 20;
+                          _context3.next = 21;
                           return callApi();
 
-                        case 20:
+                        case 21:
                           if (typeof syncInterval === 'number') {
                             setTimeout(
                             /*#__PURE__*/
@@ -7411,7 +7485,7 @@ function _useGet() {
                             })), syncInterval);
                           }
 
-                        case 21:
+                        case 22:
                         case "end":
                           return _context3.stop();
                       }
@@ -7422,9 +7496,9 @@ function _useGet() {
               }
 
               fetchData(); // eslint-disable-next-line react-hooks/exhaustive-deps
-            }, dependencies);
+            }, [params]);
 
-          case 10:
+          case 9:
           case "end":
             return _context4.stop();
         }
@@ -7433,6 +7507,95 @@ function _useGet() {
   }));
   return _useGet.apply(this, arguments);
 }
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Utility", function() { return Utility; });
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var Utility =
+/*#__PURE__*/
+function (_Object) {
+  _inherits(Utility, _Object);
+
+  function Utility() {
+    _classCallCheck(this, Utility);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Utility).apply(this, arguments));
+  }
+
+  _createClass(Utility, [{
+    key: "throw",
+    value: function _throw(functionName) {
+      throw new Error("Model error: ".concat(functionName, " must be implemented in the derived class."));
+    }
+  }, {
+    key: "postPath",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "putPath",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "deletePath",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "patchPath",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "nullableParams",
+    get: function get() {
+      return false;
+    }
+    /**
+     * If set, the api call will use the apiUriOverride path
+     * instead of the path provided by the config.
+     */
+
+  }, {
+    key: "apiUriOverride",
+    get: function get() {
+      return null;
+    }
+  }]);
+
+  return Utility;
+}(_wrapNativeSuper(Object));
 
 /***/ })
 /******/ ]);

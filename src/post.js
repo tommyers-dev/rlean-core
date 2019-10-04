@@ -6,16 +6,18 @@ import { request, methods, inspectClass } from './_internal';
  * @param {Object} model
  * @param {Object} params
  */
-export default async function post(model, params) {
+export default async function post(model, params = {}) {
   const o = inspectClass(model);
-  const postUri = model.postUri;
+  const postPath = model.postPath;
   const nullableParams = model.nullableParams;
+  const apiUriOverride = model.apiUriOverride;
 
-  if (postUri !== null) {
-    const payload = { path: postUri, body: Object.assign({}, params) };
-    return await request(payload, nullableParams, methods.POST);
+  if (postPath !== null) {
+    const body = params ? Object.assign({}, params) : {};
+    const payload = { path: postPath, body: body };
+    return await request(payload, nullableParams, methods.POST, apiUriOverride);
   } else {
-    console.error(`The ${o.ClassName} model is missing the postUri attribute.`);
+    console.error(`The ${o.ClassName} object is missing the postPath attribute.`);
   }
 
   return;

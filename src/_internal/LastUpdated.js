@@ -11,8 +11,8 @@ export class LastUpdated extends Model {
     for (let i = 0; i < objects.length; i++) {
       const key = Object.keys(objects[i].prototype.initialState)[0].toString();
 
-      // Add to lastUpdated if there is a getUri.
-      if (objects[i].prototype.getUri) {
+      // Add to lastUpdated if there is a getPath.
+      if (objects[i].prototype.getPath) {
         Object.assign(lastUpdated, { [key]: null });
       }
     }

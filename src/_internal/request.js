@@ -3,24 +3,24 @@ import ReactEnt from '../ReactEnt';
 import { get } from '@react-ent/utils';
 import { methods } from './methods';
 
-export const request = async (payload, nullableParams, method) => {
+export const request = async (payload, nullableParams, method, apiUriOverride) => {
   const headers = get(ReactEnt, 'config.api.headers', {});
-  const uri = get(ReactEnt, 'config.api.uri', '');
-
-  // Replaces all the :key instances with the actual values given
-  let path = payload.path
-    .split('/')
-    .map((section, index) => {
-      if (section.includes(':')) {
-        const key = section.match(/:(.*)/).pop();
-        return section.replace(':' + key, payload.query[key]);
-      }
-
-      return section;
-    })
-    .join('/');
+  const uri = apiUriOverride ? apiUriOverride : get(ReactEnt, 'config.api.uri', '');
+  let path = payload.path;
 
   if (payload.query) {
+    // Replaces all the :key instances with the actual values given
+    path = path
+      .split('/')
+      .map((section, index) => {
+        if (section.includes(':')) {
+          const key = section.match(/:(.*)/).pop();
+          return section.replace(':' + key, payload.query[key]);
+        }
+
+        return section;
+      })
+      .join('/');
     const query = [];
 
     for (let key in payload.query) {

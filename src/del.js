@@ -8,14 +8,15 @@ import { request, methods, inspectClass } from './_internal';
  */
 export default async function del(model, params) {
   const o = inspectClass(model);
-  const deletetUri = model.deletetUri;
+  const deletePath = model.deletePath;
   const nullableParams = model.nullableParams;
+  const apiUriOverride = model.apiUriOverride;
 
-  if (deletetUri !== null) {
-    const payload = { path: deletetUri, body: Object.assign({}, params) };
-    return await request(payload, nullableParams, methods.DELETE);
+  if (deletePath !== null) {
+    const payload = { path: deletePath, body: Object.assign({}, params) };
+    return await request(payload, nullableParams, methods.DELETE, apiUriOverride);
   } else {
-    console.error(`The ${o.ClassName} model is missing the deleteUri attribute.`);
+    console.error(`The ${o.ClassName} object is missing the deletePath attribute.`);
   }
 
   return;

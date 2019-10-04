@@ -7,9 +7,11 @@ import put from './put';
 import ReactEnt from './ReactEnt';
 import { reducer } from './reducer';
 import { remove } from './remove';
+import { removeAll } from './removeAll';
 import { save } from './save';
 import { StateContext, StateProvider, useStateValue } from './State';
 import Store from './Store';
 import useGet from './useGet';
+import { Utility } from './Utility';
 
-export { del, initialState, Model, patch, post, put, ReactEnt, reducer, remove, save, StateContext, StateProvider, Store, useGet, useStateValue };
+export { del, initialState, Model, patch, post, put, ReactEnt, reducer, remove, removeAll, save, StateContext, StateProvider, Store, useGet, useStateValue, Utility };

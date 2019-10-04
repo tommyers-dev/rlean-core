@@ -9,15 +9,14 @@ import { useStateValue, Store } from './';
  *
  * @param {Object} [model={}] An instance of the model whose state needs to be populated.
  * @param {Object} [params={}] Optional params object if an API call needs to be made.
- * @param {Array} [dependencies=[]] Optional dependencies for the useGet to fire again.
  * @param {string} [type=''] An type if the model has multiple types.
  * @example
  *
  * useGet(new Model());
  *
- * useGet(new Model(), {id: someStateValue.id}, [someStateValue], new Model().types.SET_VALUE);
+ * useGet(new Model(), {id: someStateValue.id}, new Model().types.SET_VALUE);
  */
-export default async function useGet(model, params = {}, dependencies = [], type) {
+export default async function useGet(model, params = {}, type) {
   const [{ ...state }, dispatch] = useStateValue();
 
   const { isLoading, lastUpdated } = state;
@@ -36,7 +35,8 @@ export default async function useGet(model, params = {}, dependencies = [], type
       const syncInterval = model.syncInterval;
       const syncAfterTimeElapsed = model.syncAfterTimeElapsed;
       const nullableParams = model.nullableParams;
-      const getUri = model.getUri;
+      const apiUriOverride = model.apiUriOverride;
+      const getPath = model.getPath;
       const key = Object.keys(model.initialState)[0].toString();
       const stateValue = state[key];
       const storeValue = await Store.get(key);
@@ -57,8 +57,8 @@ export default async function useGet(model, params = {}, dependencies = [], type
           await dispatch(await model.updateState(storeValue));
         }
 
-        // If there is no getUri, assume it's state/store only data.
-        if (!model.getUri) {
+        // If there is no getPath, assume it's state/store only data.
+        if (!model.getPath) {
           if (persistData && !isEqual) {
             await dispatch(await model.updateState(storeValue));
           }
@@ -90,11 +90,11 @@ export default async function useGet(model, params = {}, dependencies = [], type
         }
 
         const payload = {
-          path: getUri,
+          path: getPath,
           query: params
         };
 
-        const response = await request(payload, nullableParams, methods.GET);
+        const response = await request(payload, nullableParams, methods.GET, apiUriOverride);
 
         if (response) {
           // If isSync, do a deepCompare of the result with what's in state, or state and store.
@@ -145,5 +145,5 @@ export default async function useGet(model, params = {}, dependencies = [], type
 
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, dependencies);
+  }, [params]);
 }

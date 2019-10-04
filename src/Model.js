@@ -7,28 +7,36 @@ export class Model extends Object {
     return this.throw('initialState getter');
   }
 
-  get getUri() {
+  get getPath() {
     return null;
   }
 
-  get postUri() {
+  get postPath() {
     return null;
   }
 
-  get putUri() {
+  get putPath() {
     return null;
   }
 
-  get deleteUri() {
+  get deletePath() {
     return null;
   }
 
-  get patchUri() {
+  get patchPath() {
     return null;
   }
 
   get nullableParams() {
     return false;
+  }
+
+  /**
+   * If set, the api call will use the apiUriOverride path
+   * instead of the path provided by the config.
+   */
+  get apiUriOverride() {
+    return null;
   }
 
   /**

@@ -8,14 +8,15 @@ import { request, methods, inspectClass } from './_internal';
  */
 export default async function put(model, params) {
   const o = inspectClass(model);
-  const putUri = model.putUri;
+  const putPath = model.putPath;
   const nullableParams = model.nullableParams;
+  const apiUriOverride = model.apiUriOverride;
 
-  if (putUri !== null) {
-    const payload = { path: putUri, body: Object.assign({}, params) };
-    return await request(payload, nullableParams, methods.PUT);
+  if (putPath !== null) {
+    const payload = { path: putPath, body: Object.assign({}, params) };
+    return await request(payload, nullableParams, methods.PUT, apiUriOverride);
   } else {
-    console.error(`The ${o.ClassName} model is missing the putUri attribute.`);
+    console.error(`The ${o.ClassName} object is missing the putPath attribute.`);
   }
 
   return;
