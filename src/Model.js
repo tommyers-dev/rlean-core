@@ -49,7 +49,7 @@ export class Model extends Object {
 
   /**
    * Will rely on storage instead of calling the API repeatedly.
-   * This will override optimizeLoading.
+   * This will override progressiveLoading.
    */
   get preferStore() {
     return false;

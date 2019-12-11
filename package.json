@@ -1,16 +1,16 @@
 {
   "name": "@react-ent/core",
-  "version": "0.1.46",
+  "version": "0.1.64",
   "description": "React Enterprise Framework with Hooks",
   "main": "build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "webpack --watch",
     "build": "webpack"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pntse/react-ent.git"
+    "url": "git+https://github.com/tommyers-dev/react-ent-core.git"
   },
   "keywords": [
     "react",
@@ -19,12 +19,12 @@
     "hooks",
     "boilerplate"
   ],
-  "author": "pntse",
+  "author": "tommyers-dev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pntse/react-ent/issues"
+    "url": "https://github.com/tommyers-dev/react-ent-core/issues"
   },
-  "homepage": "https://github.com/pntse/react-ent#readme",
+  "homepage": "https://github.com/tommyers-dev/react-ent-core#readme",
   "peerDependencies": {
     "react": "^16.9.0"
   },
@@ -33,17 +33,23 @@
     "axios": "^0.19.0",
     "localforage": "^1.7.3",
     "react": "^16.9.0",
+    "regenerator-runtime": "^0.13.3",
     "webpack": "^4.40.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
     "babel-core": "^6.26.3",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "jest": "^24.9.0",
+    "react-test-renderer": "^16.11.0",
     "webpack-cli": "^3.3.9"
   }
 }

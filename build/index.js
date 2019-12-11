@@ -563,7 +563,7 @@ function (_Object) {
     }
     /**
      * Will rely on storage instead of calling the API repeatedly.
-     * This will override optimizeLoading.
+     * This will override progressiveLoading.
      */
 
   }, {
@@ -1471,6 +1471,7 @@ var methods = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "request", function() { return request; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatPath", function() { return formatPath; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(37);
@@ -1491,75 +1492,38 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(payload, nullableParams, method, apiUriOverride) {
-    var headers, uri, path, query, key;
+    var headers, uri, path;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             headers = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.headers', {});
             uri = apiUriOverride ? apiUriOverride : Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.uri', '');
-            path = payload.path;
+            path = formatPath(payload.path, payload.query, payload.body, method, nullableParams); // No path specified. Return undefined.
 
-            if (!payload.query) {
-              _context.next = 17;
+            if (!(path === undefined || path === '')) {
+              _context.next = 5;
               break;
             }
 
-            // Replaces all the :key instances with the actual values given
-            path = path.split('/').map(function (section, index) {
-              if (section.includes(':')) {
-                var key = section.match(/:(.*)/).pop();
-                return section.replace(':' + key, payload.query[key]);
-              }
-
-              return section;
-            }).join('/');
-            query = [];
-            _context.t0 = regeneratorRuntime.keys(payload.query);
-
-          case 7:
-            if ((_context.t1 = _context.t0()).done) {
-              _context.next = 16;
-              break;
-            }
-
-            key = _context.t1.value;
-
-            if (!(typeof payload.query[key] !== 'undefined' && (payload.query[key] !== null || nullableParams))) {
-              _context.next = 13;
-              break;
-            }
-
-            query.push("".concat(key, "=").concat(payload.query[key]));
-            _context.next = 14;
-            break;
-
-          case 13:
             return _context.abrupt("return");
 
-          case 14:
-            _context.next = 7;
+          case 5:
+            _context.t0 = method;
+            _context.next = _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].GET ? 8 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].POST ? 11 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].DELETE ? 11 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PUT ? 11 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PATCH ? 11 : 14;
             break;
 
-          case 16:
-            path += '?' + query.join('&');
-
-          case 17:
-            _context.t2 = method;
-            _context.next = _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].GET ? 20 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].POST ? 23 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].DELETE ? 23 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PUT ? 23 : _context.t2 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PATCH ? 23 : 26;
-            break;
-
-          case 20:
-            _context.next = 22;
+          case 8:
+            _context.next = 10;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(uri + path, {
               headers: headers
             });
 
-          case 22:
+          case 10:
             return _context.abrupt("return", _context.sent);
 
-          case 23:
-            _context.next = 25;
+          case 11:
+            _context.next = 13;
             return axios__WEBPACK_IMPORTED_MODULE_0___default()({
               method: method,
               url: uri + path,
@@ -1567,13 +1531,13 @@ function () {
               data: payload.body
             });
 
-          case 25:
+          case 13:
             return _context.abrupt("return", _context.sent);
 
-          case 26:
+          case 14:
             return _context.abrupt("return");
 
-          case 27:
+          case 15:
           case "end":
             return _context.stop();
         }
@@ -1585,6 +1549,83 @@ function () {
     return _ref.apply(this, arguments);
   };
 }();
+var formatPath = function formatPath(path, payloadQuery, payloadBody, method, nullableParams) {
+  console.log("path: ".concat(path));
+  console.log("payloadQuery:", payloadQuery);
+  console.log("payloadBody:", payloadBody);
+  console.log("method: ", method);
+  console.log("nullableParams: ", nullableParams); // Check for null params if they aren't allowed.
+
+  if (!nullableParams) {
+    if (payloadQuery) {
+      for (var key in payloadQuery) {
+        if (typeof payloadQuery[key] === 'undefined' || payloadQuery[key] === null) {
+          // Params cannot be null. Return undefined.
+          return;
+        }
+      }
+    } else if (payloadBody) {
+      for (var _key in payloadBody) {
+        if (typeof payloadBody[_key] === 'undefined' || payloadBody[_key] === null) {
+          // Params cannot be null. Return undefined.
+          return;
+        }
+      }
+    } else {
+      // No params were provided. Return undefined.
+      return;
+    }
+  } // If request is not a GET, return the base path.
+
+
+  if (path && method !== _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].GET) return path;
+  console.log('made it this far'); // If payloadQuery exists, return the path with the params appended.
+
+  if (path && payloadQuery) {
+    var returnValue; // Create an array of all payload keys.
+
+    var queryStringKeys = [];
+
+    for (var _key2 in payloadQuery) {
+      queryStringKeys.push(_key2);
+    }
+
+    console.log("queryStringKeys", queryStringKeys); // Replace all the :key instances with the actual values given.
+
+    returnValue = path.split('/').map(function (section, index) {
+      if (section.includes(':')) {
+        var _key3 = section.match(/:(.*)/).pop(); // Remove key from queryStringKeys array since it is a path param.
+
+
+        var _index = queryStringKeys.indexOf(_key3);
+
+        queryStringKeys.splice(_index, 1);
+        return section.replace(':' + _key3, payloadQuery[_key3]);
+      }
+
+      return section;
+    }).join('/');
+    var query = []; // Create query string with query string params.
+
+    for (var _key4 in payloadQuery) {
+      if (queryStringKeys.includes(_key4)) {
+        query.push("".concat(_key4, "=").concat(payloadQuery[_key4]));
+      }
+    }
+
+    console.log('query: ', query);
+
+    if (query.length > 0) {
+      returnValue += '?' + query.join('&');
+    }
+
+    console.log("returnValue: ".concat(returnValue));
+    return returnValue;
+  } // Could not format the path. Return undefined.
+
+
+  return;
+};
 
 /***/ }),
 /* 10 */
@@ -3582,6 +3623,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  *
  * @param {Object} model
  * @param {Object} params
+ * @param {Function} dispatch Provide if you're expecting an updated object in the response (like the inclusion of an auto-increment id)
  */
 
 function post(_x) {
@@ -3593,25 +3635,32 @@ function _post() {
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(model) {
     var params,
+        dispatch,
         o,
         postPath,
         nullableParams,
         apiUriOverride,
+        persistData,
+        key,
         body,
         payload,
+        response,
         _args = arguments;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             params = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
+            dispatch = _args.length > 2 ? _args[2] : undefined;
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             postPath = model.postPath;
             nullableParams = model.nullableParams;
             apiUriOverride = model.apiUriOverride;
+            persistData = model.persistData;
+            key = Object.keys(model.initialState)[0].toString();
 
             if (!(postPath !== null)) {
-              _context.next = 13;
+              _context.next = 26;
               break;
             }
 
@@ -3620,19 +3669,46 @@ function _post() {
               path: postPath,
               body: body
             };
-            _context.next = 10;
+            _context.next = 13;
             return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].POST, apiUriOverride);
 
-          case 10:
-            return _context.abrupt("return", _context.sent);
-
           case 13:
+            response = _context.sent;
+
+            if (!(response && dispatch)) {
+              _context.next = 24;
+              break;
+            }
+
+            if (!persistData) {
+              _context.next = 18;
+              break;
+            }
+
+            _context.next = 18;
+            return Store.set(key, response.data);
+
+          case 18:
+            _context.t0 = dispatch;
+            _context.next = 21;
+            return model.updateState(response.data);
+
+          case 21:
+            _context.t1 = _context.sent;
+            _context.next = 24;
+            return (0, _context.t0)(_context.t1);
+
+          case 24:
+            _context.next = 27;
+            break;
+
+          case 26:
             console.error("The ".concat(o.ClassName, " object is missing the postPath attribute."));
 
-          case 14:
+          case 27:
             return _context.abrupt("return");
 
-          case 15:
+          case 28:
           case "end":
             return _context.stop();
         }
@@ -7161,38 +7237,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  * useGet(new Model(), {id: someStateValue.id}, new Model().types.SET_VALUE);
  */
 
-function useGet(_x) {
+function useGet(_x, _x2, _x3) {
   return _useGet.apply(this, arguments);
 }
 
 function _useGet() {
   _useGet = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee4(model) {
-    var params,
-        type,
-        _useStateValue,
-        _useStateValue2,
-        state,
-        dispatch,
-        isLoading,
-        lastUpdated,
-        isLoadingRef,
-        lastUpdatedRef,
-        _args4 = arguments;
+  regeneratorRuntime.mark(function _callee4(model, params, type) {
+    var _useStateValue, _useStateValue2, state, dispatch, isLoading, lastUpdated, isLoadingRef, lastUpdatedRef, dependencies;
 
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            params = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : {};
-            type = _args4.length > 2 ? _args4[2] : undefined;
             _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_3__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _extends({}, _useStateValue2[0]), dispatch = _useStateValue2[1];
             isLoading = state.isLoading, lastUpdated = state.lastUpdated;
             isLoadingRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
             lastUpdatedRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
             isLoadingRef.current = isLoading;
             lastUpdatedRef.current = lastUpdated;
+            dependencies = [];
+
+            if (params) {
+              dependencies = Object.values(params);
+            }
+
             Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
               function fetchData() {
                 return _fetchData.apply(this, arguments);
@@ -7228,7 +7298,7 @@ function _useGet() {
                             _callApi = _asyncToGenerator(
                             /*#__PURE__*/
                             regeneratorRuntime.mark(function _callee2() {
-                              var isEqual, timestamp, now, timeElapsed, isLoadingCopy, payload, response, valueToCompare, _isEqual, _isLoadingCopy, lastUpdatedCopy;
+                              var isEqual, timestamp, now, timeElapsed, isLoadingCopy, payload, response, valueToCompare, _isEqual, _isLoadingCopy, lastUpdatedCopy, _isLoadingCopy2;
 
                               return regeneratorRuntime.wrap(function _callee2$(_context2) {
                                 while (1) {
@@ -7340,19 +7410,20 @@ function _useGet() {
                                         path: getPath,
                                         query: params
                                       };
-                                      _context2.next = 51;
+                                      _context2.prev = 49;
+                                      _context2.next = 52;
                                       return Object(_internal__WEBPACK_IMPORTED_MODULE_2__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_2__["methods"].GET, apiUriOverride);
 
-                                    case 51:
+                                    case 52:
                                       response = _context2.sent;
 
                                       if (!response) {
-                                        _context2.next = 84;
+                                        _context2.next = 87;
                                         break;
                                       }
 
                                       if (!(isSync || progressiveLoading && persistData && typeof storeValue !== 'undefined' && storeValue !== null || !persistData)) {
-                                        _context2.next = 58;
+                                        _context2.next = 59;
                                         break;
                                       }
 
@@ -7362,67 +7433,90 @@ function _useGet() {
                                       _isEqual = _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["Compare"].deepCompare(response.data, valueToCompare).isEqual;
 
                                       if (!_isEqual) {
-                                        _context2.next = 58;
+                                        _context2.next = 59;
                                         break;
                                       }
 
                                       return _context2.abrupt("return");
 
-                                    case 58:
+                                    case 59:
                                       if (!persistData) {
-                                        _context2.next = 61;
+                                        _context2.next = 62;
                                         break;
                                       }
 
-                                      _context2.next = 61;
+                                      _context2.next = 62;
                                       return ___WEBPACK_IMPORTED_MODULE_3__["Store"].set(key, response.data);
 
-                                    case 61:
+                                    case 62:
                                       _context2.t10 = dispatch;
-                                      _context2.next = 64;
+                                      _context2.next = 65;
                                       return model.updateState(response.data);
 
-                                    case 64:
+                                    case 65:
                                       _context2.t11 = _context2.sent;
-                                      _context2.next = 67;
+                                      _context2.next = 68;
                                       return (0, _context2.t10)(_context2.t11);
 
-                                    case 67:
+                                    case 68:
                                       if (!(!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null))) {
-                                        _context2.next = 76;
+                                        _context2.next = 77;
                                         break;
                                       }
 
                                       _isLoadingCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoadingRef.current);
                                       _isLoadingCopy[key] = false;
                                       _context2.t12 = dispatch;
-                                      _context2.next = 73;
+                                      _context2.next = 74;
                                       return oIsLoading.updateState(Object.assign({}, _isLoadingCopy));
 
-                                    case 73:
+                                    case 74:
                                       _context2.t13 = _context2.sent;
-                                      _context2.next = 76;
+                                      _context2.next = 77;
                                       return (0, _context2.t12)(_context2.t13);
 
-                                    case 76:
+                                    case 77:
                                       // Update lastUpdated flag
                                       lastUpdatedCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdatedRef.current);
                                       lastUpdatedCopy[key] = new Date();
                                       _context2.t14 = dispatch;
-                                      _context2.next = 81;
+                                      _context2.next = 82;
                                       return oLastUpdated.updateState(Object.assign({}, lastUpdatedCopy));
 
-                                    case 81:
+                                    case 82:
                                       _context2.t15 = _context2.sent;
-                                      _context2.next = 84;
+                                      _context2.next = 85;
                                       return (0, _context2.t14)(_context2.t15);
 
-                                    case 84:
+                                    case 85:
+                                      _context2.next = 87;
+                                      return ___WEBPACK_IMPORTED_MODULE_3__["Store"].set('lastUpdated', lastUpdatedCopy);
+
+                                    case 87:
+                                      _context2.next = 99;
+                                      break;
+
+                                    case 89:
+                                      _context2.prev = 89;
+                                      _context2.t16 = _context2["catch"](49);
+                                      // Set isLoading to false when there is an error
+                                      _isLoadingCopy2 = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoadingRef.current);
+                                      _isLoadingCopy2[key] = false;
+                                      _context2.t17 = dispatch;
+                                      _context2.next = 96;
+                                      return oIsLoading.updateState(Object.assign({}, _isLoadingCopy2));
+
+                                    case 96:
+                                      _context2.t18 = _context2.sent;
+                                      _context2.next = 99;
+                                      return (0, _context2.t17)(_context2.t18);
+
+                                    case 99:
                                     case "end":
                                       return _context2.stop();
                                   }
                                 }
-                              }, _callee2);
+                              }, _callee2, null, [[49, 89]]);
                             }));
                             return _callApi.apply(this, arguments);
                           };
@@ -7496,7 +7590,7 @@ function _useGet() {
               }
 
               fetchData(); // eslint-disable-next-line react-hooks/exhaustive-deps
-            }, [params]);
+            }, dependencies);
 
           case 9:
           case "end":

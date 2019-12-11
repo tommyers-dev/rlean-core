@@ -16,7 +16,7 @@ import { useStateValue, Store } from './';
  *
  * useGet(new Model(), {id: someStateValue.id}, new Model().types.SET_VALUE);
  */
-export default async function useGet(model, params = {}, type) {
+export default async function useGet(model, params, type) {
   const [{ ...state }, dispatch] = useStateValue();
 
   const { isLoading, lastUpdated } = state;
@@ -26,6 +26,12 @@ export default async function useGet(model, params = {}, type) {
 
   isLoadingRef.current = isLoading;
   lastUpdatedRef.current = lastUpdated;
+
+  let dependencies = [];
+
+  if (params) {
+    dependencies = Object.values(params);
+  }
 
   useEffect(() => {
     async function fetchData(isSync = false) {
@@ -94,39 +100,47 @@ export default async function useGet(model, params = {}, type) {
           query: params
         };
 
-        const response = await request(payload, nullableParams, methods.GET, apiUriOverride);
+        try {
+          const response = await request(payload, nullableParams, methods.GET, apiUriOverride);
 
-        if (response) {
-          // If isSync, do a deepCompare of the result with what's in state, or state and store.
-          if (isSync || ((progressiveLoading && (persistData && typeof storeValue !== 'undefined' && storeValue !== null)) || !persistData)) {
-            // If persistData is true, then compare against the stored value, otherwise just
-            // compare against the value in state.
-            const valueToCompare = persistData ? storeValue : stateValue;
-            const isEqual = Compare.deepCompare(response.data, valueToCompare).isEqual;
+          if (response) {
+            // If isSync, do a deepCompare of the result with what's in state, or state and store.
+            if (isSync || ((progressiveLoading && (persistData && typeof storeValue !== 'undefined' && storeValue !== null)) || !persistData)) {
+              // If persistData is true, then compare against the stored value, otherwise just
+              // compare against the value in state.
+              const valueToCompare = persistData ? storeValue : stateValue;
+              const isEqual = Compare.deepCompare(response.data, valueToCompare).isEqual;
 
-            if (isEqual) return;
+              if (isEqual) return;
+            }
+
+            if (persistData) {
+              // Update storage.
+              await Store.set(key, response.data);
+            }
+
+            // Set value in state.
+            await dispatch(await model.updateState(response.data));
+
+            // Update isLoading object if necessary. Should not update if progressiveLoading
+            // is true and we have a value in the store.
+            if (!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null)) {
+              let isLoadingCopy = deepCopy(isLoadingRef.current);
+              isLoadingCopy[key] = false;
+              await dispatch(await oIsLoading.updateState(Object.assign({}, isLoadingCopy)));
+            }
+
+            // Update lastUpdated flag
+            let lastUpdatedCopy = deepCopy(lastUpdatedRef.current);
+            lastUpdatedCopy[key] = new Date();
+            await dispatch(await oLastUpdated.updateState(Object.assign({}, lastUpdatedCopy)));
+            await Store.set('lastUpdated', lastUpdatedCopy);
           }
-
-          if (persistData) {
-            // Update storage.
-            await Store.set(key, response.data);
-          }
-
-          // Set value in state.
-          await dispatch(await model.updateState(response.data));
-
-          // Update isLoading object if necessary. Should not update if progressiveLoading
-          // is true and we have a value in the store.
-          if (!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null)) {
-            let isLoadingCopy = deepCopy(isLoadingRef.current);
-            isLoadingCopy[key] = false;
-            await dispatch(await oIsLoading.updateState(Object.assign({}, isLoadingCopy)));
-          }
-
-          // Update lastUpdated flag
-          let lastUpdatedCopy = deepCopy(lastUpdatedRef.current);
-          lastUpdatedCopy[key] = new Date();
-          await dispatch(await oLastUpdated.updateState(Object.assign({}, lastUpdatedCopy)));
+        } catch (err) {
+          // Set isLoading to false when there is an error
+          let isLoadingCopy = deepCopy(isLoadingRef.current);
+          isLoadingCopy[key] = false;
+          await dispatch(await oIsLoading.updateState(Object.assign({}, isLoadingCopy)));
         }
       }
 
@@ -145,5 +159,5 @@ export default async function useGet(model, params = {}, type) {
 
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params]);
+  }, dependencies);
 }
