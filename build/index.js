@@ -1550,12 +1550,7 @@ function () {
   };
 }();
 var formatPath = function formatPath(path, payloadQuery, payloadBody, method, nullableParams) {
-  console.log("path: ".concat(path));
-  console.log("payloadQuery:", payloadQuery);
-  console.log("payloadBody:", payloadBody);
-  console.log("method: ", method);
-  console.log("nullableParams: ", nullableParams); // Check for null params if they aren't allowed.
-
+  // Check for null params if they aren't allowed.
   if (!nullableParams) {
     if (payloadQuery) {
       for (var key in payloadQuery) {
@@ -1571,15 +1566,11 @@ var formatPath = function formatPath(path, payloadQuery, payloadBody, method, nu
           return;
         }
       }
-    } else {
-      // No params were provided. Return undefined.
-      return;
     }
-  } // If request is not a GET, return the base path.
+  } // If request is not a GET or is a GET and has no params, return the base path.
 
 
-  if (path && method !== _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].GET) return path;
-  console.log('made it this far'); // If payloadQuery exists, return the path with the params appended.
+  if (path && (method !== _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].GET || !payloadQuery && !payloadBody)) return path; // If payloadQuery exists, return the path with the params appended.
 
   if (path && payloadQuery) {
     var returnValue; // Create an array of all payload keys.
@@ -1588,9 +1579,8 @@ var formatPath = function formatPath(path, payloadQuery, payloadBody, method, nu
 
     for (var _key2 in payloadQuery) {
       queryStringKeys.push(_key2);
-    }
+    } // Replace all the :key instances with the actual values given.
 
-    console.log("queryStringKeys", queryStringKeys); // Replace all the :key instances with the actual values given.
 
     returnValue = path.split('/').map(function (section, index) {
       if (section.includes(':')) {
@@ -1613,13 +1603,10 @@ var formatPath = function formatPath(path, payloadQuery, payloadBody, method, nu
       }
     }
 
-    console.log('query: ', query);
-
     if (query.length > 0) {
       returnValue += '?' + query.join('&');
     }
 
-    console.log("returnValue: ".concat(returnValue));
     return returnValue;
   } // Could not format the path. Return undefined.
 

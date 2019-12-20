@@ -47,14 +47,11 @@ export const formatPath = (path, payloadQuery, payloadBody, method, nullablePara
           return;
         }
       }
-    } else {
-      // No params were provided. Return undefined.
-      return;
     }
   }
 
-  // If request is not a GET, return the base path.
-  if (path && method !== methods.GET) return path;
+  // If request is not a GET or is a GET and has no params, return the base path.
+  if (path && (method !== methods.GET || (!payloadQuery && !payloadBody))) return path;
 
   // If payloadQuery exists, return the path with the params appended.
   if (path && payloadQuery) {
