@@ -1,35 +1,16 @@
-import LocalForage from './defaults/LocalForage';
+import localforage from 'localforage';
 
-class Store {
-  async set(model, value) {
-    const key = Object.keys(model.initialState)[0].toString();
-    const engine = this.decideWhichEngine(model);
+class LocalForage {
+  async set(key, value) {
+    if (!key || value === undefined) {
+      throw new Error('Key or value cannot be undefined');
+    }
 
     try {
-      await engine.set(key, value);
-
-      const updatedValue = await engine.get(key);
-
-      if(updatedValue === undefined) throw new Error(`Could not set ${key} = ${value}`);
-
-      return { key, value };
+      await localforage.setItem(key, JSON.stringify(value));
     } catch (err) {
       console.log(err);
     }
-  }
-
-  /*
-   * Decides whether it should use the plugin or default
-   * Only here to make logic more readable since async/await makes it annoyingly hard to read
-  */
-  decideWhichEngine(model) {
-    const hasOwnPlugin = model.plugins.storage;
-
-    if(hasOwnPlugin) {
-      return model.plugins.storage;
-    }
-
-    return LocalForage;
   }
 
   async setAll(units) {
@@ -79,4 +60,4 @@ class Store {
   }
 }
 
-export default new Store();
+export default new LocalForage();

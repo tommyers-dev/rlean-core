@@ -17,8 +17,7 @@ export const save = async (model, newValue, dispatch, type = null) => {
   if (newValue === undefined) return;
 
   if (persistData) {
-    const key = Object.keys(model.initialState)[0].toString();
-    await Store.set(key, newValue);
+    await Store.set(model, newValue);
   }
 
   await dispatch(await model.updateState(newValue, type));
