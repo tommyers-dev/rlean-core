@@ -1,8 +1,34 @@
 import LocalForage from './defaults/LocalForage';
 
 class Store {
+
+  /*
+   * Decides whether it should use the plugin or default
+   * Only here to make logic more readable since async/await makes it annoyingly hard to read
+  */
+  decideWhichEngine(model) {
+    const hasOwnPlugin = model.plugins.storage;
+
+    if(hasOwnPlugin) {
+      return model.plugins.storage;
+    }
+
+    return LocalForage;
+  }
+
+  /*
+   * Get the Models state representation
+  */
+  getKeys(model) {
+    return Object.keys(model.initialState)[0].toString();
+  }
+
+  /*
+   * Makes the 'set' call to local storage to store data
+   * Uses the storage engine found by decideWhichEngine, either plugin or default.
+  */
   async set(model, value) {
-    const key = Object.keys(model.initialState)[0].toString();
+    const key    = this.getKeys(model);
     const engine = this.decideWhichEngine(model);
 
     try {
@@ -19,17 +45,19 @@ class Store {
   }
 
   /*
-   * Decides whether it should use the plugin or default
-   * Only here to make logic more readable since async/await makes it annoyingly hard to read
+   * Makes the 'get' call to local storage to get some data
+   * Uses the storage engine found by decideWhichEngine, either plugin or default.
   */
-  decideWhichEngine(model) {
-    const hasOwnPlugin = model.plugins.storage;
+  async get(model) {
+    const key    = this.getKeys(model);
+    const engine = this.decideWhichEngine(model);
 
-    if(hasOwnPlugin) {
-      return model.plugins.storage;
+    try {
+      const value = await engine.get(key);
+      return value;
+    } catch (err) {
+      console.log(err);
     }
-
-    return LocalForage;
   }
 
   async setAll(units) {
@@ -48,31 +76,30 @@ class Store {
     return true;
   }
 
-  async get(key) {
-    if (!key) throw new Error('Must supply a key in get');
-
-    try {
-      const value = await localforage.getItem(key);
-
-      return value == null ? null : JSON.parse(value);
-    } catch (err) {
-      console.log(`LocalForage getItem error: ${err}`);
-    }
-  }
-
+  /*
+   * Makes the 'clear' call to local storage to get clear local storage
+   * Uses the storage engine found by decideWhichEngine, either plugin or default.
+  */
   async clear() {
+    const engine = this.decideWhichEngine(model);
+
     try {
-      await localforage.clear();
+      await engine.clear();
     } catch (err) {
       console.log(err);
     }
   }
 
-  async remove(key) {
-    if (!key) throw new Error('Must supply a key in remove');
+  /*
+   * Makes the 'remove' call to local storage to get remove a value from local storage
+   * Uses the storage engine found by decideWhichEngine, either plugin or default.
+  */
+  async remove(model) {
+    const key    = this.getKeys(model);
+    const engine = this.decideWhichEngine(model);
 
     try {
-      await localforage.removeItem(key);
+      await engine.remove(key);
     } catch (err) {
       console.log(err);
     }
