@@ -4352,6 +4352,10 @@ function () {
      * Only here to make logic more readable since async/await makes it annoyingly hard to read
     */
     value: function decideWhichEngine(model) {
+      if (!model.plugins) {
+        return _defaults_LocalForage__WEBPACK_IMPORTED_MODULE_0__["default"];
+      }
+
       var hasOwnPlugin = model.plugins.storage;
 
       if (hasOwnPlugin) {
@@ -7840,8 +7844,8 @@ function _useGet() {
                       apiUriOverride,
                       getPath,
                       key,
-                      stateValue,
                       storeValue,
+                      stateValue,
                       oIsLoading,
                       oLastUpdated,
                       callApi,
@@ -8093,12 +8097,12 @@ function _useGet() {
                           apiUriOverride = model.apiUriOverride;
                           getPath = model.getPath;
                           key = ___WEBPACK_IMPORTED_MODULE_3__["Store"].getKeys(model);
-                          stateValue = state[key];
-                          _context3.next = 15;
+                          _context3.next = 14;
                           return ___WEBPACK_IMPORTED_MODULE_3__["Store"].get(model);
 
-                        case 15:
+                        case 14:
                           storeValue = _context3.sent;
+                          stateValue = state[key];
                           oIsLoading = new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]();
                           oLastUpdated = new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]();
 

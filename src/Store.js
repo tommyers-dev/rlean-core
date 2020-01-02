@@ -7,6 +7,10 @@ class Store {
    * Only here to make logic more readable since async/await makes it annoyingly hard to read
   */
   decideWhichEngine(model) {
+    if(!model.plugins) {
+      return LocalForage;
+    }
+
     const hasOwnPlugin = model.plugins.storage;
 
     if(hasOwnPlugin) {
