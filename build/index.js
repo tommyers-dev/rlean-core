@@ -3766,9 +3766,21 @@ function () {
       throw new Error(inspection.error.message);
     }
   }, {
-    key: "loggingEngine",
-    value: function loggingEngine() {
-      this.logger = pluginMap.logger;
+    key: "setLoggingEngine",
+    value: function setLoggingEngine(logger) {
+      var inspection = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["implement"])(logger, {
+        rules: {
+          methods: ['trace', 'info', 'warn', 'error']
+        },
+        strictness: 'weak'
+      });
+
+      if (inspection.passed) {
+        this.logger = logger;
+        return;
+      }
+
+      throw new Error(inspection.error.message);
     }
   }]);
 

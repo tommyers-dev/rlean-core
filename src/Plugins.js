@@ -57,7 +57,19 @@ export default class Plugins {
     throw new Error(inspection.error.message);
   }
 
-  loggingEngine() {
-    this.logger = pluginMap.logger;
+  setLoggingEngine(logger) {
+    const inspection = implement(logger, {
+      rules: {
+        methods: ['trace', 'info', 'warn', 'error']
+      },
+      strictness: 'weak'
+    });
+
+    if(inspection.passed) {
+      this.logger = logger;
+      return;
+    }
+
+    throw new Error(inspection.error.message);
   }
 }

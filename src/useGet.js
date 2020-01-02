@@ -44,8 +44,8 @@ export default async function useGet(model, params, type) {
       const apiUriOverride = model.apiUriOverride;
       const getPath = model.getPath;
       const key = Store.getKeys(model);
-      const stateValue = state[key];
       const storeValue = await Store.get(model);
+      const stateValue = state[key];
       const oIsLoading = new IsLoading();
       const oLastUpdated = new LastUpdated();
 

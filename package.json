@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tommyers-dev/react-ent-core.git"
+    "url": "git+https://github.com/trevorcrupi/react-ent-core.git"
   },
   "keywords": [
     "react",
@@ -22,9 +22,9 @@
   "author": "tommyers-dev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tommyers-dev/react-ent-core/issues"
+    "url": "https://github.com/trevorcrupi/react-ent-core/issues"
   },
-  "homepage": "https://github.com/tommyers-dev/react-ent-core#readme",
+  "homepage": "https://github.com/trevorcrupi/react-ent-core#readme",
   "peerDependencies": {
     "react": "^16.12.0"
   },
