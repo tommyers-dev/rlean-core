@@ -1,4 +1,5 @@
 import LocalForage from './defaults/LocalForage';
+import { has } from '@react-ent/utils';
 
 class Store {
 
@@ -7,23 +8,20 @@ class Store {
    * Only here to make logic more readable since async/await makes it annoyingly hard to read
   */
   decideWhichEngine(model) {
-    if(!model.plugins) {
-      return LocalForage;
-    }
-
-    const hasOwnPlugin = model.plugins.storage;
-
-    if(hasOwnPlugin) {
-      return model.plugins.storage;
-    }
-
-    return LocalForage;
+    return has(model, 'plugins.storage') ? model.plugins.storage : LocalForage;
   }
 
   /*
    * Get the Models state representation
   */
   getKeys(model) {
+    if(!model) return;
+
+    // If it's a string, it's already a key!
+    if(typeof model === 'string' || model instanceof String) {
+      return model;
+    }
+
     return Object.keys(model.initialState)[0].toString();
   }
 
@@ -57,8 +55,7 @@ class Store {
     const engine = this.decideWhichEngine(model);
 
     try {
-      const value = await engine.get(key);
-      return value;
+      return await engine.get(key);
     } catch (err) {
       console.log(err);
     }

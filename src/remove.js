@@ -11,8 +11,7 @@ export const remove = async (model, dispatch, type = null) => {
   const persistData = model.persistData;
 
   if (persistData) {
-    const key = Object.keys(model.initialState)[0].toString();
-    await Store.remove(key);
+    await Store.remove(model);
   }
 
   // Reset the state of the model.

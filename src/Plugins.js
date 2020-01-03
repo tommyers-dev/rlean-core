@@ -18,7 +18,7 @@ export default class Plugins {
         this.api = this.setAPIEngine(this.pluginMap[pluginType]);
         break;
       case 'logger':
-        this.logger = this.pluginMap[pluginType];
+        this.logger = this.setLoggingEngine(this.pluginMap[pluginType]);
         break;
       default:
         this[pluginType] = this.pluginMap[pluginType];
@@ -29,45 +29,30 @@ export default class Plugins {
     const inspection = implement(storage, {
       rules: {
         methods: ['get', 'set', 'clear', 'remove']
-      },
-      strictness: 'weak'
+      }
     });
 
     if(inspection.passed) {
-      this.storage = storage;
-      return;
+      return storage;
     }
 
     throw new Error(inspection.error.message);
   }
 
+  // Remove implementation logic, throw error if trying to call function that doens't exist yet
   setAPIEngine(api) {
-    const inspection = implement(api, {
-      rules: {
-        methods: ['get', 'post', 'put', 'remove']
-      },
-      strictness: 'weak'
-    });
-
-    if(inspection.passed) {
-      this.api = api;
-      return;
-    }
-
-    throw new Error(inspection.error.message);
+    return api;
   }
 
   setLoggingEngine(logger) {
     const inspection = implement(logger, {
       rules: {
         methods: ['trace', 'info', 'warn', 'error']
-      },
-      strictness: 'weak'
+      }
     });
 
     if(inspection.passed) {
-      this.logger = logger;
-      return;
+      return logger;
     }
 
     throw new Error(inspection.error.message);

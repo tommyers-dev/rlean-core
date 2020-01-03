@@ -1,9 +1,11 @@
 import axios from 'axios';
 import ReactEnt from '../ReactEnt';
-import { get } from '@react-ent/utils';
+import { get, has } from '@react-ent/utils';
 import { methods } from './methods';
 
-export const request = async (payload, nullableParams, method, apiUriOverride) => {
+export const request = async (payload, model, method) => {
+  const nullableParams = model.nullableParams;
+  const apiUriOverride = model.apiUriOverride;
   const headers = get(ReactEnt, 'config.api.headers', {});
   const uri = apiUriOverride ? apiUriOverride : get(ReactEnt, 'config.api.uri', '');
   const path = formatPath(payload.path, payload.query, payload.body, method, nullableParams);
@@ -13,11 +15,20 @@ export const request = async (payload, nullableParams, method, apiUriOverride) =
 
   switch (method) {
     case methods.GET:
-      return await axios.get(uri + path, { headers });
+      return has(model, 'plugins.api')
+        ? await model.plugins.api.get({ url: uri + path, headers })
+        : await axios.get(uri + path, { headers });
     case methods.POST:
+      if(has(model, 'plugins.api')) return await model.plugins.api.post({ url: uri + path, headers: headers, data: payload.body });
     case methods.DELETE:
+      if(has(model, 'plugins.api')) return await model.plugins.api.del({ url: uri + path, headers: headers, data: payload.body });
     case methods.PUT:
+      if(has(model, 'plugins.api')) return await model.plugins.api.put({ url: uri + path, headers: headers, data: payload.body });
     case methods.PATCH:
+      if(has(model, 'plugins.api')) {
+        return await model.plugins.api.patch({ url: uri + path, headers: headers, data: payload.body });
+      }
+
       return await axios({
         method: method,
         url: uri + path,

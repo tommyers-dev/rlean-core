@@ -189,18 +189,15 @@ function _del() {
   _del = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(model, params) {
-    var o, deletePath, nullableParams, apiUriOverride, payload;
+    var deletePath, payload, o;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             deletePath = model.deletePath;
-            nullableParams = model.nullableParams;
-            apiUriOverride = model.apiUriOverride;
 
             if (!(deletePath !== null)) {
-              _context.next = 11;
+              _context.next = 8;
               break;
             }
 
@@ -208,19 +205,20 @@ function _del() {
               path: deletePath,
               body: Object.assign({}, params)
             };
-            _context.next = 8;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].DELETE, apiUriOverride);
+            _context.next = 5;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].DELETE);
 
-          case 8:
+          case 5:
             return _context.abrupt("return", _context.sent);
 
-          case 11:
+          case 8:
+            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the deletePath attribute."));
 
-          case 12:
+          case 10:
             return _context.abrupt("return");
 
-          case 13:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -326,13 +324,11 @@ var implement = function implement(testableClass, rulesMap) {
   var o = Object(___WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(testableClass);
   var inspector = new ImplementsInspector();
   inspector.given = o;
-  inspector.rules = rulesMap.rules;
-  inspector.strictness = rulesMap.strictness; // The inspection message we send back to give information about the interface check.
+  inspector.rules = rulesMap.rules; // The inspection message we send back to give information about the interface check.
 
   var inspectionMessage = {
     rules: inspector.rules,
     given: inspector.given,
-    strictness: inspector.strictness,
     error: {
       type: '',
       message: '',
@@ -351,30 +347,7 @@ var implement = function implement(testableClass, rulesMap) {
     inspectionMessage.error.message = "".concat(inspectionMessage.error.type, ": In class ").concat(inspectionMessage.given.className, ", we could not find required methods ").concat(inspectionMessage.error.methodsNotIncluded);
   }
 
-  if (inspector.strictness === 'weak') {
-    return inspectionMessage;
-  }
-
-  var strongTest = inspector.strongTest(); // If it failed both
-
-  if (!strongTest.passed && !weakTest.passed) {
-    inspectionMessage.error.invalidMethods = strongTest.invalidMethods;
-    inspectionMessage.error.message += " and contained invalid methods ".concat(inspectionMessage.error.invalidMethods);
-  } // If it only failed the strong test
-
-
-  if (!strongTest.passed) {
-    inspectionMessage.error.type = 'MethodError';
-    inspectionMessage.passed = false;
-    inspectionMessage.error.invalidMethods = strongTest.invalidMethods;
-    inspectionMessage.error.message = "".concat(inspectionMessage.error.type, ": Class ").concat(inspectionMessage.given.className, " contained ").concat(inspectionMessage.error.invalidMethods);
-  }
-
-  if (inspector.strictness === 'strict') {
-    return inspectionMessage;
-  }
-
-  throw new Error("implement() received an invalid strictness value. Value received was ".concat(inspector.strictness));
+  return inspectionMessage;
 };
 
 var ImplementsInspector =
@@ -477,7 +450,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -677,6 +650,11 @@ function (_Object) {
     }
   }, {
     key: "postPath",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "plugins",
     get: function get() {
       return null;
     }
@@ -1502,7 +1480,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1650,39 +1628,125 @@ var request =
 function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(payload, nullableParams, method, apiUriOverride) {
-    var headers, uri, path;
+  regeneratorRuntime.mark(function _callee(payload, model, method) {
+    var nullableParams, apiUriOverride, headers, uri, path;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            nullableParams = model.nullableParams;
+            apiUriOverride = model.apiUriOverride;
             headers = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.headers', {});
             uri = apiUriOverride ? apiUriOverride : Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_1__["default"], 'config.api.uri', '');
             path = formatPath(payload.path, payload.query, payload.body, method, nullableParams); // No path specified. Return undefined.
 
             if (!(path === undefined || path === '')) {
-              _context.next = 5;
+              _context.next = 7;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 5:
+          case 7:
             _context.t0 = method;
-            _context.next = _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].GET ? 8 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].POST ? 11 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].DELETE ? 11 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PUT ? 11 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PATCH ? 11 : 14;
+            _context.next = _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].GET ? 10 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].POST ? 20 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].DELETE ? 24 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PUT ? 28 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_3__["methods"].PATCH ? 32 : 39;
             break;
 
-          case 8:
-            _context.next = 10;
+          case 10:
+            if (!Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["has"])(model, 'plugins.api')) {
+              _context.next = 16;
+              break;
+            }
+
+            _context.next = 13;
+            return model.plugins.api.get({
+              url: uri + path,
+              headers: headers
+            });
+
+          case 13:
+            _context.t1 = _context.sent;
+            _context.next = 19;
+            break;
+
+          case 16:
+            _context.next = 18;
             return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(uri + path, {
               headers: headers
             });
 
-          case 10:
+          case 18:
+            _context.t1 = _context.sent;
+
+          case 19:
+            return _context.abrupt("return", _context.t1);
+
+          case 20:
+            if (!Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["has"])(model, 'plugins.api')) {
+              _context.next = 24;
+              break;
+            }
+
+            _context.next = 23;
+            return model.plugins.api.post({
+              url: uri + path,
+              headers: headers,
+              data: payload.body
+            });
+
+          case 23:
             return _context.abrupt("return", _context.sent);
 
-          case 11:
-            _context.next = 13;
+          case 24:
+            if (!Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["has"])(model, 'plugins.api')) {
+              _context.next = 28;
+              break;
+            }
+
+            _context.next = 27;
+            return model.plugins.api.del({
+              url: uri + path,
+              headers: headers,
+              data: payload.body
+            });
+
+          case 27:
+            return _context.abrupt("return", _context.sent);
+
+          case 28:
+            if (!Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["has"])(model, 'plugins.api')) {
+              _context.next = 32;
+              break;
+            }
+
+            _context.next = 31;
+            return model.plugins.api.put({
+              url: uri + path,
+              headers: headers,
+              data: payload.body
+            });
+
+          case 31:
+            return _context.abrupt("return", _context.sent);
+
+          case 32:
+            if (!Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["has"])(model, 'plugins.api')) {
+              _context.next = 36;
+              break;
+            }
+
+            _context.next = 35;
+            return model.plugins.api.patch({
+              url: uri + path,
+              headers: headers,
+              data: payload.body
+            });
+
+          case 35:
+            return _context.abrupt("return", _context.sent);
+
+          case 36:
+            _context.next = 38;
             return axios__WEBPACK_IMPORTED_MODULE_0___default()({
               method: method,
               url: uri + path,
@@ -1690,13 +1754,13 @@ function () {
               data: payload.body
             });
 
-          case 13:
+          case 38:
             return _context.abrupt("return", _context.sent);
 
-          case 14:
+          case 39:
             return _context.abrupt("return");
 
-          case 15:
+          case 40:
           case "end":
             return _context.stop();
         }
@@ -1704,7 +1768,7 @@ function () {
     }, _callee);
   }));
 
-  return function request(_x, _x2, _x3, _x4) {
+  return function request(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -3724,7 +3788,7 @@ function () {
           break;
 
         case 'logger':
-          this.logger = this.pluginMap[pluginType];
+          this.logger = this.setLoggingEngine(this.pluginMap[pluginType]);
           break;
 
         default:
@@ -3737,33 +3801,20 @@ function () {
       var inspection = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["implement"])(storage, {
         rules: {
           methods: ['get', 'set', 'clear', 'remove']
-        },
-        strictness: 'weak'
+        }
       });
 
       if (inspection.passed) {
-        this.storage = storage;
-        return;
+        return storage;
       }
 
       throw new Error(inspection.error.message);
-    }
+    } // Remove implementation logic, throw error if trying to call function that doens't exist yet
+
   }, {
     key: "setAPIEngine",
     value: function setAPIEngine(api) {
-      var inspection = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["implement"])(api, {
-        rules: {
-          methods: ['get', 'post', 'put', 'remove']
-        },
-        strictness: 'weak'
-      });
-
-      if (inspection.passed) {
-        this.api = api;
-        return;
-      }
-
-      throw new Error(inspection.error.message);
+      return api;
     }
   }, {
     key: "setLoggingEngine",
@@ -3771,13 +3822,11 @@ function () {
       var inspection = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["implement"])(logger, {
         rules: {
           methods: ['trace', 'info', 'warn', 'error']
-        },
-        strictness: 'weak'
+        }
       });
 
       if (inspection.passed) {
-        this.logger = logger;
-        return;
+        return logger;
       }
 
       throw new Error(inspection.error.message);
@@ -3817,18 +3866,15 @@ function _patch() {
   _patch = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(model, params) {
-    var o, patchPath, nullableParams, apiUriOverride, payload;
+    var patchPath, payload, o;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             patchPath = model.patchPath;
-            nullableParams = model.nullableParams;
-            apiUriOverride = model.apiUriOverride;
 
             if (!(patchPath !== null)) {
-              _context.next = 11;
+              _context.next = 8;
               break;
             }
 
@@ -3836,19 +3882,20 @@ function _patch() {
               path: patchPath,
               body: Object.assign({}, params)
             };
-            _context.next = 8;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PATCH, apiUriOverride);
+            _context.next = 5;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PATCH);
 
-          case 8:
+          case 5:
             return _context.abrupt("return", _context.sent);
 
-          case 11:
+          case 8:
+            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the patchPath attribute."));
 
-          case 12:
+          case 10:
             return _context.abrupt("return");
 
-          case 13:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -3889,15 +3936,13 @@ function _post() {
   regeneratorRuntime.mark(function _callee(model) {
     var params,
         dispatch,
-        o,
         postPath,
-        nullableParams,
-        apiUriOverride,
         persistData,
         key,
         body,
         payload,
         response,
+        o,
         _args = arguments;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -3905,15 +3950,12 @@ function _post() {
           case 0:
             params = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
             dispatch = _args.length > 2 ? _args[2] : undefined;
-            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             postPath = model.postPath;
-            nullableParams = model.nullableParams;
-            apiUriOverride = model.apiUriOverride;
             persistData = model.persistData;
             key = Object.keys(model.initialState)[0].toString();
 
             if (!(postPath !== null)) {
-              _context.next = 26;
+              _context.next = 23;
               break;
             }
 
@@ -3922,46 +3964,47 @@ function _post() {
               path: postPath,
               body: body
             };
-            _context.next = 13;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].POST, apiUriOverride);
+            _context.next = 10;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].POST);
 
-          case 13:
+          case 10:
             response = _context.sent;
 
             if (!(response && dispatch)) {
-              _context.next = 24;
+              _context.next = 21;
               break;
             }
 
             if (!persistData) {
-              _context.next = 18;
+              _context.next = 15;
               break;
             }
 
-            _context.next = 18;
+            _context.next = 15;
             return Store.set(key, response.data);
 
-          case 18:
+          case 15:
             _context.t0 = dispatch;
-            _context.next = 21;
+            _context.next = 18;
             return model.updateState(response.data);
 
-          case 21:
+          case 18:
             _context.t1 = _context.sent;
-            _context.next = 24;
+            _context.next = 21;
             return (0, _context.t0)(_context.t1);
 
-          case 24:
-            _context.next = 27;
+          case 21:
+            _context.next = 25;
             break;
 
-          case 26:
+          case 23:
+            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the postPath attribute."));
 
-          case 27:
+          case 25:
             return _context.abrupt("return");
 
-          case 28:
+          case 26:
           case "end":
             return _context.stop();
         }
@@ -3999,18 +4042,15 @@ function _put() {
   _put = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(model, params) {
-    var o, putPath, nullableParams, apiUriOverride, payload;
+    var putPath, payload, o;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             putPath = model.putPath;
-            nullableParams = model.nullableParams;
-            apiUriOverride = model.apiUriOverride;
 
             if (!(putPath !== null)) {
-              _context.next = 11;
+              _context.next = 8;
               break;
             }
 
@@ -4018,19 +4058,20 @@ function _put() {
               path: putPath,
               body: Object.assign({}, params)
             };
-            _context.next = 8;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PUT, apiUriOverride);
+            _context.next = 5;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PUT);
 
-          case 8:
+          case 5:
             return _context.abrupt("return", _context.sent);
 
-          case 11:
+          case 8:
+            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the putPath attribute."));
 
-          case 12:
+          case 10:
             return _context.abrupt("return");
 
-          case 13:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -4123,7 +4164,6 @@ function () {
   regeneratorRuntime.mark(function _callee(model, dispatch) {
     var type,
         persistData,
-        key,
         _args = arguments;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -4133,25 +4173,24 @@ function () {
             persistData = model.persistData;
 
             if (!persistData) {
-              _context.next = 6;
+              _context.next = 5;
               break;
             }
 
-            key = Object.keys(model.initialState)[0].toString();
-            _context.next = 6;
-            return ___WEBPACK_IMPORTED_MODULE_0__["Store"].remove(key);
+            _context.next = 5;
+            return ___WEBPACK_IMPORTED_MODULE_0__["Store"].remove(model);
 
-          case 6:
+          case 5:
             _context.t0 = dispatch;
-            _context.next = 9;
+            _context.next = 8;
             return model.updateState(model.initialState, type);
 
-          case 9:
+          case 8:
             _context.t1 = _context.sent;
-            _context.next = 12;
+            _context.next = 11;
             return (0, _context.t0)(_context.t1);
 
-          case 12:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -4325,6 +4364,8 @@ module.exports = require("react");
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _defaults_LocalForage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(51);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -4334,6 +4375,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -4352,17 +4394,7 @@ function () {
      * Only here to make logic more readable since async/await makes it annoyingly hard to read
     */
     value: function decideWhichEngine(model) {
-      if (!model.plugins) {
-        return _defaults_LocalForage__WEBPACK_IMPORTED_MODULE_0__["default"];
-      }
-
-      var hasOwnPlugin = model.plugins.storage;
-
-      if (hasOwnPlugin) {
-        return model.plugins.storage;
-      }
-
-      return _defaults_LocalForage__WEBPACK_IMPORTED_MODULE_0__["default"];
+      return Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["has"])(model, 'plugins.storage') ? model.plugins.storage : _defaults_LocalForage__WEBPACK_IMPORTED_MODULE_0__["default"];
     }
     /*
      * Get the Models state representation
@@ -4371,6 +4403,12 @@ function () {
   }, {
     key: "getKeys",
     value: function getKeys(model) {
+      if (!model) return; // If it's a string, it's already a key!
+
+      if (typeof model === 'string' || model instanceof String) {
+        return model;
+      }
+
       return Object.keys(model.initialState)[0].toString();
     }
     /*
@@ -4445,7 +4483,7 @@ function () {
       var _get = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(model) {
-        var key, engine, value;
+        var key, engine;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -4457,20 +4495,19 @@ function () {
                 return engine.get(key);
 
               case 5:
-                value = _context2.sent;
-                return _context2.abrupt("return", value);
+                return _context2.abrupt("return", _context2.sent);
 
-              case 9:
-                _context2.prev = 9;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](2);
                 console.log(_context2.t0);
 
-              case 12:
+              case 11:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[2, 9]]);
+        }, _callee2, this, [[2, 8]]);
       }));
 
       function get(_x3) {
@@ -7840,8 +7877,6 @@ function _useGet() {
                       progressiveLoading,
                       syncInterval,
                       syncAfterTimeElapsed,
-                      nullableParams,
-                      apiUriOverride,
                       getPath,
                       key,
                       storeValue,
@@ -7974,7 +8009,7 @@ function _useGet() {
                                       };
                                       _context2.prev = 49;
                                       _context2.next = 52;
-                                      return Object(_internal__WEBPACK_IMPORTED_MODULE_2__["request"])(payload, nullableParams, _internal__WEBPACK_IMPORTED_MODULE_2__["methods"].GET, apiUriOverride);
+                                      return Object(_internal__WEBPACK_IMPORTED_MODULE_2__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_2__["methods"].GET);
 
                                     case 52:
                                       response = _context2.sent;
@@ -8008,7 +8043,7 @@ function _useGet() {
                                       }
 
                                       _context2.next = 62;
-                                      return ___WEBPACK_IMPORTED_MODULE_3__["Store"].set(key, response.data);
+                                      return ___WEBPACK_IMPORTED_MODULE_3__["Store"].set(model, response.data);
 
                                     case 62:
                                       _context2.t10 = dispatch;
@@ -8093,28 +8128,26 @@ function _useGet() {
                           progressiveLoading = model.progressiveLoading;
                           syncInterval = model.syncInterval;
                           syncAfterTimeElapsed = model.syncAfterTimeElapsed;
-                          nullableParams = model.nullableParams;
-                          apiUriOverride = model.apiUriOverride;
                           getPath = model.getPath;
                           key = ___WEBPACK_IMPORTED_MODULE_3__["Store"].getKeys(model);
-                          _context3.next = 14;
+                          _context3.next = 12;
                           return ___WEBPACK_IMPORTED_MODULE_3__["Store"].get(model);
 
-                        case 14:
+                        case 12:
                           storeValue = _context3.sent;
                           stateValue = state[key];
                           oIsLoading = new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]();
                           oLastUpdated = new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]();
 
                           if (isSync) {
-                            _context3.next = 21;
+                            _context3.next = 19;
                             break;
                           }
 
-                          _context3.next = 21;
+                          _context3.next = 19;
                           return callApi();
 
-                        case 21:
+                        case 19:
                           if (typeof syncInterval === 'number') {
                             setTimeout(
                             /*#__PURE__*/
@@ -8141,7 +8174,7 @@ function _useGet() {
                             })), syncInterval);
                           }
 
-                        case 22:
+                        case 20:
                         case "end":
                           return _context3.stop();
                       }

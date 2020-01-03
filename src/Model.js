@@ -15,6 +15,10 @@ export class Model extends Object {
     return null;
   }
 
+  get plugins() {
+    return null;
+  }
+
   get putPath() {
     return null;
   }

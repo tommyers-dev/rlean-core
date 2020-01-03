@@ -40,8 +40,6 @@ export default async function useGet(model, params, type) {
       const progressiveLoading = model.progressiveLoading;
       const syncInterval = model.syncInterval;
       const syncAfterTimeElapsed = model.syncAfterTimeElapsed;
-      const nullableParams = model.nullableParams;
-      const apiUriOverride = model.apiUriOverride;
       const getPath = model.getPath;
       const key = Store.getKeys(model);
       const storeValue = await Store.get(model);
@@ -101,7 +99,7 @@ export default async function useGet(model, params, type) {
         };
 
         try {
-          const response = await request(payload, nullableParams, methods.GET, apiUriOverride);
+          const response = await request(payload, model, methods.GET);
 
           if (response) {
             // If isSync, do a deepCompare of the result with what's in state, or state and store.
@@ -116,7 +114,7 @@ export default async function useGet(model, params, type) {
 
             if (persistData) {
               // Update storage.
-              await Store.set(key, response.data);
+              await Store.set(model, response.data);
             }
 
             // Set value in state.
