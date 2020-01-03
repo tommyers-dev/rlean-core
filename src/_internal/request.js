@@ -7,6 +7,7 @@ export const request = async (payload, model, method) => {
   const nullableParams = model.nullableParams;
   const apiUriOverride = model.apiUriOverride;
   const headers = get(ReactEnt, 'config.api.headers', {});
+  const defaultAdapter = get(ReactEnt, 'config.api.adapter');
   const uri = apiUriOverride ? apiUriOverride : get(ReactEnt, 'config.api.uri', '');
   const path = formatPath(payload.path, payload.query, payload.body, method, nullableParams);
 

@@ -1,3 +1,6 @@
+import ReactEnt from './ReactEnt';
+import { get, has } from '@react-ent/utils';
+
 export class Model extends Object {
   get types() {
     return this.throw('types getter');
@@ -16,7 +19,8 @@ export class Model extends Object {
   }
 
   get plugins() {
-    return null;
+    const api = get(ReactEnt, 'config.api.adapter');
+    return api ? { api } : {};
   }
 
   get putPath() {
