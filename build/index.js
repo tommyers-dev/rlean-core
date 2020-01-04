@@ -313,22 +313,15 @@ var inspectClass = function inspectClass(obj) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "implement", function() { return implement; });
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+var _this = undefined;
 
 
-var implement = function implement(testableClass, rulesMap) {
-  var o = Object(___WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(testableClass);
-  var inspector = new ImplementsInspector();
-  inspector.given = o;
-  inspector.rules = rulesMap.rules; // The inspection message we send back to give information about the interface check.
+var implement = function implement(testableClass, rules) {
+  var given = Object(___WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(testableClass); // The inspection message we send back to give information about the interface check.
 
   var inspectionMessage = {
-    rules: inspector.rules,
-    given: inspector.given,
+    rules: rules,
+    given: given,
     error: {
       type: '',
       message: '',
@@ -337,99 +330,20 @@ var implement = function implement(testableClass, rulesMap) {
     },
     passed: true
   };
-  var weakTest = inspector.weakTest();
+  var rulesDifferential = rules.methods.filter(function (method) {
+    if (_this.given.methods.indexOf(method) < 0) return method;
+  });
 
-  if (!weakTest.passed) {
+  if (rulesDifferential.length !== 0) {
     inspectionMessage.error.type = 'MethodError';
     inspectionMessage.passed = false;
     inspectionMessage.error.invalidMethods = [];
-    inspectionMessage.error.methodsNotIncluded = weakTest.methodsNotIncluded;
-    inspectionMessage.error.message = "".concat(inspectionMessage.error.type, ": In class ").concat(inspectionMessage.given.className, ", we could not find required methods ").concat(inspectionMessage.error.methodsNotIncluded);
+    inspectionMessage.error.methodsNotIncluded = rulesDifferential;
+    inspectionMessage.error.message = "".concat(inspectionMessage.error.type, ": In class ").concat(inspectionMessage.given.ClassName, ", we could not find required methods ").concat(inspectionMessage.error.methodsNotIncluded);
   }
 
   return inspectionMessage;
 };
-
-var ImplementsInspector =
-/*#__PURE__*/
-function () {
-  function ImplementsInspector() {
-    _classCallCheck(this, ImplementsInspector);
-  }
-
-  _createClass(ImplementsInspector, [{
-    key: "weakTest",
-    value: function weakTest() {
-      var _this = this;
-
-      var weakTestResponse = {
-        passed: true,
-        methodsNotIncluded: []
-      }; // rulesDifferential = rules - given
-
-      var rulesDifferential = this.rules.methods.filter(function (method) {
-        if (_this.given.methods.indexOf(method) < 0) return method;
-      });
-
-      if (rulesDifferential.length !== 0) {
-        weakTestResponse.passed = false;
-        weakTestResponse.methodsNotIncluded = rulesDifferential;
-      }
-
-      return weakTestResponse;
-    }
-  }, {
-    key: "strongTest",
-    value: function strongTest() {
-      var _this2 = this;
-
-      var strongTestResponse = {
-        passed: true,
-        invalidMethods: []
-      };
-      var givenDifferential = this.given.methods.filter(function (method) {
-        if (_this2.rules.methods.indexOf(method) < 0) return method;
-      });
-
-      if (givenDifferential.length !== 0) {
-        strongTestResponse.passed = false;
-        strongTestResponse.invalidMethods = givenDifferential;
-      }
-
-      return strongTestResponse;
-    }
-  }, {
-    key: "rules",
-    set: function set(value) {
-      this.rulesValue = value;
-    },
-    get: function get() {
-      return this.rulesValue;
-    }
-  }, {
-    key: "given",
-    set: function set(value) {
-      this.givenValue = {
-        className: value.ClassName,
-        methods: value.Methods,
-        attributes: value.Attributes
-      };
-    },
-    get: function get() {
-      return this.givenValue;
-    }
-  }, {
-    key: "strictness",
-    set: function set(value) {
-      this.strictnessValue = value || 'strict';
-    },
-    get: function get() {
-      return this.strictnessValue;
-    }
-  }]);
-
-  return ImplementsInspector;
-}();
 
 /***/ }),
 /* 5 */
