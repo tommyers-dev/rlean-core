@@ -702,7 +702,11 @@ function () {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.config = config;
+                try {
+                  this.config = config;
+                } catch (e) {
+                  console.log(e);
+                }
 
               case 1:
               case "end":
