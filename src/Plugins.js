@@ -1,8 +1,14 @@
+import ReactEnt from './ReactEnt';
 import { implement } from './_internal';
+import { get, has } from '@react-ent/utils';
+import { LocalForageAdapter, AxiosAdapter } from './adapters';
 
 export default class Plugins {
   constructor(pluginMap) {
-    this.pluginMap = pluginMap;
+    this.pluginMap = pluginMap ? plugin : {};
+
+    this.storage = get(ReactEnt, 'config.storage.adapter', LocalForageAdapter)
+    this.api     = get(ReactEnt, 'config.api.adapter', AxiosAdapter);
 
     for(let key in pluginMap) {
       this.pipe(key);
@@ -12,10 +18,10 @@ export default class Plugins {
   pipe(pluginType) {
     switch(pluginType) {
       case 'storage':
-        this.storage = this.setStorageEngine(this.pluginMap[pluginType]);
+        this.storage = this.ensureCorrectStorageImplementation(this.pluginMap[pluginType]);
         break;
       case 'api':
-        this.api = this.setAPIEngine(this.pluginMap[pluginType]);
+        this.api = this.pluginMap[pluginType];
         break;
       case 'logger':
         this.logger = this.setLoggingEngine(this.pluginMap[pluginType]);
@@ -25,7 +31,7 @@ export default class Plugins {
     }
   }
 
-  setStorageEngine(storage) {
+  ensureCorrectStorageImplementation(storage) {
     const inspection = implement(storage, {
       rules: {
         methods: ['get', 'set', 'clear', 'remove']
@@ -37,11 +43,6 @@ export default class Plugins {
     }
 
     throw new Error(inspection.error.message);
-  }
-
-  // Remove implementation logic, throw error if trying to call function that doens't exist yet
-  setAPIEngine(api) {
-    return api;
   }
 
   setLoggingEngine(logger) {

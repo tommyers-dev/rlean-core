@@ -132,7 +132,7 @@ export default async function useGet(model, params, type) {
             let lastUpdatedCopy = deepCopy(lastUpdatedRef.current);
             lastUpdatedCopy[key] = new Date();
             await dispatch(await oLastUpdated.updateState(Object.assign({}, lastUpdatedCopy)));
-            await Store.set('lastUpdated', lastUpdatedCopy);
+            await Store.set(lastUpdatedCopy, lastUpdatedCopy);
           }
         } catch (err) {
           // Set isLoading to false when there is an error

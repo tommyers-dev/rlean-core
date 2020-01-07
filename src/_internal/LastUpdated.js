@@ -1,6 +1,8 @@
 import { Model } from '../Model';
 import { ReactEnt } from '../';
 import { get } from '@react-ent/utils';
+import { AxiosAdapter, LocalForageAdapter } from '../adapters';
+import Plugins from '../Plugins';
 
 export class LastUpdated extends Model {
   get initialState() {
@@ -26,6 +28,13 @@ export class LastUpdated extends Model {
     return {
       SET_LAST_UPDATED: 'SET_LAST_UPDATED'
     };
+  }
+
+  get plugins() {
+    return new Plugins({
+      storage: LocalForageAdapter,
+      api: AxiosAdapter
+    });
   }
 
   reducer(state, action) {

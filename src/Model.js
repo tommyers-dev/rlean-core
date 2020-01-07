@@ -1,5 +1,6 @@
 import ReactEnt from './ReactEnt';
 import { get, has } from '@react-ent/utils';
+import Plugins from './Plugins';
 
 export class Model extends Object {
   get types() {
@@ -18,9 +19,9 @@ export class Model extends Object {
     return null;
   }
 
+  // check if storage or logger are given
   get plugins() {
-    const api = get(ReactEnt, 'config.api.adapter');
-    return api ? { api } : {};
+    return new Plugins();
   }
 
   get putPath() {
@@ -37,14 +38,6 @@ export class Model extends Object {
 
   get nullableParams() {
     return false;
-  }
-
-  /**
-   * If set, the api call will use the apiUriOverride path
-   * instead of the path provided by the config.
-   */
-  get apiUriOverride() {
-    return null;
   }
 
   /**

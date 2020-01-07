@@ -10,7 +10,6 @@ import { request, methods, inspectClass } from './_internal';
 export default async function post(model, params = {}, dispatch) {
   const postPath = model.postPath;
   const persistData = model.persistData;
-  const key = Object.keys(model.initialState)[0].toString();
 
   if (postPath !== null) {
     const body = params ? Object.assign({}, params) : {};
@@ -23,7 +22,7 @@ export default async function post(model, params = {}, dispatch) {
     // if dispatch was provided, we're supposed to use it.
     if (response && dispatch) {
       if (persistData) {
-        await Store.set(key, response.data);
+        await Store.set(model, response.data);
       }
 
       await dispatch(await model.updateState(response.data));

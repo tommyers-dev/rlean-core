@@ -1,15 +1,7 @@
-import LocalForage from './defaults/LocalForage';
+import { LocalForageAdapter } from './adapters';
 import { has } from '@react-ent/utils';
 
 class Store {
-
-  /*
-   * Decides whether it should use the plugin or default
-   * Only here to make logic more readable since async/await makes it annoyingly hard to read
-  */
-  decideWhichEngine(model) {
-    return has(model, 'plugins.storage') ? model.plugins.storage : LocalForage;
-  }
 
   /*
    * Get the Models state representation
@@ -27,16 +19,14 @@ class Store {
 
   /*
    * Makes the 'set' call to local storage to store data
-   * Uses the storage engine found by decideWhichEngine, either plugin or default.
   */
   async set(model, value) {
-    const key    = this.getKeys(model);
-    const engine = this.decideWhichEngine(model);
+    const key = this.getKeys(model);
 
     try {
-      await engine.set(key, value);
+      await model.plugins.storage.set(key, value);
 
-      const updatedValue = await engine.get(key);
+      const updatedValue = await model.plugins.storage.get(key);
 
       if(updatedValue === undefined) throw new Error(`Could not set ${key} = ${value}`);
 
@@ -48,14 +38,12 @@ class Store {
 
   /*
    * Makes the 'get' call to local storage to get some data
-   * Uses the storage engine found by decideWhichEngine, either plugin or default.
   */
   async get(model) {
-    const key    = this.getKeys(model);
-    const engine = this.decideWhichEngine(model);
+    const key = this.getKeys(model);
 
     try {
-      return await engine.get(key);
+      return await model.plugins.storage.get(key);
     } catch (err) {
       console.log(err);
     }
@@ -82,10 +70,8 @@ class Store {
    * Uses the storage engine found by decideWhichEngine, either plugin or default.
   */
   async clear() {
-    const engine = this.decideWhichEngine(model);
-
     try {
-      await engine.clear();
+      await model.plugins.storage.clear();
     } catch (err) {
       console.log(err);
     }
@@ -96,11 +82,10 @@ class Store {
    * Uses the storage engine found by decideWhichEngine, either plugin or default.
   */
   async remove(model) {
-    const key    = this.getKeys(model);
-    const engine = this.decideWhichEngine(model);
+    const key = this.getKeys(model);
 
     try {
-      await engine.remove(key);
+      await model.plugins.storage.remove(key);
     } catch (err) {
       console.log(err);
     }

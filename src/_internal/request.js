@@ -7,35 +7,29 @@ export const request = async (payload, model, method) => {
   const nullableParams = model.nullableParams;
   const apiUriOverride = model.apiUriOverride;
   const headers = get(ReactEnt, 'config.api.headers', {});
-  const defaultAdapter = get(ReactEnt, 'config.api.adapter');
   const uri = apiUriOverride ? apiUriOverride : get(ReactEnt, 'config.api.uri', '');
   const path = formatPath(payload.path, payload.query, payload.body, method, nullableParams);
 
   // No path specified. Return undefined.
   if (path === undefined || path === '') return;
 
+  const apiPayload = {
+    url: uri + path,
+    data: payload.body,
+    headers
+  };
+
   switch (method) {
     case methods.GET:
-      return has(model, 'plugins.api')
-        ? await model.plugins.api.get({ url: uri + path, headers })
-        : await axios.get(uri + path, { headers });
+      return await model.plugins.api.get(apiPayload);
     case methods.POST:
-      if(has(model, 'plugins.api')) return await model.plugins.api.post({ url: uri + path, headers: headers, data: payload.body });
+      return await model.plugins.api.post(apiPayload);
     case methods.DELETE:
-      if(has(model, 'plugins.api')) return await model.plugins.api.del({ url: uri + path, headers: headers, data: payload.body });
+      return await model.plugins.api.del(apiPayload);
     case methods.PUT:
-      if(has(model, 'plugins.api')) return await model.plugins.api.put({ url: uri + path, headers: headers, data: payload.body });
+      return await model.plugins.api.put(apiPayload);
     case methods.PATCH:
-      if(has(model, 'plugins.api')) {
-        return await model.plugins.api.patch({ url: uri + path, headers: headers, data: payload.body });
-      }
-
-      return await axios({
-        method: method,
-        url: uri + path,
-        headers: headers,
-        data: payload.body
-      });
+      return await model.plugins.api.patch(apiPayload);
     default:
       // Unknown method specified. Return undefined.
       return;
