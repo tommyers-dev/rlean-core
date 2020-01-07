@@ -2,12 +2,12 @@ import { request, methods, inspectClass } from './_internal';
 
 /**
  * Function that executes a POST against the API.
- *
+ * @constructor
  * @param {Object} model
- * @param {Object} params
+ * @param {Object} [params={}]
  * @param {Function} dispatch Provide if you're expecting an updated object in the response (like the inclusion of an auto-increment id)
  */
-export default async function post(model, params = {}, dispatch) {
+async function post(model, params = {}, dispatch) {
   const postPath = model.postPath;
   const persistData = model.persistData;
 
@@ -34,3 +34,5 @@ export default async function post(model, params = {}, dispatch) {
 
   return;
 }
+
+export default post;

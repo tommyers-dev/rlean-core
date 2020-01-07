@@ -2,11 +2,12 @@ import { request, methods, inspectClass } from './_internal';
 
 /**
  * Function that executes a PUT against the API.
- *
+ * @constructor
  * @param {Object} model
  * @param {Object} params
  */
-export default async function put(model, params) {
+async function put(model, params) {
+
   const putPath = model.putPath;
 
   if (putPath !== null) {
@@ -17,3 +18,5 @@ export default async function put(model, params) {
   const o = inspectClass(model);
   console.error(`The ${o.ClassName} object is missing the putPath attribute.`);
 }
+
+export default put;

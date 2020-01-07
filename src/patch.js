@@ -2,11 +2,11 @@ import { request, methods, inspectClass } from './_internal';
 
 /**
  * Function that executes a PATCH against the API.
- *
+ * @constructor
  * @param {Object} model
  * @param {Object} params
  */
-export default async function patch(model, params) {
+async function patch(model, params) {
   const patchPath = model.patchPath;
 
   if (patchPath !== null) {
@@ -19,3 +19,5 @@ export default async function patch(model, params) {
 
   return;
 }
+
+export default patch;

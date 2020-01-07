@@ -2,11 +2,12 @@ import { request, methods, inspectClass } from './_internal';
 
 /**
  * Function that executes a DELETE against the API.
- *
+ * @constructor
  * @param {Object} model
  * @param {Object} params
  */
-export default async function del(model, params) {
+async function del(model, params) {
+
   const deletePath = model.deletePath;
 
   if (deletePath !== null) {
@@ -17,3 +18,5 @@ export default async function del(model, params) {
   const o = inspectClass(model);
   console.error(`The ${o.ClassName} object is missing the deletePath attribute.`);
 }
+
+export default del;
