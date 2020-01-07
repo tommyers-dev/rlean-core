@@ -1,6 +1,10 @@
 class ReactEnt {
   async init(config) {
-    this.config = config;
+    try {
+      this.config = config;
+    } catch(e) {
+      console.log(e);
+    }
   }
 }
 

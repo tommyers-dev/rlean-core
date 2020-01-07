@@ -1,3 +1,7 @@
+import ReactEnt from './ReactEnt';
+import { get, has } from '@react-ent/utils';
+import Plugins from './Plugins';
+
 export class Model extends Object {
   // If types isn't provided, a default one will be generated.
   get types() {
@@ -15,6 +19,11 @@ export class Model extends Object {
 
   get postPath() {
     return null;
+  }
+
+  // check if storage or logger are given
+  get plugins() {
+    return new Plugins();
   }
 
   get putPath() {

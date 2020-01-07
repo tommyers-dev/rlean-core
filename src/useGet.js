@@ -43,12 +43,10 @@ async function useGet(model, params, type) {
       const progressiveLoading = model.progressiveLoading;
       const syncInterval = model.syncInterval;
       const syncAfterTimeElapsed = model.syncAfterTimeElapsed;
-      const nullableParams = model.nullableParams;
-      const apiUriOverride = model.apiUriOverride;
       const getPath = model.getPath;
-      const key = Object.keys(model.initialState)[0].toString();
+      const key = Store.getKeys(model);
+      const storeValue = await Store.get(model);
       const stateValue = state[key];
-      const storeValue = await Store.get(key);
       const oIsLoading = new IsLoading();
       const oLastUpdated = new LastUpdated();
 
@@ -104,7 +102,7 @@ async function useGet(model, params, type) {
         };
 
         try {
-          const response = await request(payload, nullableParams, methods.GET, apiUriOverride);
+          const response = await request(payload, model, methods.GET);
 
           if (response) {
             // If isSync, do a deepCompare of the result with what's in state, or state and store.
@@ -119,7 +117,7 @@ async function useGet(model, params, type) {
 
             if (persistData) {
               // Update storage.
-              await Store.set(key, response.data);
+              await Store.set(model, response.data);
             }
 
             // Set value in state.
@@ -137,7 +135,7 @@ async function useGet(model, params, type) {
             let lastUpdatedCopy = deepCopy(lastUpdatedRef.current);
             lastUpdatedCopy[key] = new Date();
             await dispatch(await oLastUpdated.updateState(Object.assign({}, lastUpdatedCopy)));
-            await Store.set('lastUpdated', lastUpdatedCopy);
+            await Store.set(lastUpdatedCopy, lastUpdatedCopy);
           }
         } catch (err) {
           // Set isLoading to false when there is an error

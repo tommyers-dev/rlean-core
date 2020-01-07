@@ -1,9 +1,11 @@
 import axios from 'axios';
 import ReactEnt from '../ReactEnt';
-import { get } from '@react-ent/utils';
+import { get, has } from '@react-ent/utils';
 import { methods } from './methods';
 
-export const request = async (payload, nullableParams, method, apiUriOverride) => {
+export const request = async (payload, model, method) => {
+  const nullableParams = model.nullableParams;
+  const apiUriOverride = model.apiUriOverride;
   const headers = get(ReactEnt, 'config.api.headers', {});
   const uri = apiUriOverride ? apiUriOverride : get(ReactEnt, 'config.api.uri', '');
   const path = formatPath(payload.path, payload.query, payload.body, method, nullableParams);
@@ -11,19 +13,23 @@ export const request = async (payload, nullableParams, method, apiUriOverride) =
   // No path specified. Return undefined.
   if (path === undefined || path === '') return;
 
+  const apiPayload = {
+    url: uri + path,
+    data: payload.body,
+    headers
+  };
+
   switch (method) {
     case methods.GET:
-      return await axios.get(uri + path, { headers });
+      return await model.plugins.api.get(apiPayload);
     case methods.POST:
+      return await model.plugins.api.post(apiPayload);
     case methods.DELETE:
+      return await model.plugins.api.del(apiPayload);
     case methods.PUT:
+      return await model.plugins.api.put(apiPayload);
     case methods.PATCH:
-      return await axios({
-        method: method,
-        url: uri + path,
-        headers: headers,
-        data: payload.body
-      });
+      return await model.plugins.api.patch(apiPayload);
     default:
       // Unknown method specified. Return undefined.
       return;

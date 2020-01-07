@@ -1,3 +1,5 @@
+import Plugins from './Plugins';
+
 export class Utility extends Object {
   get postPath() {
     return null;
@@ -19,12 +21,8 @@ export class Utility extends Object {
     return false;
   }
 
-  /**
-   * If set, the api call will use the apiUriOverride path
-   * instead of the path provided by the config.
-   */
-  get apiUriOverride() {
-    return null;
+  get plugins() {
+    return new Plugins();
   }
 
   throw(functionName) {
