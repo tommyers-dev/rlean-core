@@ -1,10 +1,12 @@
 export class Model extends Object {
+  // If types isn't provided, a default one will be generated.
   get types() {
-    return this.throw('types getter');
+    return null;
   }
 
+  // If initialState isn't provided, a default one will be generated.
   get initialState() {
-    return this.throw('initialState getter');
+    return null;
   }
 
   get getPath() {
@@ -29,14 +31,6 @@ export class Model extends Object {
 
   get nullableParams() {
     return false;
-  }
-
-  /**
-   * If set, the api call will use the apiUriOverride path
-   * instead of the path provided by the config.
-   */
-  get apiUriOverride() {
-    return null;
   }
 
   /**
@@ -82,23 +76,20 @@ export class Model extends Object {
     return null;
   }
 
+  // If a reducer function isn't provided, a default one will be generated.
   reducer() {
-    this.throw('reducer(state, action)');
+    return null;
   }
 
   /**
    * This is your main action. This is what will be called to update your
    * object in state. Type is not needed if there is only one type in
-   * your model.
+   * your model. If an updateState function isn't provided, a default one will be generated.
    *
    * @param {Object} stateObj
    * @param {string} type
    */
   updateState(stateObj, type) {
-    this.throw('updateState(stateObj, type)');
-  }
-
-  throw(functionName) {
-    throw new Error(`Model error: ${functionName} must be implemented in the derived class.`);
+    return null;
   }
 }
