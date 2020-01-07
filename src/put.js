@@ -2,11 +2,11 @@ import { request, methods, inspectClass } from './_internal';
 
 /**
  * Function that executes a PUT against the API.
- *
+ * @constructor
  * @param {Object} model
  * @param {Object} params
  */
-export default async function put(model, params) {
+async function put(model, params) {
   const o = inspectClass(model);
   const putPath = model.putPath;
   const nullableParams = model.nullableParams;
@@ -21,3 +21,5 @@ export default async function put(model, params) {
 
   return;
 }
+
+export default put;

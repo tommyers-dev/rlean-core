@@ -2,11 +2,11 @@ import { request, methods, inspectClass } from './_internal';
 
 /**
  * Function that executes a DELETE against the API.
- *
+ * @constructor
  * @param {Object} model
  * @param {Object} params
  */
-export default async function del(model, params) {
+async function del(model, params) {
   const o = inspectClass(model);
   const deletePath = model.deletePath;
   const nullableParams = model.nullableParams;
@@ -21,3 +21,5 @@ export default async function del(model, params) {
 
   return;
 }
+
+export default del;

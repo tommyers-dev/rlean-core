@@ -2,10 +2,9 @@ import { Store } from './';
 
 /**
  * Clear an object from the store if persistData is true (default).
- *
  * @param {Object} model
  * @param {function} dispatch
- * @param {string} type
+ * @param {string} [type=null]
  */
 export const remove = async (model, dispatch, type = null) => {
   const persistData = model.persistData;
