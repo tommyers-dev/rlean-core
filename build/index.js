@@ -310,8 +310,6 @@ var inspectClass = function inspectClass(obj) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "implement", function() { return implement; });
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-var _this = undefined;
-
 
 var implement = function implement(testableClass, rules) {
   var given = Object(___WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(testableClass); // The inspection message we send back to give information about the interface check.
@@ -328,7 +326,7 @@ var implement = function implement(testableClass, rules) {
     passed: true
   };
   var rulesDifferential = rules.methods.filter(function (method) {
-    if (_this.given.methods.indexOf(method) < 0) return method;
+    if (given.Methods.indexOf(method) < 0) return method;
   });
 
   if (rulesDifferential.length !== 0) {
@@ -1459,7 +1457,7 @@ function () {
   function Plugins(pluginMap) {
     _classCallCheck(this, Plugins);
 
-    this.pluginMap = pluginMap ? plugin : {};
+    this.pluginMap = pluginMap ? pluginMap : {};
     this.storage = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.storage.adapter', _adapters__WEBPACK_IMPORTED_MODULE_3__["LocalForageAdapter"]);
     this.api = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_ReactEnt__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.adapter', _adapters__WEBPACK_IMPORTED_MODULE_3__["AxiosAdapter"]);
 
@@ -1492,9 +1490,7 @@ function () {
     key: "ensureCorrectStorageImplementation",
     value: function ensureCorrectStorageImplementation(storage) {
       var inspection = Object(_internal__WEBPACK_IMPORTED_MODULE_1__["implement"])(storage, {
-        rules: {
-          methods: ['get', 'set', 'clear', 'remove']
-        }
+        methods: ['get', 'set', 'clear', 'remove']
       });
 
       if (inspection.passed) {
@@ -1507,9 +1503,7 @@ function () {
     key: "setLoggingEngine",
     value: function setLoggingEngine(logger) {
       var inspection = Object(_internal__WEBPACK_IMPORTED_MODULE_1__["implement"])(logger, {
-        rules: {
-          methods: ['trace', 'info', 'warn', 'error']
-        }
+        methods: ['trace', 'info', 'warn', 'error']
       });
 
       if (inspection.passed) {

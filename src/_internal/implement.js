@@ -17,7 +17,7 @@ export const implement = (testableClass, rules) => {
   };
 
   const rulesDifferential = rules.methods.filter(method => {
-    if(this.given.methods.indexOf(method) < 0) return method;
+    if(given.Methods.indexOf(method) < 0) return method;
   });
 
   if(rulesDifferential.length !== 0) {

@@ -5,7 +5,7 @@ import { LocalForageAdapter, AxiosAdapter } from './adapters';
 
 export default class Plugins {
   constructor(pluginMap) {
-    this.pluginMap = pluginMap ? plugin : {};
+    this.pluginMap = pluginMap ? pluginMap : {};
 
     this.storage = get(ReactEnt, 'config.storage.adapter', LocalForageAdapter)
     this.api     = get(ReactEnt, 'config.api.adapter', AxiosAdapter);
@@ -32,11 +32,7 @@ export default class Plugins {
   }
 
   ensureCorrectStorageImplementation(storage) {
-    const inspection = implement(storage, {
-      rules: {
-        methods: ['get', 'set', 'clear', 'remove']
-      }
-    });
+    const inspection = implement(storage, { methods: ['get', 'set', 'clear', 'remove'] });
 
     if(inspection.passed) {
       return storage;
@@ -46,11 +42,7 @@ export default class Plugins {
   }
 
   setLoggingEngine(logger) {
-    const inspection = implement(logger, {
-      rules: {
-        methods: ['trace', 'info', 'warn', 'error']
-      }
-    });
+    const inspection = implement(logger, { methods: ['trace', 'info', 'warn', 'error'] });
 
     if(inspection.passed) {
       return logger;
