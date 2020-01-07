@@ -1,3 +1,7 @@
+import ReactEnt from './ReactEnt';
+import { get, has } from '@react-ent/utils';
+import Plugins from './Plugins';
+
 export class Model extends Object {
   get types() {
     return this.throw('types getter');
@@ -15,6 +19,11 @@ export class Model extends Object {
     return null;
   }
 
+  // check if storage or logger are given
+  get plugins() {
+    return new Plugins();
+  }
+
   get putPath() {
     return null;
   }
@@ -29,14 +38,6 @@ export class Model extends Object {
 
   get nullableParams() {
     return false;
-  }
-
-  /**
-   * If set, the api call will use the apiUriOverride path
-   * instead of the path provided by the config.
-   */
-  get apiUriOverride() {
-    return null;
   }
 
   /**
