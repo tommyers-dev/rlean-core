@@ -1369,11 +1369,7 @@ function () {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                try {
-                  this.config = config;
-                } catch (e) {
-                  console.log(e);
-                }
+                this.config = config;
 
               case 1:
               case "end":
@@ -7078,52 +7074,24 @@ function () {
  */
 
 
-function useSave(_x4, _x5) {
-  return _useSave.apply(this, arguments);
+function useSave(model, newValue) {
+  var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+  var _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(),
+      _useStateValue2 = _slicedToArray(_useStateValue, 2),
+      state = _useStateValue2[0],
+      dispatch = _useStateValue2[1];
+
+  if (typeof newValue === "undefined") {
+    return [function (newVal) {
+      return save(model, newValue, dispatch, type);
+    }];
+  }
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    save(model, newValue, dispatch, type);
+  }, [dispatch]);
 }
-
-function _useSave() {
-  _useSave = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(model, newValue) {
-    var type,
-        _useStateValue,
-        _useStateValue2,
-        state,
-        dispatch,
-        _args2 = arguments;
-
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            type = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : null;
-            _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _useStateValue2[0], dispatch = _useStateValue2[1];
-
-            if (!(typeof newValue === "undefined")) {
-              _context2.next = 4;
-              break;
-            }
-
-            return _context2.abrupt("return", [function (newVal) {
-              return save(model, newValue, dispatch, type);
-            }]);
-
-          case 4:
-            Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-              save(model, newValue, dispatch, type);
-            }, [dispatch]);
-
-          case 5:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2);
-  }));
-  return _useSave.apply(this, arguments);
-}
-
 ;
 
 /***/ }),

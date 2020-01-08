@@ -32,15 +32,13 @@ const save = async (model, newValue, dispatch, type = null) => {
  * @param {Object} newValue
  * @param {string} type
  */
-export default async function useSave(model, newValue, type = null) {
+export default function useSave(model, newValue, type = null) {
   const [state, dispatch] = useStateValue();
 
   if(typeof newValue === "undefined") {
     return [
-      (newVal) => {
-        return save(model, newValue, dispatch, type);
-      }
-    ]
+      (newVal) => save(model, newValue, dispatch, type)
+    ];
   }
 
   useEffect(() => {
