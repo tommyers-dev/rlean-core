@@ -1,9 +1,11 @@
 import { deepCopy, get } from '@react-ent/utils';
 import { ReactEnt } from './';
 import { IsLoading, LastUpdated } from './_internal';
+import { logActions, applyMiddleware } from './middleware';
 
 export const reducer = ({ ...state }, action) => {
   const models = get(ReactEnt, 'config.models', {});
+  const middleware = get(ReactEnt, 'config.middleware', []);
   const objects = Object.values(models);
   let combinedReducer = {};
 
@@ -24,9 +26,10 @@ export const reducer = ({ ...state }, action) => {
   nextState[stateKey] = stateValue;
 
   if (get(ReactEnt, 'config.logToConsole', true)) {
-    console.log(`dispatching`, action);
-    console.log(`next state`, nextState);
+    middleware.push(logActions);
   }
+
+  applyMiddleware(nextState, action, middleware);
 
   return combinedReducer;
 };

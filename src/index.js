@@ -1,18 +1,19 @@
-import del from './del';
 import { initialState } from './initialState';
 import { Model } from './Model';
 import Plugins from './Plugins';
-import patch from './patch';
-import post from './post';
-import put from './put';
+import useSave from './useSave';
+import useRequest from './useRequest';
+import useGet from './useGet';
+import usePatch from './usePatch';
+import usePost from './usePost';
+import usePut from './usePut';
+import useDelete from './useDelete';
 import ReactEnt from './ReactEnt';
 import { reducer } from './reducer';
 import { remove } from './remove';
 import { removeAll } from './removeAll';
-import { save } from './save';
 import { StateContext, StateProvider, useStateValue } from './State';
 import Store from './Store';
-import useGet from './useGet';
 import { Utility } from './Utility';
 
-export { del, initialState, Model, patch, Plugins, post, put, ReactEnt, reducer, remove, removeAll, save, StateContext, StateProvider, Store, useGet, useStateValue, Utility };
+export { initialState, Model, Plugins, useRequest, usePatch, usePost, usePut, useDelete, ReactEnt, reducer, remove, removeAll, StateContext, StateProvider, Store, useGet, useSave, useStateValue, Utility };

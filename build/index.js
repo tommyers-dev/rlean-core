@@ -91,57 +91,61 @@ module.exports =
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _del__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "del", function() { return _del__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+/* harmony import */ var _initialState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return _initialState__WEBPACK_IMPORTED_MODULE_0__["initialState"]; });
 
-/* harmony import */ var _initialState__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(45);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return _initialState__WEBPACK_IMPORTED_MODULE_1__["initialState"]; });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return _Model__WEBPACK_IMPORTED_MODULE_1__["Model"]; });
 
-/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return _Model__WEBPACK_IMPORTED_MODULE_2__["Model"]; });
+/* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Plugins", function() { return _Plugins__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
-/* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Plugins", function() { return _Plugins__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _useSave__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(45);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useSave", function() { return _useSave__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
-/* harmony import */ var _patch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(46);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "patch", function() { return _patch__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+/* harmony import */ var _useRequest__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(47);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useRequest", function() { return _useRequest__WEBPACK_IMPORTED_MODULE_4__["default"]; });
 
-/* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(47);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "post", function() { return _post__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+/* harmony import */ var _useGet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(48);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useGet", function() { return _useGet__WEBPACK_IMPORTED_MODULE_5__["default"]; });
 
-/* harmony import */ var _put__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(48);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "put", function() { return _put__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+/* harmony import */ var _usePatch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(49);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "usePatch", function() { return _usePatch__WEBPACK_IMPORTED_MODULE_6__["default"]; });
 
-/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(7);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReactEnt", function() { return _ReactEnt__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+/* harmony import */ var _usePost__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(50);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "usePost", function() { return _usePost__WEBPACK_IMPORTED_MODULE_7__["default"]; });
 
-/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(49);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return _reducer__WEBPACK_IMPORTED_MODULE_8__["reducer"]; });
+/* harmony import */ var _usePut__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(51);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "usePut", function() { return _usePut__WEBPACK_IMPORTED_MODULE_8__["default"]; });
 
-/* harmony import */ var _remove__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(50);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return _remove__WEBPACK_IMPORTED_MODULE_9__["remove"]; });
+/* harmony import */ var _useDelete__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(52);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useDelete", function() { return _useDelete__WEBPACK_IMPORTED_MODULE_9__["default"]; });
 
-/* harmony import */ var _removeAll__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(51);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeAll", function() { return _removeAll__WEBPACK_IMPORTED_MODULE_10__["removeAll"]; });
+/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(8);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReactEnt", function() { return _ReactEnt__WEBPACK_IMPORTED_MODULE_10__["default"]; });
 
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(52);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "save", function() { return _save__WEBPACK_IMPORTED_MODULE_11__["save"]; });
+/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(53);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return _reducer__WEBPACK_IMPORTED_MODULE_11__["reducer"]; });
 
-/* harmony import */ var _State__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(53);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return _State__WEBPACK_IMPORTED_MODULE_12__["StateContext"]; });
+/* harmony import */ var _remove__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(55);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return _remove__WEBPACK_IMPORTED_MODULE_12__["remove"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return _State__WEBPACK_IMPORTED_MODULE_12__["StateProvider"]; });
+/* harmony import */ var _removeAll__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(56);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeAll", function() { return _removeAll__WEBPACK_IMPORTED_MODULE_13__["removeAll"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return _State__WEBPACK_IMPORTED_MODULE_12__["useStateValue"]; });
+/* harmony import */ var _State__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(57);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return _State__WEBPACK_IMPORTED_MODULE_14__["StateContext"]; });
 
-/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(55);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return _Store__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return _State__WEBPACK_IMPORTED_MODULE_14__["StateProvider"]; });
 
-/* harmony import */ var _useGet__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(56);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useGet", function() { return _useGet__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return _State__WEBPACK_IMPORTED_MODULE_14__["useStateValue"]; });
 
-/* harmony import */ var _Utility__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(57);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Utility", function() { return _Utility__WEBPACK_IMPORTED_MODULE_15__["Utility"]; });
+/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(58);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return _Store__WEBPACK_IMPORTED_MODULE_15__["default"]; });
+
+/* harmony import */ var _Utility__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(59);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Utility", function() { return _Utility__WEBPACK_IMPORTED_MODULE_16__["Utility"]; });
+
 
 
 
@@ -167,554 +171,30 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return del; });
-/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-/**
- * Function that executes a DELETE against the API.
- *
- * @param {Object} model
- * @param {Object} params
- */
+var initialState = function initialState() {
+  var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["get"])(___WEBPACK_IMPORTED_MODULE_0__["ReactEnt"], 'config.models', {});
+  var objects = Object.values(models);
+  var combinedInitialState = {};
 
-function del(_x, _x2) {
-  return _del.apply(this, arguments);
-}
+  for (var i = 0; i < objects.length; i++) {
+    Object.assign(combinedInitialState, objects[i].prototype.initialState);
+  }
 
-function _del() {
-  _del = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, params) {
-    var deletePath, payload, o;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            deletePath = model.deletePath;
-
-            if (!(deletePath !== null)) {
-              _context.next = 6;
-              break;
-            }
-
-            payload = {
-              path: deletePath,
-              body: Object.assign({}, params)
-            };
-            _context.next = 5;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].DELETE);
-
-          case 5:
-            return _context.abrupt("return", _context.sent);
-
-          case 6:
-            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
-            console.error("The ".concat(o.ClassName, " object is missing the deletePath attribute."));
-
-          case 8:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _del.apply(this, arguments);
-}
+  Object.assign(combinedInitialState, new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]().initialState);
+  Object.assign(combinedInitialState, new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]().initialState);
+  return combinedInitialState;
+};
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _inspectClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inspectClass", function() { return _inspectClass__WEBPACK_IMPORTED_MODULE_0__["inspectClass"]; });
-
-/* harmony import */ var _implement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "implement", function() { return _implement__WEBPACK_IMPORTED_MODULE_1__["implement"]; });
-
-/* harmony import */ var _IsLoading__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "IsLoading", function() { return _IsLoading__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]; });
-
-/* harmony import */ var _LastUpdated__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LastUpdated", function() { return _LastUpdated__WEBPACK_IMPORTED_MODULE_3__["LastUpdated"]; });
-
-/* harmony import */ var _methods__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "methods", function() { return _methods__WEBPACK_IMPORTED_MODULE_4__["methods"]; });
-
-/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "request", function() { return _request__WEBPACK_IMPORTED_MODULE_5__["request"]; });
-
-
-
-
-
-
-
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inspectClass", function() { return inspectClass; });
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-var inspectClass = function inspectClass(obj) {
-  var objClass, className;
-  var classProto;
-  var methods = [];
-  var attributes = {};
-  var t;
-
-  try {
-    if (typeof obj != 'function') {
-      objClass = obj.constructor;
-    } else {
-      objClass = obj;
-    }
-
-    className = objClass.name;
-    classProto = objClass.prototype;
-    Object.getOwnPropertyNames(classProto).forEach(function (m) {
-      t = _typeof(classProto[m]);
-
-      if (t === 'function') {
-        methods.push(m);
-      } else {
-        attributes[m] = classProto[m];
-      }
-    });
-  } catch (err) {
-    className = 'undefined';
-  }
-
-  return {
-    ClassName: className,
-    Methods: methods,
-    Attributes: attributes
-  };
-};
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "implement", function() { return implement; });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-
-var implement = function implement(testableClass, rules) {
-  var given = Object(___WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(testableClass); // The inspection message we send back to give information about the interface check.
-
-  var inspectionMessage = {
-    rules: rules,
-    given: given,
-    error: {
-      type: '',
-      message: '',
-      invalidMethods: [],
-      methodsNotIncluded: []
-    },
-    passed: true
-  };
-  var rulesDifferential = rules.methods.filter(function (method) {
-    if (given.Methods.indexOf(method) < 0) return method;
-  });
-
-  if (rulesDifferential.length !== 0) {
-    inspectionMessage.error.type = 'MethodError';
-    inspectionMessage.passed = false;
-    inspectionMessage.error.invalidMethods = [];
-    inspectionMessage.error.methodsNotIncluded = rulesDifferential;
-    inspectionMessage.error.message = "".concat(inspectionMessage.error.type, ": In class ").concat(inspectionMessage.given.ClassName, ", we could not find required methods ").concat(inspectionMessage.error.methodsNotIncluded);
-  }
-
-  return inspectionMessage;
-};
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IsLoading", function() { return IsLoading; });
-/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-var IsLoading =
-/*#__PURE__*/
-function (_Model) {
-  _inherits(IsLoading, _Model);
-
-  function IsLoading() {
-    _classCallCheck(this, IsLoading);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(IsLoading).apply(this, arguments));
-  }
-
-  _createClass(IsLoading, [{
-    key: "reducer",
-    value: function reducer(state, action) {
-      switch (action.type) {
-        case this.types.SET_IS_LOADING:
-          return _objectSpread({}, state, {}, action.isLoading);
-
-        default:
-          return state;
-      }
-    }
-  }, {
-    key: "updateState",
-    value: function () {
-      var _updateState = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(isLoading, type) {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                return _context.abrupt("return", {
-                  type: this.types.SET_IS_LOADING,
-                  isLoading: isLoading
-                });
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function updateState(_x, _x2) {
-        return _updateState.apply(this, arguments);
-      }
-
-      return updateState;
-    }()
-  }, {
-    key: "initialState",
-    get: function get() {
-      var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(___WEBPACK_IMPORTED_MODULE_1__["ReactEnt"], 'config.models', {});
-
-      var objects = Object.values(models);
-      var isLoading = {};
-
-      for (var i = 0; i < objects.length; i++) {
-        var key = Object.keys(objects[i].prototype.initialState)[0].toString(); // Add to isLoading if there is a getPath.
-
-        if (objects[i].prototype.getPath) {
-          Object.assign(isLoading, _defineProperty({}, key, false));
-        }
-      }
-
-      return {
-        isLoading: isLoading
-      };
-    }
-  }, {
-    key: "types",
-    get: function get() {
-      return {
-        SET_IS_LOADING: 'SET_IS_LOADING'
-      };
-    }
-    /**
-     * No need to store the isLoading state.
-     */
-
-  }, {
-    key: "persistData",
-    get: function get() {
-      return false;
-    }
-  }]);
-
-  return IsLoading;
-}(_Model__WEBPACK_IMPORTED_MODULE_0__["Model"]);
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return Model; });
-/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
-
-function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
-
-function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var Model =
-/*#__PURE__*/
-function (_Object) {
-  _inherits(Model, _Object);
-
-  function Model() {
-    _classCallCheck(this, Model);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Model).apply(this, arguments));
-  }
-
-  _createClass(Model, [{
-    key: "reducer",
-    value: function reducer() {
-      this["throw"]('reducer(state, action)');
-    }
-    /**
-     * This is your main action. This is what will be called to update your
-     * object in state. Type is not needed if there is only one type in
-     * your model.
-     *
-     * @param {Object} stateObj
-     * @param {string} type
-     */
-
-  }, {
-    key: "updateState",
-    value: function updateState(stateObj, type) {
-      this["throw"]('updateState(stateObj, type)');
-    }
-  }, {
-    key: "throw",
-    value: function _throw(functionName) {
-      throw new Error("Model error: ".concat(functionName, " must be implemented in the derived class."));
-    }
-  }, {
-    key: "types",
-    get: function get() {
-      return this["throw"]('types getter');
-    }
-  }, {
-    key: "initialState",
-    get: function get() {
-      return this["throw"]('initialState getter');
-    }
-  }, {
-    key: "getPath",
-    get: function get() {
-      return null;
-    }
-  }, {
-    key: "postPath",
-    get: function get() {
-      return null;
-    } // check if storage or logger are given
-
-  }, {
-    key: "plugins",
-    get: function get() {
-      return new _Plugins__WEBPACK_IMPORTED_MODULE_2__["default"]();
-    }
-  }, {
-    key: "putPath",
-    get: function get() {
-      return null;
-    }
-  }, {
-    key: "deletePath",
-    get: function get() {
-      return null;
-    }
-  }, {
-    key: "patchPath",
-    get: function get() {
-      return null;
-    }
-  }, {
-    key: "nullableParams",
-    get: function get() {
-      return false;
-    }
-    /**
-     * If false, data isn't stored to storage. Api is called every time.
-     * This will override preferStore (because there's no store)
-     */
-
-  }, {
-    key: "persistData",
-    get: function get() {
-      return true;
-    }
-    /**
-     * Will rely on storage instead of calling the API repeatedly.
-     * This will override progressiveLoading.
-     */
-
-  }, {
-    key: "preferStore",
-    get: function get() {
-      return false;
-    }
-    /**
-     * Will return data in storage while the API retrieves the updated
-     * values from the database and will do a deepCompare to check for changes.
-     * If there are changes, it will dispatch an action to update the object.
-     */
-
-  }, {
-    key: "progressiveLoading",
-    get: function get() {
-      return false;
-    }
-    /**
-     * If set, will create a timer (TODO: in a web worker) that will re-sync the data.
-     * Should be in milliseconds.
-     */
-
-  }, {
-    key: "syncInterval",
-    get: function get() {
-      return null;
-    }
-    /**
-     * If set, will make a call to the API after a certain amount of time (in milliseconds)
-     * has elapsed. If the time has not elapsed, it will use the store. This will not
-     * cause the data to refresh has soon as the time has elapsed, but new component
-     * renders will trigger a new API call.
-     */
-
-  }, {
-    key: "syncAfterTimeElapsed",
-    get: function get() {
-      return null;
-    }
-  }]);
-
-  return Model;
-}(_wrapNativeSuper(Object));
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var ReactEnt =
-/*#__PURE__*/
-function () {
-  function ReactEnt() {
-    _classCallCheck(this, ReactEnt);
-  }
-
-  _createClass(ReactEnt, [{
-    key: "init",
-    value: function () {
-      var _init = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(config) {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                try {
-                  this.config = config;
-                } catch (e) {
-                  console.log(e);
-                }
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function init(_x) {
-        return _init.apply(this, arguments);
-      }
-
-      return init;
-    }()
-  }]);
-
-  return ReactEnt;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (new ReactEnt());
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports) {
 
 module.exports =
@@ -1429,15 +909,503 @@ var uuid = function uuid() {
 /******/ ]);
 
 /***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _inspectClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inspectClass", function() { return _inspectClass__WEBPACK_IMPORTED_MODULE_0__["inspectClass"]; });
+
+/* harmony import */ var _implement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "implement", function() { return _implement__WEBPACK_IMPORTED_MODULE_1__["implement"]; });
+
+/* harmony import */ var _IsLoading__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "IsLoading", function() { return _IsLoading__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]; });
+
+/* harmony import */ var _LastUpdated__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LastUpdated", function() { return _LastUpdated__WEBPACK_IMPORTED_MODULE_3__["LastUpdated"]; });
+
+/* harmony import */ var _methods__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "methods", function() { return _methods__WEBPACK_IMPORTED_MODULE_4__["methods"]; });
+
+/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(44);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "request", function() { return _request__WEBPACK_IMPORTED_MODULE_5__["request"]; });
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inspectClass", function() { return inspectClass; });
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var inspectClass = function inspectClass(obj) {
+  var objClass, className;
+  var classProto;
+  var methods = [];
+  var attributes = {};
+  var t;
+
+  try {
+    if (typeof obj != 'function') {
+      objClass = obj.constructor;
+    } else {
+      objClass = obj;
+    }
+
+    className = objClass.name;
+    classProto = objClass.prototype;
+    Object.getOwnPropertyNames(classProto).forEach(function (m) {
+      t = _typeof(classProto[m]);
+
+      if (t === 'function') {
+        methods.push(m);
+      } else {
+        attributes[m] = classProto[m];
+      }
+    });
+  } catch (err) {
+    className = 'undefined';
+  }
+
+  return {
+    ClassName: className,
+    Methods: methods,
+    Attributes: attributes
+  };
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "implement", function() { return implement; });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+
+var implement = function implement(testableClass, rules) {
+  var given = Object(___WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(testableClass); // The inspection message we send back to give information about the interface check.
+
+  var inspectionMessage = {
+    rules: rules,
+    given: given,
+    error: {
+      type: '',
+      message: '',
+      invalidMethods: [],
+      methodsNotIncluded: []
+    },
+    passed: true
+  };
+  var rulesDifferential = rules.methods.filter(function (method) {
+    if (given.Methods.indexOf(method) < 0) return method;
+  });
+
+  if (rulesDifferential.length !== 0) {
+    inspectionMessage.error.type = 'MethodError';
+    inspectionMessage.passed = false;
+    inspectionMessage.error.invalidMethods = [];
+    inspectionMessage.error.methodsNotIncluded = rulesDifferential;
+    inspectionMessage.error.message = "".concat(inspectionMessage.error.type, ": In class ").concat(inspectionMessage.given.ClassName, ", we could not find required methods ").concat(inspectionMessage.error.methodsNotIncluded);
+  }
+
+  return inspectionMessage;
+};
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IsLoading", function() { return IsLoading; });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var IsLoading =
+/*#__PURE__*/
+function (_Model) {
+  _inherits(IsLoading, _Model);
+
+  function IsLoading() {
+    _classCallCheck(this, IsLoading);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(IsLoading).apply(this, arguments));
+  }
+
+  _createClass(IsLoading, [{
+    key: "reducer",
+    value: function reducer(state, action) {
+      switch (action.type) {
+        case this.types.SET_IS_LOADING:
+          return _objectSpread({}, state, {}, action.isLoading);
+
+        default:
+          return state;
+      }
+    }
+  }, {
+    key: "updateState",
+    value: function () {
+      var _updateState = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(isLoading, type) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                return _context.abrupt("return", {
+                  type: this.types.SET_IS_LOADING,
+                  isLoading: isLoading
+                });
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function updateState(_x, _x2) {
+        return _updateState.apply(this, arguments);
+      }
+
+      return updateState;
+    }()
+  }, {
+    key: "initialState",
+    get: function get() {
+      var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(___WEBPACK_IMPORTED_MODULE_1__["ReactEnt"], 'config.models', {});
+
+      var objects = Object.values(models);
+      var isLoading = {};
+
+      for (var i = 0; i < objects.length; i++) {
+        var key = Object.keys(objects[i].prototype.initialState)[0].toString(); // Add to isLoading if there is a getPath.
+
+        if (objects[i].prototype.getPath) {
+          Object.assign(isLoading, _defineProperty({}, key, false));
+        }
+      }
+
+      return {
+        isLoading: isLoading
+      };
+    }
+  }, {
+    key: "types",
+    get: function get() {
+      return {
+        SET_IS_LOADING: 'SET_IS_LOADING'
+      };
+    }
+    /**
+     * No need to store the isLoading state.
+     */
+
+  }, {
+    key: "persistData",
+    get: function get() {
+      return false;
+    }
+  }]);
+
+  return IsLoading;
+}(_Model__WEBPACK_IMPORTED_MODULE_0__["Model"]);
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return Model; });
+/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var Model =
+/*#__PURE__*/
+function (_Object) {
+  _inherits(Model, _Object);
+
+  function Model() {
+    _classCallCheck(this, Model);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Model).apply(this, arguments));
+  }
+
+  _createClass(Model, [{
+    key: "reducer",
+    value: function reducer() {
+      this["throw"]('reducer(state, action)');
+    }
+    /**
+     * This is your main action. This is what will be called to update your
+     * object in state. Type is not needed if there is only one type in
+     * your model.
+     *
+     * @param {Object} stateObj
+     * @param {string} type
+     */
+
+  }, {
+    key: "updateState",
+    value: function updateState(stateObj, type) {
+      this["throw"]('updateState(stateObj, type)');
+    }
+  }, {
+    key: "throw",
+    value: function _throw(functionName) {
+      throw new Error("Model error: ".concat(functionName, " must be implemented in the derived class."));
+    }
+  }, {
+    key: "types",
+    get: function get() {
+      return this["throw"]('types getter');
+    }
+  }, {
+    key: "initialState",
+    get: function get() {
+      return this["throw"]('initialState getter');
+    }
+  }, {
+    key: "getPath",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "postPath",
+    get: function get() {
+      return null;
+    } // check if storage or logger are given
+
+  }, {
+    key: "plugins",
+    get: function get() {
+      return new _Plugins__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    }
+  }, {
+    key: "putPath",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "deletePath",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "patchPath",
+    get: function get() {
+      return null;
+    }
+  }, {
+    key: "nullableParams",
+    get: function get() {
+      return false;
+    }
+    /**
+     * If false, data isn't stored to storage. Api is called every time.
+     * This will override preferStore (because there's no store)
+     */
+
+  }, {
+    key: "persistData",
+    get: function get() {
+      return true;
+    }
+    /**
+     * Will rely on storage instead of calling the API repeatedly.
+     * This will override progressiveLoading.
+     */
+
+  }, {
+    key: "preferStore",
+    get: function get() {
+      return false;
+    }
+    /**
+     * Will return data in storage while the API retrieves the updated
+     * values from the database and will do a deepCompare to check for changes.
+     * If there are changes, it will dispatch an action to update the object.
+     */
+
+  }, {
+    key: "progressiveLoading",
+    get: function get() {
+      return false;
+    }
+    /**
+     * If set, will create a timer (TODO: in a web worker) that will re-sync the data.
+     * Should be in milliseconds.
+     */
+
+  }, {
+    key: "syncInterval",
+    get: function get() {
+      return null;
+    }
+    /**
+     * If set, will make a call to the API after a certain amount of time (in milliseconds)
+     * has elapsed. If the time has not elapsed, it will use the store. This will not
+     * cause the data to refresh has soon as the time has elapsed, but new component
+     * renders will trigger a new API call.
+     */
+
+  }, {
+    key: "syncAfterTimeElapsed",
+    get: function get() {
+      return null;
+    }
+  }]);
+
+  return Model;
+}(_wrapNativeSuper(Object));
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ReactEnt =
+/*#__PURE__*/
+function () {
+  function ReactEnt() {
+    _classCallCheck(this, ReactEnt);
+  }
+
+  _createClass(ReactEnt, [{
+    key: "init",
+    value: function () {
+      var _init = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(config) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                try {
+                  this.config = config;
+                } catch (e) {
+                  console.log(e);
+                }
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function init(_x) {
+        return _init.apply(this, arguments);
+      }
+
+      return init;
+    }()
+  }]);
+
+  return ReactEnt;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (new ReactEnt());
+
+/***/ }),
 /* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Plugins; });
-/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
-/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 /* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _adapters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -6706,9 +6674,9 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LastUpdated", function() { return LastUpdated; });
-/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 /* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _adapters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
 /* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
@@ -6846,8 +6814,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatPath", function() { return formatPath; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
+/* harmony import */ var _ReactEnt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 /* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _methods__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(39);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -7013,442 +6981,22 @@ var formatPath = function formatPath(path, payloadQuery, payloadBody, method, nu
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-
-
-
-var initialState = function initialState() {
-  var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["get"])(___WEBPACK_IMPORTED_MODULE_0__["ReactEnt"], 'config.models', {});
-  var objects = Object.values(models);
-  var combinedInitialState = {};
-
-  for (var i = 0; i < objects.length; i++) {
-    Object.assign(combinedInitialState, objects[i].prototype.initialState);
-  }
-
-  Object.assign(combinedInitialState, new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]().initialState);
-  Object.assign(combinedInitialState, new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]().initialState);
-  return combinedInitialState;
-};
-
-/***/ }),
-/* 46 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return patch; });
-/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-/**
- * Function that executes a PATCH against the API.
- *
- * @param {Object} model
- * @param {Object} params
- */
-
-function patch(_x, _x2) {
-  return _patch.apply(this, arguments);
-}
-
-function _patch() {
-  _patch = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, params) {
-    var patchPath, payload, o;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            patchPath = model.patchPath;
-
-            if (!(patchPath !== null)) {
-              _context.next = 8;
-              break;
-            }
-
-            payload = {
-              path: patchPath,
-              body: Object.assign({}, params)
-            };
-            _context.next = 5;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PATCH);
-
-          case 5:
-            return _context.abrupt("return", _context.sent);
-
-          case 8:
-            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
-            console.error("The ".concat(o.ClassName, " object is missing the patchPath attribute."));
-
-          case 10:
-            return _context.abrupt("return");
-
-          case 11:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _patch.apply(this, arguments);
-}
-
-/***/ }),
-/* 47 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return post; });
-/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-/**
- * Function that executes a POST against the API.
- *
- * @param {Object} model
- * @param {Object} params
- * @param {Function} dispatch Provide if you're expecting an updated object in the response (like the inclusion of an auto-increment id)
- */
-
-function post(_x) {
-  return _post.apply(this, arguments);
-}
-
-function _post() {
-  _post = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model) {
-    var params,
-        dispatch,
-        postPath,
-        persistData,
-        body,
-        payload,
-        response,
-        o,
-        _args = arguments;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            params = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
-            dispatch = _args.length > 2 ? _args[2] : undefined;
-            postPath = model.postPath;
-            persistData = model.persistData;
-
-            if (!(postPath !== null)) {
-              _context.next = 22;
-              break;
-            }
-
-            body = params ? Object.assign({}, params) : {};
-            payload = {
-              path: postPath,
-              body: body
-            };
-            _context.next = 9;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].POST);
-
-          case 9:
-            response = _context.sent;
-
-            if (!(response && dispatch)) {
-              _context.next = 20;
-              break;
-            }
-
-            if (!persistData) {
-              _context.next = 14;
-              break;
-            }
-
-            _context.next = 14;
-            return Store.set(model, response.data);
-
-          case 14:
-            _context.t0 = dispatch;
-            _context.next = 17;
-            return model.updateState(response.data);
-
-          case 17:
-            _context.t1 = _context.sent;
-            _context.next = 20;
-            return (0, _context.t0)(_context.t1);
-
-          case 20:
-            _context.next = 24;
-            break;
-
-          case 22:
-            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
-            console.error("The ".concat(o.ClassName, " object is missing the postPath attribute."));
-
-          case 24:
-            return _context.abrupt("return");
-
-          case 25:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _post.apply(this, arguments);
-}
-
-/***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return put; });
-/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-/**
- * Function that executes a PUT against the API.
- *
- * @param {Object} model
- * @param {Object} params
- */
-
-function put(_x, _x2) {
-  return _put.apply(this, arguments);
-}
-
-function _put() {
-  _put = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, params) {
-    var putPath, payload, o;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            putPath = model.putPath;
-
-            if (!(putPath !== null)) {
-              _context.next = 6;
-              break;
-            }
-
-            payload = {
-              path: putPath,
-              body: Object.assign({}, params)
-            };
-            _context.next = 5;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PUT);
-
-          case 5:
-            return _context.abrupt("return", _context.sent);
-
-          case 6:
-            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
-            console.error("The ".concat(o.ClassName, " object is missing the putPath attribute."));
-
-          case 8:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _put.apply(this, arguments);
-}
-
-/***/ }),
-/* 49 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useSave; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-
-
-var reducer = function reducer(_ref, action) {
-  var state = _extends({}, _ref);
-
-  var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["get"])(___WEBPACK_IMPORTED_MODULE_1__["ReactEnt"], 'config.models', {});
-  var objects = Object.values(models);
-  var combinedReducer = {};
-
-  for (var i = 0; i < objects.length; i++) {
-    var key = Object.keys(objects[i].prototype.initialState)[0].toString();
-    var value = state[key];
-    Object.assign(combinedReducer, _defineProperty({}, key, objects[i].prototype.reducer(value, action)));
-  } // Add IsLoading and LastUpdated reducers to main reducer.
-
-
-  Object.assign(combinedReducer, {
-    isLoading: new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]().reducer(state['isLoading'], action)
-  });
-  Object.assign(combinedReducer, {
-    lastUpdated: new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]().reducer(state['lastUpdated'], action)
-  });
-  var nextState = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["deepCopy"])(state);
-  var stateKey = Object.keys(action)[1].toString();
-  var stateValue = action[stateKey];
-  nextState[stateKey] = stateValue;
-
-  if (Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["get"])(___WEBPACK_IMPORTED_MODULE_1__["ReactEnt"], 'config.logToConsole', true)) {
-    console.log("dispatching", action);
-    console.log("next state", nextState);
-  }
-
-  return combinedReducer;
-};
-
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return remove; });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-
-/**
- * Clear an object from the store if persistData is true (default).
- *
- * @param {Object} model
- * @param {function} dispatch
- * @param {string} type
- */
-
-var remove =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, dispatch) {
-    var type,
-        persistData,
-        _args = arguments;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            type = _args.length > 2 && _args[2] !== undefined ? _args[2] : null;
-            persistData = model.persistData;
-
-            if (!persistData) {
-              _context.next = 5;
-              break;
-            }
-
-            _context.next = 5;
-            return ___WEBPACK_IMPORTED_MODULE_0__["Store"].remove(model);
-
-          case 5:
-            _context.t0 = dispatch;
-            _context.next = 8;
-            return model.updateState(model.initialState, type);
-
-          case 8:
-            _context.t1 = _context.sent;
-            _context.next = 11;
-            return (0, _context.t0)(_context.t1);
-
-          case 11:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function remove(_x, _x2) {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-/***/ }),
-/* 51 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeAll", function() { return removeAll; });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-/**
- * Clear all data from the store and from session.
- */
-
-var removeAll =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee() {
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            ___WEBPACK_IMPORTED_MODULE_0__["Store"].clear();
-            sessionStorage.clear();
-
-          case 2:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function removeAll() {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-/***/ }),
-/* 52 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "save", function() { return save; });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 /**
@@ -7470,40 +7018,41 @@ function () {
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(model, newValue, dispatch) {
     var type,
-        persistData,
         _args = arguments;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             type = _args.length > 3 && _args[3] !== undefined ? _args[3] : null;
-            persistData = model.persistData;
 
             if (!(newValue === undefined)) {
-              _context.next = 4;
+              _context.next = 3;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 4:
-            if (!persistData) {
-              _context.next = 7;
+          case 3:
+            if (!model.persistData) {
+              _context.next = 6;
               break;
             }
 
-            _context.next = 7;
-            return ___WEBPACK_IMPORTED_MODULE_0__["Store"].set(model, newValue);
+            _context.next = 6;
+            return ___WEBPACK_IMPORTED_MODULE_1__["Store"].set(model, newValue);
 
-          case 7:
+          case 6:
             _context.t0 = dispatch;
-            _context.next = 10;
+            _context.next = 9;
             return model.updateState(newValue, type);
 
-          case 10:
+          case 9:
             _context.t1 = _context.sent;
-            _context.next = 13;
+            _context.next = 12;
             return (0, _context.t0)(_context.t1);
+
+          case 12:
+            return _context.abrupt("return", _context.sent);
 
           case 13:
           case "end":
@@ -7517,359 +7066,152 @@ function () {
     return _ref.apply(this, arguments);
   };
 }();
+/**
+ * Save an object to state, and optionally to store if persistData
+ * is true (default). Don't check if current state and new value are different
+ * so if there is an infinite loop, the developer will know right away in the
+ * console log.
+ *
+ * @param {Object} model
+ * @param {Object} newValue
+ * @param {string} type
+ */
+
+
+function useSave(_x4, _x5) {
+  return _useSave.apply(this, arguments);
+}
+
+function _useSave() {
+  _useSave = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(model, newValue) {
+    var type,
+        _useStateValue,
+        _useStateValue2,
+        state,
+        dispatch,
+        _args2 = arguments;
+
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            type = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : null;
+            _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _useStateValue2[0], dispatch = _useStateValue2[1];
+
+            if (!(typeof newValue === "undefined")) {
+              _context2.next = 4;
+              break;
+            }
+
+            return _context2.abrupt("return", [function (newVal) {
+              return save(model, newValue, dispatch, type);
+            }]);
+
+          case 4:
+            Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+              save(model, newValue, dispatch, type);
+            }, [dispatch]);
+
+          case 5:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _useSave.apply(this, arguments);
+}
+
+;
 
 /***/ }),
-/* 53 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return StateContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return StateProvider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return useStateValue; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(54);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-
-
-var StateContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])();
-var StateProvider = function StateProvider(_ref) {
-  var children = _ref.children;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StateContext.Provider, {
-    value: Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(___WEBPACK_IMPORTED_MODULE_1__["reducer"], Object(___WEBPACK_IMPORTED_MODULE_1__["initialState"])())
-  }, children);
-};
-var useStateValue = function useStateValue() {
-  return Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(StateContext);
-};
-
-/***/ }),
-/* 54 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = require("react");
 
 /***/ }),
-/* 55 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _adapters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useRequest; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+function useRequest(_x, _x2, _x3) {
+  return _useRequest.apply(this, arguments);
+}
 
+function _useRequest() {
+  _useRequest = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(model, params, method) {
+    var _useStateValue, _useStateValue2, state, dispatch;
 
-var Store =
-/*#__PURE__*/
-function () {
-  function Store() {
-    _classCallCheck(this, Store);
-  }
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _useStateValue2[0], dispatch = _useStateValue2[1];
 
-  _createClass(Store, [{
-    key: "getKeys",
-
-    /*
-     * Get the Models state representation
-    */
-    value: function getKeys(model) {
-      if (!model) return; // If it's a string, it's already a key!
-
-      if (typeof model === 'string' || model instanceof String) {
-        return model;
-      }
-
-      return Object.keys(model.initialState)[0].toString();
-    }
-    /*
-     * Makes the 'set' call to local storage to store data
-    */
-
-  }, {
-    key: "set",
-    value: function () {
-      var _set = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(model, value) {
-        var key, updatedValue;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                key = this.getKeys(model);
-                _context.prev = 1;
-                _context.next = 4;
-                return model.plugins.storage.set(key, value);
-
-              case 4:
-                _context.next = 6;
-                return model.plugins.storage.get(key);
-
-              case 6:
-                updatedValue = _context.sent;
-
-                if (!(updatedValue === undefined)) {
-                  _context.next = 9;
-                  break;
-                }
-
-                throw new Error("Could not set ".concat(key, " = ").concat(value));
-
-              case 9:
-                return _context.abrupt("return", {
-                  key: key,
-                  value: value
-                });
-
-              case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](1);
-                console.log(_context.t0);
-
-              case 15:
-              case "end":
-                return _context.stop();
+            if (!(typeof model === "undefined")) {
+              _context.next = 3;
+              break;
             }
-          }
-        }, _callee, this, [[1, 12]]);
-      }));
 
-      function set(_x, _x2) {
-        return _set.apply(this, arguments);
+            return _context.abrupt("return", [function (modelInput, body) {
+              method(modelInput, body, dispatch);
+            }]);
+
+          case 3:
+            Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+              try {
+                method(model, params, dispatch);
+              } catch (e) {
+                console.log(e);
+              }
+            }, [params]);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
       }
-
-      return set;
-    }()
-    /*
-     * Makes the 'get' call to local storage to get some data
-    */
-
-  }, {
-    key: "get",
-    value: function () {
-      var _get = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(model) {
-        var key;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                key = this.getKeys(model);
-                _context2.prev = 1;
-                _context2.next = 4;
-                return model.plugins.storage.get(key);
-
-              case 4:
-                return _context2.abrupt("return", _context2.sent);
-
-              case 7:
-                _context2.prev = 7;
-                _context2.t0 = _context2["catch"](1);
-                console.log(_context2.t0);
-
-              case 10:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this, [[1, 7]]);
-      }));
-
-      function get(_x3) {
-        return _get.apply(this, arguments);
-      }
-
-      return get;
-    }()
-  }, {
-    key: "setAll",
-    value: function () {
-      var _setAll = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee4(units) {
-        var _this = this;
-
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                if (!(units === undefined || units.length === 0)) {
-                  _context4.next = 2;
-                  break;
-                }
-
-                throw new Error('Array cannot be null or empty');
-
-              case 2:
-                units.forEach(
-                /*#__PURE__*/
-                function () {
-                  var _ref = _asyncToGenerator(
-                  /*#__PURE__*/
-                  regeneratorRuntime.mark(function _callee3(kvPair) {
-                    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                      while (1) {
-                        switch (_context3.prev = _context3.next) {
-                          case 0:
-                            _context3.prev = 0;
-                            _context3.next = 3;
-                            return _this.set(kvPair.key, kvPair.value);
-
-                          case 3:
-                            _context3.next = 8;
-                            break;
-
-                          case 5:
-                            _context3.prev = 5;
-                            _context3.t0 = _context3["catch"](0);
-                            console.log(_context3.t0);
-
-                          case 8:
-                          case "end":
-                            return _context3.stop();
-                        }
-                      }
-                    }, _callee3, null, [[0, 5]]);
-                  }));
-
-                  return function (_x5) {
-                    return _ref.apply(this, arguments);
-                  };
-                }());
-                return _context4.abrupt("return", true);
-
-              case 4:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }));
-
-      function setAll(_x4) {
-        return _setAll.apply(this, arguments);
-      }
-
-      return setAll;
-    }()
-    /*
-     * Makes the 'clear' call to local storage to get clear local storage
-     * Uses the storage engine found by decideWhichEngine, either plugin or default.
-    */
-
-  }, {
-    key: "clear",
-    value: function () {
-      var _clear = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee5() {
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                _context5.prev = 0;
-                _context5.next = 3;
-                return model.plugins.storage.clear();
-
-              case 3:
-                _context5.next = 8;
-                break;
-
-              case 5:
-                _context5.prev = 5;
-                _context5.t0 = _context5["catch"](0);
-                console.log(_context5.t0);
-
-              case 8:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, null, [[0, 5]]);
-      }));
-
-      function clear() {
-        return _clear.apply(this, arguments);
-      }
-
-      return clear;
-    }()
-    /*
-     * Makes the 'remove' call to local storage to get remove a value from local storage
-     * Uses the storage engine found by decideWhichEngine, either plugin or default.
-    */
-
-  }, {
-    key: "remove",
-    value: function () {
-      var _remove = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee6(model) {
-        var key;
-        return regeneratorRuntime.wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                key = this.getKeys(model);
-                _context6.prev = 1;
-                _context6.next = 4;
-                return model.plugins.storage.remove(key);
-
-              case 4:
-                _context6.next = 9;
-                break;
-
-              case 6:
-                _context6.prev = 6;
-                _context6.t0 = _context6["catch"](1);
-                console.log(_context6.t0);
-
-              case 9:
-              case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6, this, [[1, 6]]);
-      }));
-
-      function remove(_x6) {
-        return _remove.apply(this, arguments);
-      }
-
-      return remove;
-    }()
-  }]);
-
-  return Store;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (new Store());
+    }, _callee);
+  }));
+  return _useRequest.apply(this, arguments);
+}
 
 /***/ }),
-/* 56 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useGet; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(54);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -8265,7 +7607,1065 @@ function _useGet() {
 }
 
 /***/ }),
+/* 49 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return usePatch; });
+/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+/**
+ * Function that executes a PATCH against the API.
+ *
+ * @param {Object} model
+ * @param {Object} params
+ */
+
+var patch =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(model, params, dispatch) {
+    var patchPath, payload, response, o;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            patchPath = model.patchPath;
+
+            if (!(patchPath !== null)) {
+              _context.next = 18;
+              break;
+            }
+
+            payload = {
+              path: patchPath,
+              body: Object.assign({}, params)
+            };
+            _context.next = 5;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PATCH);
+
+          case 5:
+            response = _context.sent;
+
+            if (!(response && dispatch)) {
+              _context.next = 16;
+              break;
+            }
+
+            if (!model.persistData) {
+              _context.next = 10;
+              break;
+            }
+
+            _context.next = 10;
+            return Store.set(model, response.data);
+
+          case 10:
+            _context.t0 = dispatch;
+            _context.next = 13;
+            return model.updateState(response.data);
+
+          case 13:
+            _context.t1 = _context.sent;
+            _context.next = 16;
+            return (0, _context.t0)(_context.t1);
+
+          case 16:
+            _context.next = 20;
+            break;
+
+          case 18:
+            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
+            console.error("The ".concat(o.ClassName, " object is missing the patchPath attribute."));
+
+          case 20:
+            return _context.abrupt("return");
+
+          case 21:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function patch(_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+}();
+/**
+ * Hook that exposes patch() safely and funly
+ *
+ * Usage: usePatch(new ActiveProject(), { body: '7' });
+ *        const [ patch ] = usePatch();  patch(new ActiveProject(), { body: '7' });
+ *
+ * @param {Object} model
+ * @param {Object} params
+ */
+
+
+function usePatch(_x4, _x5) {
+  return _usePatch.apply(this, arguments);
+}
+
+function _usePatch() {
+  _usePatch = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(model, params) {
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            return _context2.abrupt("return", Object(___WEBPACK_IMPORTED_MODULE_1__["useRequest"])(patch));
+
+          case 1:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _usePatch.apply(this, arguments);
+}
+
+/***/ }),
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return usePost; });
+/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/**
+ * Function that executes a POST against the API.
+ *
+ * @param {Object} model
+ * @param {Object} params
+ * @param {Function} dispatch Provide if you're expecting an updated object in the response (like the inclusion of an auto-increment id)
+ */
+
+var post =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(model) {
+    var params,
+        dispatch,
+        postPath,
+        persistData,
+        body,
+        payload,
+        response,
+        o,
+        _args = arguments;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            params = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
+            dispatch = _args.length > 2 ? _args[2] : undefined;
+            postPath = model.postPath;
+            persistData = model.persistData;
+
+            if (!(postPath !== null)) {
+              _context.next = 22;
+              break;
+            }
+
+            body = params ? Object.assign({}, params) : {};
+            payload = {
+              path: postPath,
+              body: body
+            };
+            _context.next = 9;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].POST);
+
+          case 9:
+            response = _context.sent;
+
+            if (!(response && dispatch)) {
+              _context.next = 20;
+              break;
+            }
+
+            if (!persistData) {
+              _context.next = 14;
+              break;
+            }
+
+            _context.next = 14;
+            return Store.set(model, response.data);
+
+          case 14:
+            _context.t0 = dispatch;
+            _context.next = 17;
+            return model.updateState(response.data);
+
+          case 17:
+            _context.t1 = _context.sent;
+            _context.next = 20;
+            return (0, _context.t0)(_context.t1);
+
+          case 20:
+            _context.next = 24;
+            break;
+
+          case 22:
+            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
+            console.error("The ".concat(o.ClassName, " object is missing the postPath attribute."));
+
+          case 24:
+            return _context.abrupt("return");
+
+          case 25:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function post(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+/**
+ * Exposed Hook that allows user to access post method
+ * If no model given, returns function to use post to allow conditional operation.
+ *
+ * Usage: usePost(new ActiveProject(), { body: '7' });
+ *        const [ post ] = usePost();  post(new ActiveProject(), { body: '7' });
+ *
+ * @param {Object} model
+ * @param {Object} params
+ */
+
+
+function usePost(_x2) {
+  return _usePost.apply(this, arguments);
+}
+
+function _usePost() {
+  _usePost = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(model) {
+    var params,
+        _args2 = arguments;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            params = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : {};
+            return _context2.abrupt("return", useRequest(model, params, post));
+
+          case 2:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _usePost.apply(this, arguments);
+}
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return usePut; });
+/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+/**
+ * Function that executes a PUT against the API.
+ *
+ * Usage: usePut(new ActiveProject(), { body: '7' });
+ *        const [ put ] = usePut();  put(new ActiveProject(), { body: '7' });
+ *
+ * @param {Object} model
+ * @param {Object} params
+ */
+
+var put =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(model, params, dispatch) {
+    var putPath, payload, response, o;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            putPath = model.putPath;
+
+            if (!(putPath !== null)) {
+              _context.next = 18;
+              break;
+            }
+
+            payload = {
+              path: putPath,
+              body: Object.assign({}, params)
+            };
+            _context.next = 5;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PUT);
+
+          case 5:
+            response = _context.sent;
+
+            if (!(response && dispatch)) {
+              _context.next = 16;
+              break;
+            }
+
+            if (!model.persistData) {
+              _context.next = 10;
+              break;
+            }
+
+            _context.next = 10;
+            return Store.set(model, response.data);
+
+          case 10:
+            _context.t0 = dispatch;
+            _context.next = 13;
+            return model.updateState(response.data);
+
+          case 13:
+            _context.t1 = _context.sent;
+            _context.next = 16;
+            return (0, _context.t0)(_context.t1);
+
+          case 16:
+            _context.next = 20;
+            break;
+
+          case 18:
+            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
+            console.error("The ".concat(o.ClassName, " object is missing the putPath attribute."));
+
+          case 20:
+            return _context.abrupt("return");
+
+          case 21:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function put(_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+function usePut(model) {
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return Object(___WEBPACK_IMPORTED_MODULE_1__["useRequest"])(model, params, put);
+}
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useDelete; });
+/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+/**
+ * Function that executes a DELETE against the API.
+ *
+ * @param {Object} model
+ * @param {Object} params
+ */
+
+var del =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(model, params, dispatch) {
+    var deletePath, payload, o;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            deletePath = model.deletePath;
+
+            if (!(deletePath !== null)) {
+              _context.next = 6;
+              break;
+            }
+
+            payload = {
+              path: deletePath,
+              body: Object.assign({}, params)
+            };
+            _context.next = 5;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].DELETE);
+
+          case 5:
+            return _context.abrupt("return", _context.sent);
+
+          case 6:
+            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
+            console.error("The ".concat(o.ClassName, " object is missing the deletePath attribute."));
+
+          case 8:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function del(_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+}();
+/**
+ * Hook that exposes del()
+ *
+ * Usage: useDelete(new ActiveProject(), { body: '7' });
+ *        const [ del ] = useDelete();  del(new ActiveProject(), { body: '7' });
+ *
+ * @param {Object} model
+ * @param {Object} params
+ */
+
+
+function useDelete(model) {
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return Object(___WEBPACK_IMPORTED_MODULE_1__["useRequest"])(model, params, del);
+}
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(54);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+
+
+var reducer = function reducer(_ref, action) {
+  var state = _extends({}, _ref);
+
+  var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["get"])(___WEBPACK_IMPORTED_MODULE_1__["ReactEnt"], 'config.models', {});
+  var middleware = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["get"])(___WEBPACK_IMPORTED_MODULE_1__["ReactEnt"], 'config.middleware', []);
+  var objects = Object.values(models);
+  var combinedReducer = {};
+
+  for (var i = 0; i < objects.length; i++) {
+    var key = Object.keys(objects[i].prototype.initialState)[0].toString();
+    var value = state[key];
+    Object.assign(combinedReducer, _defineProperty({}, key, objects[i].prototype.reducer(value, action)));
+  } // Add IsLoading and LastUpdated reducers to main reducer.
+
+
+  Object.assign(combinedReducer, {
+    isLoading: new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]().reducer(state['isLoading'], action)
+  });
+  Object.assign(combinedReducer, {
+    lastUpdated: new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]().reducer(state['lastUpdated'], action)
+  });
+  var nextState = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["deepCopy"])(state);
+  var stateKey = Object.keys(action)[1].toString();
+  var stateValue = action[stateKey];
+  nextState[stateKey] = stateValue;
+
+  if (Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["get"])(___WEBPACK_IMPORTED_MODULE_1__["ReactEnt"], 'config.logToConsole', true)) {
+    middleware.push(_middleware__WEBPACK_IMPORTED_MODULE_3__["logActions"]);
+  }
+
+  Object(_middleware__WEBPACK_IMPORTED_MODULE_3__["applyMiddleware"])(nextState, action, middleware);
+  return combinedReducer;
+};
+
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return applyMiddleware; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logActions", function() { return logActions; });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+function logActions(_x, _x2, _x3) {
+  return _logActions.apply(this, arguments);
+}
+
+function _logActions() {
+  _logActions = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(state, action, next) {
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            console.log("dispatching", action.type);
+            console.log("next state", state);
+            return _context.abrupt("return", next(action));
+
+          case 3:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _logActions.apply(this, arguments);
+}
+
+function setLocalData(_x4, _x5, _x6) {
+  return _setLocalData.apply(this, arguments);
+}
+
+function _setLocalData() {
+  _setLocalData = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(state, action, next) {
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _setLocalData.apply(this, arguments);
+}
+
+function applyMiddleware(_x7, _x8, _x9) {
+  return _applyMiddleware.apply(this, arguments);
+}
+
+function _applyMiddleware() {
+  _applyMiddleware = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee3(state, action, middleware) {
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            return _context3.abrupt("return", middleware.reduce(function (st, fn) {
+              return fn(st, action, function (currentAction) {
+                return state;
+              });
+            }, state));
+
+          case 1:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _applyMiddleware.apply(this, arguments);
+}
+
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return remove; });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/**
+ * Clear an object from the store if persistData is true (default).
+ *
+ * @param {Object} model
+ * @param {function} dispatch
+ * @param {string} type
+ */
+
+var remove =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(model, dispatch) {
+    var type,
+        persistData,
+        _args = arguments;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            type = _args.length > 2 && _args[2] !== undefined ? _args[2] : null;
+            persistData = model.persistData;
+
+            if (!persistData) {
+              _context.next = 5;
+              break;
+            }
+
+            _context.next = 5;
+            return ___WEBPACK_IMPORTED_MODULE_0__["Store"].remove(model);
+
+          case 5:
+            _context.t0 = dispatch;
+            _context.next = 8;
+            return model.updateState(model.initialState, type);
+
+          case 8:
+            _context.t1 = _context.sent;
+            _context.next = 11;
+            return (0, _context.t0)(_context.t1);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function remove(_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeAll", function() { return removeAll; });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/**
+ * Clear all data from the store and from session.
+ */
+
+var removeAll =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee() {
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            ___WEBPACK_IMPORTED_MODULE_0__["Store"].clear();
+            sessionStorage.clear();
+
+          case 2:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function removeAll() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
 /* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return StateContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return StateProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return useStateValue; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+
+
+var StateContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])();
+var StateProvider = function StateProvider(_ref) {
+  var children = _ref.children;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StateContext.Provider, {
+    value: Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(___WEBPACK_IMPORTED_MODULE_1__["reducer"], Object(___WEBPACK_IMPORTED_MODULE_1__["initialState"])())
+  }, children);
+};
+var useStateValue = function useStateValue() {
+  return Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(StateContext);
+};
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _adapters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var Store =
+/*#__PURE__*/
+function () {
+  function Store() {
+    _classCallCheck(this, Store);
+  }
+
+  _createClass(Store, [{
+    key: "getKeys",
+
+    /*
+     * Get the Models state representation
+    */
+    value: function getKeys(model) {
+      if (!model) return; // If it's a string, it's already a key!
+
+      if (typeof model === 'string' || model instanceof String) {
+        return model;
+      }
+
+      return Object.keys(model.initialState)[0].toString();
+    }
+    /*
+     * Makes the 'set' call to local storage to store data
+    */
+
+  }, {
+    key: "set",
+    value: function () {
+      var _set = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(model, value) {
+        var key, updatedValue;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                key = this.getKeys(model);
+                _context.prev = 1;
+                _context.next = 4;
+                return model.plugins.storage.set(key, value);
+
+              case 4:
+                _context.next = 6;
+                return model.plugins.storage.get(key);
+
+              case 6:
+                updatedValue = _context.sent;
+
+                if (!(updatedValue === undefined)) {
+                  _context.next = 9;
+                  break;
+                }
+
+                throw new Error("Could not set ".concat(key, " = ").concat(value));
+
+              case 9:
+                return _context.abrupt("return", {
+                  key: key,
+                  value: value
+                });
+
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](1);
+                console.log(_context.t0);
+
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[1, 12]]);
+      }));
+
+      function set(_x, _x2) {
+        return _set.apply(this, arguments);
+      }
+
+      return set;
+    }()
+    /*
+     * Makes the 'get' call to local storage to get some data
+    */
+
+  }, {
+    key: "get",
+    value: function () {
+      var _get = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(model) {
+        var key;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                key = this.getKeys(model);
+                _context2.prev = 1;
+                _context2.next = 4;
+                return model.plugins.storage.get(key);
+
+              case 4:
+                return _context2.abrupt("return", _context2.sent);
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](1);
+                console.log(_context2.t0);
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[1, 7]]);
+      }));
+
+      function get(_x3) {
+        return _get.apply(this, arguments);
+      }
+
+      return get;
+    }()
+  }, {
+    key: "setAll",
+    value: function () {
+      var _setAll = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(units) {
+        var _this = this;
+
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                if (!(units === undefined || units.length === 0)) {
+                  _context4.next = 2;
+                  break;
+                }
+
+                throw new Error('Array cannot be null or empty');
+
+              case 2:
+                units.forEach(
+                /*#__PURE__*/
+                function () {
+                  var _ref = _asyncToGenerator(
+                  /*#__PURE__*/
+                  regeneratorRuntime.mark(function _callee3(kvPair) {
+                    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                      while (1) {
+                        switch (_context3.prev = _context3.next) {
+                          case 0:
+                            _context3.prev = 0;
+                            _context3.next = 3;
+                            return _this.set(kvPair.key, kvPair.value);
+
+                          case 3:
+                            _context3.next = 8;
+                            break;
+
+                          case 5:
+                            _context3.prev = 5;
+                            _context3.t0 = _context3["catch"](0);
+                            console.log(_context3.t0);
+
+                          case 8:
+                          case "end":
+                            return _context3.stop();
+                        }
+                      }
+                    }, _callee3, null, [[0, 5]]);
+                  }));
+
+                  return function (_x5) {
+                    return _ref.apply(this, arguments);
+                  };
+                }());
+                return _context4.abrupt("return", true);
+
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }));
+
+      function setAll(_x4) {
+        return _setAll.apply(this, arguments);
+      }
+
+      return setAll;
+    }()
+    /*
+     * Makes the 'clear' call to local storage to get clear local storage
+     * Uses the storage engine found by decideWhichEngine, either plugin or default.
+    */
+
+  }, {
+    key: "clear",
+    value: function () {
+      var _clear = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee5() {
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return model.plugins.storage.clear();
+
+              case 3:
+                _context5.next = 8;
+                break;
+
+              case 5:
+                _context5.prev = 5;
+                _context5.t0 = _context5["catch"](0);
+                console.log(_context5.t0);
+
+              case 8:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 5]]);
+      }));
+
+      function clear() {
+        return _clear.apply(this, arguments);
+      }
+
+      return clear;
+    }()
+    /*
+     * Makes the 'remove' call to local storage to get remove a value from local storage
+     * Uses the storage engine found by decideWhichEngine, either plugin or default.
+    */
+
+  }, {
+    key: "remove",
+    value: function () {
+      var _remove = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee6(model) {
+        var key;
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                key = this.getKeys(model);
+                _context6.prev = 1;
+                _context6.next = 4;
+                return model.plugins.storage.remove(key);
+
+              case 4:
+                _context6.next = 9;
+                break;
+
+              case 6:
+                _context6.prev = 6;
+                _context6.t0 = _context6["catch"](1);
+                console.log(_context6.t0);
+
+              case 9:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this, [[1, 6]]);
+      }));
+
+      function remove(_x6) {
+        return _remove.apply(this, arguments);
+      }
+
+      return remove;
+    }()
+  }]);
+
+  return Store;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (new Store());
+
+/***/ }),
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
