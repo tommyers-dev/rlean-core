@@ -7084,7 +7084,7 @@ function useSave(model, newValue) {
 
   if (typeof newValue === "undefined") {
     return [function (newVal) {
-      return save(model, newValue, dispatch, type);
+      save(model, newVal, dispatch, type);
     }];
   }
 

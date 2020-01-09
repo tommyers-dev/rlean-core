@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useStateValue, Store } from './';
+import { useStateValue, Store, ReactEnt } from './';
 
 /**
  * Save an object to state, and optionally to store if persistData
@@ -37,7 +37,9 @@ export default function useSave(model, newValue, type = null) {
 
   if(typeof newValue === "undefined") {
     return [
-      (newVal) => save(model, newValue, dispatch, type)
+      (newVal) => {
+        save(model, newVal, dispatch, type);
+      }
     ];
   }
 
