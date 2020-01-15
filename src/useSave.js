@@ -15,10 +15,11 @@ import { useStateValue, Store, ReactEnt } from './';
 const save = async (model, newValue, dispatch, type = null) => {
   if (newValue === undefined) return;
 
-  if(model.persistData) {
+  /*if(model.persistData) {
     await Store.set(model, newValue);
-  }
+  }*/
 
+  ReactEnt.model = model;
   return await dispatch(await model.updateState(newValue, type));
 };
 

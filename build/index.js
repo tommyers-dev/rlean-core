@@ -7029,28 +7029,23 @@ function () {
             return _context.abrupt("return");
 
           case 3:
-            if (!model.persistData) {
-              _context.next = 6;
-              break;
-            }
-
-            _context.next = 6;
-            return ___WEBPACK_IMPORTED_MODULE_1__["Store"].set(model, newValue);
-
-          case 6:
+            /*if(model.persistData) {
+              await Store.set(model, newValue);
+            }*/
+            ___WEBPACK_IMPORTED_MODULE_1__["ReactEnt"].model = model;
             _context.t0 = dispatch;
-            _context.next = 9;
+            _context.next = 7;
             return model.updateState(newValue, type);
 
-          case 9:
+          case 7:
             _context.t1 = _context.sent;
-            _context.next = 12;
+            _context.next = 10;
             return (0, _context.t0)(_context.t1);
 
-          case 12:
+          case 10:
             return _context.abrupt("return", _context.sent);
 
-          case 13:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -7364,40 +7359,41 @@ function _useGet() {
 
                                     case 39:
                                       if (!(!isSync && (!progressiveLoading || storeValue === 'undefined' || storeValue === null))) {
-                                        _context2.next = 48;
+                                        _context2.next = 49;
                                         break;
                                       }
 
                                       isLoadingCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoadingRef.current);
                                       isLoadingCopy[key] = true;
+                                      ___WEBPACK_IMPORTED_MODULE_3__["ReactEnt"].model = oIsLoading;
                                       _context2.t8 = dispatch;
-                                      _context2.next = 45;
+                                      _context2.next = 46;
                                       return oIsLoading.updateState(Object.assign({}, isLoadingCopy));
 
-                                    case 45:
+                                    case 46:
                                       _context2.t9 = _context2.sent;
-                                      _context2.next = 48;
+                                      _context2.next = 49;
                                       return (0, _context2.t8)(_context2.t9);
 
-                                    case 48:
+                                    case 49:
                                       payload = {
                                         path: getPath,
                                         query: params
                                       };
-                                      _context2.prev = 49;
-                                      _context2.next = 52;
+                                      _context2.prev = 50;
+                                      _context2.next = 53;
                                       return Object(_internal__WEBPACK_IMPORTED_MODULE_2__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_2__["methods"].GET);
 
-                                    case 52:
+                                    case 53:
                                       response = _context2.sent;
 
                                       if (!response) {
-                                        _context2.next = 87;
+                                        _context2.next = 86;
                                         break;
                                       }
 
                                       if (!(isSync || progressiveLoading && persistData && typeof storeValue !== 'undefined' && storeValue !== null || !persistData)) {
-                                        _context2.next = 59;
+                                        _context2.next = 60;
                                         break;
                                       }
 
@@ -7407,32 +7403,29 @@ function _useGet() {
                                       _isEqual = _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["Compare"].deepCompare(response.data, valueToCompare).isEqual;
 
                                       if (!_isEqual) {
-                                        _context2.next = 59;
+                                        _context2.next = 60;
                                         break;
                                       }
 
                                       return _context2.abrupt("return");
 
-                                    case 59:
-                                      if (!persistData) {
-                                        _context2.next = 62;
-                                        break;
-                                      }
-
-                                      _context2.next = 62;
-                                      return ___WEBPACK_IMPORTED_MODULE_3__["Store"].set(model, response.data);
-
-                                    case 62:
+                                    case 60:
+                                      /*if (persistData) {
+                                        // Update storage.
+                                        await Store.set(model, response.data);
+                                      }*/
+                                      // Set value in state.
+                                      ___WEBPACK_IMPORTED_MODULE_3__["ReactEnt"].model = model;
                                       _context2.t10 = dispatch;
-                                      _context2.next = 65;
+                                      _context2.next = 64;
                                       return model.updateState(response.data);
 
-                                    case 65:
+                                    case 64:
                                       _context2.t11 = _context2.sent;
-                                      _context2.next = 68;
+                                      _context2.next = 67;
                                       return (0, _context2.t10)(_context2.t11);
 
-                                    case 68:
+                                    case 67:
                                       if (!(!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null))) {
                                         _context2.next = 77;
                                         break;
@@ -7440,6 +7433,7 @@ function _useGet() {
 
                                       _isLoadingCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoadingRef.current);
                                       _isLoadingCopy[key] = false;
+                                      ___WEBPACK_IMPORTED_MODULE_3__["ReactEnt"].model = oIsLoading;
                                       _context2.t12 = dispatch;
                                       _context2.next = 74;
                                       return oIsLoading.updateState(Object.assign({}, _isLoadingCopy));
@@ -7453,29 +7447,27 @@ function _useGet() {
                                       // Update lastUpdated flag
                                       lastUpdatedCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdatedRef.current);
                                       lastUpdatedCopy[key] = new Date();
+                                      ___WEBPACK_IMPORTED_MODULE_3__["ReactEnt"].model = oLastUpdated;
                                       _context2.t14 = dispatch;
-                                      _context2.next = 82;
+                                      _context2.next = 83;
                                       return oLastUpdated.updateState(Object.assign({}, lastUpdatedCopy));
 
-                                    case 82:
+                                    case 83:
                                       _context2.t15 = _context2.sent;
-                                      _context2.next = 85;
+                                      _context2.next = 86;
                                       return (0, _context2.t14)(_context2.t15);
 
-                                    case 85:
-                                      _context2.next = 87;
-                                      return ___WEBPACK_IMPORTED_MODULE_3__["Store"].set(lastUpdatedCopy, lastUpdatedCopy);
-
-                                    case 87:
+                                    case 86:
                                       _context2.next = 99;
                                       break;
 
-                                    case 89:
-                                      _context2.prev = 89;
-                                      _context2.t16 = _context2["catch"](49);
+                                    case 88:
+                                      _context2.prev = 88;
+                                      _context2.t16 = _context2["catch"](50);
                                       // Set isLoading to false when there is an error
                                       _isLoadingCopy2 = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoadingRef.current);
                                       _isLoadingCopy2[key] = false;
+                                      ___WEBPACK_IMPORTED_MODULE_3__["ReactEnt"].model = oIsLoading;
                                       _context2.t17 = dispatch;
                                       _context2.next = 96;
                                       return oIsLoading.updateState(Object.assign({}, _isLoadingCopy2));
@@ -7490,7 +7482,7 @@ function _useGet() {
                                       return _context2.stop();
                                   }
                                 }
-                              }, _callee2, null, [[49, 89]]);
+                              }, _callee2, null, [[50, 88]]);
                             }));
                             return _callApi.apply(this, arguments);
                           };
@@ -7515,16 +7507,17 @@ function _useGet() {
                           stateValue = state[key];
                           oIsLoading = new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]();
                           oLastUpdated = new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]();
+                          ___WEBPACK_IMPORTED_MODULE_3__["ReactEnt"].model = model;
 
                           if (isSync) {
-                            _context3.next = 19;
+                            _context3.next = 20;
                             break;
                           }
 
-                          _context3.next = 19;
+                          _context3.next = 20;
                           return callApi();
 
-                        case 19:
+                        case 20:
                           if (typeof syncInterval === 'number') {
                             setTimeout(
                             /*#__PURE__*/
@@ -7551,7 +7544,7 @@ function _useGet() {
                             })), syncInterval);
                           }
 
-                        case 20:
+                        case 21:
                         case "end":
                           return _context3.stop();
                       }
@@ -8089,7 +8082,8 @@ var reducer = function reducer(_ref, action) {
     middleware.push(_middleware__WEBPACK_IMPORTED_MODULE_3__["logActions"]);
   }
 
-  Object(_middleware__WEBPACK_IMPORTED_MODULE_3__["applyMiddleware"])(nextState, action, middleware);
+  middleware.push(_middleware__WEBPACK_IMPORTED_MODULE_3__["saveToIndexedDB"]);
+  Object(_middleware__WEBPACK_IMPORTED_MODULE_3__["applyMiddleware"])(___WEBPACK_IMPORTED_MODULE_1__["ReactEnt"].model, nextState, action, middleware);
   return combinedReducer;
 };
 
@@ -8103,6 +8097,7 @@ var reducer = function reducer(_ref, action) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return applyMiddleware; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logActions", function() { return logActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveToIndexedDB", function() { return saveToIndexedDB; });
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -8110,23 +8105,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-function logActions(_x, _x2, _x3) {
+function logActions(_x, _x2, _x3, _x4) {
   return _logActions.apply(this, arguments);
 }
 
 function _logActions() {
   _logActions = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(state, action, next) {
+  regeneratorRuntime.mark(function _callee(model, state, action, next) {
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            console.log("model ", model);
             console.log("dispatching", action.type);
             console.log("next state", state);
             return _context.abrupt("return", next(action));
 
-          case 3:
+          case 4:
           case "end":
             return _context.stop();
         }
@@ -8136,41 +8132,53 @@ function _logActions() {
   return _logActions.apply(this, arguments);
 }
 
-function setLocalData(_x4, _x5, _x6) {
-  return _setLocalData.apply(this, arguments);
+function saveToIndexedDB(_x5, _x6, _x7, _x8) {
+  return _saveToIndexedDB.apply(this, arguments);
 }
 
-function _setLocalData() {
-  _setLocalData = _asyncToGenerator(
+function _saveToIndexedDB() {
+  _saveToIndexedDB = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(state, action, next) {
+  regeneratorRuntime.mark(function _callee2(model, state, action, next) {
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
+            if (!model.persistData) {
+              _context2.next = 3;
+              break;
+            }
+
+            _context2.next = 3;
+            return ___WEBPACK_IMPORTED_MODULE_0__["Store"].set(model, Object.values(action)[1]);
+
+          case 3:
+            return _context2.abrupt("return", next(action));
+
+          case 4:
           case "end":
             return _context2.stop();
         }
       }
     }, _callee2);
   }));
-  return _setLocalData.apply(this, arguments);
+  return _saveToIndexedDB.apply(this, arguments);
 }
 
-function applyMiddleware(_x7, _x8, _x9) {
+function applyMiddleware(_x9, _x10, _x11, _x12) {
   return _applyMiddleware.apply(this, arguments);
 }
 
 function _applyMiddleware() {
   _applyMiddleware = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee3(state, action, middleware) {
+  regeneratorRuntime.mark(function _callee3(model, state, action, middleware) {
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             return _context3.abrupt("return", middleware.reduce(function (st, fn) {
-              return fn(st, action, function (currentAction) {
+              return fn(model, st, action, function (currentAction) {
                 return state;
               });
             }, state));

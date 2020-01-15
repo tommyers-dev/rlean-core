@@ -1,16 +1,23 @@
 import { Store } from './';
 
-async function logActions(state, action, next) {
+async function logActions(model, state, action, next) {
+  console.log(`model `, model);
   console.log(`dispatching`, action.type);
   console.log(`next state`, state);
   return next(action);
 }
 
-async function setLocalData(state, action, next) { }
+async function saveToIndexedDB(model, state, action, next) {
+  if(model.persistData) {
+    await Store.set(model, Object.values(action)[1]);
+  }
 
-async function applyMiddleware(state, action, middleware) {
+  return next(action);
+}
+
+async function applyMiddleware(model, state, action, middleware) {
   return middleware.reduce((st, fn) => {
-    return fn(st, action, (currentAction) => {
+    return fn(model, st, action, (currentAction) => {
       return state;
     });
   }, state);
@@ -18,5 +25,6 @@ async function applyMiddleware(state, action, middleware) {
 
 export {
   applyMiddleware,
-  logActions
+  logActions,
+  saveToIndexedDB
 };

@@ -1,7 +1,7 @@
 import { deepCopy, get } from '@react-ent/utils';
 import { ReactEnt } from './';
 import { IsLoading, LastUpdated } from './_internal';
-import { logActions, applyMiddleware } from './middleware';
+import { logActions, saveToIndexedDB, applyMiddleware } from './middleware';
 
 export const reducer = ({ ...state }, action) => {
   const models = get(ReactEnt, 'config.models', {});
@@ -29,7 +29,8 @@ export const reducer = ({ ...state }, action) => {
     middleware.push(logActions);
   }
 
-  applyMiddleware(nextState, action, middleware);
+  middleware.push(saveToIndexedDB);
+  applyMiddleware(ReactEnt.model, nextState, action, middleware);
 
   return combinedReducer;
 };
