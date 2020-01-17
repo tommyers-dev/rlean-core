@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useStateValue, Store, ReactEnt } from './';
+import { useStateValue, RLean } from './';
 
 /**
  * Save an object to state, and optionally to store if persistData
@@ -19,7 +19,7 @@ const save = async (model, newValue, dispatch, type = null) => {
     await Store.set(model, newValue);
   }*/
 
-  ReactEnt.model = model;
+  RLean.model = model;
   return await dispatch(await model.updateState(newValue, type));
 };
 
@@ -36,9 +36,9 @@ const save = async (model, newValue, dispatch, type = null) => {
 export default function useSave(model, newValue, type = null) {
   const [state, dispatch] = useStateValue();
 
-  if(typeof newValue === "undefined") {
+  if (typeof newValue === 'undefined') {
     return [
-      (newVal) => {
+      newVal => {
         save(model, newVal, dispatch, type);
       }
     ];
@@ -47,4 +47,4 @@ export default function useSave(model, newValue, type = null) {
   useEffect(() => {
     save(model, newValue, dispatch, type);
   }, [dispatch]);
-};
+}

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Compare, deepCopy } from '@react-ent/utils';
 import { request, methods, IsLoading, LastUpdated } from './_internal';
-import { useStateValue, Store, ReactEnt } from './';
+import { useStateValue, Store, RLean } from './';
 
 /**
  * The useGet custom hook is what populates all of your state objects based on whatever
@@ -49,7 +49,7 @@ async function useGet(model, params, type) {
       const stateValue = state[key];
       const oIsLoading = new IsLoading();
       const oLastUpdated = new LastUpdated();
-      ReactEnt.model = model;
+      RLean.model = model;
 
       async function callApi() {
         const isEqual = Compare.deepCompare(storeValue, stateValue).isEqual;
@@ -94,7 +94,7 @@ async function useGet(model, params, type) {
         if (!isSync && (!progressiveLoading || storeValue === 'undefined' || storeValue === null)) {
           let isLoadingCopy = deepCopy(isLoadingRef.current);
           isLoadingCopy[key] = true;
-          ReactEnt.model = oIsLoading;
+          RLean.model = oIsLoading;
           await dispatch(await oIsLoading.updateState(Object.assign({}, isLoadingCopy)));
         }
 
@@ -123,7 +123,7 @@ async function useGet(model, params, type) {
             }*/
 
             // Set value in state.
-            ReactEnt.model = model;
+            RLean.model = model;
             await dispatch(await model.updateState(response.data));
 
             // Update isLoading object if necessary. Should not update if progressiveLoading
@@ -131,14 +131,14 @@ async function useGet(model, params, type) {
             if (!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null)) {
               let isLoadingCopy = deepCopy(isLoadingRef.current);
               isLoadingCopy[key] = false;
-              ReactEnt.model = oIsLoading;
+              RLean.model = oIsLoading;
               await dispatch(await oIsLoading.updateState(Object.assign({}, isLoadingCopy)));
             }
 
             // Update lastUpdated flag
             let lastUpdatedCopy = deepCopy(lastUpdatedRef.current);
             lastUpdatedCopy[key] = new Date();
-            ReactEnt.model = oLastUpdated;
+            RLean.model = oLastUpdated;
             await dispatch(await oLastUpdated.updateState(Object.assign({}, lastUpdatedCopy)));
             // await Store.set(lastUpdatedCopy, lastUpdatedCopy);
           }
@@ -146,7 +146,7 @@ async function useGet(model, params, type) {
           // Set isLoading to false when there is an error
           let isLoadingCopy = deepCopy(isLoadingRef.current);
           isLoadingCopy[key] = false;
-          ReactEnt.model = oIsLoading;
+          RLean.model = oIsLoading;
           await dispatch(await oIsLoading.updateState(Object.assign({}, isLoadingCopy)));
         }
       }
