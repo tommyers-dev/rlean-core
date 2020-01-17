@@ -11,7 +11,8 @@ export class ApiErrors extends Model {
     for (let i = 0; i < objects.length; i++) {
       const key = Object.keys(objects[i].prototype.initialState)[0].toString();
 
-      // Add to apiErrors if Model contains any API path.
+      // Add to apiErrors if Model contains any API path
+
       if (
         objects[i].prototype.getPath ||
         objects[i].prototype.postPath ||
