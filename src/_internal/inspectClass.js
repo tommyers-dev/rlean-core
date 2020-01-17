@@ -6,7 +6,7 @@ export const inspectClass = obj => {
   let t;
 
   try {
-    if (typeof obj != 'function') {
+    if (typeof obj !== 'function') {
       objClass = obj.constructor;
     } else {
       objClass = obj;
@@ -26,6 +26,7 @@ export const inspectClass = obj => {
     });
   } catch (err) {
     className = 'undefined';
+    console.error(err);
   }
 
   return { ClassName: className, Methods: methods, Attributes: attributes };

@@ -1,11 +1,11 @@
-class ReactEnt {
+class RLean {
   async init(config) {
     try {
       this.config = config;
-    } catch(e) {
+    } catch (e) {
       console.log(e);
     }
   }
 }
 
-export default new ReactEnt();
+export default new RLean();

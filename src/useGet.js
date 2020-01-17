@@ -44,7 +44,7 @@ async function useGet(model, params, type) {
       const syncInterval = model.syncInterval;
       const syncAfterTimeElapsed = model.syncAfterTimeElapsed;
       const getPath = model.getPath;
-      const key = Store.getKeys(model);
+      const key = Store.getKey(model);
       const storeValue = await Store.get(model);
       const stateValue = state[key];
       const oIsLoading = new IsLoading();

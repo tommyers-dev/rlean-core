@@ -1,14 +1,15 @@
 import { Model } from '../Model';
-import { ReactEnt } from '../';
+import { RLean } from '../';
 import { get } from '@react-ent/utils';
 
 export class IsLoading extends Model {
   get initialState() {
-    const models = get(ReactEnt, 'config.models', {});
+    const models = get(RLean, 'config.models', {});
     const objects = Object.values(models);
     let isLoading = {};
 
     for (let i = 0; i < objects.length; i++) {
+      // TODO: this will probably need to use Store.getKey(model) function
       const key = Object.keys(objects[i].prototype.initialState)[0].toString();
 
       // Add to isLoading if there is a getPath.

@@ -1,16 +1,16 @@
-import ReactEnt from './ReactEnt';
-import { get, has } from '@react-ent/utils';
 import Plugins from './Plugins';
+import { convertToType } from './_internal/convertToType';
+import { Store } from './';
 
 export class Model extends Object {
-  // If types isn't provided, a default one will be generated.
-  get types() {
-    return null;
-  }
-
   // If initialState isn't provided, a default one will be generated.
   get initialState() {
-    return null;
+    return { [Store.getKey(this.constructor.name)]: null };
+  }
+
+  // If types isn't provided, a default one will be generated.
+  get types() {
+    return { [convertToType(this.constructor.name)]: `${convertToType(this.constructor.name)}` };
   }
 
   get getPath() {
@@ -86,8 +86,17 @@ export class Model extends Object {
   }
 
   // If a reducer function isn't provided, a default one will be generated.
-  reducer() {
-    return null;
+  reducer(state, action) {
+    switch (action.type) {
+      case convertToType(this.constructor.name):
+        return {
+          ...state,
+          ...action.value
+        };
+
+      default:
+        return state;
+    }
   }
 
   /**
@@ -95,10 +104,13 @@ export class Model extends Object {
    * object in state. Type is not needed if there is only one type in
    * your model. If an updateState function isn't provided, a default one will be generated.
    *
-   * @param {Object} stateObj
+   * @param {Object} value
    * @param {string} type
    */
-  updateState(stateObj, type) {
-    return null;
+  async updateState(value, type) {
+    return {
+      type: convertToType(this.constructor.name),
+      value
+    };
   }
 }

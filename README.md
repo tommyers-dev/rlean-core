@@ -1,4 +1,4 @@
-# @react-ent/core
+# @rlean/core
 
 The purpose of this package is to remove the boilerplate code that becomes unruly when working in enterprise level React applications. This package handles the state, storage, middleware, API calls, and suggests structure and implementation in the Web app. There is no need for smart components or dumb components, only functional components. All global state objects have classes that extend the model class. Model provides a number of attributes that tells this package how to handle the behavior of that object, and the state for that object can be managed by invoking any of the package's functions and custom hooks: useGet, save, remove, removeAll, post, put, patch, and del.
 
@@ -8,11 +8,11 @@ The purpose of this package is to remove the boilerplate code that becomes unrul
 
 It's recommended that you fork the [boilerplate template](https://github.com/tommyers-dev/react_ent_boilerplate) rather than starting with a new installation, but if you'd prefer to install in an existing project using your preferred structure, follow these steps:
 
-`npm i @react-ent/core --save`
+`npm i @rlean/core --save`
 
 Create **models** and **utilities** folders somewhere in your app. In the [boilerplate template](https://github.com/tommyers-dev/react_ent_boilerplate), that's located at **lib/models** and **lib/utilities**. Make sure each of these folder contain an index.js file to export all models and utilities.
 
-Add a configuration file that will be used when initializing the @react-ent/core package. In the [boilerplate template](https://github.com/tommyers-dev/react_ent_boilerplate), that's located at **config/reactEnt.js**.
+Add a configuration file that will be used when initializing the @rlean/core package. In the [boilerplate template](https://github.com/tommyers-dev/react_ent_boilerplate), that's located at **config/rLean.js**.
 
 Example configuration:
 
@@ -24,7 +24,7 @@ import * as models from 'lib/models';
 import * as utilities from 'lib/utilities';
 import { getToken } from 'config';
 
-export const reactEnt = {
+export const rLean = {
   models: models,
   utilities: utilities,
   api: {
@@ -40,14 +40,14 @@ export const reactEnt = {
 In the index.js file at the root of the project, include the following imports:
 
 ```js
-import { ReactEnt, StateProvider } from '@react-ent/core';
-import { reactEnt as config } from 'config';
+import { RLean, StateProvider } from '@rlean/core';
+import { rLean as config } from 'config';
 ```
 
-Initialize the @react-ent/core package:
+Initialize the @rlean/core package:
 
 ```js
-ReactEnt.init(config);
+RLean.init(config);
 ```
 
 And wrap the App component in the StateProvider:
@@ -60,7 +60,7 @@ ReactDom.render(
 );
 ```
 
-That's it! Now you can start using @react-ent/core functions within the project. For a working example of the configuration above, please refer to the [boilerplate template](https://github.com/tommyers-dev/react_ent_boilerplate) on github.
+That's it! Now you can start using @rlean/core functions within the project. For a working example of the configuration above, please refer to the [boilerplate template](https://github.com/tommyers-dev/react_ent_boilerplate) on github.
 
 ### Recommended structure
 
@@ -71,7 +71,7 @@ Please see the [boilerplate template](https://github.com/tommyers-dev/react_ent_
 This is an example of a model that doesn't get populated from an API call.
 
 ```js
-import { Model } from '@react-ent/core';
+import { Model } from '@rlean/core';
 
 export class DemoModel extends Model {
   get initialState() {
@@ -190,14 +190,6 @@ get nullableParams() {
 }
 ```
 
-If apiUriOverride is set, the api call will use the apiUriOverride path instead of the path provided by the config.
-
-```js
-get apiUriOverride() {
-	return null;
-}
-```
-
 If persistData is false, data isn't stored to storage. Api is called every time. This will override preferStore (because there's no store). This is true by default.
 
 ```js
@@ -312,14 +304,6 @@ get nullableParams() {
 }
 ```
 
-If set, the api call will use the apiUriOverride path instead of the path provided by the config.
-
-```js
-get apiUriOverride() {
-	return null;
-}
-```
-
 ## Custom hooks and functions
 
 ### useStateValue
@@ -327,7 +311,7 @@ get apiUriOverride() {
 Use the useStateValue custom hook to access global state and/or the dispatch function.
 
 ```js
-import { useStateValue } from '@react-ent/core';
+import { useStateValue } from '@rlean/core';
 
 const [{ stateObject, anotherStateObject }, dispatch] = useStateValue();
 ```
@@ -336,11 +320,11 @@ const [{ stateObject, anotherStateObject }, dispatch] = useStateValue();
 
 The useGet custom hook is what populates all of your state objects based on whatever attributes are set in your model, and can be called from any component that relies on that state object. A dependency will be created for the param values, so if the params change, the custom hook will fire again. If no params are set, the custom hook will fire only once. useGet also takes an optional type param. Note that the component is wrapped in React Memo, as all components using state values should be. This package uses Context API under the hood and this will prevent components from re-rendering unnecessarily.
 
-> Note: this also relies on @react-ent/utils to check that ID of someStateValue exists before attempting to use the value. This approach also assumes that demoModel cannot be null, and that the initial state value is null, but an empty value from the API is a valid value.
+> Note: this also relies on @rlean/utils to check that ID of someStateValue exists before attempting to use the value. This approach also assumes that demoModel cannot be null, and that the initial state value is null, but an empty value from the API is a valid value.
 
 ```js
 import React, { memo } from 'react';
-import { useStateValue, useGet } from '@react-ent/core';
+import { useStateValue, useGet } from '@rlean/core';
 import { Spinner } from 'some-ui-library';
 import { DemoModel } from 'lib/models';
 
@@ -385,7 +369,7 @@ The call will look like: (uri-from-config)/SomeApiPath?id=1
 The post function is an asynchronous function used to post against the API, and takes model, params, and an optional dispatch function. If dispatch is included, the function assumes that we're getting an updated object back from the api (like the object featuring an auto-increment ID), so it will update the state object for that model with the response data. If this is unintended, do not include the dispatch function.
 
 ```js
-import { useStateValue, post } from '@react-ent/core';
+import { useStateValue, post } from '@rlean/core';
 import { DemoModel } from 'lib/models';
 
 const [, dispatch] = useStateValue();
@@ -398,8 +382,8 @@ const function updateDb = async () => {
 Or, if the ID is being set as a GUID in the web app and no updated value in the response is expected:
 
 ```js
-import { useStateValue, post } from '@react-ent/core';
-import { uuid } from '@react-ent/utils';
+import { useStateValue, post } from '@rlean/core';
+import { uuid } from '@rlean/utils';
 import { DemoModel } from 'lib/models';
 
 const [, dispatch] = useStateValue();
@@ -418,7 +402,7 @@ The patch, put, and del functions are all asynchronous functions that work simil
 The save function is an asynchronous function that is used when saving a state value, and takes an instance of the model being updated, the new value, the dispatch function made available from the useStateValue custom hook, and an optional type. Saving a value will update state and storage if the persistData attribute is 'true' on the model (the default setting).
 
 ```js
-import { useStateValue, save } from '@react-ent/core';
+import { useStateValue, save } from '@rlean/core';
 import { DemoModel } from 'lib/models'
 
 const [, dispatch] = useStateValue();
@@ -433,7 +417,7 @@ const function buttonClicked = async newValue => {
 The remove function is an asynchronous function that is used to remove an object from state and storage if applicable, and takes an instance of the model being updated, the dispatch function made available from the useStateValue custom hook, and an optional type.
 
 ```js
-import { useStateValue, remove } from '@react-ent/core';
+import { useStateValue, remove } from '@rlean/core';
 import { DemoModel } from 'lib/models'
 
 const [, dispatch] = useStateValue();
@@ -454,7 +438,7 @@ The removeAll function is an asynchronous function that is used to clear all sto
 IsLoading is a model that is included by default if there are models that make calls against an API to populate one or more objects in state. This can be leveraged to render loading animations.
 
 ```js
-import { useStateValue } from '@react-ent/core';
+import { useStateValue } from '@rlean/core';
 import { Spinner } from 'some-ui-library';
 import { DemoModel } from 'lib/models'
 

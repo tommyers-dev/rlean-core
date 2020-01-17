@@ -1,9 +1,9 @@
-import { ReactEnt } from './';
+import { RLean } from './';
 import { get } from '@react-ent/utils';
 import { IsLoading, LastUpdated } from './_internal';
 
 export const initialState = () => {
-  const models = get(ReactEnt, 'config.models', {});
+  const models = get(RLean, 'config.models', {});
   const objects = Object.values(models);
   let combinedInitialState = {};
 

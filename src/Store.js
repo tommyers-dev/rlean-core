@@ -1,34 +1,36 @@
-import { LocalForageAdapter } from './adapters';
-import { has } from '@react-ent/utils';
+import { inspectClass } from './_internal/inspectClass';
 
 class Store {
-
   /*
    * Get the Models state representation
-  */
-  getKeys(model) {
-    if(!model) return;
+   */
+  getKey(model) {
+    if (!model) return;
 
     // If it's a string, it's already a key!
-    if(typeof model === 'string' || model instanceof String) {
+    if (typeof model === 'string' || model instanceof String) {
       return model;
     }
 
-    return Object.keys(model.initialState)[0].toString();
+    const o = inspectClass(model);
+    let key = o.ClassName;
+    key.charAt(0).toLowerCase();
+
+    return key;
   }
 
   /*
    * Makes the 'set' call to local storage to store data
-  */
+   */
   async set(model, value) {
-    const key = this.getKeys(model);
+    const key = this.getKey(model);
 
     try {
       await model.plugins.storage.set(key, value);
 
       const updatedValue = await model.plugins.storage.get(key);
 
-      if(updatedValue === undefined) throw new Error(`Could not set ${key} = ${value}`);
+      if (updatedValue === undefined) throw new Error(`Could not set ${key} = ${value}`);
 
       return { key, value };
     } catch (err) {
@@ -38,9 +40,9 @@ class Store {
 
   /*
    * Makes the 'get' call to local storage to get some data
-  */
+   */
   async get(model) {
-    const key = this.getKeys(model);
+    const key = this.getKey(model);
 
     try {
       return await model.plugins.storage.get(key);
@@ -68,7 +70,7 @@ class Store {
   /*
    * Makes the 'clear' call to local storage to get clear local storage
    * Uses the storage engine found by decideWhichEngine, either plugin or default.
-  */
+   */
   async clear() {
     try {
       await model.plugins.storage.clear();
@@ -80,9 +82,9 @@ class Store {
   /*
    * Makes the 'remove' call to local storage to get remove a value from local storage
    * Uses the storage engine found by decideWhichEngine, either plugin or default.
-  */
+   */
   async remove(model) {
-    const key = this.getKeys(model);
+    const key = this.getKey(model);
 
     try {
       await model.plugins.storage.remove(key);

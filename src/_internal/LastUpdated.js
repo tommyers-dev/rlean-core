@@ -1,12 +1,12 @@
 import { Model } from '../Model';
-import { ReactEnt } from '../';
+import { RLean } from '../';
 import { get } from '@react-ent/utils';
 import { AxiosAdapter, LocalForageAdapter } from '../adapters';
 import Plugins from '../Plugins';
 
 export class LastUpdated extends Model {
   get initialState() {
-    const models = get(ReactEnt, 'config.models', {});
+    const models = get(RLean, 'config.models', {});
     const objects = Object.values(models);
     let lastUpdated = {};
 

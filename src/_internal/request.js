@@ -1,13 +1,12 @@
-import axios from 'axios';
-import ReactEnt from '../ReactEnt';
-import { get, has } from '@react-ent/utils';
+import RLean from '../RLean';
+import { get } from '@react-ent/utils';
 import { methods } from './methods';
 
 export const request = async (payload, model, method) => {
   const nullableParams = model.nullableParams;
   const apiUriOverride = model.apiUriOverride;
-  const headers = get(ReactEnt, 'config.api.headers', {});
-  const uri = apiUriOverride ? apiUriOverride : get(ReactEnt, 'config.api.uri', '');
+  const headers = get(RLean, 'config.api.headers', {});
+  const uri = apiUriOverride ? apiUriOverride : get(RLean, 'config.api.uri', '');
   const path = formatPath(payload.path, payload.query, payload.body, method, nullableParams);
 
   // No path specified. Return undefined.

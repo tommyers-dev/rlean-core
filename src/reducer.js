@@ -1,9 +1,9 @@
 import { deepCopy, get } from '@react-ent/utils';
-import { ReactEnt } from './';
+import { RLean } from './';
 import { IsLoading, LastUpdated } from './_internal';
 
 export const reducer = ({ ...state }, action) => {
-  const models = get(ReactEnt, 'config.models', {});
+  const models = get(RLean, 'config.models', {});
   const objects = Object.values(models);
   let combinedReducer = {};
 
@@ -23,7 +23,7 @@ export const reducer = ({ ...state }, action) => {
 
   nextState[stateKey] = stateValue;
 
-  if (get(ReactEnt, 'config.logToConsole', true)) {
+  if (get(RLean, 'config.logToConsole', true)) {
     console.log(`dispatching`, action);
     console.log(`next state`, nextState);
   }

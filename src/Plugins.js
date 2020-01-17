@@ -1,22 +1,22 @@
-import ReactEnt from './ReactEnt';
+import RLean from './RLean';
 import { implement } from './_internal';
-import { get, has } from '@react-ent/utils';
+import { get } from '@react-ent/utils';
 import { LocalForageAdapter, AxiosAdapter } from './adapters';
 
 export default class Plugins {
   constructor(pluginMap) {
     this.pluginMap = pluginMap ? pluginMap : {};
 
-    this.storage = get(ReactEnt, 'config.storage.adapter', LocalForageAdapter)
-    this.api     = get(ReactEnt, 'config.api.adapter', AxiosAdapter);
+    this.storage = get(RLean, 'config.storage.adapter', LocalForageAdapter);
+    this.api = get(RLean, 'config.api.adapter', AxiosAdapter);
 
-    for(let key in pluginMap) {
+    for (let key in pluginMap) {
       this.pipe(key);
     }
   }
 
   pipe(pluginType) {
-    switch(pluginType) {
+    switch (pluginType) {
       case 'storage':
         this.storage = this.ensureCorrectStorageImplementation(this.pluginMap[pluginType]);
         break;
@@ -34,7 +34,7 @@ export default class Plugins {
   ensureCorrectStorageImplementation(storage) {
     const inspection = implement(storage, { methods: ['get', 'set', 'clear', 'remove'] });
 
-    if(inspection.passed) {
+    if (inspection.passed) {
       return storage;
     }
 
@@ -44,7 +44,7 @@ export default class Plugins {
   setLoggingEngine(logger) {
     const inspection = implement(logger, { methods: ['trace', 'info', 'warn', 'error'] });
 
-    if(inspection.passed) {
+    if (inspection.passed) {
       return logger;
     }
 

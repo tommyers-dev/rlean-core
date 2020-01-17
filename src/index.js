@@ -5,7 +5,7 @@ import Plugins from './Plugins';
 import patch from './patch';
 import post from './post';
 import put from './put';
-import ReactEnt from './ReactEnt';
+import RLean from './RLean';
 import { reducer } from './reducer';
 import { remove } from './remove';
 import { removeAll } from './removeAll';
@@ -15,4 +15,23 @@ import Store from './Store';
 import useGet from './useGet';
 import { Utility } from './Utility';
 
-export { del, initialState, Model, patch, Plugins, post, put, ReactEnt, reducer, remove, removeAll, save, StateContext, StateProvider, Store, useGet, useStateValue, Utility };
+export {
+  del,
+  initialState,
+  Model,
+  patch,
+  Plugins,
+  post,
+  put,
+  RLean,
+  reducer,
+  remove,
+  removeAll,
+  save,
+  StateContext,
+  StateProvider,
+  Store,
+  useGet,
+  useStateValue,
+  Utility
+};
