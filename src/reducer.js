@@ -1,9 +1,11 @@
 import { deepCopy, get } from '@react-ent/utils';
 import { RLean } from './';
 import { IsLoading, LastUpdated } from './_internal';
+import { logActions, saveToIndexedDB, applyMiddleware } from './middleware';
 
 export const reducer = ({ ...state }, action) => {
   const models = get(RLean, 'config.models', {});
+  const middleware = get(RLean, 'config.middleware', []);
   const objects = Object.values(models);
   let combinedReducer = {};
 
@@ -24,9 +26,11 @@ export const reducer = ({ ...state }, action) => {
   nextState[stateKey] = stateValue;
 
   if (get(RLean, 'config.logToConsole', true)) {
-    console.log(`dispatching`, action);
-    console.log(`next state`, nextState);
+    middleware.push(logActions);
   }
+
+  middleware.push(saveToIndexedDB);
+  applyMiddleware(RLean.model, nextState, action, middleware);
 
   return combinedReducer;
 };

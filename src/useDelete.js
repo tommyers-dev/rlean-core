@@ -1,4 +1,5 @@
 import { request, methods, inspectClass } from './_internal';
+import { useRequest } from './';
 
 /**
  * Function that executes a DELETE against the API.
@@ -6,8 +7,7 @@ import { request, methods, inspectClass } from './_internal';
  * @param {Object} model
  * @param {Object} params
  */
-async function del(model, params) {
-
+const del = async (model, params, dispatch) => {
   const deletePath = model.deletePath;
 
   if (deletePath !== null) {
@@ -17,6 +17,17 @@ async function del(model, params) {
 
   const o = inspectClass(model);
   console.error(`The ${o.ClassName} object is missing the deletePath attribute.`);
-}
+};
 
-export default del;
+/**
+ * Hook that exposes del()
+ *
+ * Usage: useDelete(new ActiveProject(), { body: '7' });
+ *        const [ del ] = useDelete();  del(new ActiveProject(), { body: '7' });
+ *
+ * @param {Object} model
+ * @param {Object} params
+ */
+export default function useDelete(model, params = {}) {
+  return useRequest(model, params, del);
+}

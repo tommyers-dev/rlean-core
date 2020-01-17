@@ -7,7 +7,7 @@ import { request, methods, inspectClass } from './_internal';
  * @param {Object} [params={}]
  * @param {Function} dispatch Provide if you're expecting an updated object in the response (like the inclusion of an auto-increment id)
  */
-async function post(model, params = {}, dispatch) {
+const post = async (model, params = {}, dispatch) => {
   const postPath = model.postPath;
   const persistData = model.persistData;
 
@@ -33,6 +33,18 @@ async function post(model, params = {}, dispatch) {
   }
 
   return;
-}
+};
 
-export default post;
+/**
+ * Exposed Hook that allows user to access post method
+ * If no model given, returns function to use post to allow conditional operation.
+ *
+ * Usage: usePost(new ActiveProject(), { body: '7' });
+ *        const [ post ] = usePost();  post(new ActiveProject(), { body: '7' });
+ *
+ * @param {Object} model
+ * @param {Object} params
+ */
+export default async function usePost(model, params = {}) {
+  return useRequest(model, params, post);
+}

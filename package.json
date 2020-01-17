@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack",
+    "link-react": "link ../form_builder/node_modules/react"
   },
   "repository": {
     "type": "git",
