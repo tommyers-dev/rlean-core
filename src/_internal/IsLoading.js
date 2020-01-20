@@ -9,7 +9,6 @@ export class IsLoading extends Model {
     let isLoading = {};
 
     for (let i = 0; i < objects.length; i++) {
-      // TODO: this will probably need to use Store.getKey(model) function
       const key = Object.keys(objects[i].prototype.initialState)[0].toString();
 
       // Add to isLoading if there is a getPath.

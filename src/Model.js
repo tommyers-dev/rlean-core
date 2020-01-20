@@ -1,11 +1,14 @@
 import Plugins from './Plugins';
 import { convertToType } from './_internal/convertToType';
-import { Store } from './';
 
 export class Model extends Object {
+  get key() {
+    return `${this.constructor.name.charAt(0).toLowerCase()}${this.constructor.name.slice(1)}`;
+  }
+
   // If initialState isn't provided, a default one will be generated.
   get initialState() {
-    return { [Store.getKey(this.constructor.name)]: null };
+    return { [this.key]: null };
   }
 
   // If types isn't provided, a default one will be generated.
@@ -91,7 +94,7 @@ export class Model extends Object {
       case convertToType(this.constructor.name):
         return {
           ...state,
-          ...action.value
+          ...action[this.key]
         };
 
       default:
@@ -110,7 +113,7 @@ export class Model extends Object {
   async updateState(value, type) {
     return {
       type: convertToType(this.constructor.name),
-      value
+      [this.key]: value
     };
   }
 }

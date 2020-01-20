@@ -1,29 +1,9 @@
-import { inspectClass } from './_internal/inspectClass';
-
 class Store {
-  /*
-   * Get the Models state representation
-   */
-  getKey(model) {
-    if (!model) return;
-
-    // If it's a string, it's already a key!
-    if (typeof model === 'string' || model instanceof String) {
-      return model;
-    }
-
-    const o = inspectClass(model);
-    let key = o.ClassName;
-    key.charAt(0).toLowerCase();
-
-    return key;
-  }
-
   /*
    * Makes the 'set' call to local storage to store data
    */
   async set(model, value) {
-    const key = this.getKey(model);
+    const key = model.key;
 
     try {
       await model.plugins.storage.set(key, value);
@@ -42,7 +22,7 @@ class Store {
    * Makes the 'get' call to local storage to get some data
    */
   async get(model) {
-    const key = this.getKey(model);
+    const key = model.key;
 
     try {
       return await model.plugins.storage.get(key);
@@ -84,7 +64,7 @@ class Store {
    * Uses the storage engine found by decideWhichEngine, either plugin or default.
    */
   async remove(model) {
-    const key = this.getKey(model);
+    const key = model.key;
 
     try {
       await model.plugins.storage.remove(key);

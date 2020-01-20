@@ -1126,7 +1126,6 @@ function (_Model) {
       var isLoading = {};
 
       for (var i = 0; i < objects.length; i++) {
-        // TODO: this will probably need to use Store.getKey(model) function
         var key = Object.keys(objects[i].prototype.initialState)[0].toString(); // Add to isLoading if there is a getPath.
 
         if (objects[i].prototype.getPath) {
@@ -1168,7 +1167,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return Model; });
 /* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
 /* harmony import */ var _internal_convertToType__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1207,7 +1205,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var Model =
 /*#__PURE__*/
 function (_Object) {
@@ -1225,7 +1222,7 @@ function (_Object) {
     value: function reducer(state, action) {
       switch (action.type) {
         case Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_1__["convertToType"])(this.constructor.name):
-          return _objectSpread({}, state, {}, action.value);
+          return _objectSpread({}, state, {}, action[this.key]);
 
         default:
           return state;
@@ -1250,10 +1247,9 @@ function (_Object) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                return _context.abrupt("return", {
-                  type: Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_1__["convertToType"])(this.constructor.name),
-                  value: value
-                });
+                return _context.abrupt("return", _defineProperty({
+                  type: Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_1__["convertToType"])(this.constructor.name)
+                }, this.key, value));
 
               case 1:
               case "end":
@@ -1270,10 +1266,15 @@ function (_Object) {
       return updateState;
     }()
   }, {
-    key: "initialState",
-    // If initialState isn't provided, a default one will be generated.
+    key: "key",
     get: function get() {
-      return _defineProperty({}, ___WEBPACK_IMPORTED_MODULE_2__["Store"].getKey(this.constructor.name), null);
+      return "".concat(this.constructor.name.charAt(0).toLowerCase()).concat(this.constructor.name.slice(1));
+    } // If initialState isn't provided, a default one will be generated.
+
+  }, {
+    key: "initialState",
+    get: function get() {
+      return _defineProperty({}, this.key, null);
     } // If types isn't provided, a default one will be generated.
 
   }, {
@@ -6710,7 +6711,7 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "convertToType", function() { return convertToType; });
 var convertToType = function convertToType(string) {
-  return "SET_".concat(string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1_$2').toUpperCase());
+  return "SET".concat(string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1_$2').toUpperCase());
 };
 
 /***/ }),
@@ -7546,7 +7547,7 @@ function _useGet() {
                           syncInterval = model.syncInterval;
                           syncAfterTimeElapsed = model.syncAfterTimeElapsed;
                           getPath = model.getPath;
-                          key = ___WEBPACK_IMPORTED_MODULE_3__["Store"].getKey(model);
+                          key = model.key;
                           _context3.next = 12;
                           return ___WEBPACK_IMPORTED_MODULE_3__["Store"].get(model);
 
@@ -8167,12 +8168,11 @@ function _logActions() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log("model ", model);
             console.log("dispatching", action.type);
             console.log("next state", state);
             return _context.abrupt("return", next(action));
 
-          case 4:
+          case 3:
           case "end":
             return _context.stop();
         }
@@ -8386,7 +8386,6 @@ var useStateValue = function useStateValue() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _internal_inspectClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -8397,8 +8396,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
-
 var Store =
 /*#__PURE__*/
 function () {
@@ -8407,29 +8404,11 @@ function () {
   }
 
   _createClass(Store, [{
-    key: "getKey",
+    key: "set",
 
-    /*
-     * Get the Models state representation
-     */
-    value: function getKey(model) {
-      if (!model) return; // If it's a string, it's already a key!
-
-      if (typeof model === 'string' || model instanceof String) {
-        return model;
-      }
-
-      var o = Object(_internal_inspectClass__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
-      var key = o.ClassName;
-      key.charAt(0).toLowerCase();
-      return key;
-    }
     /*
      * Makes the 'set' call to local storage to store data
      */
-
-  }, {
-    key: "set",
     value: function () {
       var _set = _asyncToGenerator(
       /*#__PURE__*/
@@ -8439,7 +8418,7 @@ function () {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                key = this.getKey(model);
+                key = model.key;
                 _context.prev = 1;
                 _context.next = 4;
                 return model.plugins.storage.set(key, value);
@@ -8474,7 +8453,7 @@ function () {
                 return _context.stop();
             }
           }
-        }, _callee, this, [[1, 12]]);
+        }, _callee, null, [[1, 12]]);
       }));
 
       function set(_x, _x2) {
@@ -8498,7 +8477,7 @@ function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                key = this.getKey(model);
+                key = model.key;
                 _context2.prev = 1;
                 _context2.next = 4;
                 return model.plugins.storage.get(key);
@@ -8516,7 +8495,7 @@ function () {
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[1, 7]]);
+        }, _callee2, null, [[1, 7]]);
       }));
 
       function get(_x3) {
@@ -8654,7 +8633,7 @@ function () {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                key = this.getKey(model);
+                key = model.key;
                 _context6.prev = 1;
                 _context6.next = 4;
                 return model.plugins.storage.remove(key);
@@ -8673,7 +8652,7 @@ function () {
                 return _context6.stop();
             }
           }
-        }, _callee6, this, [[1, 6]]);
+        }, _callee6, null, [[1, 6]]);
       }));
 
       function remove(_x6) {
