@@ -92,6 +92,13 @@ export class Model extends Object {
   reducer(state, action) {
     switch (action.type) {
       case convertToType(this.constructor.name):
+        if (Array.isArray(action[this.key])) {
+          return {
+            ...state,
+            array: action[this.key]
+          };
+        }
+
         return {
           ...state,
           ...action[this.key]
