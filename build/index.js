@@ -103,47 +103,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _useSave__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(46);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useSave", function() { return _useSave__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
-/* harmony import */ var _useRequest__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(48);
+/* harmony import */ var _useRequest__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(49);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useRequest", function() { return _useRequest__WEBPACK_IMPORTED_MODULE_4__["default"]; });
 
-/* harmony import */ var _useGet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(49);
+/* harmony import */ var _useGet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(50);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useGet", function() { return _useGet__WEBPACK_IMPORTED_MODULE_5__["default"]; });
 
-/* harmony import */ var _usePatch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(50);
+/* harmony import */ var _usePatch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(51);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "usePatch", function() { return _usePatch__WEBPACK_IMPORTED_MODULE_6__["default"]; });
 
-/* harmony import */ var _usePost__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(51);
+/* harmony import */ var _usePost__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(52);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "usePost", function() { return _usePost__WEBPACK_IMPORTED_MODULE_7__["default"]; });
 
-/* harmony import */ var _usePut__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(52);
+/* harmony import */ var _usePut__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(53);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "usePut", function() { return _usePut__WEBPACK_IMPORTED_MODULE_8__["default"]; });
 
-/* harmony import */ var _useDelete__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(53);
+/* harmony import */ var _useDelete__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(54);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useDelete", function() { return _useDelete__WEBPACK_IMPORTED_MODULE_9__["default"]; });
 
 /* harmony import */ var _RLean__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RLean", function() { return _RLean__WEBPACK_IMPORTED_MODULE_10__["default"]; });
 
-/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(54);
+/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(55);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return _reducer__WEBPACK_IMPORTED_MODULE_11__["reducer"]; });
 
-/* harmony import */ var _remove__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(56);
+/* harmony import */ var _remove__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(57);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return _remove__WEBPACK_IMPORTED_MODULE_12__["remove"]; });
 
-/* harmony import */ var _removeAll__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(57);
+/* harmony import */ var _removeAll__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(58);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeAll", function() { return _removeAll__WEBPACK_IMPORTED_MODULE_13__["removeAll"]; });
 
-/* harmony import */ var _State__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(58);
+/* harmony import */ var _State__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(59);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateContext", function() { return _State__WEBPACK_IMPORTED_MODULE_14__["StateContext"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StateProvider", function() { return _State__WEBPACK_IMPORTED_MODULE_14__["StateProvider"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useStateValue", function() { return _State__WEBPACK_IMPORTED_MODULE_14__["useStateValue"]; });
 
-/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(59);
+/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(60);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return _Store__WEBPACK_IMPORTED_MODULE_15__["default"]; });
 
-/* harmony import */ var _Utility__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(60);
+/* harmony import */ var _Utility__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(61);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Utility", function() { return _Utility__WEBPACK_IMPORTED_MODULE_16__["Utility"]; });
 
 
@@ -173,19 +173,23 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 
 
 
 var initialState = function initialState() {
-  var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["get"])(___WEBPACK_IMPORTED_MODULE_0__["RLean"], 'config.models', {});
+  var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["getValue"])(___WEBPACK_IMPORTED_MODULE_0__["RLean"], 'config.models', {});
   var objects = Object.values(models);
   var combinedInitialState = {};
 
   for (var i = 0; i < objects.length; i++) {
-    Object.assign(combinedInitialState, objects[i].prototype.initialState);
+    if (objects[i].prototype) {
+      Object.assign(combinedInitialState, objects[i].prototype.initialState);
+    } else {
+      Object.assign(combinedInitialState, objects[i].initialState);
+    }
   }
 
   Object.assign(combinedInitialState, new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]().initialState);
@@ -299,11 +303,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _formatPhoneNumber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "formatPhoneNumber", function() { return _formatPhoneNumber__WEBPACK_IMPORTED_MODULE_2__["formatPhoneNumber"]; });
 
-/* harmony import */ var _get__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "get", function() { return _get__WEBPACK_IMPORTED_MODULE_3__["get"]; });
+/* harmony import */ var _getValue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getValue", function() { return _getValue__WEBPACK_IMPORTED_MODULE_3__["getValue"]; });
 
-/* harmony import */ var _has__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "has", function() { return _has__WEBPACK_IMPORTED_MODULE_4__["has"]; });
+/* harmony import */ var _hasValue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hasValue", function() { return _hasValue__WEBPACK_IMPORTED_MODULE_4__["hasValue"]; });
 
 /* harmony import */ var _makeCamelCaseNormal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeCamelCaseNormal", function() { return _makeCamelCaseNormal__WEBPACK_IMPORTED_MODULE_5__["makeCamelCaseNormal"]; });
@@ -807,8 +811,8 @@ var removeNonNumericChars = function removeNonNumericChars(value) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get", function() { return get; });
-var get = function get(obj, path, defaultValue) {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getValue", function() { return getValue; });
+var getValue = function getValue(obj, path, defaultValue) {
   return path.split('.').reduce(function (a, c) {
     return a != null && typeof a != 'undefined' && a[c] != null && typeof a[c] != 'undefined' ? a[c] : defaultValue != null ? defaultValue : null;
   }, obj);
@@ -820,11 +824,11 @@ var get = function get(obj, path, defaultValue) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "has", function() { return has; });
-/* harmony import */ var _get__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasValue", function() { return hasValue; });
+/* harmony import */ var _getValue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
 
-var has = function has(obj, path) {
-  var value = Object(_get__WEBPACK_IMPORTED_MODULE_0__["get"])(obj, path);
+var hasValue = function hasValue(obj, path) {
+  var value = Object(_getValue__WEBPACK_IMPORTED_MODULE_0__["getValue"])(obj, path);
   return value == null ? false : true;
 };
 
@@ -1033,8 +1037,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IsLoading", function() { return IsLoading; });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _convertToType__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1066,6 +1071,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var IsLoading =
 /*#__PURE__*/
 function (_Model) {
@@ -1079,14 +1085,36 @@ function (_Model) {
 
   _createClass(IsLoading, [{
     key: "reducer",
+    // reducer(state, action) {
+    //   switch (action.type) {
+    //     case this.types.SET_IS_LOADING:
+    //       return {
+    //         ...state,
+    //         ...action.isLoading
+    //       };
+    //     default:
+    //       return state;
+    //   }
+    // }
     value: function reducer(state, action) {
-      switch (action.type) {
-        case this.types.SET_IS_LOADING:
-          return _objectSpread({}, state, {}, action.isLoading);
+      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+      var objects = Object.values(models);
 
-        default:
-          return state;
+      for (var i = 0; i < objects.length; i++) {
+        if (action.type === "SET_IS_LOADING_".concat(objects[i].constructor.name.toUpperCase())) {
+          var objectKey = '';
+
+          if (objects[i].prototype) {
+            objectKey = objects[i].prototype.key;
+          } else {
+            objectKey = objects[i].key;
+          }
+
+          return _objectSpread({}, state, _defineProperty({}, objectKey, action[objectKey]));
+        }
       }
+
+      return state;
     }
   }, {
     key: "updateState",
@@ -1094,21 +1122,31 @@ function (_Model) {
       var _updateState = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(isLoading, type) {
+        var models, objects, key, i;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                return _context.abrupt("return", {
-                  type: this.types.SET_IS_LOADING,
-                  isLoading: isLoading
-                });
+                models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+                objects = Object.values(models);
+                key = '';
 
-              case 1:
+                for (i = 0; i < objects.length; i++) {
+                  if (type === "SET_IS_LOADING_".concat(objects[i].constructor.name.toUpperCase())) {
+                    key = objects[i].key;
+                  }
+                }
+
+                return _context.abrupt("return", _defineProperty({
+                  type: type
+                }, key, isLoading));
+
+              case 5:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee);
       }));
 
       function updateState(_x, _x2) {
@@ -1120,28 +1158,48 @@ function (_Model) {
   }, {
     key: "initialState",
     get: function get() {
-      var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
-
+      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
       var objects = Object.values(models);
       var isLoading = {};
 
       for (var i = 0; i < objects.length; i++) {
-        var key = Object.keys(objects[i].prototype.initialState)[0].toString(); // Add to isLoading if there is a getPath.
-
-        if (objects[i].prototype.getPath) {
-          Object.assign(isLoading, _defineProperty({}, key, false));
+        if (objects[i].prototype) {
+          // Add to isLoading if there is a getPath.
+          if (objects[i].prototype.getPath) {
+            Object.assign(isLoading, _defineProperty({}, objects[i].prototype.key, false));
+          }
+        } else {
+          // Add to isLoading if there is a getPath.
+          if (objects[i].getPath) {
+            Object.assign(isLoading, _defineProperty({}, objects[i].key, false));
+          }
         }
       }
 
       return {
         isLoading: isLoading
       };
-    }
+    } // TODO: Remove. This isn't used.
+
   }, {
     key: "types",
     get: function get() {
+      var isLoading = {};
+      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+      var objects = Object.values(models);
+
+      for (var i = 0; i < objects.length; i++) {
+        var key = "SET_IS_LOADING".concat(Object(_convertToType__WEBPACK_IMPORTED_MODULE_3__["convertToType"])(objects[i].constructor.name));
+
+        if (objects[i].prototype && objects[i].prototype.getPath) {
+          Object.assign(isLoading, _defineProperty({}, key, key));
+        } else if (objects[i].getPath) {
+          Object.assign(isLoading, _defineProperty({}, key, key));
+        }
+      }
+
       return {
-        SET_IS_LOADING: 'SET_IS_LOADING'
+        isLoading: isLoading
       };
     }
     /**
@@ -1218,10 +1276,16 @@ function (_Object) {
 
   _createClass(Model, [{
     key: "reducer",
-    // If a reducer function isn't provided, a default one will be generated.
+    // If a reducer isn't provided, a default one will be generated.
     value: function reducer(state, action) {
       switch (action.type) {
         case Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_1__["convertToType"])(this.constructor.name):
+          if (Array.isArray(action[this.key])) {
+            return _objectSpread({}, state, {
+              array: action[this.key]
+            });
+          }
+
           return _objectSpread({}, state, {}, action[this.key]);
 
         default:
@@ -1385,8 +1449,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Plugins; });
 /* harmony import */ var _RLean__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
 /* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _adapters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1406,8 +1470,8 @@ function () {
     _classCallCheck(this, Plugins);
 
     this.pluginMap = pluginMap ? pluginMap : {};
-    this.storage = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.storage.adapter', _adapters__WEBPACK_IMPORTED_MODULE_3__["LocalForageAdapter"]);
-    this.api = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.adapter', _adapters__WEBPACK_IMPORTED_MODULE_3__["AxiosAdapter"]);
+    this.storage = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.storage.adapter', _adapters__WEBPACK_IMPORTED_MODULE_3__["LocalForageAdapter"]);
+    this.api = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.adapter', _adapters__WEBPACK_IMPORTED_MODULE_3__["AxiosAdapter"]);
 
     for (var key in pluginMap) {
       this.pipe(key);
@@ -1770,9 +1834,9 @@ module.exports = __webpack_require__(13);
 
 var utils = __webpack_require__(14);
 var bind = __webpack_require__(15);
-var Axios = __webpack_require__(17);
+var Axios = __webpack_require__(16);
 var mergeConfig = __webpack_require__(35);
-var defaults = __webpack_require__(23);
+var defaults = __webpack_require__(22);
 
 /**
  * Create an instance of Axios
@@ -1807,7 +1871,7 @@ axios.create = function create(instanceConfig) {
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(36);
 axios.CancelToken = __webpack_require__(37);
-axios.isCancel = __webpack_require__(22);
+axios.isCancel = __webpack_require__(21);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -1829,7 +1893,6 @@ module.exports.default = axios;
 
 
 var bind = __webpack_require__(15);
-var isBuffer = __webpack_require__(16);
 
 /*global toString:true*/
 
@@ -1845,6 +1908,27 @@ var toString = Object.prototype.toString;
  */
 function isArray(val) {
   return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is a Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
+    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
 }
 
 /**
@@ -1901,16 +1985,6 @@ function isString(val) {
  */
 function isNumber(val) {
   return typeof val === 'number';
-}
-
-/**
- * Determine if a value is undefined
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if the value is undefined, otherwise false
- */
-function isUndefined(val) {
-  return typeof val === 'undefined';
 }
 
 /**
@@ -2182,32 +2256,15 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 /* 16 */
-/***/ (function(module, exports) {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-module.exports = function isBuffer (obj) {
-  return obj != null && obj.constructor != null &&
-    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
-
-
-/***/ }),
-/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(14);
-var buildURL = __webpack_require__(18);
-var InterceptorManager = __webpack_require__(19);
-var dispatchRequest = __webpack_require__(20);
+var buildURL = __webpack_require__(17);
+var InterceptorManager = __webpack_require__(18);
+var dispatchRequest = __webpack_require__(19);
 var mergeConfig = __webpack_require__(35);
 
 /**
@@ -2239,7 +2296,15 @@ Axios.prototype.request = function request(config) {
   }
 
   config = mergeConfig(this.defaults, config);
-  config.method = config.method ? config.method.toLowerCase() : 'get';
+
+  // Set config.method
+  if (config.method) {
+    config.method = config.method.toLowerCase();
+  } else if (this.defaults.method) {
+    config.method = this.defaults.method.toLowerCase();
+  } else {
+    config.method = 'get';
+  }
 
   // Hook up interceptors middleware
   var chain = [dispatchRequest, undefined];
@@ -2291,7 +2356,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2369,7 +2434,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2428,18 +2493,16 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(14);
-var transformData = __webpack_require__(21);
-var isCancel = __webpack_require__(22);
-var defaults = __webpack_require__(23);
-var isAbsoluteURL = __webpack_require__(33);
-var combineURLs = __webpack_require__(34);
+var transformData = __webpack_require__(20);
+var isCancel = __webpack_require__(21);
+var defaults = __webpack_require__(22);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -2459,11 +2522,6 @@ function throwIfCancellationRequested(config) {
 module.exports = function dispatchRequest(config) {
   throwIfCancellationRequested(config);
 
-  // Support baseURL config
-  if (config.baseURL && !isAbsoluteURL(config.url)) {
-    config.url = combineURLs(config.baseURL, config.url);
-  }
-
   // Ensure headers exist
   config.headers = config.headers || {};
 
@@ -2478,7 +2536,7 @@ module.exports = function dispatchRequest(config) {
   config.headers = utils.merge(
     config.headers.common || {},
     config.headers[config.method] || {},
-    config.headers || {}
+    config.headers
   );
 
   utils.forEach(
@@ -2521,7 +2579,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2548,7 +2606,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2560,14 +2618,14 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(14);
-var normalizeHeaderName = __webpack_require__(25);
+var normalizeHeaderName = __webpack_require__(24);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -2581,13 +2639,12 @@ function setContentTypeIfUnset(headers, value) {
 
 function getDefaultAdapter() {
   var adapter;
-  // Only Node.JS has a process variable that is of [[Class]] process
-  if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(26);
-  } else if (typeof XMLHttpRequest !== 'undefined') {
+  if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(26);
+    adapter = __webpack_require__(25);
+  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(25);
   }
   return adapter;
 }
@@ -2663,10 +2720,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(24)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(23)))
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -2856,7 +2913,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2875,18 +2932,19 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(14);
-var settle = __webpack_require__(27);
-var buildURL = __webpack_require__(18);
-var parseHeaders = __webpack_require__(30);
-var isURLSameOrigin = __webpack_require__(31);
-var createError = __webpack_require__(28);
+var settle = __webpack_require__(26);
+var buildURL = __webpack_require__(17);
+var buildFullPath = __webpack_require__(29);
+var parseHeaders = __webpack_require__(32);
+var isURLSameOrigin = __webpack_require__(33);
+var createError = __webpack_require__(27);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -2906,7 +2964,8 @@ module.exports = function xhrAdapter(config) {
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
 
     // Set the request timeout in MS
     request.timeout = config.timeout;
@@ -2967,7 +3026,11 @@ module.exports = function xhrAdapter(config) {
 
     // Handle timeout
     request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
+      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
+      if (config.timeoutErrorMessage) {
+        timeoutErrorMessage = config.timeoutErrorMessage;
+      }
+      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED',
         request));
 
       // Clean up request
@@ -2978,10 +3041,10 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(32);
+      var cookies = __webpack_require__(34);
 
       // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
         cookies.read(config.xsrfCookieName) :
         undefined;
 
@@ -3004,8 +3067,8 @@ module.exports = function xhrAdapter(config) {
     }
 
     // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
+    if (!utils.isUndefined(config.withCredentials)) {
+      request.withCredentials = !!config.withCredentials;
     }
 
     // Add responseType to request if needed
@@ -3056,13 +3119,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(28);
+var createError = __webpack_require__(27);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -3088,13 +3151,13 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(29);
+var enhanceError = __webpack_require__(28);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -3113,7 +3176,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3162,7 +3225,76 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isAbsoluteURL = __webpack_require__(30);
+var combineURLs = __webpack_require__(31);
+
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+module.exports = function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !isAbsoluteURL(requestedURL)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+};
+
+
+/***/ }),
 /* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+module.exports = function isAbsoluteURL(url) {
+  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+  // by any combination of letters, digits, plus, period, or hyphen.
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+};
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+module.exports = function combineURLs(baseURL, relativeURL) {
+  return relativeURL
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+};
+
+
+/***/ }),
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3222,7 +3354,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3297,7 +3429,7 @@ module.exports = (
 
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3357,48 +3489,6 @@ module.exports = (
 
 
 /***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Determines whether the specified URL is absolute
- *
- * @param {string} url The URL to test
- * @returns {boolean} True if the specified URL is absolute, otherwise false
- */
-module.exports = function isAbsoluteURL(url) {
-  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
-  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
-  // by any combination of letters, digits, plus, period, or hyphen.
-  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
-};
-
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Creates a new URL by combining the specified URLs
- *
- * @param {string} baseURL The base URL
- * @param {string} relativeURL The relative URL
- * @returns {string} The combined URL
- */
-module.exports = function combineURLs(baseURL, relativeURL) {
-  return relativeURL
-    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
-    : baseURL;
-};
-
-
-/***/ }),
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3420,13 +3510,23 @@ module.exports = function mergeConfig(config1, config2) {
   config2 = config2 || {};
   var config = {};
 
-  utils.forEach(['url', 'method', 'params', 'data'], function valueFromConfig2(prop) {
+  var valueFromConfig2Keys = ['url', 'method', 'params', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy'];
+  var defaultToConfig2Keys = [
+    'baseURL', 'url', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress',
+    'maxContentLength', 'validateStatus', 'maxRedirects', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath'
+  ];
+
+  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     }
   });
 
-  utils.forEach(['headers', 'auth', 'proxy'], function mergeDeepProperties(prop) {
+  utils.forEach(mergeDeepPropertiesKeys, function mergeDeepProperties(prop) {
     if (utils.isObject(config2[prop])) {
       config[prop] = utils.deepMerge(config1[prop], config2[prop]);
     } else if (typeof config2[prop] !== 'undefined') {
@@ -3438,13 +3538,25 @@ module.exports = function mergeConfig(config1, config2) {
     }
   });
 
-  utils.forEach([
-    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
-    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
-    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'maxContentLength',
-    'validateStatus', 'maxRedirects', 'httpAgent', 'httpsAgent', 'cancelToken',
-    'socketPath'
-  ], function defaultToConfig2(prop) {
+  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
+    if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    } else if (typeof config1[prop] !== 'undefined') {
+      config[prop] = config1[prop];
+    }
+  });
+
+  var axiosKeys = valueFromConfig2Keys
+    .concat(mergeDeepPropertiesKeys)
+    .concat(defaultToConfig2Keys);
+
+  var otherKeys = Object
+    .keys(config2)
+    .filter(function filterAxiosKeys(key) {
+      return axiosKeys.indexOf(key) === -1;
+    });
+
+  utils.forEach(otherKeys, function otherKeysDefaultToConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     } else if (typeof config1[prop] !== 'undefined') {
@@ -6723,8 +6835,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LastUpdated", function() { return LastUpdated; });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _adapters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
 /* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6774,13 +6886,24 @@ function (_Model) {
   _createClass(LastUpdated, [{
     key: "reducer",
     value: function reducer(state, action) {
-      switch (action.type) {
-        case this.types.SET_LAST_UPDATED:
-          return _objectSpread({}, state, {}, action.lastUpdated);
+      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+      var objects = Object.values(models);
 
-        default:
-          return state;
+      for (var i = 0; i < objects.length; i++) {
+        if (action.type === "SET_LAST_UPDATED_".concat(objects[i].constructor.name.toUpperCase())) {
+          var objectKey = '';
+
+          if (objects[i].prototype) {
+            objectKey = objects[i].prototype.key;
+          } else {
+            objectKey = objects[i].key;
+          }
+
+          return _objectSpread({}, state, _defineProperty({}, objectKey, action[objectKey]));
+        }
       }
+
+      return state;
     }
   }, {
     key: "updateState",
@@ -6788,21 +6911,33 @@ function (_Model) {
       var _updateState = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(lastUpdated, type) {
+        var models, objects, key, i, lastUpdatedType;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                return _context.abrupt("return", {
-                  type: this.types.SET_LAST_UPDATED,
-                  lastUpdated: lastUpdated
-                });
+                models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+                objects = Object.values(models);
+                key = '';
 
-              case 1:
+                for (i = 0; i < objects.length; i++) {
+                  lastUpdatedType = "SET_LAST_UPDATED_".concat(objects[i].constructor.name.toUpperCase());
+
+                  if (type === lastUpdatedType) {
+                    key = objects[i].key;
+                  }
+                }
+
+                return _context.abrupt("return", _defineProperty({
+                  type: type
+                }, key, lastUpdated));
+
+              case 5:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee);
       }));
 
       function updateState(_x, _x2) {
@@ -6814,30 +6949,51 @@ function (_Model) {
   }, {
     key: "initialState",
     get: function get() {
-      var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_2__["get"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
-
+      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
       var objects = Object.values(models);
       var lastUpdated = {};
 
       for (var i = 0; i < objects.length; i++) {
-        var key = Object.keys(objects[i].prototype.initialState)[0].toString(); // Add to lastUpdated if there is a getPath.
-
-        if (objects[i].prototype.getPath) {
-          Object.assign(lastUpdated, _defineProperty({}, key, null));
+        if (objects[i].prototype) {
+          // Add to lastUpdated if there is a getPath.
+          if (objects[i].prototype.getPath) {
+            Object.assign(lastUpdated, _defineProperty({}, objects[i].prototype.key, null));
+          }
+        } else {
+          // Add to lastUpdated if there is a getPath.
+          if (objects[i].getPath) {
+            Object.assign(lastUpdated, _defineProperty({}, objects[i].key, null));
+          }
         }
       }
 
       return {
         lastUpdated: lastUpdated
       };
-    }
+    } // TODO: Remove. This isn't used.
+
   }, {
     key: "types",
     get: function get() {
+      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+      var objects = Object.values(models);
+      var lastUpdated = {};
+
+      for (var i = 0; i < objects.length; i++) {
+        var key = "SET_LAST_UPDATED_".concat(objects[i].constructor.name.toUpperCase());
+
+        if (objects[i].prototype && objects[i].prototype.getPath) {
+          Object.assign(lastUpdated, _defineProperty({}, key, key));
+        } else if (objects[i].getPath) {
+          Object.assign(lastUpdated, _defineProperty({}, key, key));
+        }
+      }
+
       return {
-        SET_LAST_UPDATED: 'SET_LAST_UPDATED'
+        lastUpdated: lastUpdated
       };
-    }
+    } // TODO: REMOVE THIS!!! This is a problem!
+
   }, {
     key: "plugins",
     get: function get() {
@@ -6860,8 +7016,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "request", function() { return request; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatPath", function() { return formatPath; });
 /* harmony import */ var _RLean__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _methods__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(39);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -6883,8 +7039,8 @@ function () {
           case 0:
             nullableParams = model.nullableParams;
             apiUriOverride = model.apiUriOverride;
-            headers = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["get"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.headers', {});
-            uri = apiUriOverride ? apiUriOverride : Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["get"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.uri', '');
+            headers = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.headers', {});
+            uri = apiUriOverride ? apiUriOverride : Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.uri', '');
             path = formatPath(payload.path, payload.query, payload.body, method, nullableParams); // No path specified. Return undefined.
 
             if (!(path === undefined || path === '')) {
@@ -7029,6 +7185,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _internal_getOptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(48);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -7043,16 +7200,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /**
  * Save an object to state, and optionally to store if persistData
  * is true (default). Don't check if current state and new value are different
  * so if there is an infinite loop, the developer will know right away in the
  * console log.
  *
- * @param {Object} model
- * @param {Object} newValue
- * @param {function} dispatch
- * @param {string} type
+ * @param {Object} options
+ * @param {Function} dispatch
+ * @param {Function} [callback=null]
  */
 
 var save =
@@ -7060,30 +7217,30 @@ var save =
 function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, newValue, dispatch) {
-    var type,
-        _args = arguments;
+  regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
+    var _getOptions, model, value, type;
+
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            type = _args.length > 3 && _args[3] !== undefined ? _args[3] : null;
-
-            if (!(newValue === undefined)) {
-              _context.next = 3;
+            if (!(typeof options === 'undefined' || typeof options.value === 'undefined')) {
+              _context.next = 2;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 3:
+          case 2:
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_2__["getOptions"])(options), model = _getOptions.model, value = _getOptions.value, type = _getOptions.type;
             /*if(model.persistData) {
-              await Store.set(model, newValue);
+              await Store.set(model, value);
             }*/
+
             ___WEBPACK_IMPORTED_MODULE_1__["RLean"].model = model;
             _context.t0 = dispatch;
             _context.next = 7;
-            return model.updateState(newValue, type);
+            return model.updateState(value, type);
 
           case 7:
             _context.t1 = _context.sent;
@@ -7091,7 +7248,7 @@ function () {
             return (0, _context.t0)(_context.t1);
 
           case 10:
-            return _context.abrupt("return", _context.sent);
+            if (callback) callback();
 
           case 11:
           case "end":
@@ -7111,28 +7268,26 @@ function () {
  * so if there is an infinite loop, the developer will know right away in the
  * console log.
  *
- * @param {Object} model
- * @param {Object} newValue
- * @param {string} type
+ * @constructor
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
+ * @example
  */
 
 
-function useSave(model, newValue) {
-  var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
+function useSave(options, callback) {
   var _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(),
       _useStateValue2 = _slicedToArray(_useStateValue, 2),
-      state = _useStateValue2[0],
       dispatch = _useStateValue2[1];
 
-  if (typeof newValue === 'undefined') {
-    return [function (newVal) {
-      save(model, newVal, dispatch, type);
+  if (typeof options === 'undefined') {
+    return [function (options, callback) {
+      save(options, dispatch, callback);
     }];
   }
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    save(model, newValue, dispatch, type);
+    save(options, dispatch, callback);
   }, [dispatch]);
 }
 
@@ -7144,6 +7299,33 @@ module.exports = require("react");
 
 /***/ }),
 /* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOptions", function() { return getOptions; });
+var getOptions = function getOptions(options) {
+  if (!options) {
+    return {
+      model: null,
+      params: null,
+      value: null,
+      type: null,
+      body: null
+    };
+  }
+
+  return {
+    model: options.model || null,
+    params: options.params || null,
+    value: typeof options.value !== 'undefined' ? options.value : null,
+    type: options.type || null,
+    body: options.body || null
+  };
+};
+
+/***/ }),
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7173,28 +7355,28 @@ function useRequest(_x, _x2, _x3) {
 function _useRequest() {
   _useRequest = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, params, method) {
-    var _useStateValue, _useStateValue2, state, dispatch;
+  regeneratorRuntime.mark(function _callee(options, method, callback) {
+    var _useStateValue, _useStateValue2, dispatch;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _useStateValue2[0], dispatch = _useStateValue2[1];
+            _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), dispatch = _useStateValue2[1];
 
-            if (!(typeof model === "undefined")) {
+            if (!(typeof options === 'undefined')) {
               _context.next = 3;
               break;
             }
 
-            return _context.abrupt("return", [function (modelInput, body) {
-              method(modelInput, body, dispatch);
+            return _context.abrupt("return", [function (options, callback) {
+              method(options, dispatch, callback);
             }]);
 
           case 3:
             Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
               try {
-                method(model, params, dispatch);
+                method(options, dispatch, callback);
               } catch (e) {
                 console.log(e);
               }
@@ -7211,17 +7393,18 @@ function _useRequest() {
 }
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+/* harmony import */ var _internal_getOptions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(48);
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -7240,6 +7423,392 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
+/**
+ * @param {Object} model
+ * @param {string} type
+ * @param {Function} dispatch
+ * @param {Function} callback
+ */
+
+var get =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee4(model, lastUpdated, params, type, state, dispatch, callback) {
+    var fetchData, _fetchData;
+
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _fetchData = function _ref6() {
+              _fetchData = _asyncToGenerator(
+              /*#__PURE__*/
+              regeneratorRuntime.mark(function _callee3() {
+                var isSync,
+                    persistData,
+                    preferStore,
+                    progressiveLoading,
+                    syncInterval,
+                    syncAfterTimeElapsed,
+                    getPath,
+                    key,
+                    storeValue,
+                    stateValue,
+                    outputState,
+                    outputResponse,
+                    oIsLoading,
+                    oLastUpdated,
+                    callApi,
+                    _callApi,
+                    _args3 = arguments;
+
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                  while (1) {
+                    switch (_context3.prev = _context3.next) {
+                      case 0:
+                        _callApi = function _ref4() {
+                          _callApi = _asyncToGenerator(
+                          /*#__PURE__*/
+                          regeneratorRuntime.mark(function _callee2() {
+                            var isEqual, timestamp, now, timeElapsed, payload, response, valueToCompare, _isEqual;
+
+                            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                              while (1) {
+                                switch (_context2.prev = _context2.next) {
+                                  case 0:
+                                    isEqual = _rlean_utils__WEBPACK_IMPORTED_MODULE_1__["Compare"].deepCompare(storeValue, stateValue).isEqual;
+
+                                    if (!(persistData && preferStore && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual)) {
+                                      _context2.next = 12;
+                                      break;
+                                    }
+
+                                    // We already have a value in the store and it doesn't match state, so
+                                    // return the value.
+                                    outputState = storeValue;
+                                    _context2.t0 = dispatch;
+                                    _context2.next = 6;
+                                    return model.updateState(storeValue);
+
+                                  case 6:
+                                    _context2.t1 = _context2.sent;
+                                    _context2.next = 9;
+                                    return (0, _context2.t0)(_context2.t1);
+
+                                  case 9:
+                                    return _context2.abrupt("return");
+
+                                  case 12:
+                                    if (!(persistData && progressiveLoading && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual)) {
+                                      _context2.next = 20;
+                                      break;
+                                    }
+
+                                    // If progressiveLoading is true, then set the data with the current store
+                                    // value while we wait for a response from the API.
+                                    outputState = storeValue;
+                                    _context2.t2 = dispatch;
+                                    _context2.next = 17;
+                                    return model.updateState(storeValue);
+
+                                  case 17:
+                                    _context2.t3 = _context2.sent;
+                                    _context2.next = 20;
+                                    return (0, _context2.t2)(_context2.t3);
+
+                                  case 20:
+                                    if (model.getPath) {
+                                      _context2.next = 30;
+                                      break;
+                                    }
+
+                                    if (!(persistData && !isEqual)) {
+                                      _context2.next = 29;
+                                      break;
+                                    }
+
+                                    outputState = storeValue;
+                                    _context2.t4 = dispatch;
+                                    _context2.next = 26;
+                                    return model.updateState(storeValue);
+
+                                  case 26:
+                                    _context2.t5 = _context2.sent;
+                                    _context2.next = 29;
+                                    return (0, _context2.t4)(_context2.t5);
+
+                                  case 29:
+                                    return _context2.abrupt("return");
+
+                                  case 30:
+                                    if (!syncAfterTimeElapsed) {
+                                      _context2.next = 43;
+                                      break;
+                                    }
+
+                                    timestamp = lastUpdated[key];
+                                    now = new Date();
+                                    timeElapsed = timestamp + syncAfterTimeElapsed; // Don't make API call.
+
+                                    if (!(timeElapsed < now && storeValue)) {
+                                      _context2.next = 43;
+                                      break;
+                                    }
+
+                                    outputState = storeValue;
+                                    _context2.t6 = dispatch;
+                                    _context2.next = 39;
+                                    return model.updateState(storeValue);
+
+                                  case 39:
+                                    _context2.t7 = _context2.sent;
+                                    _context2.next = 42;
+                                    return (0, _context2.t6)(_context2.t7);
+
+                                  case 42:
+                                    return _context2.abrupt("return");
+
+                                  case 43:
+                                    if (!(!isSync && (!progressiveLoading || storeValue === 'undefined' || storeValue === null))) {
+                                      _context2.next = 52;
+                                      break;
+                                    }
+
+                                    if (!getPath) {
+                                      _context2.next = 52;
+                                      break;
+                                    }
+
+                                    ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = oIsLoading;
+                                    _context2.t8 = dispatch;
+                                    _context2.next = 49;
+                                    return oIsLoading.updateState(true, "SET_IS_LOADING_".concat(key.toUpperCase()));
+
+                                  case 49:
+                                    _context2.t9 = _context2.sent;
+                                    _context2.next = 52;
+                                    return (0, _context2.t8)(_context2.t9);
+
+                                  case 52:
+                                    payload = {
+                                      path: getPath,
+                                      query: params
+                                    };
+                                    _context2.prev = 53;
+                                    _context2.next = 56;
+                                    return Object(_internal__WEBPACK_IMPORTED_MODULE_2__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_2__["methods"].GET);
+
+                                  case 56:
+                                    response = _context2.sent;
+
+                                    if (!response) {
+                                      _context2.next = 89;
+                                      break;
+                                    }
+
+                                    outputResponse = response; // If isSync, do a deepCompare of the result with what's in state, or state and store.
+
+                                    if (!(isSync || progressiveLoading && persistData && typeof storeValue !== 'undefined' && storeValue !== null || !persistData)) {
+                                      _context2.next = 64;
+                                      break;
+                                    }
+
+                                    // If persistData is true, then compare against the stored value, otherwise just
+                                    // compare against the value in state.
+                                    valueToCompare = persistData ? storeValue : stateValue;
+                                    _isEqual = _rlean_utils__WEBPACK_IMPORTED_MODULE_1__["Compare"].deepCompare(response.data, valueToCompare).isEqual;
+
+                                    if (!_isEqual) {
+                                      _context2.next = 64;
+                                      break;
+                                    }
+
+                                    return _context2.abrupt("return");
+
+                                  case 64:
+                                    /*if (persistData) {
+                                      // Update storage.
+                                      await Store.set(model, response.data);
+                                    }*/
+                                    // Set value in state.
+                                    ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = model;
+                                    outputState = response.data;
+                                    _context2.t10 = dispatch;
+                                    _context2.next = 69;
+                                    return model.updateState(response.data);
+
+                                  case 69:
+                                    _context2.t11 = _context2.sent;
+                                    _context2.next = 72;
+                                    return (0, _context2.t10)(_context2.t11);
+
+                                  case 72:
+                                    if (!(!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null))) {
+                                      _context2.next = 81;
+                                      break;
+                                    }
+
+                                    if (!getPath) {
+                                      _context2.next = 81;
+                                      break;
+                                    }
+
+                                    ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = oIsLoading;
+                                    _context2.t12 = dispatch;
+                                    _context2.next = 78;
+                                    return oIsLoading.updateState(false, "SET_IS_LOADING_".concat(key.toUpperCase()));
+
+                                  case 78:
+                                    _context2.t13 = _context2.sent;
+                                    _context2.next = 81;
+                                    return (0, _context2.t12)(_context2.t13);
+
+                                  case 81:
+                                    if (!getPath) {
+                                      _context2.next = 89;
+                                      break;
+                                    }
+
+                                    ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = oLastUpdated;
+                                    _context2.t14 = dispatch;
+                                    _context2.next = 86;
+                                    return oLastUpdated.updateState(new Date(), "SET_LAST_UPDATED_".concat(key.toUpperCase()));
+
+                                  case 86:
+                                    _context2.t15 = _context2.sent;
+                                    _context2.next = 89;
+                                    return (0, _context2.t14)(_context2.t15);
+
+                                  case 89:
+                                    _context2.next = 101;
+                                    break;
+
+                                  case 91:
+                                    _context2.prev = 91;
+                                    _context2.t16 = _context2["catch"](53);
+
+                                    if (!getPath) {
+                                      _context2.next = 101;
+                                      break;
+                                    }
+
+                                    ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = oIsLoading;
+                                    _context2.t17 = dispatch;
+                                    _context2.next = 98;
+                                    return oIsLoading.updateState(false, "SET_IS_LOADING_".concat(key.toUpperCase()));
+
+                                  case 98:
+                                    _context2.t18 = _context2.sent;
+                                    _context2.next = 101;
+                                    return (0, _context2.t17)(_context2.t18);
+
+                                  case 101:
+                                  case "end":
+                                    return _context2.stop();
+                                }
+                              }
+                            }, _callee2, null, [[53, 91]]);
+                          }));
+                          return _callApi.apply(this, arguments);
+                        };
+
+                        callApi = function _ref3() {
+                          return _callApi.apply(this, arguments);
+                        };
+
+                        isSync = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : false;
+                        persistData = model.persistData;
+                        preferStore = model.preferStore;
+                        progressiveLoading = model.progressiveLoading;
+                        syncInterval = model.syncInterval;
+                        syncAfterTimeElapsed = model.syncAfterTimeElapsed;
+                        getPath = model.getPath;
+                        key = model.key;
+                        _context3.next = 12;
+                        return ___WEBPACK_IMPORTED_MODULE_3__["Store"].get(model);
+
+                      case 12:
+                        storeValue = _context3.sent;
+                        stateValue = state[key];
+                        outputState = stateValue;
+                        outputResponse = null;
+                        oIsLoading = new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]();
+                        oLastUpdated = new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]();
+                        ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = model;
+
+                        if (isSync) {
+                          _context3.next = 23;
+                          break;
+                        }
+
+                        _context3.next = 22;
+                        return callApi();
+
+                      case 22:
+                        // Execute optional callback
+                        if (callback) callback(outputState, outputResponse);
+
+                      case 23:
+                        if (typeof syncInterval === 'number') {
+                          setTimeout(
+                          /*#__PURE__*/
+                          _asyncToGenerator(
+                          /*#__PURE__*/
+                          regeneratorRuntime.mark(function _callee() {
+                            return regeneratorRuntime.wrap(function _callee$(_context) {
+                              while (1) {
+                                switch (_context.prev = _context.next) {
+                                  case 0:
+                                    _context.next = 2;
+                                    return callApi();
+
+                                  case 2:
+                                    // Execute optional callback
+                                    if (callback) callback(outputState, outputResponse); // Restart the sync.
+
+                                    _context.next = 5;
+                                    return fetchData(true);
+
+                                  case 5:
+                                  case "end":
+                                    return _context.stop();
+                                }
+                              }
+                            }, _callee);
+                          })), syncInterval);
+                        }
+
+                      case 24:
+                      case "end":
+                        return _context3.stop();
+                    }
+                  }
+                }, _callee3);
+              }));
+              return _fetchData.apply(this, arguments);
+            };
+
+            fetchData = function _ref5() {
+              return _fetchData.apply(this, arguments);
+            };
+
+            fetchData();
+
+          case 3:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+
+  return function get(_x, _x2, _x3, _x4, _x5, _x6, _x7) {
+    return _ref.apply(this, arguments);
+  };
+}();
 /**
  * The useGet custom hook is what populates all of your state objects based on whatever
  * attributes are set in your model and can be called from any component that relies on
@@ -7247,35 +7816,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  * change, the custom hook will fire again. If no params are set, the custom hook will fire
  * only once.
  * @constructor
- * @param {Object} model An instance of the model whose state needs to be populated.
- * @param {Object} [params=null] Optional params object if an API call needs to be made.
- * @param {string} [type=null] A type if the model has multiple types.
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after useGet has executed its logic.
  * @example
  *
- * useGet(new Model());
+ * useGet({ model: Model });
  *
- * useGet(new Model(), {id: someStateValue.id}, new Model().types.SET_VALUE);
+ * useGet({ model: Model, params: {id: someStateValue.id}, type: Model.types.SET_VALUE }, callback);
  */
 
-function useGet(_x, _x2, _x3) {
+
+function useGet(_x8, _x9) {
   return _useGet.apply(this, arguments);
 }
 
 function _useGet() {
   _useGet = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee4(model, params, type) {
-    var _useStateValue, _useStateValue2, state, dispatch, isLoading, lastUpdated, isLoadingRef, lastUpdatedRef, dependencies;
+  regeneratorRuntime.mark(function _callee5(options, callback) {
+    var _getOptions, model, params, type, _useStateValue, _useStateValue2, state, dispatch, lastUpdated, lastUpdatedRef, dependencies;
 
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_4__["getOptions"])(options), model = _getOptions.model, params = _getOptions.params, type = _getOptions.type;
             _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_3__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _extends({}, _useStateValue2[0]), dispatch = _useStateValue2[1];
-            isLoading = state.isLoading, lastUpdated = state.lastUpdated;
-            isLoadingRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+            lastUpdated = state.lastUpdated;
             lastUpdatedRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
-            isLoadingRef.current = isLoading;
             lastUpdatedRef.current = lastUpdated;
             dependencies = [];
 
@@ -7283,335 +7851,31 @@ function _useGet() {
               dependencies = Object.values(params);
             }
 
-            Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-              function fetchData() {
-                return _fetchData.apply(this, arguments);
-              }
+            if (!(typeof options === 'undefined')) {
+              _context5.next = 9;
+              break;
+            }
 
-              function _fetchData() {
-                _fetchData = _asyncToGenerator(
-                /*#__PURE__*/
-                regeneratorRuntime.mark(function _callee3() {
-                  var isSync,
-                      persistData,
-                      preferStore,
-                      progressiveLoading,
-                      syncInterval,
-                      syncAfterTimeElapsed,
-                      getPath,
-                      key,
-                      storeValue,
-                      stateValue,
-                      oIsLoading,
-                      oLastUpdated,
-                      callApi,
-                      _callApi,
-                      _args3 = arguments;
+            return _context5.abrupt("return", [function (options, callback) {
+              var _getOptions2 = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_4__["getOptions"])(options),
+                  model = _getOptions2.model,
+                  params = _getOptions2.params,
+                  type = _getOptions2.type;
 
-                  return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                    while (1) {
-                      switch (_context3.prev = _context3.next) {
-                        case 0:
-                          _callApi = function _ref3() {
-                            _callApi = _asyncToGenerator(
-                            /*#__PURE__*/
-                            regeneratorRuntime.mark(function _callee2() {
-                              var isEqual, timestamp, now, timeElapsed, isLoadingCopy, payload, response, valueToCompare, _isEqual, _isLoadingCopy, lastUpdatedCopy, _isLoadingCopy2;
-
-                              return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                                while (1) {
-                                  switch (_context2.prev = _context2.next) {
-                                    case 0:
-                                      isEqual = _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["Compare"].deepCompare(storeValue, stateValue).isEqual;
-
-                                      if (!(persistData && preferStore && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual)) {
-                                        _context2.next = 11;
-                                        break;
-                                      }
-
-                                      _context2.t0 = dispatch;
-                                      _context2.next = 5;
-                                      return model.updateState(storeValue);
-
-                                    case 5:
-                                      _context2.t1 = _context2.sent;
-                                      _context2.next = 8;
-                                      return (0, _context2.t0)(_context2.t1);
-
-                                    case 8:
-                                      return _context2.abrupt("return");
-
-                                    case 11:
-                                      if (!(persistData && progressiveLoading && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual)) {
-                                        _context2.next = 18;
-                                        break;
-                                      }
-
-                                      _context2.t2 = dispatch;
-                                      _context2.next = 15;
-                                      return model.updateState(storeValue);
-
-                                    case 15:
-                                      _context2.t3 = _context2.sent;
-                                      _context2.next = 18;
-                                      return (0, _context2.t2)(_context2.t3);
-
-                                    case 18:
-                                      if (model.getPath) {
-                                        _context2.next = 27;
-                                        break;
-                                      }
-
-                                      if (!(persistData && !isEqual)) {
-                                        _context2.next = 26;
-                                        break;
-                                      }
-
-                                      _context2.t4 = dispatch;
-                                      _context2.next = 23;
-                                      return model.updateState(storeValue);
-
-                                    case 23:
-                                      _context2.t5 = _context2.sent;
-                                      _context2.next = 26;
-                                      return (0, _context2.t4)(_context2.t5);
-
-                                    case 26:
-                                      return _context2.abrupt("return");
-
-                                    case 27:
-                                      if (!syncAfterTimeElapsed) {
-                                        _context2.next = 39;
-                                        break;
-                                      }
-
-                                      timestamp = lastUpdated[key];
-                                      now = new Date();
-                                      timeElapsed = timestamp + syncAfterTimeElapsed; // Don't make API call.
-
-                                      if (!(timeElapsed < now && storeValue)) {
-                                        _context2.next = 39;
-                                        break;
-                                      }
-
-                                      _context2.t6 = dispatch;
-                                      _context2.next = 35;
-                                      return model.updateState(storeValue);
-
-                                    case 35:
-                                      _context2.t7 = _context2.sent;
-                                      _context2.next = 38;
-                                      return (0, _context2.t6)(_context2.t7);
-
-                                    case 38:
-                                      return _context2.abrupt("return");
-
-                                    case 39:
-                                      if (!(!isSync && (!progressiveLoading || storeValue === 'undefined' || storeValue === null))) {
-                                        _context2.next = 49;
-                                        break;
-                                      }
-
-                                      isLoadingCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoadingRef.current);
-                                      isLoadingCopy[key] = true;
-                                      ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = oIsLoading;
-                                      _context2.t8 = dispatch;
-                                      _context2.next = 46;
-                                      return oIsLoading.updateState(Object.assign({}, isLoadingCopy));
-
-                                    case 46:
-                                      _context2.t9 = _context2.sent;
-                                      _context2.next = 49;
-                                      return (0, _context2.t8)(_context2.t9);
-
-                                    case 49:
-                                      payload = {
-                                        path: getPath,
-                                        query: params
-                                      };
-                                      _context2.prev = 50;
-                                      _context2.next = 53;
-                                      return Object(_internal__WEBPACK_IMPORTED_MODULE_2__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_2__["methods"].GET);
-
-                                    case 53:
-                                      response = _context2.sent;
-
-                                      if (!response) {
-                                        _context2.next = 86;
-                                        break;
-                                      }
-
-                                      if (!(isSync || progressiveLoading && persistData && typeof storeValue !== 'undefined' && storeValue !== null || !persistData)) {
-                                        _context2.next = 60;
-                                        break;
-                                      }
-
-                                      // If persistData is true, then compare against the stored value, otherwise just
-                                      // compare against the value in state.
-                                      valueToCompare = persistData ? storeValue : stateValue;
-                                      _isEqual = _react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["Compare"].deepCompare(response.data, valueToCompare).isEqual;
-
-                                      if (!_isEqual) {
-                                        _context2.next = 60;
-                                        break;
-                                      }
-
-                                      return _context2.abrupt("return");
-
-                                    case 60:
-                                      /*if (persistData) {
-                                        // Update storage.
-                                        await Store.set(model, response.data);
-                                      }*/
-                                      // Set value in state.
-                                      ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = model;
-                                      _context2.t10 = dispatch;
-                                      _context2.next = 64;
-                                      return model.updateState(response.data);
-
-                                    case 64:
-                                      _context2.t11 = _context2.sent;
-                                      _context2.next = 67;
-                                      return (0, _context2.t10)(_context2.t11);
-
-                                    case 67:
-                                      if (!(!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null))) {
-                                        _context2.next = 77;
-                                        break;
-                                      }
-
-                                      _isLoadingCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoadingRef.current);
-                                      _isLoadingCopy[key] = false;
-                                      ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = oIsLoading;
-                                      _context2.t12 = dispatch;
-                                      _context2.next = 74;
-                                      return oIsLoading.updateState(Object.assign({}, _isLoadingCopy));
-
-                                    case 74:
-                                      _context2.t13 = _context2.sent;
-                                      _context2.next = 77;
-                                      return (0, _context2.t12)(_context2.t13);
-
-                                    case 77:
-                                      // Update lastUpdated flag
-                                      lastUpdatedCopy = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdatedRef.current);
-                                      lastUpdatedCopy[key] = new Date();
-                                      ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = oLastUpdated;
-                                      _context2.t14 = dispatch;
-                                      _context2.next = 83;
-                                      return oLastUpdated.updateState(Object.assign({}, lastUpdatedCopy));
-
-                                    case 83:
-                                      _context2.t15 = _context2.sent;
-                                      _context2.next = 86;
-                                      return (0, _context2.t14)(_context2.t15);
-
-                                    case 86:
-                                      _context2.next = 99;
-                                      break;
-
-                                    case 88:
-                                      _context2.prev = 88;
-                                      _context2.t16 = _context2["catch"](50);
-                                      // Set isLoading to false when there is an error
-                                      _isLoadingCopy2 = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(isLoadingRef.current);
-                                      _isLoadingCopy2[key] = false;
-                                      ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = oIsLoading;
-                                      _context2.t17 = dispatch;
-                                      _context2.next = 96;
-                                      return oIsLoading.updateState(Object.assign({}, _isLoadingCopy2));
-
-                                    case 96:
-                                      _context2.t18 = _context2.sent;
-                                      _context2.next = 99;
-                                      return (0, _context2.t17)(_context2.t18);
-
-                                    case 99:
-                                    case "end":
-                                      return _context2.stop();
-                                  }
-                                }
-                              }, _callee2, null, [[50, 88]]);
-                            }));
-                            return _callApi.apply(this, arguments);
-                          };
-
-                          callApi = function _ref2() {
-                            return _callApi.apply(this, arguments);
-                          };
-
-                          isSync = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : false;
-                          persistData = model.persistData;
-                          preferStore = model.preferStore;
-                          progressiveLoading = model.progressiveLoading;
-                          syncInterval = model.syncInterval;
-                          syncAfterTimeElapsed = model.syncAfterTimeElapsed;
-                          getPath = model.getPath;
-                          key = model.key;
-                          _context3.next = 12;
-                          return ___WEBPACK_IMPORTED_MODULE_3__["Store"].get(model);
-
-                        case 12:
-                          storeValue = _context3.sent;
-                          stateValue = state[key];
-                          oIsLoading = new _internal__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]();
-                          oLastUpdated = new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]();
-                          ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = model;
-
-                          if (isSync) {
-                            _context3.next = 20;
-                            break;
-                          }
-
-                          _context3.next = 20;
-                          return callApi();
-
-                        case 20:
-                          if (typeof syncInterval === 'number') {
-                            setTimeout(
-                            /*#__PURE__*/
-                            _asyncToGenerator(
-                            /*#__PURE__*/
-                            regeneratorRuntime.mark(function _callee() {
-                              return regeneratorRuntime.wrap(function _callee$(_context) {
-                                while (1) {
-                                  switch (_context.prev = _context.next) {
-                                    case 0:
-                                      _context.next = 2;
-                                      return callApi();
-
-                                    case 2:
-                                      _context.next = 4;
-                                      return fetchData(true);
-
-                                    case 4:
-                                    case "end":
-                                      return _context.stop();
-                                  }
-                                }
-                              }, _callee);
-                            })), syncInterval);
-                          }
-
-                        case 21:
-                        case "end":
-                          return _context3.stop();
-                      }
-                    }
-                  }, _callee3);
-                }));
-                return _fetchData.apply(this, arguments);
-              }
-
-              fetchData(); // eslint-disable-next-line react-hooks/exhaustive-deps
-            }, dependencies);
+              get(model, Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdatedRef.current), params, type, state, dispatch, callback);
+            }]);
 
           case 9:
+            Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+              get(model, Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdatedRef.current), params, type, state, dispatch, callback); // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, dependencies);
+
+          case 10:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, _callee4);
+    }, _callee5);
   }));
   return _useGet.apply(this, arguments);
 }
@@ -7619,7 +7883,7 @@ function _useGet() {
 /* harmony default export */ __webpack_exports__["default"] = (useGet);
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7627,17 +7891,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return usePatch; });
 /* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _internal_getOptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(48);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
+
 /**
  * Function that executes a PATCH against the API.
  *
- * @param {Object} model
- * @param {Object} params
+ * @param {Object} options
+ * @param {Function} dispatch
+ * @param {Function} [callback=null]
  */
 
 var patch =
@@ -7645,64 +7920,67 @@ var patch =
 function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, params, dispatch) {
-    var patchPath, payload, response, o;
+  regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
+    var _getOptions, model, body, patchPath, payload, _response, o;
+
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_2__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body;
             patchPath = model.patchPath;
 
             if (!(patchPath !== null)) {
-              _context.next = 18;
+              _context.next = 19;
               break;
             }
 
             payload = {
               path: patchPath,
-              body: Object.assign({}, params)
+              body: body ? Object.assign({}, body) : {}
             };
-            _context.next = 5;
+            _context.next = 6;
             return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PATCH);
 
-          case 5:
-            response = _context.sent;
+          case 6:
+            _response = _context.sent;
 
-            if (!(response && dispatch)) {
-              _context.next = 16;
+            if (!(_response && dispatch)) {
+              _context.next = 17;
               break;
             }
 
             if (!model.persistData) {
-              _context.next = 10;
+              _context.next = 11;
               break;
             }
 
-            _context.next = 10;
-            return Store.set(model, response.data);
+            _context.next = 11;
+            return Store.set(model, _response.data);
 
-          case 10:
+          case 11:
             _context.t0 = dispatch;
-            _context.next = 13;
-            return model.updateState(response.data);
+            _context.next = 14;
+            return model.updateState(_response.data);
 
-          case 13:
+          case 14:
             _context.t1 = _context.sent;
-            _context.next = 16;
+            _context.next = 17;
             return (0, _context.t0)(_context.t1);
 
-          case 16:
-            _context.next = 20;
+          case 17:
+            _context.next = 21;
             break;
 
-          case 18:
+          case 19:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the patchPath attribute."));
 
-          case 20:
+          case 21:
+            if (callback) callback(response);
             return _context.abrupt("return");
 
-          case 21:
+          case 23:
           case "end":
             return _context.stop();
         }
@@ -7717,182 +7995,32 @@ function () {
 /**
  * Hook that exposes patch() safely and funly
  *
- * Usage: usePatch(new ActiveProject(), { body: '7' });
- *        const [ patch ] = usePatch();  patch(new ActiveProject(), { body: '7' });
- *
- * @param {Object} model
- * @param {Object} params
- */
-
-
-function usePatch(_x4, _x5) {
-  return _usePatch.apply(this, arguments);
-}
-
-function _usePatch() {
-  _usePatch = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(model, params) {
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            return _context2.abrupt("return", Object(___WEBPACK_IMPORTED_MODULE_1__["useRequest"])(patch));
-
-          case 1:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2);
-  }));
-  return _usePatch.apply(this, arguments);
-}
-
-/***/ }),
-/* 51 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return usePost; });
-/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-/**
- * Function that executes a POST against the API.
  * @constructor
- * @param {Object} model
- * @param {Object} [params={}]
- * @param {Function} dispatch Provide if you're expecting an updated object in the response (like the inclusion of an auto-increment id)
- */
-
-var post =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model) {
-    var params,
-        dispatch,
-        postPath,
-        persistData,
-        body,
-        payload,
-        response,
-        o,
-        _args = arguments;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            params = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
-            dispatch = _args.length > 2 ? _args[2] : undefined;
-            postPath = model.postPath;
-            persistData = model.persistData;
-
-            if (!(postPath !== null)) {
-              _context.next = 22;
-              break;
-            }
-
-            body = params ? Object.assign({}, params) : {};
-            payload = {
-              path: postPath,
-              body: body
-            };
-            _context.next = 9;
-            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].POST);
-
-          case 9:
-            response = _context.sent;
-
-            if (!(response && dispatch)) {
-              _context.next = 20;
-              break;
-            }
-
-            if (!persistData) {
-              _context.next = 14;
-              break;
-            }
-
-            _context.next = 14;
-            return Store.set(model, response.data);
-
-          case 14:
-            _context.t0 = dispatch;
-            _context.next = 17;
-            return model.updateState(response.data);
-
-          case 17:
-            _context.t1 = _context.sent;
-            _context.next = 20;
-            return (0, _context.t0)(_context.t1);
-
-          case 20:
-            _context.next = 24;
-            break;
-
-          case 22:
-            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
-            console.error("The ".concat(o.ClassName, " object is missing the postPath attribute."));
-
-          case 24:
-            return _context.abrupt("return");
-
-          case 25:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function post(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-/**
- * Exposed Hook that allows user to access post method
- * If no model given, returns function to use post to allow conditional operation.
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after usePatch has executed its logic.
+ * @example
  *
- * Usage: usePost(new ActiveProject(), { body: '7' });
- *        const [ post ] = usePost();  post(new ActiveProject(), { body: '7' });
+ * usePatch({ model: Model, body: { value: 'value' } });
  *
- * @param {Object} model
- * @param {Object} params
+ * const [ patch ] = usePatch();
+ * patch({ model: Model, body: { value: 'value' } });
  */
 
 
-function usePost(_x2) {
-  return _usePost.apply(this, arguments);
-}
+function usePatch(options, callback) {
+  var _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(),
+      _useStateValue2 = _slicedToArray(_useStateValue, 2),
+      dispatch = _useStateValue2[1];
 
-function _usePost() {
-  _usePost = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(model) {
-    var params,
-        _args2 = arguments;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            params = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : {};
-            return _context2.abrupt("return", useRequest(model, params, post));
+  if (typeof options === 'undefined') {
+    return [function (options, callback) {
+      patch(options, dispatch, callback);
+    }];
+  }
 
-          case 2:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2);
-  }));
-  return _usePost.apply(this, arguments);
+  useEffect(function () {
+    patch(options, dispatch, callback);
+  }, [params]);
 }
 
 /***/ }),
@@ -7901,23 +8029,174 @@ function _usePost() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return usePut; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return usePost; });
 /* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _internal_getOptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(48);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
+
+/**
+ * Function that executes a POST against the API.
+ * @constructor
+ * @param {Object} options
+ * @param {Function} dispatch Provide if you're expecting an updated object in the response (like the inclusion of an auto-increment id)
+ * @param {Function} callback
+ */
+
+var post =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
+    var _getOptions, model, body, postPath, persistData, payload, response, o;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_1__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body;
+            postPath = model.postPath;
+            persistData = model.persistData;
+
+            if (!(postPath !== null)) {
+              _context.next = 21;
+              break;
+            }
+
+            payload = {
+              path: postPath,
+              body: body ? Object.assign({}, body) : {}
+            };
+            _context.next = 7;
+            return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].POST);
+
+          case 7:
+            response = _context.sent;
+
+            if (!(response && dispatch)) {
+              _context.next = 19;
+              break;
+            }
+
+            if (!persistData) {
+              _context.next = 12;
+              break;
+            }
+
+            _context.next = 12;
+            return Store.set(model, response.data);
+
+          case 12:
+            _context.t0 = dispatch;
+            _context.next = 15;
+            return model.updateState(response.data);
+
+          case 15:
+            _context.t1 = _context.sent;
+            _context.next = 18;
+            return (0, _context.t0)(_context.t1);
+
+          case 18:
+            if (callback) callback(response);
+
+          case 19:
+            _context.next = 23;
+            break;
+
+          case 21:
+            o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
+            console.error("The ".concat(o.ClassName, " object is missing the postPath attribute."));
+
+          case 23:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function post(_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+}();
+/**
+ * Exposed Hook that allows user to access post method
+ * If no model given, returns function to use post to allow conditional operation.
+ *
+ * @constructor
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after usePost has executed its logic.
+ * @example
+ *
+ * usePost({ model: Model, body: { value: 'value' } });
+ *
+ * const [ post ] = usePost();
+ * post({ model: Model, body: { value: 'value' } });
+ */
+
+
+function usePost(options, callback) {
+  var _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_2__["useStateValue"])(),
+      _useStateValue2 = _slicedToArray(_useStateValue, 2),
+      dispatch = _useStateValue2[1];
+
+  if (typeof options === 'undefined') {
+    return [function (options, callback) {
+      post(options, dispatch, callback);
+    }];
+  }
+
+  useEffect(function () {
+    post(options, dispatch, callback);
+  }, [params]);
+}
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return usePut; });
+/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _internal_getOptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(48);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
 /**
  * Function that executes a PUT against the API.
  *
- * Usage: usePut(new ActiveProject(), { body: '7' });
- *        const [ put ] = usePut();  put(new ActiveProject(), { body: '7' });
- *
- * @param {Object} model
- * @param {Object} params
+ * @constructor
+ * @param {Object} options
+ * @param {Function} dispatch
+ * @param {Function} callback
  */
 
 var put =
@@ -7925,64 +8204,66 @@ var put =
 function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, params, dispatch) {
-    var putPath, payload, response, o;
+  regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
+    var _getOptions, model, body, putPath, payload, response, o;
+
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_1__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body;
             putPath = model.putPath;
 
             if (!(putPath !== null)) {
-              _context.next = 18;
+              _context.next = 20;
               break;
             }
 
             payload = {
               path: putPath,
-              body: Object.assign({}, params)
+              body: body ? Object.assign({}, body) : {}
             };
-            _context.next = 5;
+            _context.next = 6;
             return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PUT);
 
-          case 5:
+          case 6:
             response = _context.sent;
 
             if (!(response && dispatch)) {
-              _context.next = 16;
+              _context.next = 18;
               break;
             }
 
             if (!model.persistData) {
-              _context.next = 10;
+              _context.next = 11;
               break;
             }
 
-            _context.next = 10;
+            _context.next = 11;
             return Store.set(model, response.data);
 
-          case 10:
+          case 11:
             _context.t0 = dispatch;
-            _context.next = 13;
+            _context.next = 14;
             return model.updateState(response.data);
 
-          case 13:
+          case 14:
             _context.t1 = _context.sent;
-            _context.next = 16;
+            _context.next = 17;
             return (0, _context.t0)(_context.t1);
 
-          case 16:
-            _context.next = 20;
-            break;
+          case 17:
+            if (callback) callback(response);
 
           case 18:
+            _context.next = 22;
+            break;
+
+          case 20:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the putPath attribute."));
 
-          case 20:
-            return _context.abrupt("return");
-
-          case 21:
+          case 22:
           case "end":
             return _context.stop();
         }
@@ -7994,14 +8275,39 @@ function () {
     return _ref.apply(this, arguments);
   };
 }();
+/**
+ * Hook that exposes put()
+ *
+ * @constructor
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after usePut has executed its logic.
+ * @example
+ *
+ * usePut({ model: Model, body: { value: 'value' } });
+ *
+ * const [put] = usePut();
+ * put({ model: Model, body: { value: 'value' } })
+ */
 
-function usePut(model) {
-  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return Object(___WEBPACK_IMPORTED_MODULE_1__["useRequest"])(model, params, put);
+
+function usePut(options, callback) {
+  var _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_2__["useStateValue"])(),
+      _useStateValue2 = _slicedToArray(_useStateValue, 2),
+      dispatch = _useStateValue2[1];
+
+  if (typeof options === 'undefined') {
+    return [function (options, callback) {
+      put(options, dispatch, callback);
+    }];
+  }
+
+  useEffect(function () {
+    put(options, dispatch, callback);
+  }, [params]);
 }
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8009,17 +8315,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useDelete; });
 /* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _internal_getOptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(48);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
+
 /**
  * Function that executes a DELETE against the API.
+ *
  * @constructor
- * @param {Object} model
- * @param {Object} params
+ * @param {Object} options
+ * @param {Function} dispatch
+ * @param {Function} callback
  */
 
 var del =
@@ -8027,34 +8345,37 @@ var del =
 function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, params, dispatch) {
-    var deletePath, payload, o;
+  regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
+    var _getOptions, model, body, deletePath, payload, o;
+
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_2__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body;
             deletePath = model.deletePath;
 
             if (!(deletePath !== null)) {
-              _context.next = 6;
+              _context.next = 8;
               break;
             }
 
             payload = {
               path: deletePath,
-              body: Object.assign({}, params)
+              body: body ? Object.assign({}, body) : {}
             };
-            _context.next = 5;
+            _context.next = 6;
             return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].DELETE);
 
-          case 5:
-            return _context.abrupt("return", _context.sent);
-
           case 6:
+            if (callback) callback(response);
+            return _context.abrupt("return");
+
+          case 8:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the deletePath attribute."));
 
-          case 8:
+          case 10:
           case "end":
             return _context.stop();
         }
@@ -8069,31 +8390,46 @@ function () {
 /**
  * Hook that exposes del()
  *
- * Usage: useDelete(new ActiveProject(), { body: '7' });
- *        const [ del ] = useDelete();  del(new ActiveProject(), { body: '7' });
+ * @constructor
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after useDelete has executed its logic.
+ * @example
  *
- * @param {Object} model
- * @param {Object} params
+ * useDelete({ model: Model, body: { value: 'value' } });
+ *
+ * const [ del ] = useDelete();
+ * del({ model: Model, body: { value: 'value' } });
  */
 
 
-function useDelete(model) {
-  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return Object(___WEBPACK_IMPORTED_MODULE_1__["useRequest"])(model, params, del);
+function useDelete(options, callback) {
+  var _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_1__["useStateValue"])(),
+      _useStateValue2 = _slicedToArray(_useStateValue, 2),
+      dispatch = _useStateValue2[1];
+
+  if (typeof options === 'undefined') {
+    return [function (options, callback) {
+      del(options, dispatch, callback);
+    }];
+  }
+
+  useEffect(function () {
+    del(options, dispatch, callback);
+  }, [params]);
 }
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _react_ent_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 /* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
-/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(55);
+/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(56);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -8106,15 +8442,21 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 var reducer = function reducer(_ref, action) {
   var state = _extends({}, _ref);
 
-  var models = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["get"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
-  var middleware = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["get"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.middleware', []);
+  var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_0__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+  var middleware = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_0__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.middleware', []);
   var objects = Object.values(models);
   var combinedReducer = {};
 
   for (var i = 0; i < objects.length; i++) {
-    var key = Object.keys(objects[i].prototype.initialState)[0].toString();
-    var value = state[key];
-    Object.assign(combinedReducer, _defineProperty({}, key, objects[i].prototype.reducer(value, action)));
+    if (objects[i].prototype) {
+      var key = objects[i].prototype.key;
+      var value = state[key];
+      Object.assign(combinedReducer, _defineProperty({}, key, objects[i].prototype.reducer(value, action)));
+    } else {
+      var _key = objects[i].key;
+      var _value = state[_key];
+      Object.assign(combinedReducer, _defineProperty({}, _key, objects[i].reducer(_value, action)));
+    }
   } // Add IsLoading and LastUpdated reducers to main reducer.
 
 
@@ -8124,12 +8466,13 @@ var reducer = function reducer(_ref, action) {
   Object.assign(combinedReducer, {
     lastUpdated: new _internal__WEBPACK_IMPORTED_MODULE_2__["LastUpdated"]().reducer(state['lastUpdated'], action)
   });
-  var nextState = Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["deepCopy"])(state);
-  var stateKey = Object.keys(action)[1].toString();
-  var stateValue = action[stateKey];
-  nextState[stateKey] = stateValue;
+  var nextState = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_0__["deepCopy"])(state); // TODO: stateKey is flawed. Doesn't work for nested state objects. Fix it.
+  // const stateKey = Object.keys(action)[1].toString();
+  // const stateValue = action[stateKey];
+  // TODO: Update state object to display next state instead of current state. Previous attempt was flawed.
+  // nextState[stateKey] = stateValue;
 
-  if (Object(_react_ent_utils__WEBPACK_IMPORTED_MODULE_0__["get"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.logToConsole', true)) {
+  if (Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_0__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.logToConsole', true)) {
     middleware.push(_middleware__WEBPACK_IMPORTED_MODULE_3__["logActions"]);
   }
 
@@ -8141,7 +8484,7 @@ var reducer = function reducer(_ref, action) {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8150,6 +8493,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logActions", function() { return logActions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveToIndexedDB", function() { return saveToIndexedDB; });
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -8164,15 +8509,18 @@ function _logActions() {
   _logActions = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(model, state, action, next) {
+    var stateKey;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log("dispatching", action.type);
-            console.log("next state", state);
+            stateKey = Object.keys(action)[1].toString();
+            console.log("state", state);
+            console.log("dispatching ".concat(action.type), _defineProperty({}, stateKey, action[stateKey])); // console.log(`next state`, state);
+
             return _context.abrupt("return", next(action));
 
-          case 3:
+          case 4:
           case "end":
             return _context.stop();
         }
@@ -8246,7 +8594,7 @@ function _applyMiddleware() {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8270,36 +8618,33 @@ var remove =
 function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, dispatch) {
-    var type,
-        persistData,
-        _args = arguments;
+  regeneratorRuntime.mark(function _callee(model, dispatch, type) {
+    var persistData;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            type = _args.length > 2 && _args[2] !== undefined ? _args[2] : null;
             persistData = model.persistData;
 
             if (!persistData) {
-              _context.next = 5;
+              _context.next = 4;
               break;
             }
 
-            _context.next = 5;
+            _context.next = 4;
             return ___WEBPACK_IMPORTED_MODULE_0__["Store"].remove(model);
 
-          case 5:
+          case 4:
             _context.t0 = dispatch;
-            _context.next = 8;
+            _context.next = 7;
             return model.updateState(model.initialState, type);
 
-          case 8:
+          case 7:
             _context.t1 = _context.sent;
-            _context.next = 11;
+            _context.next = 10;
             return (0, _context.t0)(_context.t1);
 
-          case 11:
+          case 10:
           case "end":
             return _context.stop();
         }
@@ -8307,13 +8652,13 @@ function () {
     }, _callee);
   }));
 
-  return function remove(_x, _x2) {
+  return function remove(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
   };
 }();
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8339,10 +8684,11 @@ function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            ___WEBPACK_IMPORTED_MODULE_0__["Store"].clear();
             sessionStorage.clear();
+            localStorage.clear();
+            ___WEBPACK_IMPORTED_MODULE_0__["Store"].clear();
 
-          case 2:
+          case 3:
           case "end":
             return _context.stop();
         }
@@ -8356,7 +8702,7 @@ function () {
 }();
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8381,7 +8727,7 @@ var useStateValue = function useStateValue() {
 };
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8669,7 +9015,7 @@ function () {
 /* harmony default export */ __webpack_exports__["default"] = (new Store());
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -1,8 +1,11 @@
 import { Store } from './';
 
 async function logActions(model, state, action, next) {
-  console.log(`dispatching`, action.type);
-  console.log(`next state`, state);
+  const stateKey = Object.keys(action)[1].toString();
+
+  console.log(`state`, state);
+  console.log(`dispatching ${action.type}`, { [stateKey]: action[stateKey] });
+  // console.log(`next state`, state);
   return next(action);
 }
 

@@ -6,7 +6,7 @@ import { Store } from './';
  * @param {function} dispatch
  * @param {string} [type=null]
  */
-export const remove = async (model, dispatch, type = null) => {
+export const remove = async (model, dispatch, type) => {
   const persistData = model.persistData;
 
   if (persistData) {

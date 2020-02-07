@@ -1,20 +1,22 @@
 import { request, methods, inspectClass } from './_internal';
-import { useRequest } from './';
+import { getOptions } from './_internal/getOptions';
+import { useStateValue } from './';
 
 /**
  * Function that executes a PUT against the API.
  *
- * Usage: usePut(new ActiveProject(), { body: '7' });
- *        const [ put ] = usePut();  put(new ActiveProject(), { body: '7' });
- *
- * @param {Object} model
- * @param {Object} params
+ * @constructor
+ * @param {Object} options
+ * @param {Function} dispatch
+ * @param {Function} callback
  */
-const put = async (model, params, dispatch) => {
+const put = async (options, dispatch, callback) => {
+  const { model, body } = getOptions(options);
+
   const putPath = model.putPath;
 
   if (putPath !== null) {
-    const payload = { path: putPath, body: Object.assign({}, params) };
+    const payload = { path: putPath, body: body ? Object.assign({}, body) : {} };
     const response = await request(payload, model, methods.PUT);
 
     // Don't do a deep compare on the return value against the current value.
@@ -26,15 +28,39 @@ const put = async (model, params, dispatch) => {
       }
 
       await dispatch(await model.updateState(response.data));
+      if (callback) callback(response);
     }
   } else {
     const o = inspectClass(model);
     console.error(`The ${o.ClassName} object is missing the putPath attribute.`);
   }
+};
 
-  return;
-}
+/**
+ * Hook that exposes put()
+ *
+ * @constructor
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after usePut has executed its logic.
+ * @example
+ *
+ * usePut({ model: Model, body: { value: 'value' } });
+ *
+ * const [put] = usePut();
+ * put({ model: Model, body: { value: 'value' } })
+ */
+export default function usePut(options, callback) {
+  const [, dispatch] = useStateValue();
 
-export default function usePut(model, params = {}) {
-  return useRequest(model, params, put);
+  if (typeof options === 'undefined') {
+    return [
+      (options, callback) => {
+        put(options, dispatch, callback);
+      }
+    ];
+  }
+
+  useEffect(() => {
+    put(options, dispatch, callback);
+  }, [params]);
 }

@@ -1,20 +1,22 @@
 import { request, methods, inspectClass } from './_internal';
+import { getOptions } from './_internal/getOptions';
+import { useStateValue } from './';
 
 /**
  * Function that executes a POST against the API.
  * @constructor
- * @param {Object} model
- * @param {Object} [params={}]
+ * @param {Object} options
  * @param {Function} dispatch Provide if you're expecting an updated object in the response (like the inclusion of an auto-increment id)
+ * @param {Function} callback
  */
-const post = async (model, params = {}, dispatch) => {
+const post = async (options, dispatch, callback) => {
+  const { model, body } = getOptions(options);
+
   const postPath = model.postPath;
   const persistData = model.persistData;
 
   if (postPath !== null) {
-    const body = params ? Object.assign({}, params) : {};
-    const payload = { path: postPath, body: body };
-
+    const payload = { path: postPath, body: body ? Object.assign({}, body) : {} };
     const response = await request(payload, model, methods.POST);
 
     // Don't do a deep compare on the return value against the current value.
@@ -26,25 +28,40 @@ const post = async (model, params = {}, dispatch) => {
       }
 
       await dispatch(await model.updateState(response.data));
+      if (callback) callback(response);
     }
   } else {
     const o = inspectClass(model);
     console.error(`The ${o.ClassName} object is missing the postPath attribute.`);
   }
-
-  return;
 };
 
 /**
  * Exposed Hook that allows user to access post method
  * If no model given, returns function to use post to allow conditional operation.
  *
- * Usage: usePost(new ActiveProject(), { body: '7' });
- *        const [ post ] = usePost();  post(new ActiveProject(), { body: '7' });
+ * @constructor
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after usePost has executed its logic.
+ * @example
  *
- * @param {Object} model
- * @param {Object} params
+ * usePost({ model: Model, body: { value: 'value' } });
+ *
+ * const [ post ] = usePost();
+ * post({ model: Model, body: { value: 'value' } });
  */
-export default async function usePost(model, params = {}) {
-  return useRequest(model, params, post);
+export default function usePost(options, callback) {
+  const [, dispatch] = useStateValue();
+
+  if (typeof options === 'undefined') {
+    return [
+      (options, callback) => {
+        post(options, dispatch, callback);
+      }
+    ];
+  }
+
+  useEffect(() => {
+    post(options, dispatch, callback);
+  }, [params]);
 }

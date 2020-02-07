@@ -1,21 +1,26 @@
 import { Model } from '../Model';
 import { RLean } from '../';
-import { get } from '@react-ent/utils';
+import { getValue } from '@rlean/utils';
 import { AxiosAdapter, LocalForageAdapter } from '../adapters';
 import Plugins from '../Plugins';
 
 export class LastUpdated extends Model {
   get initialState() {
-    const models = get(RLean, 'config.models', {});
+    const models = getValue(RLean, 'config.models', {});
     const objects = Object.values(models);
     let lastUpdated = {};
 
     for (let i = 0; i < objects.length; i++) {
-      const key = Object.keys(objects[i].prototype.initialState)[0].toString();
-
-      // Add to lastUpdated if there is a getPath.
-      if (objects[i].prototype.getPath) {
-        Object.assign(lastUpdated, { [key]: null });
+      if (objects[i].prototype) {
+        // Add to lastUpdated if there is a getPath.
+        if (objects[i].prototype.getPath) {
+          Object.assign(lastUpdated, { [objects[i].prototype.key]: null });
+        }
+      } else {
+        // Add to lastUpdated if there is a getPath.
+        if (objects[i].getPath) {
+          Object.assign(lastUpdated, { [objects[i].key]: null });
+        }
       }
     }
 
@@ -24,12 +29,28 @@ export class LastUpdated extends Model {
     };
   }
 
+  // TODO: Remove. This isn't used.
   get types() {
+    const models = getValue(RLean, 'config.models', {});
+    const objects = Object.values(models);
+    let lastUpdated = {};
+
+    for (let i = 0; i < objects.length; i++) {
+      const key = `SET_LAST_UPDATED_${objects[i].constructor.name.toUpperCase()}`;
+
+      if (objects[i].prototype && objects[i].prototype.getPath) {
+        Object.assign(lastUpdated, { [key]: key });
+      } else if (objects[i].getPath) {
+        Object.assign(lastUpdated, { [key]: key });
+      }
+    }
+
     return {
-      SET_LAST_UPDATED: 'SET_LAST_UPDATED'
+      lastUpdated
     };
   }
 
+  // TODO: REMOVE THIS!!! This is a problem!
   get plugins() {
     return new Plugins({
       storage: LocalForageAdapter,
@@ -38,22 +59,44 @@ export class LastUpdated extends Model {
   }
 
   reducer(state, action) {
-    switch (action.type) {
-      case this.types.SET_LAST_UPDATED:
+    const models = getValue(RLean, 'config.models', {});
+    const objects = Object.values(models);
+
+    for (let i = 0; i < objects.length; i++) {
+      if (action.type === `SET_LAST_UPDATED_${objects[i].constructor.name.toUpperCase()}`) {
+        let objectKey = '';
+        if (objects[i].prototype) {
+          objectKey = objects[i].prototype.key;
+        } else {
+          objectKey = objects[i].key;
+        }
+
         return {
           ...state,
-          ...action.lastUpdated
+          [objectKey]: action[objectKey]
         };
-
-      default:
-        return state;
+      }
     }
+
+    return state;
   }
 
   async updateState(lastUpdated, type) {
+    const models = getValue(RLean, 'config.models', {});
+    const objects = Object.values(models);
+    let key = '';
+
+    for (let i = 0; i < objects.length; i++) {
+      const lastUpdatedType = `SET_LAST_UPDATED_${objects[i].constructor.name.toUpperCase()}`;
+
+      if (type === lastUpdatedType) {
+        key = objects[i].key;
+      }
+    }
+
     return {
-      type: this.types.SET_LAST_UPDATED,
-      lastUpdated
+      type: type,
+      [key]: lastUpdated
     };
   }
 }

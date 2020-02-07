@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useStateValue, RLean } from './';
+import { getOptions } from './_internal/getOptions';
 
 /**
  * Save an object to state, and optionally to store if persistData
@@ -7,20 +8,23 @@ import { useStateValue, RLean } from './';
  * so if there is an infinite loop, the developer will know right away in the
  * console log.
  *
- * @param {Object} model
- * @param {Object} newValue
- * @param {function} dispatch
- * @param {string} type
+ * @param {Object} options
+ * @param {Function} dispatch
+ * @param {Function} [callback=null]
  */
-const save = async (model, newValue, dispatch, type = null) => {
-  if (newValue === undefined) return;
+const save = async (options, dispatch, callback) => {
+  if (typeof options === 'undefined' || typeof options.value === 'undefined') return;
+
+  const { model, value, type } = getOptions(options);
 
   /*if(model.persistData) {
-    await Store.set(model, newValue);
+    await Store.set(model, value);
   }*/
 
   RLean.model = model;
-  return await dispatch(await model.updateState(newValue, type));
+  await dispatch(await model.updateState(value, type));
+
+  if (callback) callback();
 };
 
 /**
@@ -29,22 +33,23 @@ const save = async (model, newValue, dispatch, type = null) => {
  * so if there is an infinite loop, the developer will know right away in the
  * console log.
  *
- * @param {Object} model
- * @param {Object} newValue
- * @param {string} type
+ * @constructor
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
+ * @example
  */
-export default function useSave(model, newValue, type = null) {
-  const [state, dispatch] = useStateValue();
+export default function useSave(options, callback) {
+  const [, dispatch] = useStateValue();
 
-  if (typeof newValue === 'undefined') {
+  if (typeof options === 'undefined') {
     return [
-      newVal => {
-        save(model, newVal, dispatch, type);
+      (options, callback) => {
+        save(options, dispatch, callback);
       }
     ];
   }
 
   useEffect(() => {
-    save(model, newValue, dispatch, type);
+    save(options, dispatch, callback);
   }, [dispatch]);
 }

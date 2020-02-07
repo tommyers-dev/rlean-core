@@ -1,10 +1,10 @@
 import { Model } from '../Model';
 import { RLean } from '../';
-import { get } from '@react-ent/utils';
+import { getValue } from '@rlean/utils';
 
 export class ApiErrors extends Model {
   get initialState() {
-    const models = get(RLean, 'config.models', {});
+    const models = getValue(RLean, 'config.models', {});
     const objects = Object.values(models);
     let apiErrors = {};
 
@@ -12,7 +12,6 @@ export class ApiErrors extends Model {
       const key = Object.keys(objects[i].prototype.initialState)[0].toString();
 
       // Add to apiErrors if Model contains any API path
-
       if (
         objects[i].prototype.getPath ||
         objects[i].prototype.postPath ||

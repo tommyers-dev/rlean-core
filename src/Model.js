@@ -88,7 +88,7 @@ export class Model extends Object {
     return null;
   }
 
-  // If a reducer function isn't provided, a default one will be generated.
+  // If a reducer isn't provided, a default one will be generated.
   reducer(state, action) {
     switch (action.type) {
       case convertToType(this.constructor.name):

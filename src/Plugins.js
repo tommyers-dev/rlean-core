@@ -1,14 +1,14 @@
 import RLean from './RLean';
 import { implement } from './_internal';
-import { get } from '@react-ent/utils';
+import { getValue } from '@rlean/utils';
 import { LocalForageAdapter, AxiosAdapter } from './adapters';
 
 export default class Plugins {
   constructor(pluginMap) {
     this.pluginMap = pluginMap ? pluginMap : {};
 
-    this.storage = get(RLean, 'config.storage.adapter', LocalForageAdapter);
-    this.api = get(RLean, 'config.api.adapter', AxiosAdapter);
+    this.storage = getValue(RLean, 'config.storage.adapter', LocalForageAdapter);
+    this.api = getValue(RLean, 'config.api.adapter', AxiosAdapter);
 
     for (let key in pluginMap) {
       this.pipe(key);

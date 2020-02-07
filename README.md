@@ -325,13 +325,14 @@ The useGet custom hook is what populates all of your state objects based on what
 ```js
 import React, { memo } from 'react';
 import { useStateValue, useGet } from '@rlean/core';
+import { getValue } from '@rlean/utils';
 import { Spinner } from 'some-ui-library';
 import { DemoModel } from 'lib/models';
 
 export const MyReactComponent = memo(() => {
 	const [{ demoModel, someStateValue, isLoading }] = useStateValue();
 
-	const id = get(someStateValue, 'id', null);
+	const id = getValue(someStateValue, 'id', null);
 	useGet(new DemoModel(), { id: id });
 
 	if (!demoModel || isLoading.demoModel) {

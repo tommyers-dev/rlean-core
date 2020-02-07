@@ -1,14 +1,18 @@
 import { RLean } from './';
-import { get } from '@react-ent/utils';
+import { getValue } from '@rlean/utils';
 import { IsLoading, LastUpdated } from './_internal';
 
 export const initialState = () => {
-  const models = get(RLean, 'config.models', {});
+  const models = getValue(RLean, 'config.models', {});
   const objects = Object.values(models);
   let combinedInitialState = {};
 
   for (let i = 0; i < objects.length; i++) {
-    Object.assign(combinedInitialState, objects[i].prototype.initialState);
+    if (objects[i].prototype) {
+      Object.assign(combinedInitialState, objects[i].prototype.initialState);
+    } else {
+      Object.assign(combinedInitialState, objects[i].initialState);
+    }
   }
 
   Object.assign(combinedInitialState, new IsLoading().initialState);

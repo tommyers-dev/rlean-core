@@ -1,18 +1,25 @@
 import { request, methods, inspectClass } from './_internal';
-import { useRequest } from './';
+import { useStateValue } from './';
+import { getOptions } from './_internal/getOptions';
 
 /**
  * Function that executes a DELETE against the API.
+ *
  * @constructor
- * @param {Object} model
- * @param {Object} params
+ * @param {Object} options
+ * @param {Function} dispatch
+ * @param {Function} callback
  */
-const del = async (model, params, dispatch) => {
+const del = async (options, dispatch, callback) => {
+  const { model, body } = getOptions(options);
   const deletePath = model.deletePath;
 
   if (deletePath !== null) {
-    const payload = { path: deletePath, body: Object.assign({}, params) };
-    return await request(payload, model, methods.DELETE);
+    const payload = { path: deletePath, body: body ? Object.assign({}, body) : {} };
+    await request(payload, model, methods.DELETE);
+
+    if (callback) callback(response);
+    return;
   }
 
   const o = inspectClass(model);
@@ -22,12 +29,28 @@ const del = async (model, params, dispatch) => {
 /**
  * Hook that exposes del()
  *
- * Usage: useDelete(new ActiveProject(), { body: '7' });
- *        const [ del ] = useDelete();  del(new ActiveProject(), { body: '7' });
+ * @constructor
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after useDelete has executed its logic.
+ * @example
  *
- * @param {Object} model
- * @param {Object} params
+ * useDelete({ model: Model, body: { value: 'value' } });
+ *
+ * const [ del ] = useDelete();
+ * del({ model: Model, body: { value: 'value' } });
  */
-export default function useDelete(model, params = {}) {
-  return useRequest(model, params, del);
+export default function useDelete(options, callback) {
+  const [, dispatch] = useStateValue();
+
+  if (typeof options === 'undefined') {
+    return [
+      (options, callback) => {
+        del(options, dispatch, callback);
+      }
+    ];
+  }
+
+  useEffect(() => {
+    del(options, dispatch, callback);
+  }, [params]);
 }

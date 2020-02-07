@@ -1,18 +1,24 @@
-import { deepCopy, get } from '@react-ent/utils';
+import { deepCopy, getValue } from '@rlean/utils';
 import { RLean } from './';
 import { IsLoading, LastUpdated } from './_internal';
 import { logActions, saveToIndexedDB, applyMiddleware } from './middleware';
 
 export const reducer = ({ ...state }, action) => {
-  const models = get(RLean, 'config.models', {});
-  const middleware = get(RLean, 'config.middleware', []);
+  const models = getValue(RLean, 'config.models', {});
+  const middleware = getValue(RLean, 'config.middleware', []);
   const objects = Object.values(models);
   let combinedReducer = {};
 
   for (let i = 0; i < objects.length; i++) {
-    const key = Object.keys(objects[i].prototype.initialState)[0].toString();
-    const value = state[key];
-    Object.assign(combinedReducer, { [key]: objects[i].prototype.reducer(value, action) });
+    if (objects[i].prototype) {
+      const key = objects[i].prototype.key;
+      const value = state[key];
+      Object.assign(combinedReducer, { [key]: objects[i].prototype.reducer(value, action) });
+    } else {
+      const key = objects[i].key;
+      const value = state[key];
+      Object.assign(combinedReducer, { [key]: objects[i].reducer(value, action) });
+    }
   }
 
   // Add IsLoading and LastUpdated reducers to main reducer.
@@ -20,12 +26,14 @@ export const reducer = ({ ...state }, action) => {
   Object.assign(combinedReducer, { lastUpdated: new LastUpdated().reducer(state['lastUpdated'], action) });
 
   let nextState = deepCopy(state);
-  const stateKey = Object.keys(action)[1].toString();
-  const stateValue = action[stateKey];
+  // TODO: stateKey is flawed. Doesn't work for nested state objects. Fix it.
+  // const stateKey = Object.keys(action)[1].toString();
+  // const stateValue = action[stateKey];
 
-  nextState[stateKey] = stateValue;
+  // TODO: Update state object to display next state instead of current state. Previous attempt was flawed.
+  // nextState[stateKey] = stateValue;
 
-  if (get(RLean, 'config.logToConsole', true)) {
+  if (getValue(RLean, 'config.logToConsole', true)) {
     middleware.push(logActions);
   }
 
