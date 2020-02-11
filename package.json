@@ -1,6 +1,6 @@
 {
   "name": "@rlean/core",
-  "version": "0.39.4",
+  "version": "0.39.5",
   "description": "Lean React Enterprise Framework with Hooks",
   "main": "build/index.js",
   "scripts": {
