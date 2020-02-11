@@ -1,6 +1,6 @@
 # @rlean/core
 
-The purpose of this package is to remove the boilerplate code that becomes unruly when working in enterprise level React applications. This package handles the state, storage, middleware, API calls, and suggests structure and implementation in the Web app. There is no need for smart components or dumb components, only functional components. All global state objects have classes that extend the model class. Model provides a number of attributes that tells this package how to handle the behavior of that object, and the state for that object can be managed by invoking any of the package's custom hooks: useGet, useSave, useRemove, removeAll, usePost, usePut, usePatch, and useDelete.
+The purpose of this package is to remove the boilerplate code that becomes unruly when working in enterprise level React applications. This package handles the state, storage, middleware, API calls, and suggests structure and implementation in the Web app. There is no need for smart components or dumb components, only functional components. All global state objects have classes that extend the model class. Model provides a number of attributes that tells this package how to handle the behavior of that object, and the state for that object can be managed by invoking any of the package's custom hooks and functions: useGet, usePost, usePut, usePatch, useDelete, useSave, useRemove, and removeAll.
 
 ## Getting Started
 
@@ -65,6 +65,98 @@ That's it! Now you can start using @rlean/core functions within the project. For
 ### Recommended structure
 
 Please see the [boilerplate template](https://github.com/tommyers-dev/rlean_boilerplate) project on github for a working example of the recommened structure.
+
+## Adapters
+
+This framework uses Axios for API calls and localForage for storage by default. These can be overridden by including your own custom adapters in lib/adapters and including these in your configuration file:
+
+```js
+import * as models from 'lib/models';
+import * as utilities from 'lib/utilities';
+import { ApiAdapter, StorageAdapter } from 'lib/adapters';
+import { getToken } from 'config';
+
+export const rLean = {
+  models: models,
+  utilities: utilities,
+  api: {
+    headers: {
+      Authorization: `Bearer ${getToken()}`
+    },
+    uri: process.env.REACT_APP_API_URI,
+    adapter: ApiAdapter
+  },
+  storage: {
+    adapter: StorageAdapter
+  },
+  logToConsole: true
+};
+```
+
+An API adapter should have the following structure. Any unnecessary methods can be omitted.
+
+```js
+class ApiAdapter {
+  async get(apiPayload) {
+    const { url } = apiPayload;
+    // return fetch
+  }
+
+  async post(apiPayload) {
+    const { url, data } = apiPayload;
+    // return fetch
+  }
+
+  async put(apiPayload) {
+    const { url, data } = apiPayload;
+    // return fetch
+  }
+
+  async patch(apiPayload) {
+    const { url, data } = apiPayload;
+    // return fetch
+  }
+
+  async del(apiPayload) {
+    const { url, data } = apiPayload;
+    // return fetch
+  }
+}
+
+export default new AxiosAdapter();
+```
+
+A storage adapter should have the following structure. All functions are required.
+
+```js
+class StorageAdapter {
+  async set(key, value) {
+    if (!key || value === undefined) {
+      throw new Error('Key or value cannot be undefined');
+    }
+
+    // setItem
+  }
+
+  async get(key) {
+    if (!key) throw new Error('Must supply a key in get');
+
+    // return getItem
+  }
+
+  async clear() {
+    // clear
+  }
+
+  async remove(key) {
+    if (!key) throw new Error('Must supply a key in remove');
+
+    // removeItem
+  }
+}
+
+export default new StorageAdapter();
+```
 
 ## Using Model and its functions and attributes
 
@@ -511,7 +603,7 @@ export const function MyReactComponent = () => {
 	}
 
 	return (
-		// component dependent on demoModel
+		{/* component dependent on demoModel */}
 	)
 }
 ```
