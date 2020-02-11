@@ -99,6 +99,14 @@ export class Model extends Object {
           };
         }
 
+        // Create an object if value is a string or number.
+        if (typeof action[this.key] !== 'object') {
+          return {
+            ...state,
+            value: action[this.key]
+          };
+        }
+
         return {
           ...state,
           ...action[this.key]
