@@ -20,15 +20,15 @@ export const request = async (payload, model, method) => {
 
   switch (method) {
     case methods.GET:
-      return await model.plugins.api.get(apiPayload);
+      return await model.adapters.api.get(apiPayload);
     case methods.POST:
-      return await model.plugins.api.post(apiPayload);
+      return await model.adapters.api.post(apiPayload);
     case methods.DELETE:
-      return await model.plugins.api.del(apiPayload);
+      return await model.adapters.api.del(apiPayload);
     case methods.PUT:
-      return await model.plugins.api.put(apiPayload);
+      return await model.adapters.api.put(apiPayload);
     case methods.PATCH:
-      return await model.plugins.api.patch(apiPayload);
+      return await model.adapters.api.patch(apiPayload);
     default:
       // Unknown method specified. Return undefined.
       return;

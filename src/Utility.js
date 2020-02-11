@@ -1,4 +1,4 @@
-import Plugins from './Plugins';
+import { Adapters } from './';
 
 export class Utility extends Object {
   get postPath() {
@@ -21,8 +21,8 @@ export class Utility extends Object {
     return false;
   }
 
-  get plugins() {
-    return new Plugins();
+  get adapters() {
+    return new Adapters();
   }
 
   throw(functionName) {

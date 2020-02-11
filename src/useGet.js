@@ -11,6 +11,7 @@ import { getOptions } from './_internal/getOptions';
  * @param {Function} callback
  */
 const get = async (model, lastUpdated, params, type, state, dispatch, callback) => {
+  // TODO: get keeps growing in complexity. Abstract out some of the logic.
   async function fetchData(isSync = false) {
     const persistData = model.persistData;
     const preferStore = model.preferStore;
@@ -34,20 +35,20 @@ const get = async (model, lastUpdated, params, type, state, dispatch, callback) 
         // We already have a value in the store and it doesn't match state, so
         // return the value.
         outputState = storeValue;
-        await dispatch(await model.updateState(storeValue));
+        await dispatch(await model.updateState(storeValue, type));
         return;
       } else if (persistData && progressiveLoading && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual) {
         // If progressiveLoading is true, then set the data with the current store
         // value while we wait for a response from the API.
         outputState = storeValue;
-        await dispatch(await model.updateState(storeValue));
+        await dispatch(await model.updateState(storeValue, type));
       }
 
       // If there is no getPath, assume it's state/store only data.
       if (!model.getPath) {
         if (persistData && !isEqual) {
           outputState = storeValue;
-          await dispatch(await model.updateState(storeValue));
+          await dispatch(await model.updateState(storeValue, type));
         }
 
         return;
@@ -63,7 +64,7 @@ const get = async (model, lastUpdated, params, type, state, dispatch, callback) 
         // Don't make API call.
         if (timeElapsed < now && storeValue) {
           outputState = storeValue;
-          await dispatch(await model.updateState(storeValue));
+          await dispatch(await model.updateState(storeValue, type));
 
           return;
         }
@@ -107,7 +108,7 @@ const get = async (model, lastUpdated, params, type, state, dispatch, callback) 
           // Set value in state.
           RLean.model = model;
           outputState = response.data;
-          await dispatch(await model.updateState(response.data));
+          await dispatch(await model.updateState(response.data, type));
 
           // Update isLoading object if necessary. Should not update if progressiveLoading
           // is true and we have a value in the store.
@@ -179,10 +180,9 @@ async function useGet(options, callback) {
   const [{ ...state }, dispatch] = useStateValue();
   const { lastUpdated } = state;
   const lastUpdatedRef = useRef();
+  let dependencies = [];
 
   lastUpdatedRef.current = lastUpdated;
-
-  let dependencies = [];
 
   if (params) {
     dependencies = Object.values(params);

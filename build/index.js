@@ -97,8 +97,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return _Model__WEBPACK_IMPORTED_MODULE_1__["Model"]; });
 
-/* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Plugins", function() { return _Plugins__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+/* harmony import */ var _Adapters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(45);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Adapters", function() { return _Adapters__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
 /* harmony import */ var _useSave__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(46);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useSave", function() { return _useSave__WEBPACK_IMPORTED_MODULE_3__["default"]; });
@@ -121,14 +121,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _useDelete__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(54);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useDelete", function() { return _useDelete__WEBPACK_IMPORTED_MODULE_9__["default"]; });
 
-/* harmony import */ var _RLean__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(9);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RLean", function() { return _RLean__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+/* harmony import */ var _useRemove__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(55);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useRemove", function() { return _useRemove__WEBPACK_IMPORTED_MODULE_10__["default"]; });
 
-/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(55);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return _reducer__WEBPACK_IMPORTED_MODULE_11__["reducer"]; });
+/* harmony import */ var _RLean__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(44);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RLean", function() { return _RLean__WEBPACK_IMPORTED_MODULE_11__["default"]; });
 
-/* harmony import */ var _remove__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(57);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return _remove__WEBPACK_IMPORTED_MODULE_12__["remove"]; });
+/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(56);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return _reducer__WEBPACK_IMPORTED_MODULE_12__["reducer"]; });
 
 /* harmony import */ var _removeAll__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(58);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeAll", function() { return _removeAll__WEBPACK_IMPORTED_MODULE_13__["removeAll"]; });
@@ -927,13 +927,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _IsLoading__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "IsLoading", function() { return _IsLoading__WEBPACK_IMPORTED_MODULE_2__["IsLoading"]; });
 
-/* harmony import */ var _LastUpdated__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44);
+/* harmony import */ var _LastUpdated__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LastUpdated", function() { return _LastUpdated__WEBPACK_IMPORTED_MODULE_3__["LastUpdated"]; });
 
 /* harmony import */ var _methods__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(39);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "methods", function() { return _methods__WEBPACK_IMPORTED_MODULE_4__["methods"]; });
 
-/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(45);
+/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(43);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "request", function() { return _request__WEBPACK_IMPORTED_MODULE_5__["request"]; });
 
 
@@ -1039,7 +1039,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 /* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
 /* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _convertToType__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(43);
+/* harmony import */ var _convertToType__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1223,8 +1223,8 @@ function (_Model) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Model", function() { return Model; });
-/* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
-/* harmony import */ var _internal_convertToType__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
+/* harmony import */ var _internal_convertToType__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1279,7 +1279,7 @@ function (_Object) {
     // If a reducer isn't provided, a default one will be generated.
     value: function reducer(state, action) {
       switch (action.type) {
-        case Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_1__["convertToType"])(this.constructor.name):
+        case Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_0__["convertToType"])(this.constructor.name):
           if (Array.isArray(action[this.key])) {
             return _objectSpread({}, state, {
               array: action[this.key]
@@ -1312,7 +1312,7 @@ function (_Object) {
             switch (_context.prev = _context.next) {
               case 0:
                 return _context.abrupt("return", _defineProperty({
-                  type: Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_1__["convertToType"])(this.constructor.name)
+                  type: Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_0__["convertToType"])(this.constructor.name)
                 }, this.key, value));
 
               case 1:
@@ -1344,7 +1344,7 @@ function (_Object) {
   }, {
     key: "types",
     get: function get() {
-      return _defineProperty({}, Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_1__["convertToType"])(this.constructor.name), "".concat(Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_1__["convertToType"])(this.constructor.name)));
+      return _defineProperty({}, Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_0__["convertToType"])(this.constructor.name), "".concat(Object(_internal_convertToType__WEBPACK_IMPORTED_MODULE_0__["convertToType"])(this.constructor.name)));
     }
   }, {
     key: "getPath",
@@ -1358,9 +1358,9 @@ function (_Object) {
     } // check if storage or logger are given
 
   }, {
-    key: "plugins",
+    key: "adapters",
     get: function get() {
-      return new _Plugins__WEBPACK_IMPORTED_MODULE_0__["default"]();
+      return new ___WEBPACK_IMPORTED_MODULE_1__["Adapters"]();
     }
   }, {
     key: "putPath",
@@ -1446,90 +1446,10 @@ function (_Object) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Plugins; });
-/* harmony import */ var _RLean__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
-/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _adapters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-
-
-var Plugins =
-/*#__PURE__*/
-function () {
-  function Plugins(pluginMap) {
-    _classCallCheck(this, Plugins);
-
-    this.pluginMap = pluginMap ? pluginMap : {};
-    this.storage = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.storage.adapter', _adapters__WEBPACK_IMPORTED_MODULE_3__["LocalForageAdapter"]);
-    this.api = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.adapter', _adapters__WEBPACK_IMPORTED_MODULE_3__["AxiosAdapter"]);
-
-    for (var key in pluginMap) {
-      this.pipe(key);
-    }
-  }
-
-  _createClass(Plugins, [{
-    key: "pipe",
-    value: function pipe(pluginType) {
-      switch (pluginType) {
-        case 'storage':
-          this.storage = this.ensureCorrectStorageImplementation(this.pluginMap[pluginType]);
-          break;
-
-        case 'api':
-          this.api = this.pluginMap[pluginType];
-          break;
-
-        case 'logger':
-          this.logger = this.setLoggingEngine(this.pluginMap[pluginType]);
-          break;
-
-        default:
-          this[pluginType] = this.pluginMap[pluginType];
-      }
-    }
-  }, {
-    key: "ensureCorrectStorageImplementation",
-    value: function ensureCorrectStorageImplementation(storage) {
-      var inspection = Object(_internal__WEBPACK_IMPORTED_MODULE_1__["implement"])(storage, {
-        methods: ['get', 'set', 'clear', 'remove']
-      });
-
-      if (inspection.passed) {
-        return storage;
-      }
-
-      throw new Error(inspection.error.message);
-    }
-  }, {
-    key: "setLoggingEngine",
-    value: function setLoggingEngine(logger) {
-      var inspection = Object(_internal__WEBPACK_IMPORTED_MODULE_1__["implement"])(logger, {
-        methods: ['trace', 'info', 'warn', 'error']
-      });
-
-      if (inspection.passed) {
-        return logger;
-      }
-
-      throw new Error(inspection.error.message);
-    }
-  }]);
-
-  return Plugins;
-}();
-
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "convertToType", function() { return convertToType; });
+var convertToType = function convertToType(string) {
+  return "SET".concat(string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1_$2').toUpperCase());
+};
 
 /***/ }),
 /* 9 */
@@ -1537,9 +1457,23 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LastUpdated", function() { return LastUpdated; });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _defaultAdapters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1547,45 +1481,155 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var RLean =
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var LastUpdated =
 /*#__PURE__*/
-function () {
-  function RLean() {
-    _classCallCheck(this, RLean);
+function (_Model) {
+  _inherits(LastUpdated, _Model);
+
+  function LastUpdated() {
+    _classCallCheck(this, LastUpdated);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(LastUpdated).apply(this, arguments));
   }
 
-  _createClass(RLean, [{
-    key: "init",
+  _createClass(LastUpdated, [{
+    key: "reducer",
+    value: function reducer(state, action) {
+      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+      var objects = Object.values(models);
+
+      for (var i = 0; i < objects.length; i++) {
+        if (action.type === "SET_LAST_UPDATED_".concat(objects[i].constructor.name.toUpperCase())) {
+          var objectKey = '';
+
+          if (objects[i].prototype) {
+            objectKey = objects[i].prototype.key;
+          } else {
+            objectKey = objects[i].key;
+          }
+
+          return _objectSpread({}, state, _defineProperty({}, objectKey, action[objectKey]));
+        }
+      }
+
+      return state;
+    }
+  }, {
+    key: "updateState",
     value: function () {
-      var _init = _asyncToGenerator(
+      var _updateState = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(config) {
+      regeneratorRuntime.mark(function _callee(lastUpdated, type) {
+        var models, objects, key, i, lastUpdatedType;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.config = config;
+                models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+                objects = Object.values(models);
+                key = '';
 
-              case 1:
+                for (i = 0; i < objects.length; i++) {
+                  lastUpdatedType = "SET_LAST_UPDATED_".concat(objects[i].constructor.name.toUpperCase());
+
+                  if (type === lastUpdatedType) {
+                    key = objects[i].key;
+                  }
+                }
+
+                return _context.abrupt("return", _defineProperty({
+                  type: type
+                }, key, lastUpdated));
+
+              case 5:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee);
       }));
 
-      function init(_x) {
-        return _init.apply(this, arguments);
+      function updateState(_x, _x2) {
+        return _updateState.apply(this, arguments);
       }
 
-      return init;
+      return updateState;
     }()
+  }, {
+    key: "initialState",
+    get: function get() {
+      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+      var objects = Object.values(models);
+      var lastUpdated = {};
+
+      for (var i = 0; i < objects.length; i++) {
+        if (objects[i].prototype) {
+          // Add to lastUpdated if there is a getPath.
+          if (objects[i].prototype.getPath) {
+            Object.assign(lastUpdated, _defineProperty({}, objects[i].prototype.key, null));
+          }
+        } else {
+          // Add to lastUpdated if there is a getPath.
+          if (objects[i].getPath) {
+            Object.assign(lastUpdated, _defineProperty({}, objects[i].key, null));
+          }
+        }
+      }
+
+      return {
+        lastUpdated: lastUpdated
+      };
+    } // TODO: Remove. This isn't used.
+
+  }, {
+    key: "types",
+    get: function get() {
+      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
+      var objects = Object.values(models);
+      var lastUpdated = {};
+
+      for (var i = 0; i < objects.length; i++) {
+        var key = "SET_LAST_UPDATED_".concat(objects[i].constructor.name.toUpperCase());
+
+        if (objects[i].prototype && objects[i].prototype.getPath) {
+          Object.assign(lastUpdated, _defineProperty({}, key, key));
+        } else if (objects[i].getPath) {
+          Object.assign(lastUpdated, _defineProperty({}, key, key));
+        }
+      }
+
+      return {
+        lastUpdated: lastUpdated
+      };
+    } // TODO: REMOVE THIS!!! This is a problem!
+
+  }, {
+    key: "adapters",
+    get: function get() {
+      return new ___WEBPACK_IMPORTED_MODULE_1__["Adapters"]({
+        storage: _defaultAdapters__WEBPACK_IMPORTED_MODULE_3__["LocalForageAdapter"],
+        api: _defaultAdapters__WEBPACK_IMPORTED_MODULE_3__["AxiosAdapter"]
+      });
+    }
   }]);
 
-  return RLean;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (new RLean());
+  return LastUpdated;
+}(_Model__WEBPACK_IMPORTED_MODULE_0__["Model"]);
 
 /***/ }),
 /* 10 */
@@ -6821,201 +6865,9 @@ module.exports = g;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "convertToType", function() { return convertToType; });
-var convertToType = function convertToType(string) {
-  return "SET".concat(string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1_$2').toUpperCase());
-};
-
-/***/ }),
-/* 44 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LastUpdated", function() { return LastUpdated; });
-/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
-/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
-/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _adapters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
-/* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-var LastUpdated =
-/*#__PURE__*/
-function (_Model) {
-  _inherits(LastUpdated, _Model);
-
-  function LastUpdated() {
-    _classCallCheck(this, LastUpdated);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(LastUpdated).apply(this, arguments));
-  }
-
-  _createClass(LastUpdated, [{
-    key: "reducer",
-    value: function reducer(state, action) {
-      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
-      var objects = Object.values(models);
-
-      for (var i = 0; i < objects.length; i++) {
-        if (action.type === "SET_LAST_UPDATED_".concat(objects[i].constructor.name.toUpperCase())) {
-          var objectKey = '';
-
-          if (objects[i].prototype) {
-            objectKey = objects[i].prototype.key;
-          } else {
-            objectKey = objects[i].key;
-          }
-
-          return _objectSpread({}, state, _defineProperty({}, objectKey, action[objectKey]));
-        }
-      }
-
-      return state;
-    }
-  }, {
-    key: "updateState",
-    value: function () {
-      var _updateState = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(lastUpdated, type) {
-        var models, objects, key, i, lastUpdatedType;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
-                objects = Object.values(models);
-                key = '';
-
-                for (i = 0; i < objects.length; i++) {
-                  lastUpdatedType = "SET_LAST_UPDATED_".concat(objects[i].constructor.name.toUpperCase());
-
-                  if (type === lastUpdatedType) {
-                    key = objects[i].key;
-                  }
-                }
-
-                return _context.abrupt("return", _defineProperty({
-                  type: type
-                }, key, lastUpdated));
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      function updateState(_x, _x2) {
-        return _updateState.apply(this, arguments);
-      }
-
-      return updateState;
-    }()
-  }, {
-    key: "initialState",
-    get: function get() {
-      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
-      var objects = Object.values(models);
-      var lastUpdated = {};
-
-      for (var i = 0; i < objects.length; i++) {
-        if (objects[i].prototype) {
-          // Add to lastUpdated if there is a getPath.
-          if (objects[i].prototype.getPath) {
-            Object.assign(lastUpdated, _defineProperty({}, objects[i].prototype.key, null));
-          }
-        } else {
-          // Add to lastUpdated if there is a getPath.
-          if (objects[i].getPath) {
-            Object.assign(lastUpdated, _defineProperty({}, objects[i].key, null));
-          }
-        }
-      }
-
-      return {
-        lastUpdated: lastUpdated
-      };
-    } // TODO: Remove. This isn't used.
-
-  }, {
-    key: "types",
-    get: function get() {
-      var models = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"], 'config.models', {});
-      var objects = Object.values(models);
-      var lastUpdated = {};
-
-      for (var i = 0; i < objects.length; i++) {
-        var key = "SET_LAST_UPDATED_".concat(objects[i].constructor.name.toUpperCase());
-
-        if (objects[i].prototype && objects[i].prototype.getPath) {
-          Object.assign(lastUpdated, _defineProperty({}, key, key));
-        } else if (objects[i].getPath) {
-          Object.assign(lastUpdated, _defineProperty({}, key, key));
-        }
-      }
-
-      return {
-        lastUpdated: lastUpdated
-      };
-    } // TODO: REMOVE THIS!!! This is a problem!
-
-  }, {
-    key: "plugins",
-    get: function get() {
-      return new _Plugins__WEBPACK_IMPORTED_MODULE_4__["default"]({
-        storage: _adapters__WEBPACK_IMPORTED_MODULE_3__["LocalForageAdapter"],
-        api: _adapters__WEBPACK_IMPORTED_MODULE_3__["AxiosAdapter"]
-      });
-    }
-  }]);
-
-  return LastUpdated;
-}(_Model__WEBPACK_IMPORTED_MODULE_0__["Model"]);
-
-/***/ }),
-/* 45 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "request", function() { return request; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatPath", function() { return formatPath; });
-/* harmony import */ var _RLean__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var _RLean__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
 /* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _methods__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(39);
@@ -7062,35 +6914,35 @@ function () {
 
           case 11:
             _context.next = 13;
-            return model.plugins.api.get(apiPayload);
+            return model.adapters.api.get(apiPayload);
 
           case 13:
             return _context.abrupt("return", _context.sent);
 
           case 14:
             _context.next = 16;
-            return model.plugins.api.post(apiPayload);
+            return model.adapters.api.post(apiPayload);
 
           case 16:
             return _context.abrupt("return", _context.sent);
 
           case 17:
             _context.next = 19;
-            return model.plugins.api.del(apiPayload);
+            return model.adapters.api.del(apiPayload);
 
           case 19:
             return _context.abrupt("return", _context.sent);
 
           case 20:
             _context.next = 22;
-            return model.plugins.api.put(apiPayload);
+            return model.adapters.api.put(apiPayload);
 
           case 22:
             return _context.abrupt("return", _context.sent);
 
           case 23:
             _context.next = 25;
-            return model.plugins.api.patch(apiPayload);
+            return model.adapters.api.patch(apiPayload);
 
           case 25:
             return _context.abrupt("return", _context.sent);
@@ -7174,6 +7026,153 @@ var formatPath = function formatPath(path, payloadQuery, payloadBody, method, nu
 
   return;
 };
+
+/***/ }),
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var RLean =
+/*#__PURE__*/
+function () {
+  function RLean() {
+    _classCallCheck(this, RLean);
+  }
+
+  _createClass(RLean, [{
+    key: "init",
+    value: function () {
+      var _init = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(config) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.config = config;
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function init(_x) {
+        return _init.apply(this, arguments);
+      }
+
+      return init;
+    }()
+  }]);
+
+  return RLean;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (new RLean());
+
+/***/ }),
+/* 45 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Adapters; });
+/* harmony import */ var _RLean__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
+/* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2);
+/* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _defaultAdapters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+
+var Adapters =
+/*#__PURE__*/
+function () {
+  function Adapters(adapterMap) {
+    _classCallCheck(this, Adapters);
+
+    this.adapterMap = adapterMap ? adapterMap : {};
+    this.storage = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.storage.adapter', _defaultAdapters__WEBPACK_IMPORTED_MODULE_3__["LocalForageAdapter"]);
+    this.api = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.adapter', _defaultAdapters__WEBPACK_IMPORTED_MODULE_3__["AxiosAdapter"]);
+
+    for (var key in adapterMap) {
+      this.pipe(key);
+    }
+  }
+
+  _createClass(Adapters, [{
+    key: "pipe",
+    value: function pipe(adapterMap) {
+      switch (adapterMap) {
+        case 'storage':
+          this.storage = this.ensureCorrectStorageImplementation(this.adapterMap[adapterMap]);
+          break;
+
+        case 'api':
+          this.api = this.adapterMap[adapterMap];
+          break;
+
+        case 'logger':
+          this.logger = this.setLoggingEngine(this.adapterMap[adapterMap]);
+          break;
+
+        default:
+          this[adapterMap] = this.adapterMap[adapterMap];
+      }
+    }
+  }, {
+    key: "ensureCorrectStorageImplementation",
+    value: function ensureCorrectStorageImplementation(storage) {
+      var inspection = Object(_internal__WEBPACK_IMPORTED_MODULE_1__["implement"])(storage, {
+        methods: ['get', 'set', 'clear', 'remove']
+      });
+
+      if (inspection.passed) {
+        return storage;
+      }
+
+      throw new Error(inspection.error.message);
+    }
+  }, {
+    key: "setLoggingEngine",
+    value: function setLoggingEngine(logger) {
+      var inspection = Object(_internal__WEBPACK_IMPORTED_MODULE_1__["implement"])(logger, {
+        methods: ['trace', 'info', 'warn', 'error']
+      });
+
+      if (inspection.passed) {
+        return logger;
+      }
+
+      throw new Error(inspection.error.message);
+    }
+  }]);
+
+  return Adapters;
+}();
+
+
 
 /***/ }),
 /* 46 */
@@ -7271,7 +7270,6 @@ function () {
  * @constructor
  * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
- * @example
  */
 
 
@@ -7491,7 +7489,7 @@ function () {
                                     outputState = storeValue;
                                     _context2.t0 = dispatch;
                                     _context2.next = 6;
-                                    return model.updateState(storeValue);
+                                    return model.updateState(storeValue, type);
 
                                   case 6:
                                     _context2.t1 = _context2.sent;
@@ -7512,7 +7510,7 @@ function () {
                                     outputState = storeValue;
                                     _context2.t2 = dispatch;
                                     _context2.next = 17;
-                                    return model.updateState(storeValue);
+                                    return model.updateState(storeValue, type);
 
                                   case 17:
                                     _context2.t3 = _context2.sent;
@@ -7533,7 +7531,7 @@ function () {
                                     outputState = storeValue;
                                     _context2.t4 = dispatch;
                                     _context2.next = 26;
-                                    return model.updateState(storeValue);
+                                    return model.updateState(storeValue, type);
 
                                   case 26:
                                     _context2.t5 = _context2.sent;
@@ -7561,7 +7559,7 @@ function () {
                                     outputState = storeValue;
                                     _context2.t6 = dispatch;
                                     _context2.next = 39;
-                                    return model.updateState(storeValue);
+                                    return model.updateState(storeValue, type);
 
                                   case 39:
                                     _context2.t7 = _context2.sent;
@@ -7638,7 +7636,7 @@ function () {
                                     outputState = response.data;
                                     _context2.t10 = dispatch;
                                     _context2.next = 69;
-                                    return model.updateState(response.data);
+                                    return model.updateState(response.data, type);
 
                                   case 69:
                                     _context2.t11 = _context2.sent;
@@ -7844,8 +7842,8 @@ function _useGet() {
             _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_3__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _extends({}, _useStateValue2[0]), dispatch = _useStateValue2[1];
             lastUpdated = state.lastUpdated;
             lastUpdatedRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
-            lastUpdatedRef.current = lastUpdated;
             dependencies = [];
+            lastUpdatedRef.current = lastUpdated;
 
             if (params) {
               dependencies = Object.values(params);
@@ -8424,12 +8422,122 @@ function useDelete(options, callback) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useRemove; });
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/**
+ * @param {Object} model
+ * @param {Function} dispatch
+ * @param {Function} [callback=null]
+ */
+
+var remove =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(options, callback) {
+    var _getOptions, model, type, persistData;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (!(typeof options === 'undefined')) {
+              _context.next = 2;
+              break;
+            }
+
+            return _context.abrupt("return");
+
+          case 2:
+            _getOptions = getOptions(options), model = _getOptions.model, type = _getOptions.type;
+            persistData = model.persistData;
+
+            if (!persistData) {
+              _context.next = 7;
+              break;
+            }
+
+            _context.next = 7;
+            return ___WEBPACK_IMPORTED_MODULE_0__["Store"].remove(model);
+
+          case 7:
+            // Reset the state of the model.
+            ___WEBPACK_IMPORTED_MODULE_0__["RLean"].model = model;
+            _context.t0 = dispatch;
+            _context.next = 11;
+            return model.updateState(model.initialState, type);
+
+          case 11:
+            _context.t1 = _context.sent;
+            _context.next = 14;
+            return (0, _context.t0)(_context.t1);
+
+          case 14:
+            if (callback) callback();
+
+          case 15:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function remove(_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();
+/**
+ * Clear an object from the store if persistData is true (default).
+ *
+ * @constructor
+ * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
+ * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
+ */
+
+
+function useRemove(options, callback) {
+  var _useStateValue = useStateValue(),
+      _useStateValue2 = _slicedToArray(_useStateValue, 2),
+      dispatch = _useStateValue2[1];
+
+  if (typeof options === 'undefined') {
+    return [function (options, callback) {
+      remove(options, dispatch, callback);
+    }];
+  }
+
+  useEffect(function () {
+    remove(options, dispatch, callback);
+  }, [dispatch]);
+}
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
 /* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 /* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 /* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
-/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(56);
+/* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(57);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -8484,7 +8592,7 @@ var reducer = function reducer(_ref, action) {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8592,70 +8700,6 @@ function _applyMiddleware() {
 }
 
 
-
-/***/ }),
-/* 57 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return remove; });
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-/**
- * Clear an object from the store if persistData is true (default).
- * @param {Object} model
- * @param {function} dispatch
- * @param {string} [type=null]
- */
-
-var remove =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(model, dispatch, type) {
-    var persistData;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            persistData = model.persistData;
-
-            if (!persistData) {
-              _context.next = 4;
-              break;
-            }
-
-            _context.next = 4;
-            return ___WEBPACK_IMPORTED_MODULE_0__["Store"].remove(model);
-
-          case 4:
-            _context.t0 = dispatch;
-            _context.next = 7;
-            return model.updateState(model.initialState, type);
-
-          case 7:
-            _context.t1 = _context.sent;
-            _context.next = 10;
-            return (0, _context.t0)(_context.t1);
-
-          case 10:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function remove(_x, _x2, _x3) {
-    return _ref.apply(this, arguments);
-  };
-}();
 
 /***/ }),
 /* 58 */
@@ -8767,11 +8811,11 @@ function () {
                 key = model.key;
                 _context.prev = 1;
                 _context.next = 4;
-                return model.plugins.storage.set(key, value);
+                return model.adapters.storage.set(key, value);
 
               case 4:
                 _context.next = 6;
-                return model.plugins.storage.get(key);
+                return model.adapters.storage.get(key);
 
               case 6:
                 updatedValue = _context.sent;
@@ -8826,7 +8870,7 @@ function () {
                 key = model.key;
                 _context2.prev = 1;
                 _context2.next = 4;
-                return model.plugins.storage.get(key);
+                return model.adapters.storage.get(key);
 
               case 4:
                 return _context2.abrupt("return", _context2.sent);
@@ -8923,7 +8967,7 @@ function () {
     }()
     /*
      * Makes the 'clear' call to local storage to get clear local storage
-     * Uses the storage engine found by decideWhichEngine, either plugin or default.
+     * Uses the storage engine found by decideWhichEngine, either adapter or default.
      */
 
   }, {
@@ -8938,7 +8982,7 @@ function () {
               case 0:
                 _context5.prev = 0;
                 _context5.next = 3;
-                return model.plugins.storage.clear();
+                return model.adapters.storage.clear();
 
               case 3:
                 _context5.next = 8;
@@ -8965,7 +9009,7 @@ function () {
     }()
     /*
      * Makes the 'remove' call to local storage to get remove a value from local storage
-     * Uses the storage engine found by decideWhichEngine, either plugin or default.
+     * Uses the storage engine found by decideWhichEngine, either adapter or default.
      */
 
   }, {
@@ -8982,7 +9026,7 @@ function () {
                 key = model.key;
                 _context6.prev = 1;
                 _context6.next = 4;
-                return model.plugins.storage.remove(key);
+                return model.adapters.storage.remove(key);
 
               case 4:
                 _context6.next = 9;
@@ -9021,7 +9065,7 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Utility", function() { return Utility; });
-/* harmony import */ var _Plugins__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9091,9 +9135,9 @@ function (_Object) {
       return false;
     }
   }, {
-    key: "plugins",
+    key: "adapters",
     get: function get() {
-      return new _Plugins__WEBPACK_IMPORTED_MODULE_0__["default"]();
+      return new ___WEBPACK_IMPORTED_MODULE_0__["Adapters"]();
     }
   }]);
 

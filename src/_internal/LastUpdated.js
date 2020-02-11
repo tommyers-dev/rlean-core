@@ -1,8 +1,8 @@
 import { Model } from '../Model';
 import { RLean } from '../';
 import { getValue } from '@rlean/utils';
-import { AxiosAdapter, LocalForageAdapter } from '../adapters';
-import Plugins from '../Plugins';
+import { AxiosAdapter, LocalForageAdapter } from '../defaultAdapters';
+import { Adapters } from '../';
 
 export class LastUpdated extends Model {
   get initialState() {
@@ -51,8 +51,8 @@ export class LastUpdated extends Model {
   }
 
   // TODO: REMOVE THIS!!! This is a problem!
-  get plugins() {
-    return new Plugins({
+  get adapters() {
+    return new Adapters({
       storage: LocalForageAdapter,
       api: AxiosAdapter
     });

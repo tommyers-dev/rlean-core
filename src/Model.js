@@ -1,5 +1,5 @@
-import Plugins from './Plugins';
 import { convertToType } from './_internal/convertToType';
+import { Adapters } from './';
 
 export class Model extends Object {
   get key() {
@@ -25,8 +25,8 @@ export class Model extends Object {
   }
 
   // check if storage or logger are given
-  get plugins() {
-    return new Plugins();
+  get adapters() {
+    return new Adapters();
   }
 
   get putPath() {

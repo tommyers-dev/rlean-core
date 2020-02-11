@@ -1,33 +1,33 @@
 import RLean from './RLean';
 import { implement } from './_internal';
 import { getValue } from '@rlean/utils';
-import { LocalForageAdapter, AxiosAdapter } from './adapters';
+import { LocalForageAdapter, AxiosAdapter } from './defaultAdapters';
 
-export default class Plugins {
-  constructor(pluginMap) {
-    this.pluginMap = pluginMap ? pluginMap : {};
+export default class Adapters {
+  constructor(adapterMap) {
+    this.adapterMap = adapterMap ? adapterMap : {};
 
     this.storage = getValue(RLean, 'config.storage.adapter', LocalForageAdapter);
     this.api = getValue(RLean, 'config.api.adapter', AxiosAdapter);
 
-    for (let key in pluginMap) {
+    for (let key in adapterMap) {
       this.pipe(key);
     }
   }
 
-  pipe(pluginType) {
-    switch (pluginType) {
+  pipe(adapterMap) {
+    switch (adapterMap) {
       case 'storage':
-        this.storage = this.ensureCorrectStorageImplementation(this.pluginMap[pluginType]);
+        this.storage = this.ensureCorrectStorageImplementation(this.adapterMap[adapterMap]);
         break;
       case 'api':
-        this.api = this.pluginMap[pluginType];
+        this.api = this.adapterMap[adapterMap];
         break;
       case 'logger':
-        this.logger = this.setLoggingEngine(this.pluginMap[pluginType]);
+        this.logger = this.setLoggingEngine(this.adapterMap[adapterMap]);
         break;
       default:
-        this[pluginType] = this.pluginMap[pluginType];
+        this[adapterMap] = this.adapterMap[adapterMap];
     }
   }
 

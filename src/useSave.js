@@ -36,7 +36,6 @@ const save = async (options, dispatch, callback) => {
  * @constructor
  * @param {Object} options An object containing an instance of the model whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the model has multiple types.
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
- * @example
  */
 export default function useSave(options, callback) {
   const [, dispatch] = useStateValue();

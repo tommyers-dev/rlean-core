@@ -6,9 +6,9 @@ class Store {
     const key = model.key;
 
     try {
-      await model.plugins.storage.set(key, value);
+      await model.adapters.storage.set(key, value);
 
-      const updatedValue = await model.plugins.storage.get(key);
+      const updatedValue = await model.adapters.storage.get(key);
 
       if (updatedValue === undefined) throw new Error(`Could not set ${key} = ${value}`);
 
@@ -25,7 +25,7 @@ class Store {
     const key = model.key;
 
     try {
-      return await model.plugins.storage.get(key);
+      return await model.adapters.storage.get(key);
     } catch (err) {
       console.log(err);
     }
@@ -49,11 +49,11 @@ class Store {
 
   /*
    * Makes the 'clear' call to local storage to get clear local storage
-   * Uses the storage engine found by decideWhichEngine, either plugin or default.
+   * Uses the storage engine found by decideWhichEngine, either adapter or default.
    */
   async clear() {
     try {
-      await model.plugins.storage.clear();
+      await model.adapters.storage.clear();
     } catch (err) {
       console.log(err);
     }
@@ -61,13 +61,13 @@ class Store {
 
   /*
    * Makes the 'remove' call to local storage to get remove a value from local storage
-   * Uses the storage engine found by decideWhichEngine, either plugin or default.
+   * Uses the storage engine found by decideWhichEngine, either adapter or default.
    */
   async remove(model) {
     const key = model.key;
 
     try {
-      await model.plugins.storage.remove(key);
+      await model.adapters.storage.remove(key);
     } catch (err) {
       console.log(err);
     }
