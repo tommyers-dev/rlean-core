@@ -10,9 +10,10 @@ import { getOptions } from './_internal/getOptions';
  * @param {Function} dispatch
  * @param {Function} callback
  */
-const get = async (model, lastUpdated, params, type, state, dispatch, callback) => {
+const get = async (options, lastUpdated, state, dispatch, callback) => {
   // TODO: get keeps growing in complexity. Abstract out some of the logic.
   async function fetchData(isSync = false) {
+    const { model, params, type } = getOptions(options);
     const persistData = model.persistData;
     const preferStore = model.preferStore;
     const progressiveLoading = model.progressiveLoading;
@@ -175,8 +176,7 @@ const get = async (model, lastUpdated, params, type, state, dispatch, callback) 
  *
  * useGet({ model: Model, params: {id: someStateValue.id}, type: Model.types.SET_VALUE }, callback);
  */
-async function useGet(options, callback) {
-  const { model, params, type } = getOptions(options);
+export default function useGet(options, callback) {
   const [{ ...state }, dispatch] = useStateValue();
   const { lastUpdated } = state;
   const lastUpdatedRef = useRef();
@@ -184,23 +184,20 @@ async function useGet(options, callback) {
 
   lastUpdatedRef.current = lastUpdated;
 
-  if (params) {
-    dependencies = Object.values(params);
-  }
-
   if (typeof options === 'undefined') {
     return [
       (options, callback) => {
-        const { model, params, type } = getOptions(options);
-        get(model, deepCopy(lastUpdatedRef.current), params, type, state, dispatch, callback);
+        get(options, deepCopy(lastUpdatedRef.current), state, dispatch, callback);
       }
     ];
   }
 
+  if (options.params) {
+    dependencies = Object.values(options.params);
+  }
+
   useEffect(() => {
-    get(model, deepCopy(lastUpdatedRef.current), params, type, state, dispatch, callback);
+    get(options, deepCopy(lastUpdatedRef.current), state, dispatch, callback);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 }
-
-export default useGet;

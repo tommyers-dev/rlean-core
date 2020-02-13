@@ -7403,6 +7403,7 @@ function _useRequest() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useGet; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
@@ -7441,7 +7442,7 @@ var get =
 function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee4(model, lastUpdated, params, type, state, dispatch, callback) {
+  regeneratorRuntime.mark(function _callee4(options, lastUpdated, state, dispatch, callback) {
     var fetchData, _fetchData;
 
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
@@ -7453,6 +7454,10 @@ function () {
               /*#__PURE__*/
               regeneratorRuntime.mark(function _callee3() {
                 var isSync,
+                    _getOptions,
+                    model,
+                    params,
+                    type,
                     persistData,
                     preferStore,
                     progressiveLoading,
@@ -7725,6 +7730,7 @@ function () {
                         };
 
                         isSync = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : false;
+                        _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_4__["getOptions"])(options), model = _getOptions.model, params = _getOptions.params, type = _getOptions.type;
                         persistData = model.persistData;
                         preferStore = model.preferStore;
                         progressiveLoading = model.progressiveLoading;
@@ -7732,10 +7738,10 @@ function () {
                         syncAfterTimeElapsed = model.syncAfterTimeElapsed;
                         getPath = model.getPath;
                         key = model.key;
-                        _context3.next = 12;
+                        _context3.next = 13;
                         return ___WEBPACK_IMPORTED_MODULE_3__["Store"].get(model);
 
-                      case 12:
+                      case 13:
                         storeValue = _context3.sent;
                         stateValue = state[key];
                         outputState = stateValue;
@@ -7745,18 +7751,18 @@ function () {
                         ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = model;
 
                         if (isSync) {
-                          _context3.next = 23;
+                          _context3.next = 24;
                           break;
                         }
 
-                        _context3.next = 22;
+                        _context3.next = 23;
                         return callApi();
 
-                      case 22:
+                      case 23:
                         // Execute optional callback
                         if (callback) callback(outputState, outputResponse);
 
-                      case 23:
+                      case 24:
                         if (typeof syncInterval === 'number') {
                           setTimeout(
                           /*#__PURE__*/
@@ -7786,7 +7792,7 @@ function () {
                           })), syncInterval);
                         }
 
-                      case 24:
+                      case 25:
                       case "end":
                         return _context3.stop();
                     }
@@ -7810,7 +7816,7 @@ function () {
     }, _callee4);
   }));
 
-  return function get(_x, _x2, _x3, _x4, _x5, _x6, _x7) {
+  return function get(_x, _x2, _x3, _x4, _x5) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -7831,61 +7837,31 @@ function () {
  */
 
 
-function useGet(_x8, _x9) {
-  return _useGet.apply(this, arguments);
+function useGet(options, callback) {
+  var _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_3__["useStateValue"])(),
+      _useStateValue2 = _slicedToArray(_useStateValue, 2),
+      state = _extends({}, _useStateValue2[0]),
+      dispatch = _useStateValue2[1];
+
+  var lastUpdated = state.lastUpdated;
+  var lastUpdatedRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+  var dependencies = [];
+  lastUpdatedRef.current = lastUpdated;
+
+  if (typeof options === 'undefined') {
+    return [function (options, callback) {
+      get(options, Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdatedRef.current), state, dispatch, callback);
+    }];
+  }
+
+  if (options.params) {
+    dependencies = Object.values(options.params);
+  }
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    get(options, Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdatedRef.current), state, dispatch, callback); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, dependencies);
 }
-
-function _useGet() {
-  _useGet = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee5(options, callback) {
-    var _getOptions, model, params, type, _useStateValue, _useStateValue2, state, dispatch, lastUpdated, lastUpdatedRef, dependencies;
-
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_4__["getOptions"])(options), model = _getOptions.model, params = _getOptions.params, type = _getOptions.type;
-            _useStateValue = Object(___WEBPACK_IMPORTED_MODULE_3__["useStateValue"])(), _useStateValue2 = _slicedToArray(_useStateValue, 2), state = _extends({}, _useStateValue2[0]), dispatch = _useStateValue2[1];
-            lastUpdated = state.lastUpdated;
-            lastUpdatedRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
-            dependencies = [];
-            lastUpdatedRef.current = lastUpdated;
-
-            if (params) {
-              dependencies = Object.values(params);
-            }
-
-            if (!(typeof options === 'undefined')) {
-              _context5.next = 9;
-              break;
-            }
-
-            return _context5.abrupt("return", [function (options, callback) {
-              var _getOptions2 = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_4__["getOptions"])(options),
-                  model = _getOptions2.model,
-                  params = _getOptions2.params,
-                  type = _getOptions2.type;
-
-              get(model, Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdatedRef.current), params, type, state, dispatch, callback);
-            }]);
-
-          case 9:
-            Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-              get(model, Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["deepCopy"])(lastUpdatedRef.current), params, type, state, dispatch, callback); // eslint-disable-next-line react-hooks/exhaustive-deps
-            }, dependencies);
-
-          case 10:
-          case "end":
-            return _context5.stop();
-        }
-      }
-    }, _callee5);
-  }));
-  return _useGet.apply(this, arguments);
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (useGet);
 
 /***/ }),
 /* 51 */
