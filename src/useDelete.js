@@ -1,6 +1,7 @@
 import { request, methods, inspectClass } from './_internal';
 import { useStateValue } from './';
 import { getOptions } from './_internal/getOptions';
+import Store from 'Store';
 
 /**
  * Function that executes a DELETE against the API.
@@ -11,14 +12,23 @@ import { getOptions } from './_internal/getOptions';
  * @param {Function} callback
  */
 const del = async (options, dispatch, callback) => {
-  const { model, body } = getOptions(options);
+  const { model, body, save } = getOptions(options);
   const deletePath = model.deletePath;
 
   if (deletePath !== null) {
     const payload = { path: deletePath, body: body ? Object.assign({}, body) : {} };
-    await request(payload, model, methods.DELETE);
+    const response = await request(payload, model, methods.DELETE);
 
-    if (callback) callback(response);
+    if (response && save) {
+      if (persistData) {
+        await Store.set(model, response.data);
+      }
+
+      await dispatch(await model.updateState(response.data));
+    }
+
+    if (response && callback) callback(response);
+
     return;
   }
 

@@ -10,7 +10,7 @@ import { getOptions } from './_internal/getOptions';
  * @param {Function} [callback=null]
  */
 const patch = async (options, dispatch, callback) => {
-  const { model, body } = getOptions(options);
+  const { model, body, save } = getOptions(options);
   const patchPath = model.patchPath;
 
   if (patchPath !== null) {
@@ -20,19 +20,19 @@ const patch = async (options, dispatch, callback) => {
     // Don't do a deep compare on the return value against the current value.
     // The return value will most likely be different regardless. Assume that
     // if dispatch was provided, we're supposed to use it.
-    if (response && dispatch) {
+    if (response && save) {
       if (model.persistData) {
         await Store.set(model, response.data);
       }
 
       await dispatch(await model.updateState(response.data));
     }
+
+    if (response && callback) callback(response);
   } else {
     const o = inspectClass(model);
     console.error(`The ${o.ClassName} object is missing the patchPath attribute.`);
   }
-
-  if (callback) callback(response);
 
   return;
 };

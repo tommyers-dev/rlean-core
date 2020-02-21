@@ -550,6 +550,10 @@ const function updateDb = async () => {
 
 The usePatch, usePut, and useDelete hooks work similarly to the usePost hook and have the same syntax.
 
+### options
+
+The options that are available for use with useGet are **model** and **params**. The options that are available for usePost, usePatch, usePut, and useDelete are **model**, **body**, **save**, and **type**. The options available for useSave are **model**, **value**, and **type**. The **save** option is false by default. If set to true, the response data will override the state object and store object if persistData is set to true on the model.
+
 ### useSave
 
 The useSave hook is used when saving a state value, and takes an options object that includes the model being updated and the new value, and an optional type. Saving a value will update state and storage if the persistData attribute is 'true' on the model (the default setting).

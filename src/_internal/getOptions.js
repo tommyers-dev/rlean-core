@@ -5,7 +5,8 @@ export const getOptions = options => {
       params: null,
       value: null,
       type: null,
-      body: null
+      body: null,
+      save: false
     };
   }
 
@@ -14,6 +15,7 @@ export const getOptions = options => {
     params: options.params || null,
     value: typeof options.value !== 'undefined' ? options.value : null,
     type: options.type || null,
-    body: options.body || null
+    body: options.body || null,
+    save: options.save
   };
 };
