@@ -1,6 +1,7 @@
 import { request, methods, inspectClass } from './_internal';
 import { useStateValue } from './';
 import { getOptions } from './_internal/getOptions';
+import { Store } from './';
 
 /**
  * Function that executes a PATCH against the API.

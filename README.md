@@ -6,7 +6,7 @@ The purpose of this package is to remove the boilerplate code that becomes unrul
 
 ### Installing
 
-It's recommended that you fork the [boilerplate template](https://github.com/tommyers-dev/rlean_boilerplate) rather than starting with a new installation, but if you'd prefer to install in an existing project using your preferred structure, follow these steps:
+It's recommended that you begin with a copy of the [boilerplate template](https://github.com/tommyers-dev/rlean_boilerplate) rather than starting with a new installation, but if you'd prefer to install in an existing project using your preferred structure, follow these steps:
 
 `npm i @rlean/core --save`
 

@@ -1,7 +1,7 @@
 import { request, methods, inspectClass } from './_internal';
 import { useStateValue } from './';
 import { getOptions } from './_internal/getOptions';
-import Store from 'Store';
+import { Store } from './';
 
 /**
  * Function that executes a DELETE against the API.
@@ -14,6 +14,7 @@ import Store from 'Store';
 const del = async (options, dispatch, callback) => {
   const { model, body, save } = getOptions(options);
   const deletePath = model.deletePath;
+  const persistData = model.persistData;
 
   if (deletePath !== null) {
     const payload = { path: deletePath, body: body ? Object.assign({}, body) : {} };

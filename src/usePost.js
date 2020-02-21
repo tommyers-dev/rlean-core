@@ -1,6 +1,7 @@
 import { request, methods, inspectClass } from './_internal';
 import { getOptions } from './_internal/getOptions';
 import { useStateValue } from './';
+import { Store } from './';
 
 /**
  * Function that executes a POST against the API.

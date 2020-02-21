@@ -7316,7 +7316,8 @@ var getOptions = function getOptions(options) {
       params: null,
       value: null,
       type: null,
-      body: null
+      body: null,
+      save: false
     };
   }
 
@@ -7325,7 +7326,8 @@ var getOptions = function getOptions(options) {
     params: options.params || null,
     value: typeof options.value !== 'undefined' ? options.value : null,
     type: options.type || null,
-    body: options.body || null
+    body: options.body || null,
+    save: options.save
   };
 };
 
@@ -7902,17 +7904,17 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
-    var _getOptions, model, body, patchPath, payload, _response, o;
+    var _getOptions, model, body, save, patchPath, payload, response, o;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_2__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body;
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_2__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body, save = _getOptions.save;
             patchPath = model.patchPath;
 
             if (!(patchPath !== null)) {
-              _context.next = 19;
+              _context.next = 20;
               break;
             }
 
@@ -7924,9 +7926,9 @@ function () {
             return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].PATCH);
 
           case 6:
-            _response = _context.sent;
+            response = _context.sent;
 
-            if (!(_response && dispatch)) {
+            if (!(response && save)) {
               _context.next = 17;
               break;
             }
@@ -7937,12 +7939,12 @@ function () {
             }
 
             _context.next = 11;
-            return Store.set(model, _response.data);
+            return Store.set(model, response.data);
 
           case 11:
             _context.t0 = dispatch;
             _context.next = 14;
-            return model.updateState(_response.data);
+            return model.updateState(response.data);
 
           case 14:
             _context.t1 = _context.sent;
@@ -7950,15 +7952,15 @@ function () {
             return (0, _context.t0)(_context.t1);
 
           case 17:
-            _context.next = 21;
+            if (response && callback) callback(response);
+            _context.next = 22;
             break;
 
-          case 19:
+          case 20:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the patchPath attribute."));
 
-          case 21:
-            if (callback) callback(response);
+          case 22:
             return _context.abrupt("return");
 
           case 23:
@@ -8043,13 +8045,13 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
-    var _getOptions, model, body, postPath, persistData, payload, response, o;
+    var _getOptions, model, body, save, postPath, persistData, payload, response, o;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_1__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body;
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_1__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body, save = _getOptions.save;
             postPath = model.postPath;
             persistData = model.persistData;
 
@@ -8068,8 +8070,8 @@ function () {
           case 7:
             response = _context.sent;
 
-            if (!(response && dispatch)) {
-              _context.next = 19;
+            if (!(response && save)) {
+              _context.next = 18;
               break;
             }
 
@@ -8092,9 +8094,7 @@ function () {
             return (0, _context.t0)(_context.t1);
 
           case 18:
-            if (callback) callback(response);
-
-          case 19:
+            if (response && callback) callback(response);
             _context.next = 23;
             break;
 
@@ -8186,13 +8186,13 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
-    var _getOptions, model, body, putPath, payload, response, o;
+    var _getOptions, model, body, save, putPath, payload, response, o;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_1__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body;
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_1__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body, save = _getOptions.save;
             putPath = model.putPath;
 
             if (!(putPath !== null)) {
@@ -8210,8 +8210,8 @@ function () {
           case 6:
             response = _context.sent;
 
-            if (!(response && dispatch)) {
-              _context.next = 18;
+            if (!(response && save)) {
+              _context.next = 17;
               break;
             }
 
@@ -8234,9 +8234,7 @@ function () {
             return (0, _context.t0)(_context.t1);
 
           case 17:
-            if (callback) callback(response);
-
-          case 18:
+            if (response && callback) callback(response);
             _context.next = 22;
             break;
 
@@ -8297,6 +8295,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 /* harmony import */ var _internal_getOptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(48);
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'Store'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -8308,6 +8307,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -8327,17 +8327,18 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
-    var _getOptions, model, body, deletePath, payload, o;
+    var _getOptions, model, body, save, deletePath, persistData, payload, response, o;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_2__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body;
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_2__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body, save = _getOptions.save;
             deletePath = model.deletePath;
+            persistData = model.persistData;
 
             if (!(deletePath !== null)) {
-              _context.next = 8;
+              _context.next = 20;
               break;
             }
 
@@ -8345,18 +8346,44 @@ function () {
               path: deletePath,
               body: body ? Object.assign({}, body) : {}
             };
-            _context.next = 6;
+            _context.next = 7;
             return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].DELETE);
 
-          case 6:
-            if (callback) callback(response);
+          case 7:
+            response = _context.sent;
+
+            if (!(response && save)) {
+              _context.next = 18;
+              break;
+            }
+
+            if (!persistData) {
+              _context.next = 12;
+              break;
+            }
+
+            _context.next = 12;
+            return !(function webpackMissingModule() { var e = new Error("Cannot find module 'Store'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).set(model, response.data);
+
+          case 12:
+            _context.t0 = dispatch;
+            _context.next = 15;
+            return model.updateState(response.data);
+
+          case 15:
+            _context.t1 = _context.sent;
+            _context.next = 18;
+            return (0, _context.t0)(_context.t1);
+
+          case 18:
+            if (response && callback) callback(response);
             return _context.abrupt("return");
 
-          case 8:
+          case 20:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the deletePath attribute."));
 
-          case 10:
+          case 22:
           case "end":
             return _context.stop();
         }

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useStateValue, RLean } from './';
 import { getOptions } from './_internal/getOptions';
+import { Store } from './';
 
 /**
  * Save an object to state, and optionally to store if persistData
@@ -17,9 +18,9 @@ const save = async (options, dispatch, callback) => {
 
   const { model, value, type } = getOptions(options);
 
-  /*if(model.persistData) {
+  if (model.persistData) {
     await Store.set(model, value);
-  }*/
+  }
 
   RLean.model = model;
   await dispatch(await model.updateState(value, type));
