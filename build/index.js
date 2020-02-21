@@ -7207,6 +7207,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /**
  * Save an object to state, and optionally to store if persistData
  * is true (default). Don't check if current state and new value are different
@@ -7239,24 +7240,30 @@ function () {
 
           case 2:
             _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_2__["getOptions"])(options), model = _getOptions.model, value = _getOptions.value, type = _getOptions.type;
-            /*if(model.persistData) {
-              await Store.set(model, value);
-            }*/
 
+            if (!model.persistData) {
+              _context.next = 6;
+              break;
+            }
+
+            _context.next = 6;
+            return ___WEBPACK_IMPORTED_MODULE_1__["Store"].set(model, value);
+
+          case 6:
             ___WEBPACK_IMPORTED_MODULE_1__["RLean"].model = model;
             _context.t0 = dispatch;
-            _context.next = 7;
+            _context.next = 10;
             return model.updateState(value, type);
 
-          case 7:
+          case 10:
             _context.t1 = _context.sent;
-            _context.next = 10;
+            _context.next = 13;
             return (0, _context.t0)(_context.t1);
 
-          case 10:
+          case 13:
             if (callback) callback();
 
-          case 11:
+          case 14:
           case "end":
             return _context.stop();
         }
@@ -7890,6 +7897,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /**
  * Function that executes a PATCH against the API.
  *
@@ -7939,7 +7947,7 @@ function () {
             }
 
             _context.next = 11;
-            return Store.set(model, response.data);
+            return ___WEBPACK_IMPORTED_MODULE_1__["Store"].set(model, response.data);
 
           case 11:
             _context.t0 = dispatch;
@@ -8031,6 +8039,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /**
  * Function that executes a POST against the API.
  * @constructor
@@ -8081,7 +8090,7 @@ function () {
             }
 
             _context.next = 12;
-            return Store.set(model, response.data);
+            return ___WEBPACK_IMPORTED_MODULE_2__["Store"].set(model, response.data);
 
           case 12:
             _context.t0 = dispatch;
@@ -8171,6 +8180,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /**
  * Function that executes a PUT against the API.
  *
@@ -8221,7 +8231,7 @@ function () {
             }
 
             _context.next = 11;
-            return Store.set(model, response.data);
+            return ___WEBPACK_IMPORTED_MODULE_2__["Store"].set(model, response.data);
 
           case 11:
             _context.t0 = dispatch;
@@ -8295,7 +8305,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 /* harmony import */ var _internal_getOptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(48);
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'Store'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -8363,7 +8372,7 @@ function () {
             }
 
             _context.next = 12;
-            return !(function webpackMissingModule() { var e = new Error("Cannot find module 'Store'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).set(model, response.data);
+            return ___WEBPACK_IMPORTED_MODULE_1__["Store"].set(model, response.data);
 
           case 12:
             _context.t0 = dispatch;
