@@ -1,6 +1,5 @@
 import { RLean } from './';
 import { getValue } from '@rlean/utils';
-import { IsLoading, LastUpdated } from './_internal';
 
 export const initialState = () => {
   const models = getValue(RLean, 'config.models', {});
@@ -14,9 +13,6 @@ export const initialState = () => {
       Object.assign(combinedInitialState, objects[i].initialState);
     }
   }
-
-  Object.assign(combinedInitialState, new IsLoading().initialState);
-  Object.assign(combinedInitialState, new LastUpdated().initialState);
 
   return combinedInitialState;
 };

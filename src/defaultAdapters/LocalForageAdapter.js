@@ -9,7 +9,7 @@ class LocalForage {
     try {
       await localforage.setItem(key, JSON.stringify(value));
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -21,8 +21,8 @@ class LocalForage {
     units.forEach(async kvPair => {
       try {
         await this.set(kvPair.key, kvPair.value);
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.error(err);
       }
     });
 
@@ -37,7 +37,7 @@ class LocalForage {
 
       return value == null ? null : JSON.parse(value);
     } catch (err) {
-      console.log(`LocalForage getItem error: ${err}`);
+      console.error(`LocalForage getItem error: ${err}`);
     }
   }
 
@@ -45,7 +45,7 @@ class LocalForage {
     try {
       await localforage.clear();
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -55,7 +55,7 @@ class LocalForage {
     try {
       await localforage.removeItem(key);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 }

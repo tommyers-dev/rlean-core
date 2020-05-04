@@ -1,11 +1,13 @@
-import { Store, RLean } from './';
+import { useEffect } from 'react';
+import { Store, RLean, useStateValue } from './';
+import { getOptions } from './_internal/getOptions';
 
 /**
  * @param {Object} model
  * @param {Function} dispatch
  * @param {Function} [callback=null]
  */
-const remove = async (options, callback) => {
+const remove = async (options, dispatch, callback) => {
   if (typeof options === 'undefined') return;
 
   const { model, type } = getOptions(options);
@@ -36,7 +38,7 @@ export default function useRemove(options, callback) {
     return [
       (options, callback) => {
         remove(options, dispatch, callback);
-      }
+      },
     ];
   }
 

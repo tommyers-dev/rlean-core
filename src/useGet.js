@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Compare, deepCopy } from '@rlean/utils';
-import { request, methods, IsLoading, LastUpdated } from './_internal';
+import { request, methods } from './_internal';
 import { useStateValue, Store, RLean } from './';
 import { getOptions } from './_internal/getOptions';
 
@@ -25,8 +25,6 @@ const get = async (options, lastUpdated, state, dispatch, callback) => {
     const stateValue = state[key];
     let outputState = stateValue;
     let outputResponse = null;
-    const oIsLoading = new IsLoading();
-    const oLastUpdated = new LastUpdated();
     RLean.model = model;
 
     async function callApi() {
@@ -75,14 +73,15 @@ const get = async (options, lastUpdated, state, dispatch, callback) => {
       // is true and we have a value in the store.
       if (!isSync && (!progressiveLoading || storeValue === 'undefined' || storeValue === null)) {
         if (getPath) {
-          RLean.model = oIsLoading;
-          await dispatch(await oIsLoading.updateState(true, `SET_IS_LOADING_${key.toUpperCase()}`));
+          // RLean.model = oIsLoading;
+          // await dispatch(await oIsLoading.updateState(true, `SET_IS_LOADING_${key.toUpperCase()}`));
+          await dispatch(await model.updateState(true, `${model.type}_IS_LOADING`));
         }
       }
 
       const payload = {
         path: getPath,
-        query: params
+        query: params,
       };
 
       try {
@@ -110,29 +109,35 @@ const get = async (options, lastUpdated, state, dispatch, callback) => {
           RLean.model = model;
           outputState = response.data;
           await dispatch(await model.updateState(response.data, type));
+          await dispatch(await model.updateState(false, `${model.type}_IS_LOADING`));
+          await dispatch(await model.updateState(new Date(), `${model.type}_LAST_UPDATED`));
 
           // Update isLoading object if necessary. Should not update if progressiveLoading
           // is true and we have a value in the store.
-          if (!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null)) {
-            if (getPath) {
-              RLean.model = oIsLoading;
-              await dispatch(await oIsLoading.updateState(false, `SET_IS_LOADING_${key.toUpperCase()}`));
-            }
-          }
+          // if (!isSync && (!progressiveLoading || typeof storeValue === 'undefined' || storeValue === null)) {
+          //   if (getPath) {
+          //     // RLean.model = oIsLoading;
+          //     // await dispatch(await oIsLoading.updateState(false, `SET_IS_LOADING_${key.toUpperCase()}`));
+          //     await dispatch(await model.updateState(false, `${model.type}_IS_LOADING`));
+          //   }
+          // }
 
           // Update lastUpdated flag
-          if (getPath) {
-            RLean.model = oLastUpdated;
-            await dispatch(await oLastUpdated.updateState(new Date(), `SET_LAST_UPDATED_${key.toUpperCase()}`));
-          }
+          // if (getPath) {
+          //   // RLean.model = oLastUpdated;
+          //   // await dispatch(await oLastUpdated.updateState(new Date(), `SET_LAST_UPDATED_${key.toUpperCase()}`));
+          //   await dispatch(await model.updateState(new Date(), `${model.type}_LAST_UPDATED`));
+          // }
 
           // await Store.set(lastUpdatedCopy, lastUpdatedCopy);
         }
       } catch (err) {
         // Set isLoading to false when there is an error
         if (getPath) {
-          RLean.model = oIsLoading;
-          await dispatch(await oIsLoading.updateState(false, `SET_IS_LOADING_${key.toUpperCase()}`));
+          // RLean.model = oIsLoading;
+          // await dispatch(await oIsLoading.updateState(false, `SET_IS_LOADING_${key.toUpperCase()}`));
+          await dispatch(await model.updateState(false, `${model.type}_IS_LOADING`));
+          await dispatch(await model.updateState(err, `${model.type}_ERROR`));
         }
       }
     }
@@ -188,7 +193,7 @@ export default function useGet(options, callback) {
     return [
       (options, callback) => {
         get(options, deepCopy(lastUpdatedRef.current), state, dispatch, callback);
-      }
+      },
     ];
   }
 

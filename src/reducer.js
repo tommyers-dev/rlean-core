@@ -1,6 +1,5 @@
 import { deepCopy, getValue } from '@rlean/utils';
 import { RLean } from './';
-import { IsLoading, LastUpdated } from './_internal';
 import { logActions, saveToIndexedDB, applyMiddleware } from './middleware';
 
 export const reducer = ({ ...state }, action) => {
@@ -20,10 +19,6 @@ export const reducer = ({ ...state }, action) => {
       Object.assign(combinedReducer, { [key]: objects[i].reducer(value, action) });
     }
   }
-
-  // Add IsLoading and LastUpdated reducers to main reducer.
-  Object.assign(combinedReducer, { isLoading: new IsLoading().reducer(state['isLoading'], action) });
-  Object.assign(combinedReducer, { lastUpdated: new LastUpdated().reducer(state['lastUpdated'], action) });
 
   let nextState = deepCopy(state);
   // TODO: stateKey is flawed. Doesn't work for nested state objects. Fix it.

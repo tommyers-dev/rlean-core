@@ -4,27 +4,32 @@ import { methods } from '../_internal/methods';
 class AxiosAdapter {
   async get(apiPayload) {
     const { url, headers } = apiPayload;
-    return await axios.get(url, headers);
+    const response = await axios.get(url, headers);
+    return response;
   }
 
   async post(apiPayload) {
     const { url, data, headers } = apiPayload;
-    return await axios({ method: methods.POST, url, data, headers});
+    const response = await axios({ method: methods.POST, url, data, headers });
+    return response;
   }
 
   async put(apiPayload) {
     const { url, data, headers } = apiPayload;
-    return await axios({ method: methods.PUT, url, data, headers});
+    const response = await axios({ method: methods.PUT, url, data, headers });
+    return response;
   }
 
   async del(apiPayload) {
     const { url, data, headers } = apiPayload;
-    return await axios({ method: methods.DELETE, url, data, headers});
+    const response = await axios({ method: methods.DELETE, url, data, headers });
+    return response;
   }
 
   async patch(apiPayload) {
     const { url, data, headers } = apiPayload;
-    return await axios({ method: methods.PATCH, url, data, headers});
+    const response = await axios({ method: methods.PATCH, url, data, headers });
+    return response;
   }
 }
 

@@ -3,17 +3,24 @@ import { Adapters } from './';
 
 export class Model extends Object {
   get key() {
-    return `${this.constructor.name.charAt(0).toLowerCase()}${this.constructor.name.slice(1)}`;
+    return console.error('Key is required.');
   }
 
   // If initialState isn't provided, a default one will be generated.
   get initialState() {
-    return { [this.key]: null };
+    const value = { [this.key]: null };
+
+    if (this.getPath) {
+      value.isLoading = false;
+      value.lastUpdated = null;
+    }
+
+    return value;
   }
 
   // If types isn't provided, a default one will be generated.
-  get types() {
-    return { [convertToType(this.constructor.name)]: `${convertToType(this.constructor.name)}` };
+  get type() {
+    return convertToType(this.key);
   }
 
   get getPath() {
@@ -91,11 +98,11 @@ export class Model extends Object {
   // If a reducer isn't provided, a default one will be generated.
   reducer(state, action) {
     switch (action.type) {
-      case convertToType(this.constructor.name):
+      case this.type:
         if (Array.isArray(action[this.key])) {
           return {
             ...state,
-            array: action[this.key]
+            array: action[this.key],
           };
         }
 
@@ -103,13 +110,21 @@ export class Model extends Object {
         if (typeof action[this.key] !== 'object') {
           return {
             ...state,
-            value: action[this.key]
+            value: action[this.key],
           };
         }
 
         return {
           ...state,
-          ...action[this.key]
+          ...action[this.key],
+        };
+
+      case `${this.type}_IS_LOADING`:
+      case `${this.type}_LAST_UPDATED`:
+      case `${this.type}_ERROR`:
+        return {
+          ...state,
+          ...action[this.key],
         };
 
       default:
@@ -126,9 +141,33 @@ export class Model extends Object {
    * @param {string} type
    */
   async updateState(value, type) {
-    return {
-      type: convertToType(this.constructor.name),
-      [this.key]: value
-    };
+    switch (type) {
+      case `${this.type}_IS_LOADING`:
+        return {
+          type: `${this.type}_IS_LOADING`,
+          [this.key]: {
+            isLoading: value,
+          },
+        };
+      case `${this.type}_LAST_UPDATED`:
+        return {
+          type: `${this.type}_LAST_UPDATED`,
+          [this.key]: {
+            lastUpdated: value,
+          },
+        };
+      case `${this.type}_ERROR`:
+        return {
+          type: `${this.type}_ERROR`,
+          [this.key]: {
+            error: value,
+          },
+        };
+      default:
+        return {
+          type: this.type,
+          [this.key]: value,
+        };
+    }
   }
 }
