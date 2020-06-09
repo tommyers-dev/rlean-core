@@ -12,12 +12,12 @@ import { Store } from './';
  * @param {Function} callback
  */
 const put = async (options, dispatch, callback) => {
-  const { model, body, save } = getOptions(options);
+  const { model, params, body, save } = getOptions(options);
 
   const putPath = model.putPath;
 
   if (putPath !== null) {
-    const payload = { path: putPath, body: body ? Object.assign({}, body) : {} };
+    const payload = { path: putPath, query: params, body: body ? Object.assign({}, body) : {} };
     const response = await request(payload, model, methods.PUT);
 
     // Don't do a deep compare on the return value against the current value.
@@ -58,7 +58,7 @@ export default function usePut(options, callback) {
     return [
       (options, callback) => {
         put(options, dispatch, callback);
-      }
+      },
     ];
   }
 

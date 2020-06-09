@@ -51,7 +51,7 @@ class Store {
    * Makes the 'clear' call to local storage to get clear local storage
    * Uses the storage engine found by decideWhichEngine, either adapter or default.
    */
-  async clear() {
+  async clear(model) {
     try {
       await model.adapters.storage.clear();
     } catch (err) {
