@@ -11,11 +11,11 @@ import { Store } from './';
  * @param {Function} [callback=null]
  */
 const patch = async (options, dispatch, callback) => {
-  const { model, body, save } = getOptions(options);
+  const { model, params, body, save } = getOptions(options);
   const patchPath = model.patchPath;
 
   if (patchPath !== null) {
-    const payload = { path: patchPath, body: body ? Object.assign({}, body) : {} };
+    const payload = { path: patchPath, query: params, body: body ? Object.assign({}, body) : {} };
     const response = await request(payload, model, methods.PATCH);
 
     // Don't do a deep compare on the return value against the current value.
@@ -29,7 +29,9 @@ const patch = async (options, dispatch, callback) => {
       await dispatch(await model.updateState(response.data));
     }
 
-    if (response && callback) callback(response);
+    if (response && callback) {
+      callback(response);
+    }
   } else {
     const o = inspectClass(model);
     console.error(`The ${o.ClassName} object is missing the patchPath attribute.`);
@@ -58,7 +60,7 @@ export default function usePatch(options, callback) {
     return [
       (options, callback) => {
         patch(options, dispatch, callback);
-      }
+      },
     ];
   }
 

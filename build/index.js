@@ -7058,8 +7058,8 @@ module.exports = g;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "request", function() { return request; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatPath", function() { return formatPath; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "request", function() { return request; });
 /* harmony import */ var _RLean__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
 /* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var _rlean_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__);
@@ -7071,112 +7071,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var request =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(payload, model, method) {
-    var nullableParams, apiUriOverride, headers, uri, path, apiPayload;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            nullableParams = model.nullableParams;
-            apiUriOverride = model.apiUriOverride;
-            headers = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.headers', {});
-            uri = apiUriOverride ? apiUriOverride : Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.uri', '');
-            path = formatPath(payload.path, payload.query, payload.body, method, nullableParams); // No path specified. Return undefined.
-
-            if (!(path === undefined || path === '')) {
-              _context.next = 7;
-              break;
-            }
-
-            return _context.abrupt("return");
-
-          case 7:
-            apiPayload = {
-              url: uri + path,
-              data: payload.body,
-              headers: headers
-            };
-            _context.t0 = method;
-            _context.next = _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].GET ? 11 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].POST ? 14 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].DELETE ? 17 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].PUT ? 20 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].PATCH ? 23 : 26;
-            break;
-
-          case 11:
-            _context.next = 13;
-            return model.adapters.api.get(apiPayload);
-
-          case 13:
-            return _context.abrupt("return", _context.sent);
-
-          case 14:
-            _context.next = 16;
-            return model.adapters.api.post(apiPayload);
-
-          case 16:
-            return _context.abrupt("return", _context.sent);
-
-          case 17:
-            _context.next = 19;
-            return model.adapters.api.del(apiPayload);
-
-          case 19:
-            return _context.abrupt("return", _context.sent);
-
-          case 20:
-            _context.next = 22;
-            return model.adapters.api.put(apiPayload);
-
-          case 22:
-            return _context.abrupt("return", _context.sent);
-
-          case 23:
-            _context.next = 25;
-            return model.adapters.api.patch(apiPayload);
-
-          case 25:
-            return _context.abrupt("return", _context.sent);
-
-          case 26:
-            return _context.abrupt("return");
-
-          case 27:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function request(_x, _x2, _x3) {
-    return _ref.apply(this, arguments);
-  };
-}();
 var formatPath = function formatPath(path, payloadQuery, payloadBody, method, nullableParams) {
   // Check for null params if they aren't allowed.
   if (!nullableParams) {
     if (payloadQuery) {
       for (var key in payloadQuery) {
         if (typeof payloadQuery[key] === 'undefined' || payloadQuery[key] === null) {
-          // Params cannot be null. Return undefined.
-          return;
-        }
-      }
-    } else if (payloadBody) {
-      for (var _key in payloadBody) {
-        if (typeof payloadBody[_key] === 'undefined' || payloadBody[_key] === null) {
-          // Params cannot be null. Return undefined.
+          // Params cannot be null.
           return;
         }
       }
     }
-  } // If request is not a GET or is a GET and has no params, return the base path.
+
+    if (payloadBody) {
+      for (var _key in payloadBody) {
+        if (typeof payloadBody[_key] === 'undefined' || payloadBody[_key] === null) {
+          // Params cannot be null.
+          return;
+        }
+      }
+    }
+  } // If the request has no params, return the base path.
 
 
-  if (path && (method !== _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].GET || !payloadQuery && !payloadBody)) return path; // If payloadQuery exists, return the path with the params appended.
+  if (path && !payloadQuery) {
+    return path;
+  } // If payloadQuery exists, return the path with the params appended.
+
 
   if (path && payloadQuery) {
     var returnValue; // Create an array of all payload keys.
@@ -7188,14 +7109,13 @@ var formatPath = function formatPath(path, payloadQuery, payloadBody, method, nu
     } // Replace all the :key instances with the actual values given.
 
 
-    returnValue = path.split('/').map(function (section, index) {
+    returnValue = path.split('/').map(function (section) {
       if (section.includes(':')) {
         var _key3 = section.match(/:(.*)/).pop(); // Remove key from queryStringKeys array since it is a path param.
 
 
-        var _index = queryStringKeys.indexOf(_key3);
-
-        queryStringKeys.splice(_index, 1);
+        var index = queryStringKeys.indexOf(_key3);
+        queryStringKeys.splice(index, 1);
         return section.replace(':' + _key3, payloadQuery[_key3]);
       }
 
@@ -7214,11 +7134,96 @@ var formatPath = function formatPath(path, payloadQuery, payloadBody, method, nu
     }
 
     return returnValue;
-  } // Could not format the path. Return undefined.
+  }
 
-
-  return;
+  return console.error('Could not format the path.');
 };
+var request =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(payload, model, method) {
+    var nullableParams, apiUriOverride, headers, uri, path, apiPayload;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            nullableParams = model.nullableParams;
+            apiUriOverride = model.apiUriOverride;
+            headers = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.headers', {});
+            uri = apiUriOverride ? apiUriOverride : Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_1__["getValue"])(_RLean__WEBPACK_IMPORTED_MODULE_0__["default"], 'config.api.uri', '');
+            path = formatPath(payload.path, payload.query, payload.body, method, nullableParams); // No path specified. Return undefined.
+
+            if (!(path === undefined || path === '')) {
+              _context.next = 8;
+              break;
+            }
+
+            console.error("Path is required.");
+            return _context.abrupt("return");
+
+          case 8:
+            apiPayload = {
+              url: uri + path,
+              data: payload.body,
+              headers: headers
+            };
+            _context.t0 = method;
+            _context.next = _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].GET ? 12 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].POST ? 15 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].DELETE ? 18 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].PUT ? 21 : _context.t0 === _methods__WEBPACK_IMPORTED_MODULE_2__["methods"].PATCH ? 24 : 27;
+            break;
+
+          case 12:
+            _context.next = 14;
+            return model.adapters.api.get(apiPayload);
+
+          case 14:
+            return _context.abrupt("return", _context.sent);
+
+          case 15:
+            _context.next = 17;
+            return model.adapters.api.post(apiPayload);
+
+          case 17:
+            return _context.abrupt("return", _context.sent);
+
+          case 18:
+            _context.next = 20;
+            return model.adapters.api.del(apiPayload);
+
+          case 20:
+            return _context.abrupt("return", _context.sent);
+
+          case 21:
+            _context.next = 23;
+            return model.adapters.api.put(apiPayload);
+
+          case 23:
+            return _context.abrupt("return", _context.sent);
+
+          case 24:
+            _context.next = 26;
+            return model.adapters.api.patch(apiPayload);
+
+          case 26:
+            return _context.abrupt("return", _context.sent);
+
+          case 27:
+            console.error('Unknown method specified.');
+            return _context.abrupt("return");
+
+          case 29:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function request(_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+}();
 
 /***/ }),
 /* 46 */
@@ -7300,7 +7305,9 @@ function () {
             return (0, _context.t0)(_context.t1);
 
           case 13:
-            if (callback) callback();
+            if (callback) {
+              callback();
+            }
 
           case 14:
           case "end":
@@ -7356,6 +7363,8 @@ module.exports = require("react");
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOptions", function() { return getOptions; });
 var getOptions = function getOptions(options) {
+  var _options$model, _options$params, _options$type, _options$body;
+
   if (!options) {
     return {
       model: null,
@@ -7368,11 +7377,11 @@ var getOptions = function getOptions(options) {
   }
 
   return {
-    model: options.model || null,
-    params: options.params || null,
+    model: (_options$model = options.model) !== null && _options$model !== void 0 ? _options$model : null,
+    params: (_options$params = options.params) !== null && _options$params !== void 0 ? _options$params : null,
     value: typeof options.value !== 'undefined' ? options.value : null,
-    type: options.type || null,
-    body: options.body || null,
+    type: (_options$type = options.type) !== null && _options$type !== void 0 ? _options$type : null,
+    body: (_options$body = options.body) !== null && _options$body !== void 0 ? _options$body : null,
     save: options.save
   };
 };
@@ -7795,7 +7804,9 @@ function () {
 
                       case 21:
                         // Execute optional callback
-                        if (callback) callback(outputState, outputResponse);
+                        if (callback) {
+                          callback(outputState, outputResponse);
+                        }
 
                       case 22:
                         if (typeof syncInterval === 'number') {
@@ -7813,7 +7824,10 @@ function () {
 
                                   case 2:
                                     // Execute optional callback
-                                    if (callback) callback(outputState, outputResponse); // Restart the sync.
+                                    if (callback) {
+                                      callback(outputState, outputResponse);
+                                    } // Restart the sync.
+
 
                                     _context.next = 5;
                                     return fetchData(true);
@@ -7938,13 +7952,13 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
-    var _getOptions, model, body, save, patchPath, payload, response, o;
+    var _getOptions, model, params, body, save, patchPath, payload, response, o;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_2__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body, save = _getOptions.save;
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_2__["getOptions"])(options), model = _getOptions.model, params = _getOptions.params, body = _getOptions.body, save = _getOptions.save;
             patchPath = model.patchPath;
 
             if (!(patchPath !== null)) {
@@ -7954,6 +7968,7 @@ function () {
 
             payload = {
               path: patchPath,
+              query: params,
               body: body ? Object.assign({}, body) : {}
             };
             _context.next = 6;
@@ -7986,7 +8001,10 @@ function () {
             return (0, _context.t0)(_context.t1);
 
           case 17:
-            if (response && callback) callback(response);
+            if (response && callback) {
+              callback(response);
+            }
+
             _context.next = 22;
             break;
 
@@ -8080,13 +8098,13 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
-    var _getOptions, model, body, save, postPath, persistData, payload, response, o;
+    var _getOptions, model, params, body, save, postPath, persistData, payload, response, o;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_1__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body, save = _getOptions.save;
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_1__["getOptions"])(options), model = _getOptions.model, params = _getOptions.params, body = _getOptions.body, save = _getOptions.save;
             postPath = model.postPath;
             persistData = model.persistData;
 
@@ -8097,6 +8115,7 @@ function () {
 
             payload = {
               path: postPath,
+              query: params,
               body: body ? Object.assign({}, body) : {}
             };
             _context.next = 7;
@@ -8129,7 +8148,10 @@ function () {
             return (0, _context.t0)(_context.t1);
 
           case 18:
-            if (response && callback) callback(response);
+            if (response && callback) {
+              callback(response);
+            }
+
             _context.next = 23;
             break;
 
@@ -8222,13 +8244,13 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(options, dispatch, callback) {
-    var _getOptions, model, body, save, putPath, payload, response, o;
+    var _getOptions, model, params, body, save, putPath, payload, response, o;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_1__["getOptions"])(options), model = _getOptions.model, body = _getOptions.body, save = _getOptions.save;
+            _getOptions = Object(_internal_getOptions__WEBPACK_IMPORTED_MODULE_1__["getOptions"])(options), model = _getOptions.model, params = _getOptions.params, body = _getOptions.body, save = _getOptions.save;
             putPath = model.putPath;
 
             if (!(putPath !== null)) {
@@ -8238,6 +8260,7 @@ function () {
 
             payload = {
               path: putPath,
+              query: params,
               body: body ? Object.assign({}, body) : {}
             };
             _context.next = 6;
@@ -8537,7 +8560,9 @@ function () {
             return (0, _context.t0)(_context.t1);
 
           case 14:
-            if (callback) callback();
+            if (callback) {
+              callback();
+            }
 
           case 15:
           case "end":

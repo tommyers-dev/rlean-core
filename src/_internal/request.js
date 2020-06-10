@@ -2,61 +2,31 @@ import RLean from '../RLean';
 import { getValue } from '@rlean/utils';
 import { methods } from './methods';
 
-export const request = async (payload, model, method) => {
-  const nullableParams = model.nullableParams;
-  const apiUriOverride = model.apiUriOverride;
-  const headers = getValue(RLean, 'config.api.headers', {});
-  const uri = apiUriOverride ? apiUriOverride : getValue(RLean, 'config.api.uri', '');
-  const path = formatPath(payload.path, payload.query, payload.body, method, nullableParams);
-
-  // No path specified. Return undefined.
-  if (path === undefined || path === '') return;
-
-  const apiPayload = {
-    url: uri + path,
-    data: payload.body,
-    headers
-  };
-
-  switch (method) {
-    case methods.GET:
-      return await model.adapters.api.get(apiPayload);
-    case methods.POST:
-      return await model.adapters.api.post(apiPayload);
-    case methods.DELETE:
-      return await model.adapters.api.del(apiPayload);
-    case methods.PUT:
-      return await model.adapters.api.put(apiPayload);
-    case methods.PATCH:
-      return await model.adapters.api.patch(apiPayload);
-    default:
-      // Unknown method specified. Return undefined.
-      return;
-  }
-};
-
 export const formatPath = (path, payloadQuery, payloadBody, method, nullableParams) => {
   // Check for null params if they aren't allowed.
   if (!nullableParams) {
     if (payloadQuery) {
       for (let key in payloadQuery) {
         if (typeof payloadQuery[key] === 'undefined' || payloadQuery[key] === null) {
-          // Params cannot be null. Return undefined.
+          // Params cannot be null.
           return;
         }
       }
-    } else if (payloadBody) {
+    }
+    if (payloadBody) {
       for (let key in payloadBody) {
         if (typeof payloadBody[key] === 'undefined' || payloadBody[key] === null) {
-          // Params cannot be null. Return undefined.
+          // Params cannot be null.
           return;
         }
       }
     }
   }
 
-  // If request is not a GET or is a GET and has no params, return the base path.
-  if (path && (method !== methods.GET || (!payloadQuery && !payloadBody))) return path;
+  // If the request has no params, return the base path.
+  if (path && !payloadQuery) {
+    return path;
+  }
 
   // If payloadQuery exists, return the path with the params appended.
   if (path && payloadQuery) {
@@ -71,7 +41,7 @@ export const formatPath = (path, payloadQuery, payloadBody, method, nullablePara
     // Replace all the :key instances with the actual values given.
     returnValue = path
       .split('/')
-      .map((section, index) => {
+      .map(section => {
         if (section.includes(':')) {
           const key = section.match(/:(.*)/).pop();
 
@@ -102,6 +72,41 @@ export const formatPath = (path, payloadQuery, payloadBody, method, nullablePara
     return returnValue;
   }
 
-  // Could not format the path. Return undefined.
-  return;
+  return console.error('Could not format the path.');
+};
+
+export const request = async (payload, model, method) => {
+  const nullableParams = model.nullableParams;
+  const apiUriOverride = model.apiUriOverride;
+  const headers = getValue(RLean, 'config.api.headers', {});
+  const uri = apiUriOverride ? apiUriOverride : getValue(RLean, 'config.api.uri', '');
+  const path = formatPath(payload.path, payload.query, payload.body, method, nullableParams);
+
+  // No path specified. Return undefined.
+  if (path === undefined || path === '') {
+    console.error(`Path is required.`);
+    return;
+  }
+
+  const apiPayload = {
+    url: uri + path,
+    data: payload.body,
+    headers,
+  };
+
+  switch (method) {
+    case methods.GET:
+      return await model.adapters.api.get(apiPayload);
+    case methods.POST:
+      return await model.adapters.api.post(apiPayload);
+    case methods.DELETE:
+      return await model.adapters.api.del(apiPayload);
+    case methods.PUT:
+      return await model.adapters.api.put(apiPayload);
+    case methods.PATCH:
+      return await model.adapters.api.patch(apiPayload);
+    default:
+      console.error('Unknown method specified.');
+      return;
+  }
 };

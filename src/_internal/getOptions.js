@@ -6,16 +6,16 @@ export const getOptions = options => {
       value: null,
       type: null,
       body: null,
-      save: false
+      save: false,
     };
   }
 
   return {
-    model: options.model || null,
-    params: options.params || null,
+    model: options.model ?? null,
+    params: options.params ?? null,
     value: typeof options.value !== 'undefined' ? options.value : null,
-    type: options.type || null,
-    body: options.body || null,
-    save: options.save
+    type: options.type ?? null,
+    body: options.body ?? null,
+    save: options.save,
   };
 };

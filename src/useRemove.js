@@ -8,7 +8,9 @@ import { getOptions } from './_internal/getOptions';
  * @param {Function} [callback=null]
  */
 const remove = async (options, dispatch, callback) => {
-  if (typeof options === 'undefined') return;
+  if (typeof options === 'undefined') {
+    return;
+  }
 
   const { model, type } = getOptions(options);
   const persistData = model.persistData;
@@ -21,7 +23,9 @@ const remove = async (options, dispatch, callback) => {
   RLean.model = model;
   await dispatch(await model.updateState(model.initialState, type));
 
-  if (callback) callback();
+  if (callback) {
+    callback();
+  }
 };
 
 /**

@@ -14,7 +14,9 @@ import { Store } from './';
  * @param {Function} [callback=null]
  */
 const save = async (options, dispatch, callback) => {
-  if (typeof options === 'undefined' || typeof options.value === 'undefined') return;
+  if (typeof options === 'undefined' || typeof options.value === 'undefined') {
+    return;
+  }
 
   const { model, value, type } = getOptions(options);
 
@@ -25,7 +27,9 @@ const save = async (options, dispatch, callback) => {
   RLean.model = model;
   await dispatch(await model.updateState(value, type));
 
-  if (callback) callback();
+  if (callback) {
+    callback();
+  }
 };
 
 /**
@@ -45,7 +49,7 @@ export default function useSave(options, callback) {
     return [
       (options, callback) => {
         save(options, dispatch, callback);
-      }
+      },
     ];
   }
 

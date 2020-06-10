@@ -11,13 +11,13 @@ import { Store } from './';
  * @param {Function} callback
  */
 const post = async (options, dispatch, callback) => {
-  const { model, body, save } = getOptions(options);
+  const { model, params, body, save } = getOptions(options);
 
   const postPath = model.postPath;
   const persistData = model.persistData;
 
   if (postPath !== null) {
-    const payload = { path: postPath, body: body ? Object.assign({}, body) : {} };
+    const payload = { path: postPath, query: params, body: body ? Object.assign({}, body) : {} };
     const response = await request(payload, model, methods.POST);
 
     if (response && save) {
@@ -28,7 +28,9 @@ const post = async (options, dispatch, callback) => {
       await dispatch(await model.updateState(response.data));
     }
 
-    if (response && callback) callback(response);
+    if (response && callback) {
+      callback(response);
+    }
   } else {
     const o = inspectClass(model);
     console.error(`The ${o.ClassName} object is missing the postPath attribute.`);
@@ -56,7 +58,7 @@ export default function usePost(options, callback) {
     return [
       (options, callback) => {
         post(options, dispatch, callback);
-      }
+      },
     ];
   }
 
