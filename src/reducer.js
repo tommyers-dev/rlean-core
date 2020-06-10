@@ -28,10 +28,7 @@ export const reducer = ({ ...state }, action) => {
   // TODO: Update state object to display next state instead of current state. Previous attempt was flawed.
   // nextState[stateKey] = stateValue;
 
-  if (getValue(RLean, 'config.logToConsole', true)) {
-    middleware.push(logActions);
-  }
-
+  middleware.push(logActions);
   middleware.push(saveToIndexedDB);
   applyMiddleware(RLean.model, nextState, action, middleware);
 
