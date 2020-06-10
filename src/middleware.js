@@ -17,8 +17,10 @@ async function saveToIndexedDB(model, state, action) {
 }
 
 async function applyMiddleware(model, state, action, middleware) {
-  return middleware.reduce((st, fn) => {
-    return await fn(model, st, action);
+  return middleware.reduce(async (st, fn) => {
+    // sorry
+    const returnable = await fn(model, st, action);
+    return returnable;
   }, state);
 }
 
