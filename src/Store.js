@@ -1,3 +1,5 @@
+import localforage from 'localforage';
+
 class Store {
   /*
    * Makes the 'set' call to local storage to store data
@@ -51,13 +53,13 @@ class Store {
    * Makes the 'clear' call to local storage to get clear local storage
    * Uses the storage engine found by decideWhichEngine, either adapter or default.
    */
-  async clear(model) {
-    try {
-      await model.adapters.storage.clear();
-    } catch (err) {
-      console.log(err);
-    }
-  }
+   async clear() {
+     try {
+       await localforage.clear();
+     } catch (err) {
+       console.error(err);
+     }
+   }
 
   /*
    * Makes the 'remove' call to local storage to get remove a value from local storage
