@@ -20,7 +20,7 @@ export const reducer = ({ ...state }, action) => {
     }
   }
 
-  let nextState = deepCopy(state);
+  const nextState = deepCopy(state);
   // TODO: stateKey is flawed. Doesn't work for nested state objects. Fix it.
   // const stateKey = Object.keys(action)[1].toString();
   // const stateValue = action[stateKey];
@@ -28,6 +28,7 @@ export const reducer = ({ ...state }, action) => {
   // TODO: Update state object to display next state instead of current state. Previous attempt was flawed.
   // nextState[stateKey] = stateValue;
 
+  middleware.push(logActions);
   middleware.push(saveToIndexedDB);
   applyMiddleware(RLean.model, nextState, action, middleware);
 

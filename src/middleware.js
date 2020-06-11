@@ -6,6 +6,7 @@ async function logActions(model, state, action) {
   console.log(`state`, state);
   console.log(`dispatching ${action.type}`, { [stateKey]: action[stateKey] });
   console.log(`next state`, state);
+
   return state;
 }
 
