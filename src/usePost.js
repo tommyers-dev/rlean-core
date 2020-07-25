@@ -17,19 +17,25 @@ const post = async (options, dispatch, callback) => {
   const persistData = model.persistData;
 
   if (postPath !== null) {
-    const payload = { path: postPath, query: params, body: body ? Object.assign({}, body) : {} };
-    const response = await request(payload, model, methods.POST);
+    try {
+      const payload = { path: postPath, query: params, body: body ? Object.assign({}, body) : {} };
+      const response = await request(payload, model, methods.POST);
 
-    if (response && save) {
-      if (persistData) {
-        await Store.set(model, response.data);
+      if (response && save) {
+        if (persistData) {
+          await Store.set(model, response.data);
+        }
+
+        await dispatch(await model.updateState(response.data));
       }
 
-      await dispatch(await model.updateState(response.data));
-    }
-
-    if (response && callback) {
-      callback(response);
+      if (callback && response) {
+        callback(response);
+      }
+    } catch (error) {
+      if (callback) {
+        callback(null, error);
+      }
     }
   } else {
     const o = inspectClass(model);

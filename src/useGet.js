@@ -30,15 +30,34 @@ const get = async (options, lastUpdated, state, dispatch, callback) => {
     async function callApi() {
       const isEqual = Compare.deepCompare(storeValue, stateValue).isEqual;
 
+      // add a case where persistData is false and preferStore is true
+      // if store and state is equal, then we should do nothing.
+      // don't call the API
+      if (!persistData && preferStore && typeof storeValue !== 'undefined' && storeValue !== null && isEqual) {
+        console.log(`${key}: persistData is false and preferStore is true. isEqual true. state should not be changed. CONDITION 1`);
+
+        return;
+      } else if (!persistData && preferStore && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual) {
+        console.log(`${key}: persistData is false and preferStore is true. isEqual false. state should not be changed to reflect store value. CONDITION 2`);
+
+        outputState = storeValue;
+        await dispatch(await model.updateState(storeValue, type));
+        return;
+      }
+
       if (persistData && preferStore && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual) {
         // We already have a value in the store and it doesn't match state, so
         // return the value.
+        console.log(`${key}: persistData is true and preferStore is true and values are not equal. load data from store. CONDITION 3`);
+
         outputState = storeValue;
         await dispatch(await model.updateState(storeValue, type));
         return;
       } else if (persistData && progressiveLoading && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual) {
         // If progressiveLoading is true, then set the data with the current store
         // value while we wait for a response from the API.
+        console.log(`${key}: persist Data is true and progressiveLoading is true. value in store. are not equal. load state from store. CONDITION 4`);
+
         outputState = storeValue;
         await dispatch(await model.updateState(storeValue, type));
       }
@@ -46,9 +65,13 @@ const get = async (options, lastUpdated, state, dispatch, callback) => {
       // If there is no getPath, assume it's state/store only data.
       if (!model.getPath) {
         if (persistData && !isEqual) {
+          console.log(`${key}: no getPath and persistData is true. not equal. should load from store. CONDITION 5`);
+
           outputState = storeValue;
           await dispatch(await model.updateState(storeValue, type));
         }
+
+        console.log(`${key}: no getPath and not persisting data or store and state are equal. do nothing. CONDITION 6`);
 
         return;
       }
@@ -56,6 +79,8 @@ const get = async (options, lastUpdated, state, dispatch, callback) => {
       // If syncAfterTimeElapsed is true, verify that the time elapsed
       // exceeds the threshold before continuing.
       if (syncAfterTimeElapsed) {
+        console.log(`${key}: syncAfterTimeElapsed is true. sync if time has elapsed. CONDITION 7`);
+
         const timestamp = lastUpdated[key];
         const now = new Date();
         const timeElapsed = timestamp + syncAfterTimeElapsed;
@@ -85,6 +110,8 @@ const get = async (options, lastUpdated, state, dispatch, callback) => {
       try {
         const response = await request(payload, model, methods.GET);
 
+        console.log(`${key}: calling API`);
+
         if (response) {
           outputResponse = response;
 
@@ -100,10 +127,10 @@ const get = async (options, lastUpdated, state, dispatch, callback) => {
             }
           }
 
-          /*if (persistData) {
+          if (persistData) {
             // Update storage.
             await Store.set(model, response.data);
-          }*/
+          }
 
           // Set value in state.
           RLean.model = model;

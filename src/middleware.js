@@ -5,7 +5,15 @@ async function logActions(model, state, action) {
 
   console.log(`state`, state);
   console.log(`dispatching ${action.type}`, { [stateKey]: action[stateKey] });
-  console.log(`next state`, state);
+
+  // TODO: stateKey is flawed. Doesn't work for nested state objects. Fix it.
+  // const stateKey = Object.keys(action)[1].toString();
+  // const stateValue = action[stateKey];
+
+  // TODO: Update state object to display next state instead of current state. Previous attempt was flawed.
+  // nextState[stateKey] = stateValue;
+
+  // console.log(`next state`, state);
 
   return state;
 }

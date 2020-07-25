@@ -21,7 +21,7 @@ const remove = async (options, dispatch, callback) => {
 
   // Reset the state of the model.
   RLean.model = model;
-  await dispatch(await model.updateState(model.initialState, type));
+  await dispatch(await model.updateState(model.initialState[model.key], type));
 
   if (callback) {
     callback();

@@ -7160,7 +7160,7 @@ function () {
               break;
             }
 
-            console.error("Path is required.");
+            console.warn("Path is required.");
             return _context.abrupt("return");
 
           case 8:
@@ -7544,139 +7544,176 @@ function () {
                               while (1) {
                                 switch (_context2.prev = _context2.next) {
                                   case 0:
-                                    isEqual = _rlean_utils__WEBPACK_IMPORTED_MODULE_1__["Compare"].deepCompare(storeValue, stateValue).isEqual;
+                                    isEqual = _rlean_utils__WEBPACK_IMPORTED_MODULE_1__["Compare"].deepCompare(storeValue, stateValue).isEqual; // add a case where persistData is false and preferStore is true
+                                    // if store and state is equal, then we should do nothing.
+                                    // don't call the API
 
+                                    if (!(!persistData && preferStore && typeof storeValue !== 'undefined' && storeValue !== null && isEqual)) {
+                                      _context2.next = 6;
+                                      break;
+                                    }
+
+                                    console.log("".concat(key, ": persistData is false and preferStore is true. isEqual true. state should not be changed. CONDITION 1"));
+                                    return _context2.abrupt("return");
+
+                                  case 6:
+                                    if (!(!persistData && preferStore && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual)) {
+                                      _context2.next = 16;
+                                      break;
+                                    }
+
+                                    console.log("".concat(key, ": persistData is false and preferStore is true. isEqual false. state should not be changed to reflect store value. CONDITION 2"));
+                                    outputState = storeValue;
+                                    _context2.t0 = dispatch;
+                                    _context2.next = 12;
+                                    return model.updateState(storeValue, type);
+
+                                  case 12:
+                                    _context2.t1 = _context2.sent;
+                                    _context2.next = 15;
+                                    return (0, _context2.t0)(_context2.t1);
+
+                                  case 15:
+                                    return _context2.abrupt("return");
+
+                                  case 16:
                                     if (!(persistData && preferStore && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual)) {
-                                      _context2.next = 12;
+                                      _context2.next = 28;
                                       break;
                                     }
 
                                     // We already have a value in the store and it doesn't match state, so
                                     // return the value.
+                                    console.log("".concat(key, ": persistData is true and preferStore is true and values are not equal. load data from store. CONDITION 3"));
                                     outputState = storeValue;
-                                    _context2.t0 = dispatch;
-                                    _context2.next = 6;
+                                    _context2.t2 = dispatch;
+                                    _context2.next = 22;
                                     return model.updateState(storeValue, type);
 
-                                  case 6:
-                                    _context2.t1 = _context2.sent;
-                                    _context2.next = 9;
-                                    return (0, _context2.t0)(_context2.t1);
+                                  case 22:
+                                    _context2.t3 = _context2.sent;
+                                    _context2.next = 25;
+                                    return (0, _context2.t2)(_context2.t3);
 
-                                  case 9:
+                                  case 25:
                                     return _context2.abrupt("return");
 
-                                  case 12:
+                                  case 28:
                                     if (!(persistData && progressiveLoading && typeof storeValue !== 'undefined' && storeValue !== null && !isEqual)) {
-                                      _context2.next = 20;
+                                      _context2.next = 37;
                                       break;
                                     }
 
                                     // If progressiveLoading is true, then set the data with the current store
                                     // value while we wait for a response from the API.
+                                    console.log("".concat(key, ": persist Data is true and progressiveLoading is true. value in store. are not equal. load state from store. CONDITION 4"));
                                     outputState = storeValue;
-                                    _context2.t2 = dispatch;
-                                    _context2.next = 17;
+                                    _context2.t4 = dispatch;
+                                    _context2.next = 34;
                                     return model.updateState(storeValue, type);
 
-                                  case 17:
-                                    _context2.t3 = _context2.sent;
-                                    _context2.next = 20;
-                                    return (0, _context2.t2)(_context2.t3);
+                                  case 34:
+                                    _context2.t5 = _context2.sent;
+                                    _context2.next = 37;
+                                    return (0, _context2.t4)(_context2.t5);
 
-                                  case 20:
+                                  case 37:
                                     if (model.getPath) {
-                                      _context2.next = 30;
+                                      _context2.next = 49;
                                       break;
                                     }
 
                                     if (!(persistData && !isEqual)) {
-                                      _context2.next = 29;
+                                      _context2.next = 47;
                                       break;
                                     }
 
+                                    console.log("".concat(key, ": no getPath and persistData is true. not equal. should load from store. CONDITION 5"));
                                     outputState = storeValue;
-                                    _context2.t4 = dispatch;
-                                    _context2.next = 26;
+                                    _context2.t6 = dispatch;
+                                    _context2.next = 44;
                                     return model.updateState(storeValue, type);
 
-                                  case 26:
-                                    _context2.t5 = _context2.sent;
-                                    _context2.next = 29;
-                                    return (0, _context2.t4)(_context2.t5);
+                                  case 44:
+                                    _context2.t7 = _context2.sent;
+                                    _context2.next = 47;
+                                    return (0, _context2.t6)(_context2.t7);
 
-                                  case 29:
+                                  case 47:
+                                    console.log("".concat(key, ": no getPath and not persisting data or store and state are equal. do nothing. CONDITION 6"));
                                     return _context2.abrupt("return");
 
-                                  case 30:
+                                  case 49:
                                     if (!syncAfterTimeElapsed) {
-                                      _context2.next = 43;
+                                      _context2.next = 63;
                                       break;
                                     }
 
+                                    console.log("".concat(key, ": syncAfterTimeElapsed is true. sync if time has elapsed. CONDITION 7"));
                                     timestamp = lastUpdated[key];
                                     now = new Date();
                                     timeElapsed = timestamp + syncAfterTimeElapsed; // Don't make API call.
 
                                     if (!(timeElapsed < now && storeValue)) {
-                                      _context2.next = 43;
+                                      _context2.next = 63;
                                       break;
                                     }
 
                                     outputState = storeValue;
-                                    _context2.t6 = dispatch;
-                                    _context2.next = 39;
+                                    _context2.t8 = dispatch;
+                                    _context2.next = 59;
                                     return model.updateState(storeValue, type);
 
-                                  case 39:
-                                    _context2.t7 = _context2.sent;
-                                    _context2.next = 42;
-                                    return (0, _context2.t6)(_context2.t7);
+                                  case 59:
+                                    _context2.t9 = _context2.sent;
+                                    _context2.next = 62;
+                                    return (0, _context2.t8)(_context2.t9);
 
-                                  case 42:
+                                  case 62:
                                     return _context2.abrupt("return");
 
-                                  case 43:
+                                  case 63:
                                     if (!(!isSync && (!progressiveLoading || storeValue === 'undefined' || storeValue === null))) {
-                                      _context2.next = 51;
+                                      _context2.next = 71;
                                       break;
                                     }
 
                                     if (!getPath) {
-                                      _context2.next = 51;
+                                      _context2.next = 71;
                                       break;
                                     }
 
-                                    _context2.t8 = dispatch;
-                                    _context2.next = 48;
+                                    _context2.t10 = dispatch;
+                                    _context2.next = 68;
                                     return model.updateState(true, "".concat(model.type, "_IS_LOADING"));
 
-                                  case 48:
-                                    _context2.t9 = _context2.sent;
-                                    _context2.next = 51;
-                                    return (0, _context2.t8)(_context2.t9);
+                                  case 68:
+                                    _context2.t11 = _context2.sent;
+                                    _context2.next = 71;
+                                    return (0, _context2.t10)(_context2.t11);
 
-                                  case 51:
+                                  case 71:
                                     payload = {
                                       path: getPath,
                                       query: params
                                     };
-                                    _context2.prev = 52;
-                                    _context2.next = 55;
+                                    _context2.prev = 72;
+                                    _context2.next = 75;
                                     return Object(_internal__WEBPACK_IMPORTED_MODULE_2__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_2__["methods"].GET);
 
-                                  case 55:
+                                  case 75:
                                     response = _context2.sent;
+                                    console.log("".concat(key, ": calling API"));
 
                                     if (!response) {
-                                      _context2.next = 83;
+                                      _context2.next = 107;
                                       break;
                                     }
 
                                     outputResponse = response; // If isSync, do a deepCompare of the result with what's in state, or state and store.
 
                                     if (!(isSync || progressiveLoading && persistData && typeof storeValue !== 'undefined' && storeValue !== null || !persistData)) {
-                                      _context2.next = 63;
+                                      _context2.next = 84;
                                       break;
                                     }
 
@@ -7686,87 +7723,92 @@ function () {
                                     _isEqual = _rlean_utils__WEBPACK_IMPORTED_MODULE_1__["Compare"].deepCompare(response.data, valueToCompare).isEqual;
 
                                     if (!_isEqual) {
-                                      _context2.next = 63;
+                                      _context2.next = 84;
                                       break;
                                     }
 
                                     return _context2.abrupt("return");
 
-                                  case 63:
-                                    /*if (persistData) {
-                                      // Update storage.
-                                      await Store.set(model, response.data);
-                                    }*/
-                                    // Set value in state.
-                                    ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = model;
-                                    outputState = response.data;
-                                    _context2.t10 = dispatch;
-                                    _context2.next = 68;
-                                    return model.updateState(response.data, type);
-
-                                  case 68:
-                                    _context2.t11 = _context2.sent;
-                                    _context2.next = 71;
-                                    return (0, _context2.t10)(_context2.t11);
-
-                                  case 71:
-                                    _context2.t12 = dispatch;
-                                    _context2.next = 74;
-                                    return model.updateState(false, "".concat(model.type, "_IS_LOADING"));
-
-                                  case 74:
-                                    _context2.t13 = _context2.sent;
-                                    _context2.next = 77;
-                                    return (0, _context2.t12)(_context2.t13);
-
-                                  case 77:
-                                    _context2.t14 = dispatch;
-                                    _context2.next = 80;
-                                    return model.updateState(new Date(), "".concat(model.type, "_LAST_UPDATED"));
-
-                                  case 80:
-                                    _context2.t15 = _context2.sent;
-                                    _context2.next = 83;
-                                    return (0, _context2.t14)(_context2.t15);
-
-                                  case 83:
-                                    _context2.next = 100;
-                                    break;
-
-                                  case 85:
-                                    _context2.prev = 85;
-                                    _context2.t16 = _context2["catch"](52);
-
-                                    if (!getPath) {
-                                      _context2.next = 100;
+                                  case 84:
+                                    if (!persistData) {
+                                      _context2.next = 87;
                                       break;
                                     }
 
-                                    _context2.t17 = dispatch;
-                                    _context2.next = 91;
+                                    _context2.next = 87;
+                                    return ___WEBPACK_IMPORTED_MODULE_3__["Store"].set(model, response.data);
+
+                                  case 87:
+                                    // Set value in state.
+                                    ___WEBPACK_IMPORTED_MODULE_3__["RLean"].model = model;
+                                    outputState = response.data;
+                                    _context2.t12 = dispatch;
+                                    _context2.next = 92;
+                                    return model.updateState(response.data, type);
+
+                                  case 92:
+                                    _context2.t13 = _context2.sent;
+                                    _context2.next = 95;
+                                    return (0, _context2.t12)(_context2.t13);
+
+                                  case 95:
+                                    _context2.t14 = dispatch;
+                                    _context2.next = 98;
                                     return model.updateState(false, "".concat(model.type, "_IS_LOADING"));
 
-                                  case 91:
-                                    _context2.t18 = _context2.sent;
-                                    _context2.next = 94;
-                                    return (0, _context2.t17)(_context2.t18);
+                                  case 98:
+                                    _context2.t15 = _context2.sent;
+                                    _context2.next = 101;
+                                    return (0, _context2.t14)(_context2.t15);
 
-                                  case 94:
+                                  case 101:
+                                    _context2.t16 = dispatch;
+                                    _context2.next = 104;
+                                    return model.updateState(new Date(), "".concat(model.type, "_LAST_UPDATED"));
+
+                                  case 104:
+                                    _context2.t17 = _context2.sent;
+                                    _context2.next = 107;
+                                    return (0, _context2.t16)(_context2.t17);
+
+                                  case 107:
+                                    _context2.next = 124;
+                                    break;
+
+                                  case 109:
+                                    _context2.prev = 109;
+                                    _context2.t18 = _context2["catch"](72);
+
+                                    if (!getPath) {
+                                      _context2.next = 124;
+                                      break;
+                                    }
+
                                     _context2.t19 = dispatch;
-                                    _context2.next = 97;
-                                    return model.updateState(_context2.t16, "".concat(model.type, "_ERROR"));
+                                    _context2.next = 115;
+                                    return model.updateState(false, "".concat(model.type, "_IS_LOADING"));
 
-                                  case 97:
+                                  case 115:
                                     _context2.t20 = _context2.sent;
-                                    _context2.next = 100;
+                                    _context2.next = 118;
                                     return (0, _context2.t19)(_context2.t20);
 
-                                  case 100:
+                                  case 118:
+                                    _context2.t21 = dispatch;
+                                    _context2.next = 121;
+                                    return model.updateState(_context2.t18, "".concat(model.type, "_ERROR"));
+
+                                  case 121:
+                                    _context2.t22 = _context2.sent;
+                                    _context2.next = 124;
+                                    return (0, _context2.t21)(_context2.t22);
+
+                                  case 124:
                                   case "end":
                                     return _context2.stop();
                                 }
                               }
-                            }, _callee2, null, [[52, 85]]);
+                            }, _callee2, null, [[72, 109]]);
                           }));
                           return _callApi.apply(this, arguments);
                         };
@@ -8109,62 +8151,75 @@ function () {
             persistData = model.persistData;
 
             if (!(postPath !== null)) {
-              _context.next = 21;
+              _context.next = 27;
               break;
             }
 
+            _context.prev = 4;
             payload = {
               path: postPath,
               query: params,
               body: body ? Object.assign({}, body) : {}
             };
-            _context.next = 7;
+            _context.next = 8;
             return Object(_internal__WEBPACK_IMPORTED_MODULE_0__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_0__["methods"].POST);
 
-          case 7:
+          case 8:
             response = _context.sent;
 
             if (!(response && save)) {
-              _context.next = 18;
+              _context.next = 19;
               break;
             }
 
             if (!persistData) {
-              _context.next = 12;
+              _context.next = 13;
               break;
             }
 
-            _context.next = 12;
+            _context.next = 13;
             return ___WEBPACK_IMPORTED_MODULE_2__["Store"].set(model, response.data);
 
-          case 12:
+          case 13:
             _context.t0 = dispatch;
-            _context.next = 15;
+            _context.next = 16;
             return model.updateState(response.data);
 
-          case 15:
+          case 16:
             _context.t1 = _context.sent;
-            _context.next = 18;
+            _context.next = 19;
             return (0, _context.t0)(_context.t1);
 
-          case 18:
-            if (response && callback) {
+          case 19:
+            if (callback && response) {
               callback(response);
             }
 
-            _context.next = 23;
+            _context.next = 25;
             break;
 
-          case 21:
+          case 22:
+            _context.prev = 22;
+            _context.t2 = _context["catch"](4);
+
+            if (callback) {
+              callback(null, _context.t2);
+            }
+
+          case 25:
+            _context.next = 29;
+            break;
+
+          case 27:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_0__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the postPath attribute."));
 
-          case 23:
+          case 29:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[4, 22]]);
   }));
 
   return function post(_x, _x2, _x3) {
@@ -8552,7 +8607,7 @@ function () {
             ___WEBPACK_IMPORTED_MODULE_1__["RLean"].model = model;
             _context.t0 = dispatch;
             _context.next = 11;
-            return model.updateState(model.initialState, type);
+            return model.updateState(model.initialState[model.key], type);
 
           case 11:
             _context.t1 = _context.sent;
@@ -8640,14 +8695,9 @@ var reducer = function reducer(_ref, action) {
     }
   }
 
-  var nextState = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_0__["deepCopy"])(state); // TODO: stateKey is flawed. Doesn't work for nested state objects. Fix it.
-  // const stateKey = Object.keys(action)[1].toString();
-  // const stateValue = action[stateKey];
-  // TODO: Update state object to display next state instead of current state. Previous attempt was flawed.
-  // nextState[stateKey] = stateValue;
+  var nextState = Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_0__["deepCopy"])(state);
+  middleware.push(_middleware__WEBPACK_IMPORTED_MODULE_2__["logActions"]); // middleware.push(saveToIndexedDB);
 
-  middleware.push(_middleware__WEBPACK_IMPORTED_MODULE_2__["logActions"]);
-  middleware.push(_middleware__WEBPACK_IMPORTED_MODULE_2__["saveToIndexedDB"]);
   Object(_middleware__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(___WEBPACK_IMPORTED_MODULE_1__["RLean"].model, nextState, action, middleware);
   return combinedReducer;
 };
@@ -8687,11 +8737,16 @@ function _logActions() {
           case 0:
             stateKey = Object.keys(action)[1].toString();
             console.log("state", state);
-            console.log("dispatching ".concat(action.type), _defineProperty({}, stateKey, action[stateKey]));
-            console.log("next state", state);
+            console.log("dispatching ".concat(action.type), _defineProperty({}, stateKey, action[stateKey])); // TODO: stateKey is flawed. Doesn't work for nested state objects. Fix it.
+            // const stateKey = Object.keys(action)[1].toString();
+            // const stateValue = action[stateKey];
+            // TODO: Update state object to display next state instead of current state. Previous attempt was flawed.
+            // nextState[stateKey] = stateValue;
+            // console.log(`next state`, state);
+
             return _context.abrupt("return", state);
 
-          case 5:
+          case 4:
           case "end":
             return _context.stop();
         }

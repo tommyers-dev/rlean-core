@@ -84,7 +84,7 @@ export const request = async (payload, model, method) => {
 
   // No path specified. Return undefined.
   if (path === undefined || path === '') {
-    console.error(`Path is required.`);
+    console.warn(`Path is required.`);
     return;
   }
 
