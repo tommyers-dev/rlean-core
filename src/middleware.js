@@ -1,4 +1,4 @@
-import { Store } from './';
+import { Store } from "./";
 
 async function logActions(model, state, action) {
   const stateKey = Object.keys(action)[1].toString();
@@ -27,7 +27,6 @@ async function saveToIndexedDB(model, state, action) {
 
 async function applyMiddleware(model, state, action, middleware) {
   return middleware.reduce(async (st, fn) => {
-    // sorry
     const returnable = await fn(model, st, action);
     return returnable;
   }, state);
