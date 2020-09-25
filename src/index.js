@@ -1,5 +1,5 @@
 import { initialState } from './initialState';
-import { Model } from './Model';
+import { model } from './model';
 import Adapters from './Adapters';
 import useSave from './useSave';
 import useRequest from './useRequest';
@@ -9,16 +9,17 @@ import usePost from './usePost';
 import usePut from './usePut';
 import useDelete from './useDelete';
 import useRemove from './useRemove';
+import useSyncState from './useSyncState';
 import RLean from './RLean';
 import { reducer } from './reducer';
 import { removeAll } from './removeAll';
-import { StateContext, StateProvider, useStateValue } from './State';
+import { StateContext, StateProvider, useGlobalState } from './State';
 import Store from './Store';
 import { Utility } from './Utility';
 
 export {
   initialState,
-  Model,
+  model,
   Adapters,
   useRequest,
   usePatch,
@@ -34,6 +35,7 @@ export {
   Store,
   useGet,
   useSave,
-  useStateValue,
-  Utility
+  useGlobalState,
+  useSyncState,
+  Utility,
 };

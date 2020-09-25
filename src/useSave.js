@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { useStateValue, RLean } from './';
-import { getOptions } from './_internal/getOptions';
+import { deepCopy } from '@rlean/utils';
+import { useGlobalState, RLean } from './';
+import { getHookOptions } from './_internal';
 import { Store } from './';
 
 /**
@@ -13,19 +14,19 @@ import { Store } from './';
  * @param {Function} dispatch
  * @param {Function} [callback=null]
  */
-const save = async (options, dispatch, callback) => {
+const save = async (options, state, dispatch, callback) => {
   if (typeof options === 'undefined' || typeof options.value === 'undefined') {
     return;
   }
 
-  const { model, value, type } = getOptions(options);
+  const { model, value, type } = getHookOptions(options);
 
   if (model.persistData) {
-    await Store.set(model, value);
+    Store.set(model, value);
   }
 
   RLean.model = model;
-  await dispatch(await model.updateState(value, type));
+  dispatch(model.updateState(value, type));
 
   if (callback) {
     callback();
@@ -43,17 +44,17 @@ const save = async (options, dispatch, callback) => {
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
  */
 export default function useSave(options, callback) {
-  const [, dispatch] = useStateValue();
+  const [{ ...state }, dispatch] = useGlobalState();
 
   if (typeof options === 'undefined') {
     return [
       (options, callback) => {
-        save(options, dispatch, callback);
+        save(options, state, dispatch, callback);
       },
     ];
   }
 
   useEffect(() => {
-    save(options, dispatch, callback);
+    save(options, state, dispatch, callback);
   }, [dispatch]);
 }

@@ -1,47 +1,8 @@
+import { useCallback, useEffect, useRef } from 'react';
 import { request, methods, inspectClass } from './_internal';
-import { getOptions } from './_internal/getOptions';
-import { useStateValue } from './';
+import { getHookOptions } from './_internal/getHookOptions';
+import { useGlobalState } from './';
 import { Store } from './';
-
-/**
- * Function that executes a POST against the API.
- * @constructor
- * @param {Object} options
- * @param {Function} dispatch Provide if you're expecting an updated object in the response (like the inclusion of an auto-increment id)
- * @param {Function} callback
- */
-const post = async (options, dispatch, callback) => {
-  const { model, params, body, save } = getOptions(options);
-
-  const postPath = model.postPath;
-  const persistData = model.persistData;
-
-  if (postPath !== null) {
-    try {
-      const payload = { path: postPath, query: params, body: body ? Object.assign({}, body) : {} };
-      const response = await request(payload, model, methods.POST);
-
-      if (response && save) {
-        if (persistData) {
-          await Store.set(model, response.data);
-        }
-
-        await dispatch(await model.updateState(response.data));
-      }
-
-      if (callback && response) {
-        callback(response);
-      }
-    } catch (error) {
-      if (callback) {
-        callback(null, error);
-      }
-    }
-  } else {
-    const o = inspectClass(model);
-    console.error(`The ${o.ClassName} object is missing the postPath attribute.`);
-  }
-};
 
 /**
  * Exposed Hook that allows user to access post method
@@ -58,7 +19,54 @@ const post = async (options, dispatch, callback) => {
  * post({ model: Model, body: { value: 'value' } });
  */
 export default function usePost(options, callback) {
-  const [, dispatch] = useStateValue();
+  const [, dispatch] = useGlobalState();
+  const mountedRef = useRef(true);
+
+  const post = useCallback(
+    async (options, dispatch, callback) => {
+      const { model, params, body, save } = getHookOptions(options);
+
+      const postUri = model.postUri;
+      const persistData = model.persistData;
+
+      if (postUri !== null) {
+        try {
+          const payload = {
+            path: postUri,
+            query: params,
+            body: body ? Object.assign({}, body) : {},
+          };
+          const response = request(payload, model, methods.POST);
+
+          if (!mountedRef.current) {
+            return null;
+          }
+
+          if (response && save) {
+            if (persistData) {
+              Store.set(model, response.data);
+            }
+
+            dispatch(model.updateState(response.data));
+          }
+
+          if (callback && response) {
+            callback(response);
+          }
+        } catch (error) {
+          if (callback) {
+            callback(null, error);
+          }
+        }
+      } else {
+        const o = inspectClass(model);
+        console.error(
+          `The ${o.ClassName} object is missing the postUri attribute.`
+        );
+      }
+    },
+    [mountedRef]
+  );
 
   if (typeof options === 'undefined') {
     return [
@@ -68,7 +76,13 @@ export default function usePost(options, callback) {
     ];
   }
 
+  params.push(post);
+
   useEffect(() => {
     post(options, dispatch, callback);
+
+    return () => {
+      mountedRef.current = false; // clean up
+    };
   }, [params]);
 }

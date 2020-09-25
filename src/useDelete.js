@@ -1,6 +1,7 @@
+import { useEffect, useCallback, useRef } from 'react';
 import { request, methods, inspectClass } from './_internal';
-import { useStateValue } from './';
-import { getOptions } from './_internal/getOptions';
+import { useGlobalState } from './';
+import { getHookOptions } from './_internal/getHookOptions';
 import { Store } from './';
 
 /**
@@ -12,12 +13,15 @@ import { Store } from './';
  * @param {Function} callback
  */
 const del = async (options, dispatch, callback) => {
-  const { model, body, save } = getOptions(options);
-  const deletePath = model.deletePath;
+  const { model, body, save } = getHookOptions(options);
+  const deleteUri = model.deleteUri;
   const persistData = model.persistData;
 
-  if (deletePath !== null) {
-    const payload = { path: deletePath, body: body ? Object.assign({}, body) : {} };
+  if (deleteUri !== null) {
+    const payload = {
+      path: deleteUri,
+      body: body ? Object.assign({}, body) : {},
+    };
     const response = await request(payload, model, methods.DELETE);
 
     if (response && save) {
@@ -34,7 +38,9 @@ const del = async (options, dispatch, callback) => {
   }
 
   const o = inspectClass(model);
-  console.error(`The ${o.ClassName} object is missing the deletePath attribute.`);
+  console.error(
+    `The ${o.ClassName} object is missing the deleteUri attribute.`
+  );
 };
 
 /**
@@ -51,13 +57,13 @@ const del = async (options, dispatch, callback) => {
  * del({ model: Model, body: { value: 'value' } });
  */
 export default function useDelete(options, callback) {
-  const [, dispatch] = useStateValue();
+  const [, dispatch] = useGlobalState();
 
   if (typeof options === 'undefined') {
     return [
       (options, callback) => {
         del(options, dispatch, callback);
-      }
+      },
     ];
   }
 

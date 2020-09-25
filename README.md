@@ -29,11 +29,11 @@ export const rLean = {
   utilities: utilities,
   api: {
     headers: {
-      Authorization: `Bearer ${getToken()}`
+      Authorization: `Bearer ${getToken()}`,
     },
-    uri: process.env.REACT_APP_API_URI
+    uri: process.env.REACT_APP_API_URI,
   },
-  logToConsole: true
+  logToConsole: true,
 };
 ```
 
@@ -81,15 +81,15 @@ export const rLean = {
   utilities: utilities,
   api: {
     headers: {
-      Authorization: `Bearer ${getToken()}`
+      Authorization: `Bearer ${getToken()}`,
     },
     uri: process.env.REACT_APP_API_URI,
-    adapter: ApiAdapter
+    adapter: ApiAdapter,
   },
   storage: {
-    adapter: StorageAdapter
+    adapter: StorageAdapter,
   },
-  logToConsole: true
+  logToConsole: true,
 };
 ```
 
@@ -168,13 +168,13 @@ import { Model } from '@rlean/core';
 export class DemoModel extends Model {
   get initialState() {
     return {
-      demoModel: null
+      demoModel: null,
     };
   }
 
   get types() {
     return {
-      SET_DEMO_MODEL: 'SET_DEMO_MODEL'
+      SET_DEMO_MODEL: 'SET_DEMO_MODEL',
     };
   }
 
@@ -183,7 +183,7 @@ export class DemoModel extends Model {
       case this.types.SET_DEMO_MODEL:
         return {
           ...state,
-          ...action.demoModel
+          ...action.demoModel,
         };
 
       default:
@@ -194,7 +194,7 @@ export class DemoModel extends Model {
   async updateState(demoModel, type) {
     return {
       type: this.types.SET_DEMO_MODEL,
-      demoModel
+      demoModel,
     };
   }
 }
@@ -398,14 +398,14 @@ get nullableParams() {
 
 ## Custom hooks and functions
 
-### useStateValue
+### useGlobalState
 
-Use the useStateValue custom hook to access global state and/or the dispatch function.
+Use the useGlobalState custom hook to access global state and/or the dispatch function.
 
 ```js
-import { useStateValue } from '@rlean/core';
+import { useGlobalState } from '@rlean/core';
 
-const [{ stateObject, anotherStateObject }, dispatch] = useStateValue();
+const [{ stateObject, anotherStateObject }, dispatch] = useGlobalState();
 ```
 
 ### useGet
@@ -416,13 +416,13 @@ The useGet custom hook is what populates all of your state objects based on what
 
 ```js
 import React, { memo } from 'react';
-import { useStateValue, useGet } from '@rlean/core';
+import { useGlobalState, useGet } from '@rlean/core';
 import { getValue } from '@rlean/utils';
 import { Spinner } from 'some-ui-library';
 import { DemoModel } from 'lib/models';
 
 export const MyReactComponent = memo(() => {
-	const [{ demoModel, someStateValue, isLoading }] = useStateValue();
+	const [{ demoModel, someStateValue, isLoading }] = useGlobalState();
 
 	const id = getValue(someStateValue, 'id', null);
   useGet({ model: DemoModel, params: { id: id } });
@@ -444,8 +444,8 @@ useGet(
   {
     model: DemoModel,
     params: {
-      id: id
-    }
+      id: id,
+    },
   },
   (value, response) => {
     if (response.status !== 200) {
@@ -462,13 +462,13 @@ It's also possible to use the useGet hook in this way:
 
 ```js
 import React, { memo } from 'react';
-import { useStateValue, useGet } from '@rlean/core';
+import { useGlobalState, useGet } from '@rlean/core';
 import { getValue } from '@rlean/utils';
 import { Spinner } from 'some-ui-library';
 import { DemoModel } from 'lib/models';
 
 export const MyReactComponent = memo(() => {
-  const [{ demoModel, someStateValue, isLoading }] = useStateValue();
+  const [{ demoModel, someStateValue, isLoading }] = useGlobalState();
   const [get] = useGet();
 
 	const id = getValue(someStateValue, 'id', null);
@@ -512,7 +512,7 @@ The call will look like: (uri-from-config)/SomeApiPath?id=1
 The usePost hook is used to post against the API and takes an options object and an optional callback function.
 
 ```js
-import { useStateValue, usePost } from '@rlean/core';
+import { useGlobalState, usePost } from '@rlean/core';
 import { DemoModel } from 'lib/models';
 
 const [post] = usePost();
@@ -525,7 +525,7 @@ const function updateDb = async () => {
 Or...
 
 ```js
-import { useStateValue, usePost } from '@rlean/core';
+import { useGlobalState, usePost } from '@rlean/core';
 import { DemoModel } from 'lib/models';
 
 const [post] = usePost();
@@ -559,7 +559,7 @@ The options that are available for use with useGet are **model** and **params**.
 The useSave hook is used when saving a state value, and takes an options object that includes the model being updated and the new value, and an optional type. Saving a value will update state and storage if the persistData attribute is 'true' on the model (the default setting).
 
 ```js
-import { useStateValue, useSave } from '@rlean/core';
+import { useGlobalState, useSave } from '@rlean/core';
 import { DemoModel } from 'lib/models'
 
 const [save] = useSave();
@@ -574,7 +574,7 @@ const function buttonClicked = async newValue => {
 The useRemove hook is used to remove an object from state and storage if applicable, and takes an options object that includes the model being updated and an optional type.
 
 ```js
-import { useStateValue, useRemove } from '@rlean/core';
+import { useGlobalState, useRemove } from '@rlean/core';
 import { DemoModel } from 'lib/models'
 
 const [remove] = useRemove();
@@ -595,12 +595,12 @@ The removeAll function is an asynchronous function that is used to clear all sto
 IsLoading is a model that is included by default if there are models that make calls against an API to populate one or more objects in state. This can be leveraged to render loading animations.
 
 ```js
-import { useStateValue } from '@rlean/core';
+import { useGlobalState } from '@rlean/core';
 import { Spinner } from 'some-ui-library';
 import { DemoModel } from 'lib/models'
 
 export const function MyReactComponent = () => {
-	const [{ demoModel, isLoading }] = useStateValue();
+	const [{ demoModel, isLoading }] = useGlobalState();
 
 	if (isLoading.demoModel) {
 		return <Spinner />

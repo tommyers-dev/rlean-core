@@ -1,8 +1,21 @@
+import { convertToType } from './convertToType';
+import { getHookOptions } from './getHookOptions';
+import { getModelOptions } from './getModelOptions';
 import { inspectClass } from './inspectClass';
 import { implement } from './implement';
-import { IsLoading } from './IsLoading';
-import { LastUpdated } from './LastUpdated';
 import { methods } from './methods';
 import { request } from './request';
+import { getApiMethods } from './getApiMethods';
+import { getStorageMethods } from './getStorageMethods';
 
-export { inspectClass, implement, IsLoading, LastUpdated, methods, request };
+export {
+  inspectClass,
+  implement,
+  methods,
+  request,
+  getHookOptions,
+  getModelOptions,
+  convertToType,
+  getApiMethods,
+  getStorageMethods,
+};

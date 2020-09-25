@@ -7,11 +7,9 @@ export const initialState = () => {
   let combinedInitialState = {};
 
   for (let i = 0; i < objects.length; i++) {
-    if (objects[i].prototype) {
-      Object.assign(combinedInitialState, objects[i].prototype.initialState);
-    } else {
-      Object.assign(combinedInitialState, objects[i].initialState);
-    }
+    const key = objects[i].key;
+
+    Object.assign(combinedInitialState, objects[i].initialState);
   }
 
   return combinedInitialState;

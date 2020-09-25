@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Store, RLean, useStateValue } from './';
-import { getOptions } from './_internal/getOptions';
+import { Store, RLean, useGlobalState } from './';
+import { getHookOptions } from './_internal/getHookOptions';
 
 /**
  * @param {Object} model
@@ -12,7 +12,7 @@ const remove = async (options, dispatch, callback) => {
     return;
   }
 
-  const { model, type } = getOptions(options);
+  const { model, type } = getHookOptions(options);
   const persistData = model.persistData;
 
   if (persistData) {
@@ -36,7 +36,7 @@ const remove = async (options, dispatch, callback) => {
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
  */
 export default function useRemove(options, callback) {
-  const [, dispatch] = useStateValue();
+  const [, dispatch] = useGlobalState();
 
   if (typeof options === 'undefined') {
     return [

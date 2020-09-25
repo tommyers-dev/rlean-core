@@ -1,6 +1,7 @@
+import { useEffect, useRef, useCallback } from 'react';
 import { request, methods, inspectClass } from './_internal';
-import { useStateValue } from './';
-import { getOptions } from './_internal/getOptions';
+import { useGlobalState } from './';
+import { getHookOptions } from './_internal/getHookOptions';
 import { Store } from './';
 
 /**
@@ -11,11 +12,15 @@ import { Store } from './';
  * @param {Function} [callback=null]
  */
 const patch = async (options, dispatch, callback) => {
-  const { model, params, body, save } = getOptions(options);
-  const patchPath = model.patchPath;
+  const { model, params, body, save } = getHookOptions(options);
+  const patchUri = model.patchUri;
 
-  if (patchPath !== null) {
-    const payload = { path: patchPath, query: params, body: body ? Object.assign({}, body) : {} };
+  if (patchUri !== null) {
+    const payload = {
+      path: patchUri,
+      query: params,
+      body: body ? Object.assign({}, body) : {},
+    };
     const response = await request(payload, model, methods.PATCH);
 
     // Don't do a deep compare on the return value against the current value.
@@ -34,7 +39,9 @@ const patch = async (options, dispatch, callback) => {
     }
   } else {
     const o = inspectClass(model);
-    console.error(`The ${o.ClassName} object is missing the patchPath attribute.`);
+    console.error(
+      `The ${o.ClassName} object is missing the patchUri attribute.`
+    );
   }
 
   return;
@@ -54,7 +61,7 @@ const patch = async (options, dispatch, callback) => {
  * patch({ model: Model, body: { value: 'value' } });
  */
 export default function usePatch(options, callback) {
-  const [, dispatch] = useStateValue();
+  const [, dispatch] = useGlobalState();
 
   if (typeof options === 'undefined') {
     return [

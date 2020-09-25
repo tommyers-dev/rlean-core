@@ -30,7 +30,9 @@ class LocalForage {
   }
 
   async get(key) {
-    if (!key) throw new Error('Must supply a key in get');
+    if (!key) {
+      throw new Error('Must supply a key in get');
+    }
 
     try {
       const value = await localforage.getItem(key);
@@ -50,7 +52,9 @@ class LocalForage {
   }
 
   async remove(key) {
-    if (!key) throw new Error('Must supply a key in remove');
+    if (!key) {
+      throw new Error('Must supply a key in remove');
+    }
 
     try {
       await localforage.removeItem(key);

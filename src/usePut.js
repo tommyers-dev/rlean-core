@@ -1,6 +1,7 @@
+import { useCallback, useEffect, useRef } from 'react';
 import { request, methods, inspectClass } from './_internal';
-import { getOptions } from './_internal/getOptions';
-import { useStateValue } from './';
+import { getHookOptions } from './_internal/getHookOptions';
+import { useGlobalState } from './';
 import { Store } from './';
 
 /**
@@ -12,12 +13,16 @@ import { Store } from './';
  * @param {Function} callback
  */
 const put = async (options, dispatch, callback) => {
-  const { model, params, body, save } = getOptions(options);
+  const { model, params, body, save } = getHookOptions(options);
 
-  const putPath = model.putPath;
+  const putUri = model.putUri;
 
-  if (putPath !== null) {
-    const payload = { path: putPath, query: params, body: body ? Object.assign({}, body) : {} };
+  if (putUri !== null) {
+    const payload = {
+      path: putUri,
+      query: params,
+      body: body ? Object.assign({}, body) : {},
+    };
     const response = await request(payload, model, methods.PUT);
 
     // Don't do a deep compare on the return value against the current value.
@@ -34,7 +39,7 @@ const put = async (options, dispatch, callback) => {
     if (response && callback) callback(response);
   } else {
     const o = inspectClass(model);
-    console.error(`The ${o.ClassName} object is missing the putPath attribute.`);
+    console.error(`The ${o.ClassName} object is missing the putUri attribute.`);
   }
 };
 
@@ -52,7 +57,7 @@ const put = async (options, dispatch, callback) => {
  * put({ model: Model, body: { value: 'value' } })
  */
 export default function usePut(options, callback) {
-  const [, dispatch] = useStateValue();
+  const [, dispatch] = useGlobalState();
 
   if (typeof options === 'undefined') {
     return [

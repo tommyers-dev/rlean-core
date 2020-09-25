@@ -1,8 +1,18 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { reducer, initialState } from './';
+import { reducer, initialState, useSyncState } from './';
 
 export const StateContext = createContext();
 
-export const StateProvider = ({ children }) => <StateContext.Provider value={useReducer(reducer, initialState())}>{children}</StateContext.Provider>;
+const SyncState = () => {
+  useSyncState();
+  return null;
+};
 
-export const useStateValue = () => useContext(StateContext);
+export const StateProvider = ({ children }) => (
+  <StateContext.Provider value={useReducer(reducer, initialState())}>
+    <SyncState />
+    {children}
+  </StateContext.Provider>
+);
+
+export const useGlobalState = () => useContext(StateContext);

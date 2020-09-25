@@ -1,13 +1,24 @@
 import RLean from '../RLean';
 import { getValue } from '@rlean/utils';
 import { methods } from './methods';
+import { getApiMethods } from './getApiMethods';
 
-export const formatPath = (path, payloadQuery, payloadBody, method, nullableParams) => {
+export const formatPath = (
+  path,
+  payloadQuery,
+  payloadBody,
+  method,
+  nullableParams,
+  opts
+) => {
   // Check for null params if they aren't allowed.
   if (!nullableParams) {
     if (payloadQuery) {
       for (let key in payloadQuery) {
-        if (typeof payloadQuery[key] === 'undefined' || payloadQuery[key] === null) {
+        if (
+          typeof payloadQuery[key] === 'undefined' ||
+          payloadQuery[key] === null
+        ) {
           // Params cannot be null.
           return;
         }
@@ -15,7 +26,10 @@ export const formatPath = (path, payloadQuery, payloadBody, method, nullablePara
     }
     if (payloadBody) {
       for (let key in payloadBody) {
-        if (typeof payloadBody[key] === 'undefined' || payloadBody[key] === null) {
+        if (
+          typeof payloadBody[key] === 'undefined' ||
+          payloadBody[key] === null
+        ) {
           // Params cannot be null.
           return;
         }
@@ -33,7 +47,7 @@ export const formatPath = (path, payloadQuery, payloadBody, method, nullablePara
     let returnValue;
 
     // Create an array of all payload keys.
-    let queryStringKeys = [];
+    const queryStringKeys = [];
     for (let key in payloadQuery) {
       queryStringKeys.push(key);
     }
@@ -76,11 +90,21 @@ export const formatPath = (path, payloadQuery, payloadBody, method, nullablePara
 };
 
 export const request = async (payload, model, method) => {
+  const { get, post, del, put, patch } = getApiMethods(model);
+
   const nullableParams = model.nullableParams;
   const apiUriOverride = model.apiUriOverride;
   const headers = getValue(RLean, 'config.api.headers', {});
-  const uri = apiUriOverride ? apiUriOverride : getValue(RLean, 'config.api.uri', '');
-  const path = formatPath(payload.path, payload.query, payload.body, method, nullableParams);
+  const uri = apiUriOverride
+    ? apiUriOverride
+    : getValue(RLean, 'config.api.uri', '');
+  const path = formatPath(
+    payload.path,
+    payload.query,
+    payload.body,
+    method,
+    nullableParams
+  );
 
   // No path specified. Return undefined.
   if (path === undefined || path === '') {
@@ -92,21 +116,31 @@ export const request = async (payload, model, method) => {
     url: uri + path,
     data: payload.body,
     headers,
+    signal: payload.signal,
   };
+
+  let res = null;
 
   switch (method) {
     case methods.GET:
-      return await model.adapters.api.get(apiPayload);
+      res = await get(apiPayload);
+      break;
     case methods.POST:
-      return await model.adapters.api.post(apiPayload);
+      res = await post(apiPayload);
+      break;
     case methods.DELETE:
-      return await model.adapters.api.del(apiPayload);
+      res = await del(apiPayload);
+      break;
     case methods.PUT:
-      return await model.adapters.api.put(apiPayload);
+      res = await put(apiPayload);
+      break;
     case methods.PATCH:
-      return await model.adapters.api.patch(apiPayload);
+      res = await patch(apiPayload);
+      break;
     default:
-      console.error('Unknown method specified.');
-      return;
+      console.error('Unknown API method specified.');
+      break;
   }
+
+  return res;
 };

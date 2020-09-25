@@ -1,4 +1,4 @@
-import { Model } from '../src/Model';
+import { Model } from '../src/model';
 
 class TestClassNoAttributes extends Model {}
 
@@ -6,20 +6,20 @@ describe('Model', () => {
   it('Nullable attributes should be null if class extending Model contains no attributes', () => {
     const testClass = new TestClassNoAttributes();
 
-    const getPath = testClass.getPath;
-    const postPath = testClass.postPath;
-    const putPath = testClass.putPath;
-    const deletePath = testClass.deletePath;
-    const patchPath = testClass.patchPath;
+    const getUri = testClass.getUri;
+    const postUri = testClass.postUri;
+    const putUri = testClass.putUri;
+    const deleteUri = testClass.deleteUri;
+    const patchUri = testClass.patchUri;
     const apiUriOverride = testClass.apiUriOverride;
     const syncInterval = testClass.syncInterval;
     const syncAfterTimeElapsed = testClass.syncAfterTimeElapsed;
 
-    expect(getPath).toBe(null);
-    expect(postPath).toBe(null);
-    expect(putPath).toBe(null);
-    expect(deletePath).toBe(null);
-    expect(patchPath).toBe(null);
+    expect(getUri).toBe(null);
+    expect(postUri).toBe(null);
+    expect(putUri).toBe(null);
+    expect(deleteUri).toBe(null);
+    expect(patchUri).toBe(null);
     expect(apiUriOverride).toBe(null);
     expect(syncInterval).toBe(null);
     expect(syncAfterTimeElapsed).toBe(null);

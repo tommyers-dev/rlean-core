@@ -1,18 +1,22 @@
-import localforage from 'localforage';
+import { getStorageMethods } from './_internal/getStorageMethods';
 
 class Store {
   /*
    * Makes the 'set' call to local storage to store data
    */
   async set(model, value) {
+    const { setStorage, getStorage } = getStorageMethods();
+
     const key = model.key;
 
     try {
-      await model.adapters.storage.set(key, value);
+      await setStorage(key, value);
 
-      const updatedValue = await model.adapters.storage.get(key);
+      const updatedValue = await getStorage(key);
 
-      if (updatedValue === undefined) throw new Error(`Could not set ${key} = ${value}`);
+      if (updatedValue === undefined) {
+        throw new Error(`Could not set ${key} = ${value}`);
+      }
 
       return { key, value };
     } catch (err) {
@@ -24,23 +28,28 @@ class Store {
    * Makes the 'get' call to local storage to get some data
    */
   async get(model) {
+    const { getStorage } = getStorageMethods();
+
     const key = model.key;
 
     try {
-      return await model.adapters.storage.get(key);
+      const value = await getStorage(key);
+      return value;
     } catch (err) {
       console.log(err);
     }
   }
 
   async setAll(units) {
+    const { setStorage } = getStorageMethods();
+
     if (units === undefined || units.length === 0) {
       throw new Error('Array cannot be null or empty');
     }
 
     units.forEach(async kvPair => {
       try {
-        await this.set(kvPair.key, kvPair.value);
+        await setStorage(kvPair.key, kvPair.value);
       } catch (e) {
         console.log(e);
       }
@@ -53,23 +62,27 @@ class Store {
    * Makes the 'clear' call to local storage to get clear local storage
    * Uses the storage engine found by decideWhichEngine, either adapter or default.
    */
-   async clear() {
-     try {
-       await localforage.clear();
-     } catch (err) {
-       console.error(err);
-     }
-   }
+  async clear() {
+    const { clearStorage } = getStorageMethods();
+
+    try {
+      await clearStorage();
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   /*
    * Makes the 'remove' call to local storage to get remove a value from local storage
    * Uses the storage engine found by decideWhichEngine, either adapter or default.
    */
   async remove(model) {
+    const { removeStorage } = getStorageMethods();
+
     const key = model.key;
 
     try {
-      await model.adapters.storage.remove(key);
+      await removeStorage(key);
     } catch (err) {
       console.log(err);
     }

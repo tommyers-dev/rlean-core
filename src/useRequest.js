@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-import { useStateValue } from './';
+import { useGlobalState } from './';
 
 export default async function useRequest(options, method, callback) {
-  const [, dispatch] = useStateValue();
+  const [, dispatch] = useGlobalState();
 
   if (typeof options === 'undefined') {
     return [
       (options, callback) => {
         method(options, dispatch, callback);
-      }
+      },
     ];
   }
 
