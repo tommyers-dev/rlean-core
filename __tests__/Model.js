@@ -6,20 +6,20 @@ describe('Model', () => {
   it('Nullable attributes should be null if class extending Model contains no attributes', () => {
     const testClass = new TestClassNoAttributes();
 
-    const getUri = testClass.getUri;
-    const postUri = testClass.postUri;
-    const putUri = testClass.putUri;
-    const deleteUri = testClass.deleteUri;
-    const patchUri = testClass.patchUri;
+    const getURL = testClass.getURL;
+    const postURL = testClass.postURL;
+    const putURL = testClass.putURL;
+    const deleteURL = testClass.deleteURL;
+    const patchURL = testClass.patchURL;
     const apiUriOverride = testClass.apiUriOverride;
     const syncInterval = testClass.syncInterval;
     const syncAfterTimeElapsed = testClass.syncAfterTimeElapsed;
 
-    expect(getUri).toBe(null);
-    expect(postUri).toBe(null);
-    expect(putUri).toBe(null);
-    expect(deleteUri).toBe(null);
-    expect(patchUri).toBe(null);
+    expect(getURL).toBe(null);
+    expect(postURL).toBe(null);
+    expect(putURL).toBe(null);
+    expect(deleteURL).toBe(null);
+    expect(patchURL).toBe(null);
     expect(apiUriOverride).toBe(null);
     expect(syncInterval).toBe(null);
     expect(syncAfterTimeElapsed).toBe(null);

@@ -31,7 +31,7 @@ export default function useGet(options, callback) {
     const currentState = stateRef.current;
 
     // model does not include a get call
-    if (!hasValue(model, 'getUri')) {
+    if (!hasValue(model, 'getURL')) {
       return null;
     }
 
@@ -75,7 +75,7 @@ export default function useGet(options, callback) {
       }
 
       const payload = {
-        path: model.getUri,
+        path: model.getURL,
         query: params,
         signal: abortCtrl.signal,
       };

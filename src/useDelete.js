@@ -14,12 +14,12 @@ import { Store } from './';
  */
 const del = async (options, dispatch, callback) => {
   const { model, body, save } = getHookOptions(options);
-  const deleteUri = model.deleteUri;
+  const deleteURL = model.deleteURL;
   const persistData = model.persistData;
 
-  if (deleteUri !== null) {
+  if (deleteURL !== null) {
     const payload = {
-      path: deleteUri,
+      path: deleteURL,
       body: body ? Object.assign({}, body) : {},
     };
     const response = await request(payload, model, methods.DELETE);
@@ -39,7 +39,7 @@ const del = async (options, dispatch, callback) => {
 
   const o = inspectClass(model);
   console.error(
-    `The ${o.ClassName} object is missing the deleteUri attribute.`
+    `The ${o.ClassName} object is missing the deleteURL attribute.`
   );
 };
 

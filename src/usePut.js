@@ -15,11 +15,11 @@ import { Store } from './';
 const put = async (options, dispatch, callback) => {
   const { model, params, body, save } = getHookOptions(options);
 
-  const putUri = model.putUri;
+  const putURL = model.putURL;
 
-  if (putUri !== null) {
+  if (putURL !== null) {
     const payload = {
-      path: putUri,
+      path: putURL,
       query: params,
       body: body ? Object.assign({}, body) : {},
     };
@@ -39,7 +39,7 @@ const put = async (options, dispatch, callback) => {
     if (response && callback) callback(response);
   } else {
     const o = inspectClass(model);
-    console.error(`The ${o.ClassName} object is missing the putUri attribute.`);
+    console.error(`The ${o.ClassName} object is missing the putURL attribute.`);
   }
 };
 

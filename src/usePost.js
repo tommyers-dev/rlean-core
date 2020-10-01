@@ -26,13 +26,13 @@ export default function usePost(options, callback) {
     async (options, dispatch, callback) => {
       const { model, params, body, save } = getHookOptions(options);
 
-      const postUri = model.postUri;
+      const postURL = model.postURL;
       const persistData = model.persistData;
 
-      if (postUri !== null) {
+      if (postURL !== null) {
         try {
           const payload = {
-            path: postUri,
+            path: postURL,
             query: params,
             body: body ? Object.assign({}, body) : {},
           };
@@ -61,7 +61,7 @@ export default function usePost(options, callback) {
       } else {
         const o = inspectClass(model);
         console.error(
-          `The ${o.ClassName} object is missing the postUri attribute.`
+          `The ${o.ClassName} object is missing the postURL attribute.`
         );
       }
     },

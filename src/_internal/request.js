@@ -95,9 +95,9 @@ export const request = async (payload, model, method) => {
   const nullableParams = model.nullableParams;
   const apiUriOverride = model.apiUriOverride;
   const headers = getValue(RLean, 'config.api.headers', {});
-  const uri = apiUriOverride
+  const url = apiUriOverride
     ? apiUriOverride
-    : getValue(RLean, 'config.api.uri', '');
+    : getValue(RLean, 'config.api.baseURL', '');
   const path = formatPath(
     payload.path,
     payload.query,
@@ -113,7 +113,7 @@ export const request = async (payload, model, method) => {
   }
 
   const apiPayload = {
-    url: uri + path,
+    url: url + path,
     data: payload.body,
     headers,
     signal: payload.signal,

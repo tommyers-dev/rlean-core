@@ -13,11 +13,11 @@ import { Store } from './';
  */
 const patch = async (options, dispatch, callback) => {
   const { model, params, body, save } = getHookOptions(options);
-  const patchUri = model.patchUri;
+  const patchURL = model.patchURL;
 
-  if (patchUri !== null) {
+  if (patchURL !== null) {
     const payload = {
-      path: patchUri,
+      path: patchURL,
       query: params,
       body: body ? Object.assign({}, body) : {},
     };
@@ -40,7 +40,7 @@ const patch = async (options, dispatch, callback) => {
   } else {
     const o = inspectClass(model);
     console.error(
-      `The ${o.ClassName} object is missing the patchUri attribute.`
+      `The ${o.ClassName} object is missing the patchURL attribute.`
     );
   }
 

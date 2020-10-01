@@ -6,7 +6,7 @@ export const getModelOptions = (key, options) => {
   const getInitialState = () => {
     const value = { [key]: null };
 
-    if (options && options.getUri) {
+    if (options && options.getURL) {
       value.isLoading = false;
       value.lastUpdated = null;
     }
@@ -16,11 +16,11 @@ export const getModelOptions = (key, options) => {
 
   const defaultOptions = {
     initialState: getInitialState(),
-    getUri: null,
-    postUri: null,
-    putUri: null,
-    patchUri: null,
-    deleteUri: null,
+    getURL: null,
+    postURL: null,
+    putURL: null,
+    patchURL: null,
+    deleteURL: null,
     nullableParams: null,
     persistData: true,
     preferStore: false,
@@ -67,11 +67,11 @@ export const getModelOptions = (key, options) => {
   const initialState = options.initialState
     ? { [key]: options.initialState }
     : defaultOptions.initialState;
-  const getUri = options.getUri ?? defaultOptions.getUri;
-  const postUri = options.postUri ?? defaultOptions.postUri;
-  const putUri = options.putUri ?? defaultOptions.putUri;
-  const patchUri = options.patchUri ?? defaultOptions.patchUri;
-  const deleteUri = options.deleteUri ?? defaultOptions.deleteUri;
+  const getURL = options.getURL ?? defaultOptions.getURL;
+  const postURL = options.postURL ?? defaultOptions.postURL;
+  const putURL = options.putURL ?? defaultOptions.putURL;
+  const patchURL = options.patchURL ?? defaultOptions.patchURL;
+  const deleteURL = options.deleteURL ?? defaultOptions.deleteURL;
   const nullableParams =
     options.nullableParams ?? defaultOptions.nullableParams;
   const persistData = options.persistData ?? defaultOptions.persistData;
@@ -88,11 +88,11 @@ export const getModelOptions = (key, options) => {
 
   return {
     initialState,
-    getUri,
-    postUri,
-    putUri,
-    patchUri,
-    deleteUri,
+    getURL,
+    postURL,
+    putURL,
+    patchURL,
+    deleteURL,
     nullableParams,
     persistData,
     preferStore,
