@@ -20,6 +20,7 @@ export const model = (key, options, callback) => {
     type,
     reducer,
     updateState,
+    nullableParams,
   } = getModelOptions(key, options);
 
   return {
@@ -39,5 +40,6 @@ export const model = (key, options, callback) => {
     reducer,
     updateState,
     callback,
+    nullableParams,
   };
 };

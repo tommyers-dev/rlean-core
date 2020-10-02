@@ -3,9 +3,7 @@ import RLean from '../RLean';
 import { AxiosAdapter } from '../defaultAdapters';
 
 export const getApiMethods = model => {
-  const api = hasValue(model, 'adapters.api')
-    ? model.adapters.api
-    : getValue(RLean, 'config.api.adapter', AxiosAdapter);
+  const api = hasValue(model, 'adapters.api') ? model.adapters.api : getValue(RLean, 'config.api.adapter', AxiosAdapter);
 
   const get = api.get;
   const put = api.put;

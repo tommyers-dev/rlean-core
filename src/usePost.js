@@ -25,7 +25,6 @@ export default function usePost(options, callback) {
   const post = useCallback(
     async (options, dispatch, callback) => {
       const { model, params, body, save } = getHookOptions(options);
-
       const postURL = model.postURL;
       const persistData = model.persistData;
 
@@ -36,7 +35,8 @@ export default function usePost(options, callback) {
             query: params,
             body: body ? Object.assign({}, body) : {},
           };
-          const response = request(payload, model, methods.POST);
+
+          const response = await request(payload, model, methods.POST);
 
           if (!mountedRef.current) {
             return null;
@@ -60,9 +60,7 @@ export default function usePost(options, callback) {
         }
       } else {
         const o = inspectClass(model);
-        console.error(
-          `The ${o.ClassName} object is missing the postURL attribute.`
-        );
+        console.error(`The ${o.ClassName} object is missing the postURL attribute.`);
       }
     },
     [mountedRef]

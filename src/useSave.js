@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { deepCopy } from '@rlean/utils';
 import { useGlobalState, RLean } from './';
 import { getHookOptions } from './_internal';
 import { Store } from './';
