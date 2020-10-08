@@ -28,6 +28,7 @@ export const getModelOptions = (key, options) => {
     syncInterval: null,
     syncAfterTimeElapsed: false,
     adapters: null,
+    includeInState: true,
     type: defaultType,
     updateState: (value, type) => {
       return {
@@ -64,27 +65,23 @@ export const getModelOptions = (key, options) => {
     return defaultOptions;
   }
 
-  const initialState = options.initialState
-    ? { [key]: options.initialState }
-    : defaultOptions.initialState;
+  const initialState = options.initialState ? { [key]: options.initialState } : defaultOptions.initialState;
   const getURL = options.getURL ?? defaultOptions.getURL;
   const postURL = options.postURL ?? defaultOptions.postURL;
   const putURL = options.putURL ?? defaultOptions.putURL;
   const patchURL = options.patchURL ?? defaultOptions.patchURL;
   const deleteURL = options.deleteURL ?? defaultOptions.deleteURL;
-  const nullableParams =
-    options.nullableParams ?? defaultOptions.nullableParams;
+  const nullableParams = options.nullableParams ?? defaultOptions.nullableParams;
   const persistData = options.persistData ?? defaultOptions.persistData;
   const preferStore = options.preferStore ?? defaultOptions.preferStore;
-  const progressiveLoading =
-    options.progressiveLoading ?? defaultOptions.progressiveLoading;
+  const progressiveLoading = options.progressiveLoading ?? defaultOptions.progressiveLoading;
   const syncInterval = options.syncInterval ?? defaultOptions.syncInterval;
-  const syncAfterTimeElapsed =
-    options.syncAfterTimeElapsed ?? defaultOptions.syncAfterTimeElapsed;
+  const syncAfterTimeElapsed = options.syncAfterTimeElapsed ?? defaultOptions.syncAfterTimeElapsed;
   const adapters = options.adapters ?? defaultOptions.adapters;
   const type = options.type ?? defaultOptions.type;
   const updateState = options.updateState ?? defaultOptions.updateState;
   const reducer = options.reducer ?? defaultOptions.reducer;
+  const includeInState = options.includeInState ?? defaultOptions.includeInState;
 
   return {
     initialState,
@@ -103,5 +100,6 @@ export const getModelOptions = (key, options) => {
     type,
     updateState,
     reducer,
+    includeInState,
   };
 };

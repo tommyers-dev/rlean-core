@@ -21,6 +21,7 @@ export const model = (key, options, callback) => {
     reducer,
     updateState,
     nullableParams,
+    includeInState,
   } = getModelOptions(key, options);
 
   return {
@@ -41,5 +42,6 @@ export const model = (key, options, callback) => {
     updateState,
     callback,
     nullableParams,
+    includeInState,
   };
 };

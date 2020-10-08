@@ -44,10 +44,8 @@ export default function useGet(options, callback) {
       }
     }
 
-    const stateValue =
-      currentState && currentState[model.key]
-        ? deepCopy(currentState[model.key])
-        : {};
+    const stateValue = currentState && currentState[model.key] ? deepCopy(currentState[model.key]) : {};
+    stateValue.refetch = () => refetch();
 
     try {
       if (isMounted) {
@@ -68,7 +66,9 @@ export default function useGet(options, callback) {
         save({ model, value: stateValue });
       }
 
-      dispatch(model.updateState(stateValue, `${model.type}_IS_LOADING`));
+      if (model.includeInState) {
+        dispatch(model.updateState(stateValue, `${model.type}_IS_LOADING`));
+      }
 
       if (model.preferStore) {
         return null;
@@ -101,7 +101,9 @@ export default function useGet(options, callback) {
         save({ model, value: stateValue });
       }
 
-      dispatch(model.updateState(stateValue, type));
+      if (model.includeInState) {
+        dispatch(model.updateState(stateValue, type));
+      }
 
       if (callback) {
         callback(res);
@@ -115,8 +117,20 @@ export default function useGet(options, callback) {
         setIsLoading(stateValue.isLoading);
       }
 
-      dispatch(model.updateState(stateValue, `${model.type}_ERROR`));
+      if (includeInState) {
+        dispatch(model.updateState(stateValue, `${model.type}_ERROR`));
+      }
     }
+
+    return {
+      data,
+      error,
+      isLoading,
+      isRefetching,
+      lastUpdated,
+      canceled,
+      init,
+    };
   };
 
   if (typeof options === 'undefined') {
@@ -136,7 +150,7 @@ export default function useGet(options, callback) {
 
     return () => {
       isMounted = false;
-      canceled = false;
+      canceled = true;
       abortCtrl.abort();
     };
   }, [...dependencies, refetchIndex]);
