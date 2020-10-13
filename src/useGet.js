@@ -6,7 +6,6 @@ import useSave from './useSave';
 import { getHookOptions, methods } from './_internal';
 
 export default function useGet(options, callback) {
-  const [refetchIndex, setRefetchIndex] = useState(0);
   const [init, setInit] = useState(false);
   const [data, setData] = useState();
   const [error, setError] = useState();
@@ -21,12 +20,7 @@ export default function useGet(options, callback) {
   let isMounted = true;
   let canceled = false;
 
-  const refetch = () => {
-    const newIndex = refetchIndex + 1;
-    setRefetchIndex(newIndex);
-  };
-
-  const get = async (options, stateRef, dispatch, callback, save) => {
+  const get = async (options, stateRef, dispatch, callback, save, isRefetch) => {
     const { model, params, type } = getHookOptions(options);
     const currentState = stateRef.current;
 
@@ -52,14 +46,17 @@ export default function useGet(options, callback) {
         setIsLoading(true);
         setInit(true);
 
-        if (refetchIndex > 0) {
+        if (isRefetch) {
           setIsRefetching(true);
-          stateValue.isRefetching = true;
         }
       }
 
       stateValue.isLoading = true;
       stateValue.init = true;
+
+      if (isRefetch) {
+        stateValue.isRefetching = true;
+      }
 
       // set initial loading state
       if (model.persistData) {
@@ -82,18 +79,20 @@ export default function useGet(options, callback) {
 
       const res = await request(payload, model, methods.GET);
 
-      if (isMounted && res) {
+      if (res) {
         stateValue.data = res.data;
         stateValue.isLoading = false;
         stateValue.lastUpdated = new Date();
         stateValue.isRefetching = false;
+      } else {
+        stateValue.isLoading = false;
+      }
 
+      if (isMounted) {
         setData(stateValue.data);
         setIsLoading(stateValue.isLoading);
         setLastUpdated(stateValue.lastUpdated);
         setIsRefetching(stateValue.isRefetching);
-      } else {
-        stateValue.isLoading = false;
       }
 
       // persist updated value with new loading status
@@ -117,7 +116,7 @@ export default function useGet(options, callback) {
         setIsLoading(stateValue.isLoading);
       }
 
-      if (includeInState) {
+      if (model.includeInState) {
         dispatch(model.updateState(stateValue, `${model.type}_ERROR`));
       }
     }
@@ -130,7 +129,14 @@ export default function useGet(options, callback) {
       lastUpdated,
       canceled,
       init,
+      refetch: async () => {
+        await get(options, stateRef, dispatch, callback, save, true);
+      },
     };
+  };
+
+  const refetch = async () => {
+    await get(options, stateRef, dispatch, callback, save, true);
   };
 
   if (typeof options === 'undefined') {
@@ -153,7 +159,7 @@ export default function useGet(options, callback) {
       canceled = true;
       abortCtrl.abort();
     };
-  }, [...dependencies, refetchIndex]);
+  }, [...dependencies]);
 
   return {
     data,

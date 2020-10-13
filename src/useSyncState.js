@@ -16,15 +16,12 @@ export default function useSyncState() {
         return null;
       }
 
-      if (model.persistData) {
+      if (model.persistData && model.includeInState) {
         const key = model.key;
         const stateValue = state[key];
         const storedValue = await Store.get(model);
 
-        if (
-          storedValue &&
-          !Compare.deepCompare(storedValue, stateValue).isEqual
-        ) {
+        if (storedValue && !Compare.deepCompare(storedValue, stateValue).isEqual) {
           const type = convertToType(model.key);
 
           dispatch(model.updateState(storedValue, type));

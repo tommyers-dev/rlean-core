@@ -12,11 +12,17 @@ export const reducer = ({ ...state }, action) => {
     if (objects[i].prototype) {
       const key = objects[i].prototype.key;
       const value = state[key];
-      Object.assign(combinedReducer, { [key]: objects[i].prototype.reducer(value, action) });
+
+      if (objects[i].prototype.includeInState) {
+        Object.assign(combinedReducer, { [key]: objects[i].prototype.reducer(value, action) });
+      }
     } else {
       const key = objects[i].key;
       const value = state[key];
-      Object.assign(combinedReducer, { [key]: objects[i].reducer(value, action) });
+
+      if (objects[i].includeInState) {
+        Object.assign(combinedReducer, { [key]: objects[i].reducer(value, action) });
+      }
     }
   }
 

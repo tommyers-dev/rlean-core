@@ -7110,40 +7110,35 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function useGet(options, callback) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
-      refetchIndex = _useState2[0],
-      setRefetchIndex = _useState2[1];
+      init = _useState2[0],
+      setInit = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState4 = _slicedToArray(_useState3, 2),
-      init = _useState4[0],
-      setInit = _useState4[1];
+      data = _useState4[0],
+      setData = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState6 = _slicedToArray(_useState5, 2),
-      data = _useState6[0],
-      setData = _useState6[1];
+      error = _useState6[0],
+      setError = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState8 = _slicedToArray(_useState7, 2),
-      error = _useState8[0],
-      setError = _useState8[1];
+      isLoading = _useState8[0],
+      setIsLoading = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      isLoading = _useState10[0],
-      setIsLoading = _useState10[1];
+      isRefetching = _useState10[0],
+      setIsRefetching = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState12 = _slicedToArray(_useState11, 2),
-      isRefetching = _useState12[0],
-      setIsRefetching = _useState12[1];
-
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-      _useState14 = _slicedToArray(_useState13, 2),
-      lastUpdated = _useState14[0],
-      setLastUpdated = _useState14[1];
+      lastUpdated = _useState12[0],
+      setLastUpdated = _useState12[1];
 
   var _useGlobalState = Object(_State__WEBPACK_IMPORTED_MODULE_3__["useGlobalState"])(),
       _useGlobalState2 = _slicedToArray(_useGlobalState, 2),
@@ -7161,58 +7156,53 @@ function useGet(options, callback) {
   var isMounted = true;
   var canceled = false;
 
-  var refetch = function refetch() {
-    var newIndex = refetchIndex + 1;
-    setRefetchIndex(newIndex);
-  };
-
   var get =
   /*#__PURE__*/
   function () {
     var _ref = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee(options, stateRef, dispatch, callback, save) {
+    regeneratorRuntime.mark(function _callee2(options, stateRef, dispatch, callback, save, isRefetch) {
       var _getHookOptions, model, params, type, currentState, key, stateValue, payload, res;
 
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               _getHookOptions = Object(_internal__WEBPACK_IMPORTED_MODULE_5__["getHookOptions"])(options), model = _getHookOptions.model, params = _getHookOptions.params, type = _getHookOptions.type;
               currentState = stateRef.current; // model does not include a get call
 
               if (Object(_rlean_utils__WEBPACK_IMPORTED_MODULE_2__["hasValue"])(model, 'getURL')) {
-                _context.next = 4;
+                _context2.next = 4;
                 break;
               }
 
-              return _context.abrupt("return", null);
+              return _context2.abrupt("return", null);
 
             case 4:
               if (model.nullableParams) {
-                _context.next = 12;
+                _context2.next = 12;
                 break;
               }
 
-              _context.t0 = regeneratorRuntime.keys(params);
+              _context2.t0 = regeneratorRuntime.keys(params);
 
             case 6:
-              if ((_context.t1 = _context.t0()).done) {
-                _context.next = 12;
+              if ((_context2.t1 = _context2.t0()).done) {
+                _context2.next = 12;
                 break;
               }
 
-              key = _context.t1.value;
+              key = _context2.t1.value;
 
               if (!(typeof params[key] === 'undefined' || params[key] === null)) {
-                _context.next = 10;
+                _context2.next = 10;
                 break;
               }
 
-              return _context.abrupt("return", null);
+              return _context2.abrupt("return", null);
 
             case 10:
-              _context.next = 6;
+              _context2.next = 6;
               break;
 
             case 12:
@@ -7222,20 +7212,24 @@ function useGet(options, callback) {
                 return refetch();
               };
 
-              _context.prev = 14;
+              _context2.prev = 14;
 
               if (isMounted) {
                 setIsLoading(true);
                 setInit(true);
 
-                if (refetchIndex > 0) {
+                if (isRefetch) {
                   setIsRefetching(true);
-                  stateValue.isRefetching = true;
                 }
               }
 
               stateValue.isLoading = true;
-              stateValue.init = true; // set initial loading state
+              stateValue.init = true;
+
+              if (isRefetch) {
+                stateValue.isRefetching = true;
+              } // set initial loading state
+
 
               if (model.persistData) {
                 save({
@@ -7249,35 +7243,38 @@ function useGet(options, callback) {
               }
 
               if (!model.preferStore) {
-                _context.next = 22;
+                _context2.next = 23;
                 break;
               }
 
-              return _context.abrupt("return", null);
+              return _context2.abrupt("return", null);
 
-            case 22:
+            case 23:
               payload = {
                 path: model.getURL,
                 query: params,
                 signal: abortCtrl.signal
               };
-              _context.next = 25;
+              _context2.next = 26;
               return Object(_internal_request__WEBPACK_IMPORTED_MODULE_1__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_5__["methods"].GET);
 
-            case 25:
-              res = _context.sent;
+            case 26:
+              res = _context2.sent;
 
-              if (isMounted && res) {
+              if (res) {
                 stateValue.data = res.data;
                 stateValue.isLoading = false;
                 stateValue.lastUpdated = new Date();
                 stateValue.isRefetching = false;
+              } else {
+                stateValue.isLoading = false;
+              }
+
+              if (isMounted) {
                 setData(stateValue.data);
                 setIsLoading(stateValue.isLoading);
                 setLastUpdated(stateValue.lastUpdated);
                 setIsRefetching(stateValue.isRefetching);
-              } else {
-                stateValue.isLoading = false;
               } // persist updated value with new loading status
 
 
@@ -7296,13 +7293,13 @@ function useGet(options, callback) {
                 callback(res);
               }
 
-              _context.next = 38;
+              _context2.next = 40;
               break;
 
-            case 32:
-              _context.prev = 32;
-              _context.t2 = _context["catch"](14);
-              stateValue.error = _context.t2;
+            case 34:
+              _context2.prev = 34;
+              _context2.t2 = _context2["catch"](14);
+              stateValue.error = _context2.t2;
               stateValue.isLoading = false;
 
               if (isMounted) {
@@ -7310,31 +7307,82 @@ function useGet(options, callback) {
                 setIsLoading(stateValue.isLoading);
               }
 
-              if (includeInState) {
+              if (model.includeInState) {
                 dispatch(model.updateState(stateValue, "".concat(model.type, "_ERROR")));
               }
 
-            case 38:
-              return _context.abrupt("return", {
+            case 40:
+              return _context2.abrupt("return", {
                 data: data,
                 error: error,
                 isLoading: isLoading,
                 isRefetching: isRefetching,
                 lastUpdated: lastUpdated,
                 canceled: canceled,
-                init: init
+                init: init,
+                refetch: function () {
+                  var _refetch = _asyncToGenerator(
+                  /*#__PURE__*/
+                  regeneratorRuntime.mark(function _callee() {
+                    return regeneratorRuntime.wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            _context.next = 2;
+                            return get(options, stateRef, dispatch, callback, save, true);
+
+                          case 2:
+                          case "end":
+                            return _context.stop();
+                        }
+                      }
+                    }, _callee);
+                  }));
+
+                  function refetch() {
+                    return _refetch.apply(this, arguments);
+                  }
+
+                  return refetch;
+                }()
               });
 
-            case 39:
+            case 41:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, null, [[14, 32]]);
+      }, _callee2, null, [[14, 34]]);
     }));
 
-    return function get(_x, _x2, _x3, _x4, _x5) {
+    return function get(_x, _x2, _x3, _x4, _x5, _x6) {
       return _ref.apply(this, arguments);
+    };
+  }();
+
+  var refetch =
+  /*#__PURE__*/
+  function () {
+    var _ref2 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee3() {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return get(options, stateRef, dispatch, callback, save, true);
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function refetch() {
+      return _ref2.apply(this, arguments);
     };
   }();
 
@@ -7355,7 +7403,7 @@ function useGet(options, callback) {
       canceled = true;
       abortCtrl.abort();
     };
-  }, [].concat(_toConsumableArray(dependencies), [refetchIndex]));
+  }, _toConsumableArray(dependencies));
   return {
     data: data,
     error: error,
@@ -8164,7 +8212,7 @@ function useSyncState() {
                 return _context.abrupt("return", null);
 
               case 2:
-                if (!model.persistData) {
+                if (!(model.persistData && model.includeInState)) {
                   _context.next = 9;
                   break;
                 }
@@ -8234,11 +8282,17 @@ var reducer = function reducer(_ref, action) {
     if (objects[i].prototype) {
       var key = objects[i].prototype.key;
       var value = state[key];
-      Object.assign(combinedReducer, _defineProperty({}, key, objects[i].prototype.reducer(value, action)));
+
+      if (objects[i].prototype.includeInState) {
+        Object.assign(combinedReducer, _defineProperty({}, key, objects[i].prototype.reducer(value, action)));
+      }
     } else {
       var _key = objects[i].key;
       var _value = state[_key];
-      Object.assign(combinedReducer, _defineProperty({}, _key, objects[i].reducer(_value, action)));
+
+      if (objects[i].includeInState) {
+        Object.assign(combinedReducer, _defineProperty({}, _key, objects[i].reducer(_value, action)));
+      }
     }
   }
 
