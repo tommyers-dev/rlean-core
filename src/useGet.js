@@ -15,8 +15,10 @@ export default function useGet(options, callback) {
   const [{ ...state }, dispatch] = useGlobalState();
   const stateRef = useRef(state);
   const [save] = useSave();
-  const abortCtrl = new AbortController();
+  const abortCtrl =
+    typeof new AbortController() === 'undefined' ? { signal: null, abort: () => console.warn('Browser does not support fetch canceling.') } : new AbortController();
   let dependencies = [];
+  // these should be useRef variables instead
   let isMounted = true;
   let canceled = false;
 
