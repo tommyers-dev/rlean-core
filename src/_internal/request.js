@@ -3,12 +3,21 @@ import { getValue } from '@rlean/utils';
 import { methods } from './methods';
 import { getApiMethods } from './getApiMethods';
 
-export const formatPath = (path, payloadQuery, payloadBody, method, nullableParams) => {
+export const formatPath = (
+  path,
+  payloadQuery,
+  payloadBody,
+  method,
+  nullableParams
+) => {
   // Check for null params if they aren't allowed.
   if (!nullableParams) {
     if (payloadQuery) {
       for (let key in payloadQuery) {
-        if (typeof payloadQuery[key] === 'undefined' || payloadQuery[key] === null) {
+        if (
+          typeof payloadQuery[key] === 'undefined' ||
+          payloadQuery[key] === null
+        ) {
           // Params cannot be null.
           return;
         }
@@ -16,7 +25,10 @@ export const formatPath = (path, payloadQuery, payloadBody, method, nullablePara
     }
     if (payloadBody) {
       for (let key in payloadBody) {
-        if (typeof payloadBody[key] === 'undefined' || payloadBody[key] === null) {
+        if (
+          typeof payloadBody[key] === 'undefined' ||
+          payloadBody[key] === null
+        ) {
           // Params cannot be null.
           return;
         }
@@ -82,8 +94,16 @@ export const request = async (payload, model, method) => {
   const nullableParams = model.nullableParams;
   const apiUriOverride = model.apiUriOverride;
   const headers = getValue(RLean, 'config.api.headers', {});
-  const url = apiUriOverride ? apiUriOverride : getValue(RLean, 'config.api.baseURL', '');
-  const path = formatPath(payload.path, payload.query, payload.body, method, nullableParams);
+  const url = apiUriOverride
+    ? apiUriOverride
+    : getValue(RLean, 'config.api.baseURL', '');
+  const path = formatPath(
+    payload.path,
+    payload.query,
+    payload.body,
+    method,
+    nullableParams
+  );
 
   // No path specified. Return undefined.
   if (path === undefined || path === '') {
@@ -95,7 +115,7 @@ export const request = async (payload, model, method) => {
     url: url + path,
     data: payload.body,
     headers,
-    signal: payload.signal,
+    signal: payload.signal,  
   };
 
   let res = null;
