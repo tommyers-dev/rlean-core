@@ -50,6 +50,11 @@ export const getModelOptions = (key, options) => {
             };
           }
 
+          // If there is no value to set, clear state for this model.
+          if (!action[key]) {
+            return null;
+          }
+
           return {
             ...state,
             ...action[key],
