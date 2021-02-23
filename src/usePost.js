@@ -29,11 +29,18 @@ export default function usePost(options, callback) {
       const persistData = model.persistData;
 
       if (postURL !== null) {
+        if (body && Array.isArray(body)) {
+        }
+
         try {
           const payload = {
             path: postURL,
             query: params,
-            body: body ? Object.assign({}, body) : {},
+            body: body
+              ? Array.isArray(body)
+                ? Object.assign([], body)
+                : Object.assign({}, body)
+              : {},
           };
 
           const response = await request(payload, model, methods.POST);
@@ -60,7 +67,9 @@ export default function usePost(options, callback) {
         }
       } else {
         const o = inspectClass(model);
-        console.error(`The ${o.ClassName} object is missing the postURL attribute.`);
+        console.error(
+          `The ${o.ClassName} object is missing the postURL attribute.`
+        );
       }
     },
     [mountedRef]
