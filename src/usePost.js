@@ -29,9 +29,6 @@ export default function usePost(options, callback) {
       const persistData = model.persistData;
 
       if (postURL !== null) {
-        if (body && Array.isArray(body)) {
-        }
-
         try {
           const payload = {
             path: postURL,

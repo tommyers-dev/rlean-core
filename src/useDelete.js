@@ -18,21 +18,29 @@ const del = async (options, dispatch, callback) => {
   const persistData = model.persistData;
 
   if (deleteURL !== null) {
-    const payload = {
-      path: deleteURL,
-      body: body ? Object.assign({}, body) : {},
-    };
-    const response = await request(payload, model, methods.DELETE);
+    try {
+      const payload = {
+        path: deleteURL,
+        body: body ? Object.assign({}, body) : {},
+      };
+      const response = await request(payload, model, methods.DELETE);
 
-    if (response && save) {
-      if (persistData) {
-        await Store.set(model, response.data);
+      if (response && save) {
+        if (persistData) {
+          await Store.set(model, response.data);
+        }
+
+        await dispatch(await model.updateState(response.data));
       }
 
-      await dispatch(await model.updateState(response.data));
+      if (response && callback) {
+        callback(response);
+      }
+    } catch (error) {
+      if (callback) {
+        callback(null, error);
+      }
     }
-
-    if (response && callback) callback(response);
 
     return;
   }

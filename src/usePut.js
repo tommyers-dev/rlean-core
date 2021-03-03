@@ -18,25 +18,33 @@ const put = async (options, dispatch, callback) => {
   const putURL = model.putURL;
 
   if (putURL !== null) {
-    const payload = {
-      path: putURL,
-      query: params,
-      body: body ? Object.assign({}, body) : {},
-    };
-    const response = await request(payload, model, methods.PUT);
+    try {
+      const payload = {
+        path: putURL,
+        query: params,
+        body: body ? Object.assign({}, body) : {},
+      };
+      const response = await request(payload, model, methods.PUT);
 
-    // Don't do a deep compare on the return value against the current value.
-    // The return value will most likely be different regardless. Assume that
-    // if dispatch was provided, we're supposed to use it.
-    if (response && save) {
-      if (model.persistData) {
-        await Store.set(model, response.data);
+      // Don't do a deep compare on the return value against the current value.
+      // The return value will most likely be different regardless. Assume that
+      // if dispatch was provided, we're supposed to use it.
+      if (response && save) {
+        if (model.persistData) {
+          await Store.set(model, response.data);
+        }
+
+        await dispatch(await model.updateState(response.data));
       }
 
-      await dispatch(await model.updateState(response.data));
+      if (response && callback) {
+        callback(response);
+      }
+    } catch (error) {
+      if (callback) {
+        callback(null, error);
+      }
     }
-
-    if (response && callback) callback(response);
   } else {
     const o = inspectClass(model);
     console.error(`The ${o.ClassName} object is missing the putURL attribute.`);

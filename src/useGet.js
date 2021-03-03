@@ -16,13 +16,26 @@ export default function useGet(options, callback) {
   const stateRef = useRef(state);
   const [save] = useSave();
   const abortCtrl =
-    typeof new AbortController() === 'undefined' ? { signal: null, abort: () => console.warn('Browser does not support fetch canceling.') } : new AbortController();
+    typeof new AbortController() === 'undefined'
+      ? {
+          signal: null,
+          abort: () =>
+            console.warn('Browser does not support fetch canceling.'),
+        }
+      : new AbortController();
   let dependencies = [];
   // these should be useRef variables instead
   let isMounted = true;
   let canceled = false;
 
-  const get = async (options, stateRef, dispatch, callback, save, isRefetch) => {
+  const get = async (
+    options,
+    stateRef,
+    dispatch,
+    callback,
+    save,
+    isRefetch
+  ) => {
     const { model, params, type } = getHookOptions(options);
     const currentState = stateRef.current;
 
@@ -40,7 +53,10 @@ export default function useGet(options, callback) {
       }
     }
 
-    const stateValue = currentState && currentState[model.key] ? deepCopy(currentState[model.key]) : {};
+    const stateValue =
+      currentState && currentState[model.key]
+        ? deepCopy(currentState[model.key])
+        : {};
     stateValue.refetch = () => refetch();
 
     try {
@@ -120,6 +136,10 @@ export default function useGet(options, callback) {
 
       if (model.includeInState) {
         dispatch(model.updateState(stateValue, `${model.type}_ERROR`));
+      }
+
+      if (callback) {
+        callback(null, err);
       }
     }
 
