@@ -7304,7 +7304,7 @@ function useGet(options, callback) {
                 callback(res);
               }
 
-              _context2.next = 40;
+              _context2.next = 41;
               break;
 
             case 34:
@@ -7322,7 +7322,11 @@ function useGet(options, callback) {
                 dispatch(model.updateState(stateValue, "".concat(model.type, "_ERROR")));
               }
 
-            case 40:
+              if (callback) {
+                callback(null, _context2.t2);
+              }
+
+            case 41:
               return _context2.abrupt("return", {
                 data: data,
                 error: error,
@@ -7358,7 +7362,7 @@ function useGet(options, callback) {
                 }()
               });
 
-            case 41:
+            case 42:
             case "end":
               return _context2.stop();
           }
@@ -7512,65 +7516,78 @@ function () {
             patchURL = model.patchURL;
 
             if (!(patchURL !== null)) {
-              _context.next = 20;
+              _context.next = 26;
               break;
             }
 
+            _context.prev = 3;
             payload = {
               path: patchURL,
               query: params,
               body: body ? Object.assign({}, body) : {}
             };
-            _context.next = 6;
+            _context.next = 7;
             return Object(_internal__WEBPACK_IMPORTED_MODULE_1__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_1__["methods"].PATCH);
 
-          case 6:
+          case 7:
             response = _context.sent;
 
             if (!(response && save)) {
-              _context.next = 17;
+              _context.next = 18;
               break;
             }
 
             if (!model.persistData) {
-              _context.next = 11;
+              _context.next = 12;
               break;
             }
 
-            _context.next = 11;
+            _context.next = 12;
             return ___WEBPACK_IMPORTED_MODULE_2__["Store"].set(model, response.data);
 
-          case 11:
+          case 12:
             _context.t0 = dispatch;
-            _context.next = 14;
+            _context.next = 15;
             return model.updateState(response.data);
 
-          case 14:
+          case 15:
             _context.t1 = _context.sent;
-            _context.next = 17;
+            _context.next = 18;
             return (0, _context.t0)(_context.t1);
 
-          case 17:
+          case 18:
             if (response && callback) {
               callback(response);
             }
 
-            _context.next = 22;
+            _context.next = 24;
             break;
 
-          case 20:
+          case 21:
+            _context.prev = 21;
+            _context.t2 = _context["catch"](3);
+
+            if (callback) {
+              callback(null, _context.t2);
+            }
+
+          case 24:
+            _context.next = 28;
+            break;
+
+          case 26:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_1__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the patchURL attribute."));
 
-          case 22:
+          case 28:
             return _context.abrupt("return");
 
-          case 23:
+          case 29:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[3, 21]]);
   }));
 
   return function patch(_x, _x2, _x3) {
@@ -7683,7 +7700,7 @@ function usePost(options, callback) {
               payload = {
                 path: postURL,
                 query: params,
-                body: body ? Object.assign({}, body) : {}
+                body: body ? Array.isArray(body) ? Object.assign([], body) : Object.assign({}, body) : {}
               };
               _context.next = 8;
               return Object(_internal__WEBPACK_IMPORTED_MODULE_1__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_1__["methods"].POST);
@@ -7812,59 +7829,75 @@ function () {
             putURL = model.putURL;
 
             if (!(putURL !== null)) {
-              _context.next = 20;
+              _context.next = 26;
               break;
             }
 
+            _context.prev = 3;
             payload = {
               path: putURL,
               query: params,
               body: body ? Object.assign({}, body) : {}
             };
-            _context.next = 6;
+            _context.next = 7;
             return Object(_internal__WEBPACK_IMPORTED_MODULE_1__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_1__["methods"].PUT);
 
-          case 6:
+          case 7:
             response = _context.sent;
 
             if (!(response && save)) {
-              _context.next = 17;
+              _context.next = 18;
               break;
             }
 
             if (!model.persistData) {
-              _context.next = 11;
+              _context.next = 12;
               break;
             }
 
-            _context.next = 11;
+            _context.next = 12;
             return ___WEBPACK_IMPORTED_MODULE_3__["Store"].set(model, response.data);
 
-          case 11:
+          case 12:
             _context.t0 = dispatch;
-            _context.next = 14;
+            _context.next = 15;
             return model.updateState(response.data);
 
-          case 14:
+          case 15:
             _context.t1 = _context.sent;
-            _context.next = 17;
+            _context.next = 18;
             return (0, _context.t0)(_context.t1);
 
-          case 17:
-            if (response && callback) callback(response);
-            _context.next = 22;
+          case 18:
+            if (response && callback) {
+              callback(response);
+            }
+
+            _context.next = 24;
             break;
 
-          case 20:
+          case 21:
+            _context.prev = 21;
+            _context.t2 = _context["catch"](3);
+
+            if (callback) {
+              callback(null, _context.t2);
+            }
+
+          case 24:
+            _context.next = 28;
+            break;
+
+          case 26:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_1__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the putURL attribute."));
 
-          case 22:
+          case 28:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[3, 21]]);
   }));
 
   return function put(_x, _x2, _x3) {
@@ -7957,57 +7990,73 @@ function () {
             persistData = model.persistData;
 
             if (!(deleteURL !== null)) {
-              _context.next = 20;
+              _context.next = 26;
               break;
             }
 
+            _context.prev = 4;
             payload = {
               path: deleteURL,
               body: body ? Object.assign({}, body) : {}
             };
-            _context.next = 7;
+            _context.next = 8;
             return Object(_internal__WEBPACK_IMPORTED_MODULE_1__["request"])(payload, model, _internal__WEBPACK_IMPORTED_MODULE_1__["methods"].DELETE);
 
-          case 7:
+          case 8:
             response = _context.sent;
 
             if (!(response && save)) {
-              _context.next = 18;
+              _context.next = 19;
               break;
             }
 
             if (!persistData) {
-              _context.next = 12;
+              _context.next = 13;
               break;
             }
 
-            _context.next = 12;
+            _context.next = 13;
             return ___WEBPACK_IMPORTED_MODULE_2__["Store"].set(model, response.data);
 
-          case 12:
+          case 13:
             _context.t0 = dispatch;
-            _context.next = 15;
+            _context.next = 16;
             return model.updateState(response.data);
 
-          case 15:
+          case 16:
             _context.t1 = _context.sent;
-            _context.next = 18;
+            _context.next = 19;
             return (0, _context.t0)(_context.t1);
 
-          case 18:
-            if (response && callback) callback(response);
+          case 19:
+            if (response && callback) {
+              callback(response);
+            }
+
+            _context.next = 25;
+            break;
+
+          case 22:
+            _context.prev = 22;
+            _context.t2 = _context["catch"](4);
+
+            if (callback) {
+              callback(null, _context.t2);
+            }
+
+          case 25:
             return _context.abrupt("return");
 
-          case 20:
+          case 26:
             o = Object(_internal__WEBPACK_IMPORTED_MODULE_1__["inspectClass"])(model);
             console.error("The ".concat(o.ClassName, " object is missing the deleteURL attribute."));
 
-          case 22:
+          case 28:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[4, 22]]);
   }));
 
   return function del(_x, _x2, _x3) {
@@ -8106,7 +8155,7 @@ function () {
 
 
             ___WEBPACK_IMPORTED_MODULE_1__["RLean"].model = model;
-            dispatch(model.updateState(model.initialState[model.key], type));
+            dispatch(model.updateState(null, type));
 
             if (callback) {
               callback();
