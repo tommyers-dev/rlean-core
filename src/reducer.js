@@ -3,25 +3,30 @@ import { RLean } from './';
 import { logActions, saveToIndexedDB, applyMiddleware } from './middleware';
 
 export const reducer = ({ ...state }, action) => {
-  const models = getValue(RLean, 'config.models', {});
+  const stateDefinitions = getValue(RLean, 'config.stateDefinitions', {});
   const middleware = getValue(RLean, 'config.middleware', []);
-  const objects = Object.values(models);
+  const objects = Object.values(stateDefinitions);
+  const objectsLength = objects.length;
   let combinedReducer = {};
 
-  for (let i = 0; i < objects.length; i++) {
+  for (let i = 0; i < objectsLength; i += 1) {
     if (objects[i].prototype) {
       const key = objects[i].prototype.key;
       const value = state[key];
 
       if (objects[i].prototype.includeInState) {
-        Object.assign(combinedReducer, { [key]: objects[i].prototype.reducer(value, action) });
+        Object.assign(combinedReducer, {
+          [key]: objects[i].prototype.reducer(value, action),
+        });
       }
     } else {
       const key = objects[i].key;
       const value = state[key];
 
       if (objects[i].includeInState) {
-        Object.assign(combinedReducer, { [key]: objects[i].reducer(value, action) });
+        Object.assign(combinedReducer, {
+          [key]: objects[i].reducer(value, action),
+        });
       }
     }
   }
@@ -30,7 +35,7 @@ export const reducer = ({ ...state }, action) => {
 
   middleware.push(logActions);
   // middleware.push(saveToIndexedDB);
-  applyMiddleware(RLean.model, nextState, action, middleware);
+  applyMiddleware(RLean.definition, nextState, action, middleware);
 
   return combinedReducer;
 };

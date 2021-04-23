@@ -88,11 +88,11 @@ export const formatPath = (
   return console.error('Could not format the path.');
 };
 
-export const request = async (payload, model, method) => {
-  const { get, post, del, put, patch } = getApiMethods(model);
+export const request = async (payload, definition, method) => {
+  const { get, post, del, put, patch } = getApiMethods(definition);
 
-  const nullableParams = model.nullableParams;
-  const apiUriOverride = model.apiUriOverride;
+  const nullableParams = definition.nullableParams;
+  const apiUriOverride = definition.apiUriOverride;
   const headers = getValue(RLean, 'config.api.headers', {});
   const url = apiUriOverride
     ? apiUriOverride
@@ -115,7 +115,7 @@ export const request = async (payload, model, method) => {
     url: url + path,
     data: payload.body,
     headers,
-    signal: payload.signal,  
+    signal: payload.signal,
   };
 
   let res = null;

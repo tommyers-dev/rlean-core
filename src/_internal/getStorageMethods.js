@@ -2,9 +2,9 @@ import { getValue, hasValue } from '@rlean/utils';
 import RLean from '../RLean';
 import { LocalForageAdapter } from '../defaultAdapters';
 
-export const getStorageMethods = model => {
-  const store = hasValue(model, 'adapters.storage')
-    ? model.adapters.storage
+export const getStorageMethods = definition => {
+  const store = hasValue(definition, 'adapters.storage')
+    ? definition.adapters.storage
     : getValue(RLean, 'config.storage.adapter', LocalForageAdapter);
 
   const setStorage = store.set;

@@ -1,6 +1,6 @@
 import { Store, RLean } from './';
 
-async function logActions(model, state, action) {
+async function logActions(definition, state, action) {
   const stateKey = Object.keys(action)[1].toString();
 
   if (RLean.config.logToConsole) {
@@ -20,17 +20,17 @@ async function logActions(model, state, action) {
   return state;
 }
 
-async function saveToIndexedDB(model, state, action) {
-  if (model.persistData) {
-    await Store.set(model, Object.values(action)[1]);
+async function saveToIndexedDB(definition, state, action) {
+  if (definition.persistData) {
+    await Store.set(definition, Object.values(action)[1]);
   }
 
   return state;
 }
 
-async function applyMiddleware(model, state, action, middleware) {
+async function applyMiddleware(definition, state, action, middleware) {
   return middleware.reduce(async (st, fn) => {
-    const returnable = await fn(model, st, action);
+    const returnable = await fn(definition, st, action);
 
     return returnable;
   }, state);

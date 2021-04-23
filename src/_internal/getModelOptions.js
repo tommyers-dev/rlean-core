@@ -1,6 +1,6 @@
 import { convertToType } from './convertToType';
 
-export const getModelOptions = (key, options) => {
+export const getDefinitionOptions = (key, options) => {
   const defaultType = convertToType(key);
 
   const getInitialState = () => {
@@ -38,10 +38,10 @@ export const getModelOptions = (key, options) => {
     },
     reducer: (state, action) => {
       switch (action.type) {
-        case `${defaultType}_IS_LOADING`:
-        case `${defaultType}_LAST_UPDATED`:
-        case `${defaultType}_ERROR`:
-        case defaultType:
+        case `SET_${defaultType}_IS_LOADING`:
+        case `SET_${defaultType}_LAST_UPDATED`:
+        case `SET_${defaultType}_ERROR`:
+        case `SET_${defaultType}`:
           // Create an object if value is a string or number.
           if (typeof action[key] !== 'object') {
             return {
@@ -50,7 +50,7 @@ export const getModelOptions = (key, options) => {
             };
           }
 
-          // If there is no value to set, clear state for this model.
+          // If there is no value to set, clear state for this definition.
           if (!action[key]) {
             return null;
           }
@@ -64,29 +64,37 @@ export const getModelOptions = (key, options) => {
           return state;
       }
     },
+    listener: null,
   };
 
   if (!options) {
     return defaultOptions;
   }
 
-  const initialState = options.initialState ? { [key]: options.initialState } : defaultOptions.initialState;
+  const initialState = options.initialState
+    ? { [key]: options.initialState }
+    : defaultOptions.initialState;
   const getURL = options.getURL ?? defaultOptions.getURL;
   const postURL = options.postURL ?? defaultOptions.postURL;
   const putURL = options.putURL ?? defaultOptions.putURL;
   const patchURL = options.patchURL ?? defaultOptions.patchURL;
   const deleteURL = options.deleteURL ?? defaultOptions.deleteURL;
-  const nullableParams = options.nullableParams ?? defaultOptions.nullableParams;
+  const nullableParams =
+    options.nullableParams ?? defaultOptions.nullableParams;
   const persistData = options.persistData ?? defaultOptions.persistData;
   const preferStore = options.preferStore ?? defaultOptions.preferStore;
-  const progressiveLoading = options.progressiveLoading ?? defaultOptions.progressiveLoading;
+  const progressiveLoading =
+    options.progressiveLoading ?? defaultOptions.progressiveLoading;
   const syncInterval = options.syncInterval ?? defaultOptions.syncInterval;
-  const syncAfterTimeElapsed = options.syncAfterTimeElapsed ?? defaultOptions.syncAfterTimeElapsed;
+  const syncAfterTimeElapsed =
+    options.syncAfterTimeElapsed ?? defaultOptions.syncAfterTimeElapsed;
   const adapters = options.adapters ?? defaultOptions.adapters;
   const type = options.type ?? defaultOptions.type;
   const updateState = options.updateState ?? defaultOptions.updateState;
   const reducer = options.reducer ?? defaultOptions.reducer;
-  const includeInState = options.includeInState ?? defaultOptions.includeInState;
+  const includeInState =
+    options.includeInState ?? defaultOptions.includeInState;
+  const listener = options.listener ?? defaultOptions.listener;
 
   return {
     initialState,
@@ -106,5 +114,6 @@ export const getModelOptions = (key, options) => {
     updateState,
     reducer,
     includeInState,
+    listener,
   };
 };

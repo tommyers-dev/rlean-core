@@ -1,7 +1,7 @@
 export const getOptions = options => {
   if (!options) {
     return {
-      model: null,
+      definition: null,
       params: null,
       value: null,
       type: null,
@@ -11,7 +11,7 @@ export const getOptions = options => {
   }
 
   return {
-    model: options.model ?? null,
+    definition: options.definition ?? null,
     params: options.params ?? null,
     value: typeof options.value !== 'undefined' ? options.value : null,
     type: options.type ?? null,

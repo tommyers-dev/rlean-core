@@ -2,11 +2,12 @@ import { RLean } from './';
 import { getValue } from '@rlean/utils';
 
 export const initialState = () => {
-  const models = getValue(RLean, 'config.models', {});
-  const objects = Object.values(models);
+  const stateDefinitions = getValue(RLean, 'config.stateDefinitions', {});
+  const objects = Object.values(stateDefinitions);
+  const objectsLength = objects.length;
   let combinedInitialState = {};
 
-  for (let i = 0; i < objects.length; i++) {
+  for (let i = 0; i < objectsLength; i += 1) {
     if (objects[i].includeInState) {
       Object.assign(combinedInitialState, objects[i].initialState);
     }

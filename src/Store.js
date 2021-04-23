@@ -4,10 +4,10 @@ class Store {
   /*
    * Makes the 'set' call to local storage to store data
    */
-  async set(model, value) {
+  async set(definition, value) {
     const { setStorage, getStorage } = getStorageMethods();
 
-    const key = model.key;
+    const key = definition.key;
 
     try {
       await setStorage(key, value);
@@ -27,10 +27,10 @@ class Store {
   /*
    * Makes the 'get' call to local storage to get some data
    */
-  async get(model) {
+  async get(definition) {
     const { getStorage } = getStorageMethods();
 
-    const key = model.key;
+    const key = definition.key;
 
     try {
       const value = await getStorage(key);
@@ -47,9 +47,9 @@ class Store {
       throw new Error('Array cannot be null or empty');
     }
 
-    units.forEach(async kvPair => {
+    units.forEach(async unit => {
       try {
-        await setStorage(kvPair.key, kvPair.value);
+        await setStorage(unit.key, unit.value);
       } catch (e) {
         console.log(e);
       }
@@ -76,10 +76,10 @@ class Store {
    * Makes the 'remove' call to local storage to get remove a value from local storage
    * Uses the storage engine found by decideWhichEngine, either adapter or default.
    */
-  async remove(model) {
+  async remove(definition) {
     const { removeStorage } = getStorageMethods();
 
-    const key = model.key;
+    const key = definition.key;
 
     try {
       await removeStorage(key);

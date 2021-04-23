@@ -1,6 +1,6 @@
 import { convertToType } from './convertToType';
 import { getHookOptions } from './getHookOptions';
-import { getModelOptions } from './getModelOptions';
+import { getDefinitionOptions } from './getDefinitionOptions';
 import { inspectClass } from './inspectClass';
 import { implement } from './implement';
 import { methods } from './methods';
@@ -14,7 +14,7 @@ export {
   methods,
   request,
   getHookOptions,
-  getModelOptions,
+  getDefinitionOptions,
   convertToType,
   getApiMethods,
   getStorageMethods,
