@@ -1,11 +1,11 @@
 export const inspectClass = obj => {
-  let objClass, className;
-  let classProto;
-  let methods = [];
+  let className;
   let attributes = {};
-  let t;
+  const methods = [];
 
   try {
+    let objClass;
+
     if (typeof obj !== 'function') {
       objClass = obj.constructor;
     } else {
@@ -13,10 +13,10 @@ export const inspectClass = obj => {
     }
 
     className = objClass.name;
-    classProto = objClass.prototype;
+    const classProto = objClass.prototype;
 
-    Object.getOwnPropertyNames(classProto).forEach(function(m) {
-      t = typeof classProto[m];
+    Object.getOwnPropertyNames(classProto).forEach(function (m) {
+      const t = typeof classProto[m];
 
       if (t === 'function') {
         methods.push(m);

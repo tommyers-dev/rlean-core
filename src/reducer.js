@@ -3,9 +3,9 @@ import { RLean } from './';
 import { logActions, saveToIndexedDB, applyMiddleware } from './middleware';
 
 export const reducer = ({ ...state }, action) => {
-  const stateDefinitions = getValue(RLean, 'config.stateDefinitions', {});
+  const entityDefinitions = getValue(RLean, 'config.entities', {});
   const middleware = getValue(RLean, 'config.middleware', []);
-  const objects = Object.values(stateDefinitions);
+  const objects = Object.values(entityDefinitions);
   const objectsLength = objects.length;
   let combinedReducer = {};
 

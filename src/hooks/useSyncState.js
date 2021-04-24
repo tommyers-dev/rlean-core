@@ -8,8 +8,8 @@ export default function useSyncState() {
   const [{ ...state }, dispatch] = useGlobalState();
 
   const syncState = useCallback(() => {
-    const stateDefinitions = getValue(RLean, 'config.stateDefinitions', {});
-    const objects = Object.values(stateDefinitions);
+    const entityDefinitions = getValue(RLean, 'config.entities', {});
+    const objects = Object.values(entityDefinitions);
 
     objects.map(async definition => {
       if (!mountedRef.current) {

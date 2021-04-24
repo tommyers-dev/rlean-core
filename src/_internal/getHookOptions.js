@@ -14,9 +14,9 @@ export const getHookOptions = options => {
     };
   }
 
-  const stateDefinitions = getValue(RLean, 'config.stateDefinitions', {});
+  const entityDefinitions = getValue(RLean, 'config.entities', {});
   const key = options.key ?? null;
-  const objects = Object.values(stateDefinitions);
+  const objects = Object.values(entityDefinitions);
   const definition = key
     ? objects.find(object => object.key === key)
     : options.definition ?? null;

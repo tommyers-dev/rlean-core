@@ -3,15 +3,15 @@ import RLean from './RLean';
 import { convertToType } from './_internal/convertToType';
 
 const getKeys = () => {
-  const stateDefinitions = getValue(RLean, 'config.stateDefinitions', {});
-  const stateDefinitionsLength = stateDefinitions.length;
+  const entityDefinitions = getValue(RLean, 'config.entities', {});
+  const entityDefinitionsLength = entityDefinitions.length;
   const keys = {};
 
-  for (let i = 0; i < stateDefinitionsLength; i += 1) {
-    const key = convertToType(stateDefinitions[i].key);
+  for (let i = 0; i < entityDefinitionsLength; i += 1) {
+    const key = convertToType(entityDefinitions[i].key);
 
     Object.assign(keys, {
-      [key]: stateDefinitions[i].key,
+      [key]: entityDefinitions[i].key,
     });
   }
 

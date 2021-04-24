@@ -2,8 +2,8 @@ import { RLean } from './';
 import { getValue } from '@rlean/utils';
 
 export const initialState = () => {
-  const stateDefinitions = getValue(RLean, 'config.stateDefinitions', {});
-  const objects = Object.values(stateDefinitions);
+  const entityDefinitions = getValue(RLean, 'config.entities', {});
+  const objects = Object.values(entityDefinitions);
   const objectsLength = objects.length;
   let combinedInitialState = {};
 
