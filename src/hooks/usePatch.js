@@ -16,26 +16,32 @@ const patch = async (options, dispatch, callback) => {
   const patchURL = definition.patchURL;
 
   if (patchURL !== null) {
-    const payload = {
-      path: patchURL,
-      query: params,
-      body: body ? Object.assign({}, body) : {},
-    };
-    const response = await request(payload, definition, methods.PATCH);
+    try {
+      const payload = {
+        path: patchURL,
+        query: params,
+        body: body ? Object.assign({}, body) : {},
+      };
+      const response = await request(payload, definition, methods.PATCH);
 
-    // Don't do a deep compare on the return value against the current value.
-    // The return value will most likely be different regardless. Assume that
-    // if dispatch was provided, we're supposed to use it.
-    if (response && save) {
-      if (definition.persistData) {
-        await Store.set(definition, response.data);
+      // Don't do a deep compare on the return value against the current value.
+      // The return value will most likely be different regardless. Assume that
+      // if dispatch was provided, we're supposed to use it.
+      if (response && save) {
+        if (definition.persistData) {
+          await Store.set(definition, response.data);
+        }
+
+        await dispatch(await definition.updateState(response.data));
       }
 
-      await dispatch(await definition.updateState(response.data));
-    }
-
-    if (response && callback) {
-      callback(response);
+      if (response && callback) {
+        callback(response);
+      }
+    } catch (error) {
+      if (callback) {
+        callback(null, error);
+      }
     }
   } else {
     const o = inspectClass(definition);

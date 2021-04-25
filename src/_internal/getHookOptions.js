@@ -19,7 +19,7 @@ export const getHookOptions = options => {
   const objects = Object.values(entityDefinitions);
   const definition = key
     ? objects.find(object => object.key === key)
-    : options.definition ?? null;
+    : options.entity ?? null;
 
   return {
     definition,

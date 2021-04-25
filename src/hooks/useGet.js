@@ -142,6 +142,10 @@ export default function useGet(options, callback) {
           definition.updateState(stateValue, `${definition.type}_ERROR`)
         );
       }
+
+      if (callback) {
+        callback(null, err);
+      }
     }
 
     return {

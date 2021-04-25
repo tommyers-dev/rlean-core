@@ -18,25 +18,31 @@ const del = async (options, dispatch, callback) => {
   const persistData = definition.persistData;
 
   if (deleteURL !== null) {
-    const payload = {
-      path: deleteURL,
-      body: body ? Object.assign({}, body) : {},
-    };
-    const response = await request(payload, definition, methods.DELETE);
+    try {
+      const payload = {
+        path: deleteURL,
+        body: body ? Object.assign({}, body) : {},
+      };
+      const response = await request(payload, definition, methods.DELETE);
 
-    if (response && save) {
-      if (persistData) {
-        await Store.set(definition, response.data);
+      if (response && save) {
+        if (persistData) {
+          await Store.set(definition, response.data);
+        }
+
+        await dispatch(await definition.updateState(response.data));
       }
 
-      await dispatch(await definition.updateState(response.data));
-    }
+      if (response && callback) {
+        callback(response);
+      }
 
-    if (response && callback) {
-      callback(response);
+      return;
+    } catch (error) {
+      if (callback) {
+        callback(null, error);
+      }
     }
-
-    return;
   }
 
   const o = inspectClass(definition);
