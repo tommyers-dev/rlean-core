@@ -4,15 +4,16 @@ import { deepCopy, hasValue } from '@rlean/utils';
 import { useGlobalState } from '../State';
 import useSave from './useSave';
 import { getHookOptions, methods } from '../_internal';
+import { Store } from '..';
 
 export default function useGet(options, callback) {
+  const [{ ...state }, dispatch] = useGlobalState();
   const [init, setInit] = useState(false);
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState();
   const [isRefetching, setIsRefetching] = useState(false);
   const [lastUpdated, setLastUpdated] = useState();
-  const [{ ...state }, dispatch] = useGlobalState();
   const stateRef = useRef(state);
   const [save] = useSave();
   const abortCtrl =
@@ -118,7 +119,7 @@ export default function useGet(options, callback) {
 
       // persist updated value with new loading status
       if (definition.persistData) {
-        save({ definition, value: stateValue }); // TODO: Should be a store, not save
+        save({ entity: definition, value: stateValue }); // TODO: Should be a store, not save
       }
 
       if (definition.includeInState) {

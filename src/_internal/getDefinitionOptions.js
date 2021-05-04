@@ -1,7 +1,7 @@
 import { convertToType } from './convertToType';
 
 export const getDefinitionOptions = (key, options) => {
-  const defaultType = convertToType(key);
+  const defaultType = `SET_${convertToType(key)}`;
 
   const getInitialState = () => {
     const value = { [key]: null };
@@ -30,18 +30,18 @@ export const getDefinitionOptions = (key, options) => {
     adapters: null,
     includeInState: true,
     type: defaultType,
-    updateState: (value, type) => {
+    updateState: (value, givenType) => {
       return {
-        type: type ? type : defaultType,
+        type: givenType ?? defaultType,
         [key]: value,
       };
     },
     reducer: (state, action) => {
       switch (action.type) {
-        case `SET_${defaultType}_IS_LOADING`:
-        case `SET_${defaultType}_LAST_UPDATED`:
-        case `SET_${defaultType}_ERROR`:
-        case `SET_${defaultType}`:
+        case `${defaultType}_IS_LOADING`:
+        case `${defaultType}_LAST_UPDATED`:
+        case `${defaultType}_ERROR`:
+        case `${defaultType}`:
           // Create an object if value is a string or number.
           if (typeof action[key] !== 'object') {
             return {
