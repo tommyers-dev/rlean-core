@@ -5,6 +5,7 @@ import { logActions, saveToIndexedDB, applyMiddleware } from './middleware';
 export const reducer = ({ ...state }, action) => {
   const entityDefinitions = getValue(RLean, 'config.entities', {});
   const middleware = getValue(RLean, 'config.middleware', []);
+  const definition = getValue(RLean, 'definition', {});
   const objects = Object.values(entityDefinitions);
   const objectsLength = objects.length;
   let combinedReducer = {};
@@ -35,7 +36,7 @@ export const reducer = ({ ...state }, action) => {
 
   middleware.push(logActions);
   // middleware.push(saveToIndexedDB);
-  applyMiddleware(RLean.definition, nextState, action, middleware);
+  applyMiddleware(definition, nextState, action, middleware);
 
   return combinedReducer;
 };

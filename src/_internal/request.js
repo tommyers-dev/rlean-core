@@ -93,10 +93,16 @@ export const request = async (payload, definition, method) => {
 
   const nullableParams = definition.nullableParams;
   const apiUriOverride = definition.apiUriOverride;
-  const headers = getValue(RLean, 'config.api.headers', {});
+  let headers = getValue(RLean, 'config.api.headers', {});
   const url = apiUriOverride
     ? apiUriOverride
     : getValue(RLean, 'config.api.baseURL', '');
+  const token = getValue(RLean, 'config.api.token', null);
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
   const path = formatPath(
     payload.path,
     payload.query,

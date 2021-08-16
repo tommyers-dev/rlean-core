@@ -3,6 +3,7 @@ import { request, methods, inspectClass } from '../_internal';
 import { getHookOptions } from '../_internal/getHookOptions';
 import { useGlobalState } from '..';
 import { Store } from '..';
+import useOfflineQueue from './useOfflineQueue';
 
 /**
  * Exposed Hook that allows user to access post method
@@ -21,12 +22,14 @@ import { Store } from '..';
 export default function usePost(options, callback) {
   const [, dispatch] = useGlobalState();
   const mountedRef = useRef(true);
+  const [enqueue] = useOfflineQueue();
 
   const post = useCallback(
     async (options, dispatch, callback) => {
       const { definition, params, body, save } = getHookOptions(options);
       const postURL = definition.postURL;
       const persistData = definition.persistData;
+      const queueOffline = definition.queueOffline;
 
       if (postURL !== null) {
         try {
@@ -40,7 +43,13 @@ export default function usePost(options, callback) {
               : {},
           };
 
-          const response = await request(payload, definition, methods.POST);
+          let response = null;
+
+          if (navigator.onLine) {
+            response = await request(payload, definition, methods.POST);
+          } else if (queueOffline) {
+            enqueue({ method: methods.POST, options, callback });
+          }
 
           if (!mountedRef.current) {
             return null;

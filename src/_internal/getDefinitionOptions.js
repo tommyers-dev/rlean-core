@@ -1,7 +1,9 @@
+import { hasValue } from '@rlean/utils';
 import { convertToType } from './convertToType';
 
 export const getDefinitionOptions = (key, options) => {
   const defaultType = `SET_${convertToType(key)}`;
+  const addType = `ADD_${convertToType(key)}`;
 
   const getInitialState = () => {
     const value = { [key]: null };
@@ -29,6 +31,7 @@ export const getDefinitionOptions = (key, options) => {
     syncAfterTimeElapsed: false,
     adapters: null,
     includeInState: true,
+    queueOffline: false,
     type: defaultType,
     updateState: (value, givenType) => {
       return {
@@ -41,7 +44,7 @@ export const getDefinitionOptions = (key, options) => {
         case `${defaultType}_IS_LOADING`:
         case `${defaultType}_LAST_UPDATED`:
         case `${defaultType}_ERROR`:
-        case `${defaultType}`:
+        case defaultType:
           // Create an object if value is a string or number.
           if (typeof action[key] !== 'object') {
             return {
@@ -59,6 +62,20 @@ export const getDefinitionOptions = (key, options) => {
             ...state,
             ...action[key],
           };
+
+        case addType:
+          // add to existing state
+          if (hasValue(state, 'data')) {
+            return {
+              ...state,
+              data: [].concat([], ...state.data, ...action[key].data),
+            };
+          } else {
+            return {
+              ...state,
+              ...action[key],
+            };
+          }
 
         default:
           return state;
@@ -89,6 +106,7 @@ export const getDefinitionOptions = (key, options) => {
   const syncAfterTimeElapsed =
     options.syncAfterTimeElapsed ?? defaultOptions.syncAfterTimeElapsed;
   const adapters = options.adapters ?? defaultOptions.adapters;
+  const queueOffline = options.queueOffline ?? defaultOptions.queueOffline;
   const type = options.type ?? defaultOptions.type;
   const updateState = options.updateState ?? defaultOptions.updateState;
   const reducer = options.reducer ?? defaultOptions.reducer;
@@ -110,6 +128,7 @@ export const getDefinitionOptions = (key, options) => {
     syncInterval,
     syncAfterTimeElapsed,
     adapters,
+    queueOffline,
     type,
     updateState,
     reducer,

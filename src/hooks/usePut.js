@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { request, methods, inspectClass } from '../_internal';
 import { getHookOptions } from '../_internal/getHookOptions';
 import { useGlobalState } from '..';
 import { Store } from '..';
+import useOfflineQueue from './useOfflineQueue';
 
 /**
  * Function that executes a PUT against the API.
@@ -14,8 +15,10 @@ import { Store } from '..';
  */
 const put = async (options, dispatch, callback) => {
   const { definition, params, body, save } = getHookOptions(options);
+  const [enqueue] = useOfflineQueue();
 
   const putURL = definition.putURL;
+  const queueOffline = definition.queueOffline;
 
   if (putURL !== null) {
     try {
@@ -24,7 +27,14 @@ const put = async (options, dispatch, callback) => {
         query: params,
         body: body ? Object.assign({}, body) : {},
       };
-      const response = await request(payload, definition, methods.PUT);
+
+      let response = null;
+
+      if (navigator.onLine) {
+        response = await request(payload, definition, methods.PUT);
+      } else if (queueOffline) {
+        enqueue({ method: methods.PUT, options, callback });
+      }
 
       // Don't do a deep compare on the return value against the current value.
       // The return value will most likely be different regardless. Assume that

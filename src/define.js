@@ -22,6 +22,7 @@ export const define = (key, options, callback) => {
     updateState,
     nullableParams,
     includeInState,
+    queueOffline,
   } = getDefinitionOptions(key, options);
 
   return {
@@ -43,5 +44,6 @@ export const define = (key, options, callback) => {
     callback,
     nullableParams,
     includeInState,
+    queueOffline,
   };
 };

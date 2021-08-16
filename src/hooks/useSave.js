@@ -13,7 +13,7 @@ import { Store } from '..';
  * @param {Function} dispatch
  * @param {Function} [callback=null]
  */
-const save = async (options, state, dispatch, callback) => {
+const save = async (options, dispatch, callback) => {
   if (typeof options === 'undefined' || typeof options.value === 'undefined') {
     return;
   }
@@ -43,17 +43,17 @@ const save = async (options, state, dispatch, callback) => {
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
  */
 export default function useSave(options, callback) {
-  const [{ ...state }, dispatch] = useGlobalState();
+  const [, dispatch] = useGlobalState();
 
   if (typeof options === 'undefined') {
     return [
       (options, callback) => {
-        save(options, state, dispatch, callback);
+        save(options, dispatch, callback);
       },
     ];
   }
 
   useEffect(() => {
-    save(options, state, dispatch, callback);
+    save(options, dispatch, callback);
   }, [dispatch]);
 }

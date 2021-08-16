@@ -1,9 +1,11 @@
 import { Store, RLean } from './';
+import { getValue } from '@rlean/utils';
 
 async function logActions(definition, state, action) {
   const stateKey = Object.keys(action)[1].toString();
+  const logToConsole = getValue(RLean, 'config.logToConsole', false);
 
-  if (RLean.config.logToConsole) {
+  if (logToConsole) {
     console.log(`state`, state);
     console.log(`dispatching ${action.type}`, { [stateKey]: action[stateKey] });
   }

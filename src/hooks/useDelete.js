@@ -3,6 +3,7 @@ import { request, methods, inspectClass } from '../_internal';
 import { useGlobalState } from '..';
 import { getHookOptions } from '../_internal/getHookOptions';
 import { Store } from '..';
+import useOfflineQueue from './useOfflineQueue';
 
 /**
  * Function that executes a DELETE against the API.
@@ -16,6 +17,8 @@ const del = async (options, dispatch, callback) => {
   const { definition, body, save } = getHookOptions(options);
   const deleteURL = definition.deleteURL;
   const persistData = definition.persistData;
+  const queueOffline = definition.queueOffline;
+  const [enqueue] = useOfflineQueue();
 
   if (deleteURL !== null) {
     try {
@@ -23,7 +26,14 @@ const del = async (options, dispatch, callback) => {
         path: deleteURL,
         body: body ? Object.assign({}, body) : {},
       };
-      const response = await request(payload, definition, methods.DELETE);
+
+      let response = null;
+
+      if (navigator.onLine) {
+        response = await request(payload, definition, methods.DELETE);
+      } else if (queueOffline) {
+        enqueue({ method: methods.DELETE, options, callback });
+      }
 
       if (response && save) {
         if (persistData) {
