@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack && npx -p typescript tsc"
   },
   "repository": {
     "type": "git",
