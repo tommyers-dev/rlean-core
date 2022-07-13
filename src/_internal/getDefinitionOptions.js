@@ -1,6 +1,6 @@
-import { hasValue } from '@rlean/utils';
-import { convertToType } from './convertToType';
-
+import { hasValue } from "@rlean/utils";
+import { convertToType } from "./convertToType";
+// NOT CONVERTED
 export const getDefinitionOptions = (key, options) => {
   const defaultType = `SET_${convertToType(key)}`;
   const addType = `ADD_${convertToType(key)}`;
@@ -46,7 +46,7 @@ export const getDefinitionOptions = (key, options) => {
         case `${defaultType}_ERROR`:
         case defaultType:
           // Create an object if value is a string or number.
-          if (typeof action[key] !== 'object') {
+          if (typeof action[key] !== "object") {
             return {
               ...state,
               value: action[key],
@@ -65,7 +65,7 @@ export const getDefinitionOptions = (key, options) => {
 
         case addType:
           // add to existing state
-          if (hasValue(state, 'data')) {
+          if (hasValue(state, "data")) {
             return {
               ...state,
               data: [].concat([], ...state.data, ...action[key].data),

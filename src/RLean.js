@@ -1,9 +1,9 @@
-import { getValue } from '@rlean/utils';
-import { RLean_OfflineQueue } from './_internal/entities';
-
+import { getValue } from "@rlean/utils";
+import { RLean_OfflineQueue } from "./_internal/entities";
+// NOT CONVERTED
 class RLean {
   async init(config) {
-    const entities = getValue(config, 'entities', {});
+    const entities = getValue(config, "entities", {});
     config.entities = { ...entities, RLean_OfflineQueue };
     this.config = config;
   }

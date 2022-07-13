@@ -1,5 +1,5 @@
-import { getStorageMethods } from './_internal/getStorageMethods';
-
+import { getStorageMethods } from "./_internal/getStorageMethods";
+// NOT CONVERTED
 class Store {
   /*
    * Makes the 'set' call to local storage to store data
@@ -44,10 +44,10 @@ class Store {
     const { setStorage } = getStorageMethods();
 
     if (units === undefined || units.length === 0) {
-      throw new Error('Array cannot be null or empty');
+      throw new Error("Array cannot be null or empty");
     }
 
-    units.forEach(async unit => {
+    units.forEach(async (unit) => {
       try {
         await setStorage(unit.key, unit.value);
       } catch (e) {

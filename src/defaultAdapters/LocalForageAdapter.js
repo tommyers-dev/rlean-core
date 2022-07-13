@@ -1,9 +1,9 @@
-import localforage from 'localforage';
-
+import localforage from "localforage";
+// NOT CONVERTED
 class LocalForage {
   async set(key, value) {
     if (!key || value === undefined) {
-      throw new Error('Key or value cannot be undefined');
+      throw new Error("Key or value cannot be undefined");
     }
 
     try {
@@ -15,10 +15,10 @@ class LocalForage {
 
   async setAll(units) {
     if (units === undefined || units.length === 0) {
-      throw new Error('Array cannot be null or empty');
+      throw new Error("Array cannot be null or empty");
     }
 
-    units.forEach(async kvPair => {
+    units.forEach(async (kvPair) => {
       try {
         await this.set(kvPair.key, kvPair.value);
       } catch (err) {
@@ -31,7 +31,7 @@ class LocalForage {
 
   async get(key) {
     if (!key) {
-      throw new Error('Must supply a key in get');
+      throw new Error("Must supply a key in get");
     }
 
     try {
@@ -53,7 +53,7 @@ class LocalForage {
 
   async remove(key) {
     if (!key) {
-      throw new Error('Must supply a key in remove');
+      throw new Error("Must supply a key in remove");
     }
 
     try {

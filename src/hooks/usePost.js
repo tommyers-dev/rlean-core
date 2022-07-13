@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { request, methods, inspectClass } from '../_internal';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { useGlobalState } from '..';
-import { Store } from '..';
-import useOfflineQueue from './useOfflineQueue';
-
+import { useCallback, useEffect, useRef } from "react";
+import { request, methods, inspectClass } from "../_internal";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { useGlobalState } from "../..";
+import { Store } from "../..";
+import useOfflineQueue from "./useOfflineQueue";
+// NOT CONVERTED
 /**
  * Exposed Hook that allows user to access post method
  * If no definition given, returns function to use post to allow conditional operation.
@@ -81,7 +81,7 @@ export default function usePost(options, callback) {
     [mountedRef]
   );
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       (options, callback) => {
         post(options, dispatch, callback);

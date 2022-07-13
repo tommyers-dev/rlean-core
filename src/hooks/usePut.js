@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-import { request, methods, inspectClass } from '../_internal';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { useGlobalState } from '..';
-import { Store } from '..';
-import useOfflineQueue from './useOfflineQueue';
-
+import { useEffect } from "react";
+import { request, methods, inspectClass } from "../_internal";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { useGlobalState } from "../..";
+import { Store } from "../..";
+import useOfflineQueue from "./useOfflineQueue";
+// NOT CONVERTED
 /**
  * Function that executes a PUT against the API.
  *
@@ -77,7 +77,7 @@ const put = async (options, dispatch, callback) => {
 export default function usePut(options, callback) {
   const [, dispatch] = useGlobalState();
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       (options, callback) => {
         put(options, dispatch, callback);

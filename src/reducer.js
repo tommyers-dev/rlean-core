@@ -1,11 +1,11 @@
-import { deepCopy, getValue } from '@rlean/utils';
-import { RLean } from './';
-import { logActions, saveToIndexedDB, applyMiddleware } from './middleware';
-
+import { deepCopy, getValue } from "@rlean/utils";
+import { RLean } from "..";
+import { logActions, saveToIndexedDB, applyMiddleware } from "./middleware";
+// NOT CONVERTED
 export const reducer = ({ ...state }, action) => {
-  const entityDefinitions = getValue(RLean, 'config.entities', {});
-  const middleware = getValue(RLean, 'config.middleware', []);
-  const definition = getValue(RLean, 'definition', {});
+  const entityDefinitions = getValue(RLean, "config.entities", {});
+  const middleware = getValue(RLean, "config.middleware", []);
+  const definition = getValue(RLean, "definition", {});
   const objects = Object.values(entityDefinitions);
   const objectsLength = objects.length;
   let combinedReducer = {};

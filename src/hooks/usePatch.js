@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-import { request, methods, inspectClass } from '../_internal';
-import { useGlobalState } from '..';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { Store } from '..';
-import useOfflineQueue from './useOfflineQueue';
-
+import { useEffect } from "react";
+import { request, methods, inspectClass } from "../_internal";
+import { useGlobalState } from "../..";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { Store } from "../..";
+import useOfflineQueue from "./useOfflineQueue";
+// NOT CONVERTED
 /**
  * Function that executes a PATCH against the API.
  *
@@ -79,7 +79,7 @@ const patch = async (options, dispatch, callback) => {
 export default function usePatch(options, callback) {
   const [, dispatch] = useGlobalState();
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       (options, callback) => {
         patch(options, dispatch, callback);

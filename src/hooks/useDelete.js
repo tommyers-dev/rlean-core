@@ -1,10 +1,10 @@
-import { useEffect, useCallback, useRef } from 'react';
-import { request, methods, inspectClass } from '../_internal';
-import { useGlobalState } from '..';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { Store } from '..';
-import useOfflineQueue from './useOfflineQueue';
-
+import { useEffect, useCallback, useRef } from "react";
+import { request, methods, inspectClass } from "../_internal";
+import { useGlobalState } from "../..";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { Store } from "../..";
+import useOfflineQueue from "./useOfflineQueue";
+// NOT CONVERTED
 /**
  * Function that executes a DELETE against the API.
  *
@@ -77,7 +77,7 @@ const del = async (options, dispatch, callback) => {
 export default function useDelete(options, callback) {
   const [, dispatch] = useGlobalState();
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       (options, callback) => {
         del(options, dispatch, callback);

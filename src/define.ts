@@ -1,34 +1,11 @@
+import { EntityDefineOptions } from "./types";
 import { getDefinitionOptions } from "./_internal";
 
-/**
- * @template T
- * @typedef DefineOptions
- * @type {object}
- * @property {string} getURL
- * @property {string} postURL
- * @property {object} initialState
- * @property {T} extensions
- */
-
-/**
- * @typedef Definition
- * @type {object}
- * @property {string} key
- * @property {string} getURL
- * @property {string} postURL
- */
-
-/**
- * Define an entity
- *
- * @template T
- *
- * @param {string} key Identifier of the entity
- * @param {DefineOptions<T>} options Entity definition options
- *
- * @return {Definition & {[Property in keyof T]: T[Property]}} Entity definition
- */
-export const define = (key, options, callback) => {
+export default function define<T>(
+  key: string,
+  options: Partial<EntityDefineOptions<T>>,
+  callback: Function
+): EntityDefineOptions<T> {
   if (!key) {
     console.error(`Key is required for definition.`);
   }
@@ -75,4 +52,4 @@ export const define = (key, options, callback) => {
     queueOffline,
     ...(options?.extensions ?? {}),
   };
-};
+}

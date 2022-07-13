@@ -1,8 +1,13 @@
-import { RLean } from './';
-import { getValue } from '@rlean/utils';
+import { RLean } from "..";
+import { getValue } from "@rlean/utils";
+import { EntityDefineOptions, GlobalState } from "./types";
 
-export const initialState = () => {
-  const entityDefinitions = getValue(RLean, 'config.entities', {});
+export const initialState = (): GlobalState<any> => {
+  const entityDefinitions = getValue(
+    RLean,
+    "config.entities",
+    {}
+  ) as EntityDefineOptions<any>[];
   const objects = Object.values(entityDefinitions);
   const objectsLength = objects.length;
   let combinedInitialState = {};

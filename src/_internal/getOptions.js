@@ -1,4 +1,5 @@
-export const getOptions = options => {
+// NOT CONVERTED
+export const getOptions = (options) => {
   if (!options) {
     return {
       definition: null,
@@ -13,7 +14,7 @@ export const getOptions = options => {
   return {
     definition: options.definition ?? null,
     params: options.params ?? null,
-    value: typeof options.value !== 'undefined' ? options.value : null,
+    value: typeof options.value !== "undefined" ? options.value : null,
     type: options.type ?? null,
     body: options.body ?? null,
     save: options.save,

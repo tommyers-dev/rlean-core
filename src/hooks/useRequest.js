@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-import { useGlobalState } from '..';
-
+import { useEffect } from "react";
+import { useGlobalState } from "../..";
+// NOT CONVERTED
 export default async function useRequest(options, method, callback) {
   const [, dispatch] = useGlobalState();
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       (options, callback) => {
         method(options, dispatch, callback);

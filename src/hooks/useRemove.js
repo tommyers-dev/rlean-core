@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
-import { Store, RLean, useGlobalState } from '..';
-import { getHookOptions } from '../_internal/getHookOptions';
-
+import { useEffect } from "react";
+import { Store, RLean, useGlobalState } from "../..";
+import { getHookOptions } from "../_internal/getHookOptions";
+// NOT CONVERTED
 /**
  * @param {Object} def
  * @param {Function} dispatch
  * @param {Function} [callback=null]
  */
 const remove = async (options, dispatch, callback) => {
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return;
   }
 
@@ -38,7 +38,7 @@ const remove = async (options, dispatch, callback) => {
 export default function useRemove(options, callback) {
   const [, dispatch] = useGlobalState();
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       (options, callback) => {
         remove(options, dispatch, callback);

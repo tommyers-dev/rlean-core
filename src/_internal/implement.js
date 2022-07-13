@@ -1,5 +1,5 @@
-import { inspectClass } from './';
-
+import { inspectClass } from "./";
+// NOT CONVERTED
 export const implement = (testableClass, rules) => {
   const given = inspectClass(testableClass);
 
@@ -8,22 +8,22 @@ export const implement = (testableClass, rules) => {
     rules,
     given,
     error: {
-      type: '',
-      message: '',
+      type: "",
+      message: "",
       invalidMethods: [],
       methodsNotIncluded: [],
     },
     passed: true,
   };
 
-  const rulesDifferential = rules.methods.filter(method => {
+  const rulesDifferential = rules.methods.filter((method) => {
     if (given.Methods.indexOf(method) < 0) {
       return method;
     }
   });
 
   if (rulesDifferential.length !== 0) {
-    inspectionMessage.error.type = 'MethodError';
+    inspectionMessage.error.type = "MethodError";
     inspectionMessage.passed = false;
     inspectionMessage.error.invalidMethods = [];
     inspectionMessage.error.methodsNotIncluded = rulesDifferential;

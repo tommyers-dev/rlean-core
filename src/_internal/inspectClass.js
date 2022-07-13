@@ -1,4 +1,5 @@
-export const inspectClass = obj => {
+// NOT CONVERTED
+export const inspectClass = (obj) => {
   let className;
   let attributes = {};
   const methods = [];
@@ -6,7 +7,7 @@ export const inspectClass = obj => {
   try {
     let objClass;
 
-    if (typeof obj !== 'function') {
+    if (typeof obj !== "function") {
       objClass = obj.constructor;
     } else {
       objClass = obj;
@@ -18,14 +19,14 @@ export const inspectClass = obj => {
     Object.getOwnPropertyNames(classProto).forEach(function (m) {
       const t = typeof classProto[m];
 
-      if (t === 'function') {
+      if (t === "function") {
         methods.push(m);
       } else {
         attributes[m] = classProto[m];
       }
     });
   } catch (err) {
-    className = 'undefined';
+    className = "undefined";
     console.error(err);
   }
 

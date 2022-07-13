@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { request } from '../_internal/request';
-import { deepCopy, hasValue } from '@rlean/utils';
-import { useGlobalState } from '../State';
-import useSave from './useSave';
-import { getHookOptions, methods } from '../_internal';
-import { Store } from '..';
-
+import { useEffect, useRef, useState } from "react";
+import { request } from "../_internal/request";
+import { deepCopy, hasValue } from "@rlean/utils";
+import { useGlobalState } from "../State";
+import useSave from "./useSave";
+import { getHookOptions, methods } from "../_internal";
+import { Store } from "../..";
+// NOT CONVERTED
 export default function useGet(options, callback) {
   const [{ ...state }, dispatch] = useGlobalState();
   const [init, setInit] = useState(false);
@@ -17,11 +17,11 @@ export default function useGet(options, callback) {
   const stateRef = useRef(state);
   const [save] = useSave();
   const abortCtrl =
-    typeof new AbortController() === 'undefined'
+    typeof new AbortController() === "undefined"
       ? {
           signal: null,
           abort: () =>
-            console.warn('Browser does not support fetch canceling.'),
+            console.warn("Browser does not support fetch canceling."),
         }
       : new AbortController();
   let dependencies = [];
@@ -41,14 +41,14 @@ export default function useGet(options, callback) {
     const currentState = stateRef.current;
 
     // definition does not include a get call
-    if (!hasValue(definition, 'getURL')) {
+    if (!hasValue(definition, "getURL")) {
       return null;
     }
 
     // check for null params
     if (!definition.nullableParams) {
       for (let key in params) {
-        if (typeof params[key] === 'undefined' || params[key] === null) {
+        if (typeof params[key] === "undefined" || params[key] === null) {
           return null;
         }
       }
@@ -167,7 +167,7 @@ export default function useGet(options, callback) {
     await get(options, stateRef, dispatch, callback, save, true);
   };
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       (options, callback) => {
         get(options, stateRef, dispatch, callback, save);

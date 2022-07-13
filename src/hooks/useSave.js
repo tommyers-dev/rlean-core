@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { useGlobalState, RLean } from '..';
-import { getHookOptions } from '../_internal';
-import { Store } from '..';
-
+import { useEffect } from "react";
+import { useGlobalState, RLean } from "../..";
+import { getHookOptions } from "../_internal";
+import { Store } from "../..";
+// NOT CONVERTED
 /**
  * Save an object to state, and optionally to store if persistData
  * is true (default). Don't check if current state and new value are different
@@ -14,7 +14,7 @@ import { Store } from '..';
  * @param {Function} [callback=null]
  */
 const save = async (options, dispatch, callback) => {
-  if (typeof options === 'undefined' || typeof options.value === 'undefined') {
+  if (typeof options === "undefined" || typeof options.value === "undefined") {
     return;
   }
 
@@ -45,7 +45,7 @@ const save = async (options, dispatch, callback) => {
 export default function useSave(options, callback) {
   const [, dispatch] = useGlobalState();
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       (options, callback) => {
         save(options, dispatch, callback);
