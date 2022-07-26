@@ -1,7 +1,7 @@
 import { hasValue } from "@rlean/utils";
 import { convertToType } from "./convertToType";
-// NOT CONVERTED
-export const getDefinitionOptions = (key, options) => {
+
+export const getDefinitionOptions = (key: string, options: any) => {
   const defaultType = `SET_${convertToType(key)}`;
   const addType = `ADD_${convertToType(key)}`;
 
@@ -33,13 +33,13 @@ export const getDefinitionOptions = (key, options) => {
     includeInState: true,
     queueOffline: false,
     type: defaultType,
-    updateState: (value, givenType) => {
+    updateState: (value: any, givenType: any) => {
       return {
         type: givenType ?? defaultType,
         [key]: value,
       };
     },
-    reducer: (state, action) => {
+    reducer: (state: any, action: any) => {
       switch (action.type) {
         case `${defaultType}_IS_LOADING`:
         case `${defaultType}_LAST_UPDATED`:

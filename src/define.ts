@@ -1,11 +1,11 @@
 import { EntityDefineOptions } from "./types";
 import { getDefinitionOptions } from "./_internal";
 
-export default function define<T>(
+export const define = <T>(
   key: string,
   options: Partial<EntityDefineOptions<T>>,
-  callback: Function
-): EntityDefineOptions<T> {
+  callback?: Function
+): EntityDefineOptions<T> => {
   if (!key) {
     console.error(`Key is required for definition.`);
   }
@@ -52,4 +52,4 @@ export default function define<T>(
     queueOffline,
     ...(options?.extensions ?? {}),
   };
-}
+};

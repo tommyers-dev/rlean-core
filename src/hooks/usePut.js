@@ -74,7 +74,7 @@ const put = async (options, dispatch, callback) => {
  * const [put] = usePut();
  * put({ definition: Definition, body: { value: 'value' } })
  */
-export default function usePut(options, callback) {
+export default function usePut(options = undefined, callback = () => {}) {
   const [, dispatch] = useGlobalState();
 
   if (typeof options === "undefined") {

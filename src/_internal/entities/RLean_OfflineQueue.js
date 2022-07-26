@@ -1,4 +1,4 @@
-import define from "../../define";
+import { define } from "../../define";
 // NOT CONVERTED
 const RLean_OfflineQueue = define("rlean_offlineQueue");
 

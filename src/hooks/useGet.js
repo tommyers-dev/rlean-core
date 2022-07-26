@@ -5,8 +5,8 @@ import { useGlobalState } from "../State";
 import useSave from "./useSave";
 import { getHookOptions, methods } from "../_internal";
 import { Store } from "../..";
-// NOT CONVERTED
-export default function useGet(options, callback) {
+
+export default function useGet(options, callback = () => {}) {
   const [{ ...state }, dispatch] = useGlobalState();
   const [init, setInit] = useState(false);
   const [data, setData] = useState();

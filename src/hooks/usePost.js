@@ -19,7 +19,7 @@ import useOfflineQueue from "./useOfflineQueue";
  * const [ post ] = usePost();
  * post({ definition: Definition, body: { value: 'value' } });
  */
-export default function usePost(options, callback) {
+export default function usePost(options = undefined, callback = () => {}) {
   const [, dispatch] = useGlobalState();
   const mountedRef = useRef(true);
   const [enqueue] = useOfflineQueue();

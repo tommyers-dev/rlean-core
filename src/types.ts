@@ -1,5 +1,23 @@
+export type RLeanConfig<F> = {
+  entities: { [K in keyof F]: F[K] };
+  utilities?: any;
+  api: {
+    headers: {
+      Authorization?: string;
+    };
+    baseURL: string;
+    adapter?: any;
+    token?: string;
+  };
+  logToConsole?: boolean;
+};
+
 export type GlobalState<F> = {
-  [K in keyof F]: F[K] | EntityState<F[K]>;
+  [K in keyof F as Uncapitalize<string & K>]: F[K] extends EntityDefineOptions<
+    infer A
+  >
+    ? EntityState<A>
+    : never;
 };
 
 export type EntityState<T> = {
@@ -14,7 +32,7 @@ export type Adapter = {};
 
 export type EntityDefineOptions<T> = {
   key: string;
-  initialState?: T;
+  initialState?: Partial<T>;
   getURL?: string;
   postURL?: string;
   putURL?: string;

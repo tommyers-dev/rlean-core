@@ -13,7 +13,11 @@ import { Store } from "../..";
  * @param {Function} dispatch
  * @param {Function} [callback=null]
  */
-const save = async (options, dispatch, callback) => {
+const save = async (
+  options = undefined,
+  dispatch = () => {},
+  callback = () => {}
+) => {
   if (typeof options === "undefined" || typeof options.value === "undefined") {
     return;
   }
@@ -42,12 +46,12 @@ const save = async (options, dispatch, callback) => {
  * @param {Object} options An object containing an instance of the definition whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the definition has multiple types.
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
  */
-export default function useSave(options, callback) {
+export default function useSave(options = undefined, callback = () => {}) {
   const [, dispatch] = useGlobalState();
 
   if (typeof options === "undefined") {
     return [
-      (options, callback) => {
+      (options = undefined, callback = () => {}) => {
         save(options, dispatch, callback);
       },
     ];

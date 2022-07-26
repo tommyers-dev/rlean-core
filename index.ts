@@ -1,6 +1,6 @@
 import { initialState } from "./src/initialState";
 import Adapters from "./src/Adapters";
-import define from "./src/define";
+import { define } from "./src/define";
 import { keys } from "./src/keys";
 import useSave from "./src/hooks/useSave";
 import useRequest from "./src/hooks/useRequest";
