@@ -33,7 +33,7 @@ export const getDefinitionOptions = (key: string, options: any) => {
     includeInState: true,
     queueOffline: false,
     type: defaultType,
-    updateState: (value: any, givenType: any) => {
+    updateState: (value: any, givenType: string) => {
       return {
         type: givenType ?? defaultType,
         [key]: value,

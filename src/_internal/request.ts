@@ -1,17 +1,20 @@
 import RLean from "../RLean";
 import { getValue } from "@rlean/utils";
-import { methods } from "./methods";
 import { getApiMethods } from "./getApiMethods";
-
-// NOT CONVERTED
+import {
+  AdapterAPIPayload,
+  API_METHOD,
+  EntityDefineOptions,
+  RequestPayload,
+} from "../types";
 
 export const formatPath = (
-  path,
-  payloadQuery,
-  payloadBody,
-  method,
-  nullableParams
-) => {
+  path: string,
+  payloadQuery: Object,
+  payloadBody: Object,
+  method: API_METHOD,
+  nullableParams: boolean
+): string => {
   // Check for null params if they aren't allowed.
   if (!nullableParams) {
     if (payloadQuery) {
@@ -45,7 +48,7 @@ export const formatPath = (
 
   // If payloadQuery exists, return the path with the params appended.
   if (path && payloadQuery) {
-    let returnValue;
+    let returnValue = "";
 
     // Create an array of all payload keys.
     const queryStringKeys = [];
@@ -87,19 +90,26 @@ export const formatPath = (
     return returnValue;
   }
 
-  return console.error("Could not format the path.");
+  throw Error("Could not format the path.");
 };
 
-export const request = async (payload, definition, method) => {
+export const request = async <Res, P, T>(
+  payload: RequestPayload<P>,
+  definition: EntityDefineOptions<T>,
+  method: API_METHOD
+) => {
   const { get, post, del, put, patch } = getApiMethods(definition);
 
   const nullableParams = definition.nullableParams;
   const apiUriOverride = definition.apiUriOverride;
+
+  // @todo type headers on RLeanConfig type
   let headers = getValue(RLean, "config.api.headers", {});
-  const url = apiUriOverride
+
+  const url: string = apiUriOverride
     ? apiUriOverride
     : getValue(RLean, "config.api.baseURL", "");
-  const token = getValue(RLean, "config.api.token", null);
+  const token: string = getValue(RLean, "config.api.token", null);
 
   if (token) {
     headers.Authorization = `Bearer ${token}`;
@@ -119,7 +129,7 @@ export const request = async (payload, definition, method) => {
     return;
   }
 
-  const apiPayload = {
+  const apiPayload: AdapterAPIPayload<P> = {
     url: url + path,
     data: payload.body,
     headers,
@@ -129,20 +139,20 @@ export const request = async (payload, definition, method) => {
   let res = null;
 
   switch (method) {
-    case methods.GET:
-      res = await get(apiPayload);
+    case API_METHOD.GET:
+      res = await get<Res, P>(apiPayload);
       break;
-    case methods.POST:
-      res = await post(apiPayload);
+    case API_METHOD.POST:
+      res = await post<Res, P>(apiPayload);
       break;
-    case methods.DELETE:
-      res = await del(apiPayload);
+    case API_METHOD.DELETE:
+      res = await del<Res, P>(apiPayload);
       break;
-    case methods.PUT:
-      res = await put(apiPayload);
+    case API_METHOD.PUT:
+      res = await put<Res, P>(apiPayload);
       break;
-    case methods.PATCH:
-      res = await patch(apiPayload);
+    case API_METHOD.PATCH:
+      res = await patch<Res, P>(apiPayload);
       break;
     default:
       console.error("Unknown API method specified.");

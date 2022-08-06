@@ -3,6 +3,7 @@ import { RLeanConfig } from "./types";
 // import { RLean_OfflineQueue } from "./_internal/entities";
 
 class RLean<T> {
+  public definition: any;
   public config: RLeanConfig<T>;
 
   async init(config: RLeanConfig<T>) {

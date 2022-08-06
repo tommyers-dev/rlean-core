@@ -119,7 +119,7 @@ export default function useGet(options, callback = () => {}) {
 
       // persist updated value with new loading status
       if (definition.persistData) {
-        save({ entity: definition, value: stateValue }); // TODO: Should be a store, not save
+        Store.set(definition, stateValue);
       }
 
       if (definition.includeInState) {

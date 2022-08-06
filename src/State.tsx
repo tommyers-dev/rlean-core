@@ -2,13 +2,7 @@
 import * as React from "react";
 import { reducer, initialState, useSyncState, RLean } from "..";
 import { useProcessQueue } from "./_internal/hooks";
-import { GlobalState } from "./types";
-
-type ContextType<T> = [
-  // state: GlobalState<typeof entityDefinitions>,
-  state: GlobalState<T>,
-  dispatch: React.DispatchWithoutAction
-];
+import { ContextType } from "./types";
 
 export const StateContext = React.createContext([] as any);
 

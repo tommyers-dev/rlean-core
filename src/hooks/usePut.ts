@@ -4,16 +4,22 @@ import { getHookOptions } from "../_internal/getHookOptions";
 import { useGlobalState } from "../..";
 import { Store } from "../..";
 import useOfflineQueue from "./useOfflineQueue";
-// NOT CONVERTED
+import {
+  APIResponse,
+  EntityDefineOptions,
+  PutOptions,
+  SaveOptions,
+} from "../types";
+
 /**
  * Function that executes a PUT against the API.
  *
- * @constructor
- * @param {Object} options
- * @param {Function} dispatch
- * @param {Function} callback
  */
-const put = async (options, dispatch, callback) => {
+const put = async <Res, T extends EntityDefineOptions<any>>(
+  options: SaveOptions<T> | undefined,
+  dispatch: (updateState: any) => void,
+  callback: (response: APIResponse<Res>, error?: any) => void
+) => {
   const { definition, params, body, save } = getHookOptions(options);
   const [enqueue] = useOfflineQueue();
 
@@ -74,12 +80,18 @@ const put = async (options, dispatch, callback) => {
  * const [put] = usePut();
  * put({ definition: Definition, body: { value: 'value' } })
  */
-export default function usePut(options = undefined, callback = () => {}) {
+export default function usePut<Res, T extends EntityDefineOptions<any>>(
+  options: PutOptions<T> | undefined,
+  callback: (response: APIResponse<Res>, error?: any) => void
+) {
   const [, dispatch] = useGlobalState();
 
   if (typeof options === "undefined") {
     return [
-      (options, callback) => {
+      <T extends EntityDefineOptions<any>>(
+        options: PutOptions<T> = undefined,
+        callback: (response: APIResponse<Res>, error?: any) => void
+      ) => {
         put(options, dispatch, callback);
       },
     ];
@@ -87,5 +99,5 @@ export default function usePut(options = undefined, callback = () => {}) {
 
   useEffect(() => {
     put(options, dispatch, callback);
-  }, [params]);
+  }, []);
 }

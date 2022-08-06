@@ -1,19 +1,11 @@
 import { getValue } from "@rlean/utils";
 import RLean from "../RLean";
 import { convertToType } from "./convertToType";
+import { SaveOptions, HookOptions, EntityDefineOptions } from "../types";
 
-export const getHookOptions = (options: {
-  key?: string;
-  entity: {
-    key: string;
-  };
-  params: any;
-  value: any;
-  body: any;
-  save: any;
-  type: any;
-  add: any;
-}): any => {
+export const getHookOptions = <T extends EntityDefineOptions<any>>(
+  options: SaveOptions<T>
+): HookOptions<T> => {
   if (!options) {
     return {
       definition: null,
@@ -27,7 +19,8 @@ export const getHookOptions = (options: {
   }
 
   const entityDefinitions = getValue(RLean, "config.entities", {});
-  const entities: { key: string }[] = Object.values(entityDefinitions);
+  const entities: (T & EntityDefineOptions<any>)[] =
+    Object.values(entityDefinitions);
 
   const definition = options.key
     ? entities.find((entity) => entity.key === options.key)
