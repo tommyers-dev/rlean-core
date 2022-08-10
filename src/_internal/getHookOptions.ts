@@ -1,10 +1,10 @@
 import { getValue } from "@rlean/utils";
 import RLean from "../RLean";
 import { convertToType } from "./convertToType";
-import { SaveOptions, HookOptions, EntityDefineOptions } from "../types";
+import { Options, HookOptions, EntityDefineOptions } from "../types";
 
 export const getHookOptions = <T extends EntityDefineOptions<any>>(
-  options: SaveOptions<T>
+  options: Partial<Options<T>>
 ): HookOptions<T> => {
   if (!options) {
     return {

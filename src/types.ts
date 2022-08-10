@@ -31,6 +31,8 @@ export type EntityState<T> = {
   isLoading: boolean;
   isRefetching: boolean;
   lastUpdated: Date;
+  error?: any;
+  canceled?: boolean;
 };
 
 export enum API_METHOD {
@@ -44,7 +46,7 @@ export enum API_METHOD {
 export type RequestPayload<T> = {
   path: string;
   query: Object;
-  body: T;
+  body?: T;
   signal?: any;
 };
 
@@ -62,11 +64,11 @@ export interface APIResponse<T> {
 }
 
 export interface ApiAdapter {
-  get: <R, T>(payload: AdapterAPIPayload<T>) => APIResponse<R>;
-  put: <R, T>(payload: AdapterAPIPayload<T>) => APIResponse<R>;
-  post: <R, T>(payload: AdapterAPIPayload<T>) => APIResponse<R>;
-  del: <R, T>(payload: AdapterAPIPayload<T>) => APIResponse<R>;
-  patch: <R, T>(payload: AdapterAPIPayload<T>) => APIResponse<R>;
+  get?: <R, T>(payload: AdapterAPIPayload<T>) => Promise<APIResponse<R>>;
+  put?: <R, T>(payload: AdapterAPIPayload<T>) => Promise<APIResponse<R>>;
+  post?: <R, T>(payload: AdapterAPIPayload<T>) => Promise<APIResponse<R>>;
+  del?: <R, T>(payload: AdapterAPIPayload<T>) => Promise<APIResponse<R>>;
+  patch?: <R, T>(payload: AdapterAPIPayload<T>) => Promise<APIResponse<R>>;
 }
 
 export type Adapter = {
@@ -98,31 +100,41 @@ export type EntityDefineOptions<T> = {
   extensions?: any;
 };
 
-export type Options<Def> = {
+export interface Options<
+  Def,
+  F = Def extends EntityDefineOptions<infer F> ? F : unknown
+> {
   params: Object;
-  value: EntityState<Def extends EntityDefineOptions<infer F> ? F : unknown>;
+  value: Partial<
+    // EntityState<Def extends EntityDefineOptions<infer F> ? F : unknown>
+    EntityState<F>
+  >;
   type: string;
-  body: any;
+  body: F extends Array<infer O> ? O : F;
   save: boolean;
+  entity: Def;
   key: string;
-};
+  add?: any;
+}
+
+export type GetOptions<Def extends EntityDefineOptions<any>> = Partial<
+  Options<Def>
+>;
+
+export type SaveOptions<Def extends EntityDefineOptions<any>> = Partial<
+  Options<Def>
+>;
+
+export type PutOptions<Def extends EntityDefineOptions<any>> = Partial<
+  Options<Def>
+>;
+
+export type PostOptions<Def extends EntityDefineOptions<any>> = Partial<
+  Options<Def>
+>;
 
 export type HookOptions<Def extends EntityDefineOptions<any>> = Partial<
   Options<Def>
 > & {
   definition: Def;
-};
-
-export type SaveOptions<Def extends EntityDefineOptions<any>> = Partial<
-  Options<Def>
-> & {
-  entity: Def;
-  add?: any;
-};
-
-export type PutOptions<Def extends EntityDefineOptions<any>> = Partial<
-  Options<Def>
-> & {
-  entity: Def;
-  add?: any;
 };

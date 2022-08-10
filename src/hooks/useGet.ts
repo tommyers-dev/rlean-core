@@ -1,21 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Ref } from "react";
 import { request } from "../_internal/request";
 import { deepCopy, hasValue } from "@rlean/utils";
 import { useGlobalState } from "../State";
-import useSave from "./useSave";
 import { getHookOptions, methods } from "../_internal";
 import { Store } from "../..";
+import {
+  EntityState,
+  GlobalState,
+  EntityDefineOptions,
+  GetOptions,
+} from "../types";
 
-export default function useGet(options, callback = () => {}) {
+export default function useGet<Def extends EntityDefineOptions<any>>(
+  options: GetOptions<Def> | undefined,
+  callback = () => {}
+): EntityState<Def> | [(options: GetOptions<Def>, callback: Function) => void] {
   const [{ ...state }, dispatch] = useGlobalState();
   const [init, setInit] = useState(false);
   const [data, setData] = useState();
   const [error, setError] = useState();
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState<boolean>();
   const [isRefetching, setIsRefetching] = useState(false);
   const [lastUpdated, setLastUpdated] = useState();
   const stateRef = useRef(state);
-  const [save] = useSave();
   const abortCtrl =
     typeof new AbortController() === "undefined"
       ? {
@@ -29,16 +36,15 @@ export default function useGet(options, callback = () => {}) {
   let isMounted = true;
   let canceled = false;
 
-  const get = async (
-    options,
-    stateRef,
-    dispatch,
-    callback,
-    save,
-    isRefetch
+  const get = async <A, T extends EntityDefineOptions<any>>(
+    options: GetOptions<T> | undefined,
+    stateRef: any,
+    dispatch: (updateState: any) => void,
+    callback: Function,
+    isRefetch: boolean = false
   ) => {
     const { definition, params, type } = getHookOptions(options);
-    const currentState = stateRef.current;
+    const currentState: GlobalState<A> = stateRef.current;
 
     // definition does not include a get call
     if (!hasValue(definition, "getURL")) {
@@ -80,7 +86,6 @@ export default function useGet(options, callback = () => {}) {
       // set initial loading state
       if (definition.persistData) {
         Store.set(definition, stateValue);
-        // save({ definition, value: stateValue }); // TODO: Should be a store, not save
       }
 
       if (definition.includeInState) {
@@ -158,19 +163,19 @@ export default function useGet(options, callback = () => {}) {
       canceled,
       init,
       refetch: async () => {
-        await get(options, stateRef, dispatch, callback, save, true);
+        await get(options, stateRef, dispatch, callback, true);
       },
     };
   };
 
   const refetch = async () => {
-    await get(options, stateRef, dispatch, callback, save, true);
+    await get(options, stateRef, dispatch, callback, true);
   };
 
   if (typeof options === "undefined") {
     return [
       (options, callback) => {
-        get(options, stateRef, dispatch, callback, save);
+        get(options, stateRef, dispatch, callback);
       },
     ];
   }
@@ -180,7 +185,7 @@ export default function useGet(options, callback = () => {}) {
   }
 
   useEffect(() => {
-    get(options, stateRef, dispatch, callback, save);
+    get(options, stateRef, dispatch, callback);
 
     return () => {
       isMounted = false;
@@ -197,7 +202,7 @@ export default function useGet(options, callback = () => {}) {
     lastUpdated,
     canceled,
     init,
-    get,
-    refetch,
+    // get,
+    // refetch,
   };
 }

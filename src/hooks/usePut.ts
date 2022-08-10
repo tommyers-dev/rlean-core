@@ -4,19 +4,14 @@ import { getHookOptions } from "../_internal/getHookOptions";
 import { useGlobalState } from "../..";
 import { Store } from "../..";
 import useOfflineQueue from "./useOfflineQueue";
-import {
-  APIResponse,
-  EntityDefineOptions,
-  PutOptions,
-  SaveOptions,
-} from "../types";
+import { APIResponse, EntityDefineOptions, PutOptions } from "../types";
 
 /**
  * Function that executes a PUT against the API.
  *
  */
 const put = async <Res, T extends EntityDefineOptions<any>>(
-  options: SaveOptions<T> | undefined,
+  options: PutOptions<T> | undefined,
   dispatch: (updateState: any) => void,
   callback: (response: APIResponse<Res>, error?: any) => void
 ) => {
@@ -81,8 +76,8 @@ const put = async <Res, T extends EntityDefineOptions<any>>(
  * put({ definition: Definition, body: { value: 'value' } })
  */
 export default function usePut<Res, T extends EntityDefineOptions<any>>(
-  options: PutOptions<T> | undefined,
-  callback: (response: APIResponse<Res>, error?: any) => void
+  options?: PutOptions<T>,
+  callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
   const [, dispatch] = useGlobalState();
 

@@ -4,7 +4,8 @@ import { getHookOptions } from "../_internal/getHookOptions";
 import { useGlobalState } from "../..";
 import { Store } from "../..";
 import useOfflineQueue from "./useOfflineQueue";
-// NOT CONVERTED
+import { APIResponse, EntityDefineOptions, PostOptions } from "../types";
+
 /**
  * Exposed Hook that allows user to access post method
  * If no definition given, returns function to use post to allow conditional operation.
@@ -19,13 +20,20 @@ import useOfflineQueue from "./useOfflineQueue";
  * const [ post ] = usePost();
  * post({ definition: Definition, body: { value: 'value' } });
  */
-export default function usePost(options = undefined, callback = () => {}) {
+export default function usePost<Def extends EntityDefineOptions<any>>(
+  options?: PostOptions<Def> | undefined,
+  callback = () => {}
+) {
   const [, dispatch] = useGlobalState();
   const mountedRef = useRef(true);
   const [enqueue] = useOfflineQueue();
 
   const post = useCallback(
-    async (options, dispatch, callback) => {
+    async <T extends EntityDefineOptions<any>>(
+      options: PostOptions<T> | undefined,
+      dispatch: (updateState: any) => void,
+      callback: Function
+    ) => {
       const { definition, params, body, save } = getHookOptions(options);
       const postURL = definition.postURL;
       const persistData = definition.persistData;
@@ -83,13 +91,16 @@ export default function usePost(options = undefined, callback = () => {}) {
 
   if (typeof options === "undefined") {
     return [
-      (options, callback) => {
+      <T extends EntityDefineOptions<any>, Res = any>(
+        options: PostOptions<T>,
+        callback: (response: APIResponse<Res>, error?: any) => void
+      ) => {
         post(options, dispatch, callback);
       },
     ];
   }
 
-  params.push(post);
+  // params.push(post);
 
   useEffect(() => {
     post(options, dispatch, callback);
@@ -97,5 +108,6 @@ export default function usePost(options = undefined, callback = () => {}) {
     return () => {
       mountedRef.current = false; // clean up
     };
-  }, [params]);
+    // }, [params]);
+  }, []);
 }

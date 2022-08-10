@@ -28,18 +28,19 @@ const save = async <T extends EntityDefineOptions<any>, A>(
 
   const { definition, value, type } = getHookOptions(options);
 
-  const stateValue: EntityState<
-    T extends EntityDefineOptions<infer F> ? F : unknown
-  > = state && state[definition.key] ? deepCopy(state[definition.key]) : {};
+  //const stateValue: EntityState<
+  //  T extends EntityDefineOptions<infer F> ? F : unknown
+  //> = state && state[definition.key] ? deepCopy(state[definition.key]) : {};
+
+  const stateValue: EntityState<any> =
+    state && state[definition.key] ? deepCopy(state[definition.key]) : {};
 
   if (definition.persistData) {
     Store.set(definition, value);
   }
 
-  // stateValue.data = value.data;
-
   RLean.definition = definition;
-  dispatch(definition.updateState(value, type));
+  dispatch(definition.updateState({ ...stateValue, ...value }, type));
 
   if (callback) {
     callback();
@@ -56,7 +57,7 @@ const save = async <T extends EntityDefineOptions<any>, A>(
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
  */
 export default function useSave<T extends EntityDefineOptions<any>>(
-  options: SaveOptions<T> | undefined,
+  options?: SaveOptions<T>,
   callback = () => {}
 ) {
   const [{ ...state }, dispatch] = useGlobalState();
