@@ -10,8 +10,8 @@ import { APIResponse, EntityDefineOptions, PutOptions } from "../types";
  * Function that executes a PUT against the API.
  *
  */
-const put = async <Res, T extends EntityDefineOptions<any>>(
-  options: PutOptions<T> | undefined,
+const put = async <Res, Req, T extends EntityDefineOptions<any>>(
+  options: PutOptions<T, Req> | undefined,
   dispatch: (updateState: any) => void,
   callback: (response: APIResponse<Res>, error?: any) => void
 ) => {
@@ -75,16 +75,16 @@ const put = async <Res, T extends EntityDefineOptions<any>>(
  * const [put] = usePut();
  * put({ definition: Definition, body: { value: 'value' } })
  */
-export default function usePut<Res, T extends EntityDefineOptions<any>>(
-  options?: PutOptions<T>,
+export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
+  options?: PutOptions<T, Req>,
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
   const [, dispatch] = useGlobalState();
 
   if (typeof options === "undefined") {
     return [
-      <T extends EntityDefineOptions<any>>(
-        options: PutOptions<T> = undefined,
+      <Res, Req, T extends EntityDefineOptions<any>>(
+        options: PutOptions<T, Req> = undefined,
         callback: (response: APIResponse<Res>, error?: any) => void
       ) => {
         put(options, dispatch, callback);

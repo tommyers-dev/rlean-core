@@ -102,7 +102,8 @@ export type EntityDefineOptions<T> = {
 
 export interface Options<
   Def,
-  F = Def extends EntityDefineOptions<infer F> ? F : unknown
+  F = Def extends EntityDefineOptions<infer F> ? F : unknown,
+  Req = F extends Array<infer O> ? O : F
 > {
   params: Object;
   value: Partial<
@@ -110,7 +111,7 @@ export interface Options<
     EntityState<F>
   >;
   type: string;
-  body: F extends Array<infer O> ? O : F;
+  body: Req; //F extends Array<infer O> ? O : F;
   save: boolean;
   entity: Def;
   key: string;
@@ -125,12 +126,12 @@ export type SaveOptions<Def extends EntityDefineOptions<any>> = Partial<
   Options<Def>
 >;
 
-export type PutOptions<Def extends EntityDefineOptions<any>> = Partial<
-  Options<Def>
+export type PutOptions<Def extends EntityDefineOptions<any>, Body> = Partial<
+  Options<Def, Def extends EntityDefineOptions<infer F> ? F : unknown, Body>
 >;
 
-export type PostOptions<Def extends EntityDefineOptions<any>> = Partial<
-  Options<Def>
+export type PostOptions<Def extends EntityDefineOptions<any>, Body> = Partial<
+  Options<Def, Def extends EntityDefineOptions<infer F> ? F : unknown, Body>
 >;
 
 export type HookOptions<Def extends EntityDefineOptions<any>> = Partial<

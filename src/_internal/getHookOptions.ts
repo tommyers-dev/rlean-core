@@ -3,8 +3,11 @@ import RLean from "../RLean";
 import { convertToType } from "./convertToType";
 import { Options, HookOptions, EntityDefineOptions } from "../types";
 
-export const getHookOptions = <T extends EntityDefineOptions<any>>(
-  options: Partial<Options<T>>
+export const getHookOptions = <
+  T extends EntityDefineOptions<any>,
+  F extends Partial<Options<T>>
+>(
+  options: F
 ): HookOptions<T> => {
   if (!options) {
     return {

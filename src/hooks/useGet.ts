@@ -2,13 +2,14 @@ import { useEffect, useRef, useState, Ref } from "react";
 import { request } from "../_internal/request";
 import { deepCopy, hasValue } from "@rlean/utils";
 import { useGlobalState } from "../State";
-import { getHookOptions, methods } from "../_internal";
+import { getHookOptions } from "../_internal";
 import { Store } from "../..";
 import {
   EntityState,
   GlobalState,
   EntityDefineOptions,
   GetOptions,
+  API_METHOD,
 } from "../types";
 
 export default function useGet<Def extends EntityDefineOptions<any>>(
@@ -104,7 +105,7 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
         signal: abortCtrl.signal,
       };
 
-      const res = await request(payload, definition, methods.GET);
+      const res = await request(payload, definition, API_METHOD.GET);
 
       if (res) {
         stateValue.data = res.data;

@@ -20,19 +20,19 @@ import { APIResponse, EntityDefineOptions, PostOptions } from "../types";
  * const [ post ] = usePost();
  * post({ definition: Definition, body: { value: 'value' } });
  */
-export default function usePost<Def extends EntityDefineOptions<any>>(
-  options?: PostOptions<Def> | undefined,
-  callback = () => {}
+export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
+  options?: PostOptions<Def, Req>,
+  callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
   const [, dispatch] = useGlobalState();
   const mountedRef = useRef(true);
   const [enqueue] = useOfflineQueue();
 
   const post = useCallback(
-    async <T extends EntityDefineOptions<any>>(
-      options: PostOptions<T> | undefined,
+    async <Res, Req, T extends EntityDefineOptions<any>>(
+      options: PostOptions<T, Req> | undefined,
       dispatch: (updateState: any) => void,
-      callback: Function
+      callback: (response: APIResponse<Res>, error?: any) => void
     ) => {
       const { definition, params, body, save } = getHookOptions(options);
       const postURL = definition.postURL;
@@ -91,8 +91,8 @@ export default function usePost<Def extends EntityDefineOptions<any>>(
 
   if (typeof options === "undefined") {
     return [
-      <T extends EntityDefineOptions<any>, Res = any>(
-        options: PostOptions<T>,
+      <Res, Req, T extends EntityDefineOptions<any> = any>(
+        options: PostOptions<T, Req>,
         callback: (response: APIResponse<Res>, error?: any) => void
       ) => {
         post(options, dispatch, callback);
