@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import { deepCopy } from '@rlean/utils';
-import { useGet } from 'index';
+import React, { useEffect, useRef } from "react";
+import { deepCopy } from "@rlean/utils";
+import { useGet } from ".";
 
 export default function useListener(options, listener) {}
 
@@ -12,7 +12,7 @@ export default function useListener(options, listener) {}
  * }, []);
  *
  */
-
+// NOT CONVERTED
 useListener({ entity: SomeEntity, dependencies: [] }, () => {
   //
 });

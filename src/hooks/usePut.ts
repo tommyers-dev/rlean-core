@@ -1,27 +1,30 @@
 import { useEffect } from "react";
 import { request, methods, inspectClass } from "../_internal";
-import { useGlobalState } from "../..";
 import { getHookOptions } from "../_internal/getHookOptions";
+import { useGlobalState } from "../..";
 import { Store } from "../..";
 import useOfflineQueue from "./useOfflineQueue";
-// NOT CONVERTED
+import { APIResponse, EntityDefineOptions, PutOptions } from "../types";
+
 /**
- * Function that executes a PATCH against the API.
+ * Function that executes a PUT against the API.
  *
- * @param {Object} options
- * @param {Function} dispatch
- * @param {Function} [callback=null]
  */
-const patch = async (options, dispatch, callback) => {
+const put = async <Res, Req, T extends EntityDefineOptions<any>>(
+  options: PutOptions<T, Req> | undefined,
+  dispatch: (updateState: any) => void,
+  callback: (response: APIResponse<Res>, error?: any) => void
+) => {
   const { definition, params, body, save } = getHookOptions(options);
-  const patchURL = definition.patchURL;
-  const queueOffline = definition.queueOffline;
   const [enqueue] = useOfflineQueue();
 
-  if (patchURL !== null) {
+  const putURL = definition.putURL;
+  const queueOffline = definition.queueOffline;
+
+  if (putURL !== null) {
     try {
       const payload = {
-        path: patchURL,
+        path: putURL,
         query: params,
         body: body ? Object.assign({}, body) : {},
       };
@@ -29,9 +32,9 @@ const patch = async (options, dispatch, callback) => {
       let response = null;
 
       if (navigator.onLine) {
-        response = await request(payload, definition, methods.PATCH);
+        response = await request(payload, definition, methods.PUT);
       } else if (queueOffline) {
-        enqueue({ method: methods.PATCH, options, callback });
+        enqueue({ method: methods.PUT, options, callback });
       }
 
       // Don't do a deep compare on the return value against the current value.
@@ -55,39 +58,41 @@ const patch = async (options, dispatch, callback) => {
     }
   } else {
     const o = inspectClass(definition);
-    console.error(
-      `The ${o.ClassName} object is missing the patchURL attribute.`
-    );
+    console.error(`The ${o.ClassName} object is missing the putURL attribute.`);
   }
-
-  return;
 };
 
 /**
- * Hook that exposes patch() safely and funly
+ * Hook that exposes put()
  *
  * @constructor
  * @param {Object} options An object containing an instance of the definition whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the definition has multiple types.
- * @param {Function} [callback=null] Optional callback function to be executed after usePatch has executed its logic.
+ * @param {Function} [callback=null] Optional callback function to be executed after usePut has executed its logic.
  * @example
  *
- * usePatch({ definition: Definition, body: { value: 'value' } });
+ * usePut({ definition: Definition, body: { value: 'value' } });
  *
- * const [ patch ] = usePatch();
- * patch({ definition: Definition, body: { value: 'value' } });
+ * const [put] = usePut();
+ * put({ definition: Definition, body: { value: 'value' } })
  */
-export default function usePatch(options, callback) {
+export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
+  options?: PutOptions<T, Req>,
+  callback: (response: APIResponse<Res>, error?: any) => void = () => {}
+) {
   const [, dispatch] = useGlobalState();
 
   if (typeof options === "undefined") {
     return [
-      (options, callback) => {
-        patch(options, dispatch, callback);
+      <Res, Req, T extends EntityDefineOptions<any>>(
+        options: PutOptions<T, Req> = undefined,
+        callback: (response: APIResponse<Res>, error?: any) => void
+      ) => {
+        put(options, dispatch, callback);
       },
     ];
   }
 
   useEffect(() => {
-    patch(options, dispatch, callback);
-  }, [params]);
+    put(options, dispatch, callback);
+  }, []);
 }

@@ -1,9 +1,9 @@
-import { Store, RLean } from './';
-import { getValue } from '@rlean/utils';
-
+import { Store, RLean } from "..";
+import { getValue } from "@rlean/utils";
+// NOT CONVERTED
 async function logActions(definition, state, action) {
   const stateKey = Object.keys(action)[1].toString();
-  const logToConsole = getValue(RLean, 'config.logToConsole', false);
+  const logToConsole = getValue(RLean, "config.logToConsole", false);
 
   if (logToConsole) {
     console.log(`state`, state);

@@ -1,8 +1,8 @@
-import { useRef } from 'react';
-import { getValue } from '@rlean/utils';
-import { useSave, useGlobalState } from '../';
-import { RLean_OfflineQueue } from '../_internal/entities';
-
+import { useRef } from "react";
+import { getValue } from "@rlean/utils";
+import { useSave, useGlobalState } from "../..";
+import { RLean_OfflineQueue } from "../_internal/entities";
+// NOT CONVERTED
 export default function useOfflineQueue() {
   const [save] = useSave();
   const [{ rlean_offlineQueue }] = useGlobalState();
@@ -10,7 +10,7 @@ export default function useOfflineQueue() {
 
   const enqueue = (params, rlean_offlineQueueRef) => {
     const { method, options, callback } = params;
-    const data = getValue(rlean_offlineQueueRef, 'data', []);
+    const data = getValue(rlean_offlineQueueRef, "data", []);
     data.push({ method, options, callback });
 
     const stateValue = { data };
@@ -19,7 +19,7 @@ export default function useOfflineQueue() {
   };
 
   return [
-    params => {
+    (params) => {
       enqueue(params, rlean_offlineQueueRef);
     },
   ];
