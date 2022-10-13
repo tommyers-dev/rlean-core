@@ -293,7 +293,7 @@ If using the optional type to update a part of the object in state instead of th
 
 ### useGlobalState
 
-Use the useGlobalState custom hook to access global state and/or the dispatch function.
+Use the useGlobalState custom hook to access global state.
 
 ```js
 import { useGlobalState } from '@rlean/core';
