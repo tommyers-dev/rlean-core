@@ -189,7 +189,7 @@ const DemoEntity = define('demoEntity', {
 
 If query string params will be used, don't include the params in the getPath attribute. The query string params will be built out for you based on what is provided as params when using the useGet custom hook.
 
-### entity props
+### Entity props
 
 The following props can be added to customize your entity's behavior.
 
