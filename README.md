@@ -219,7 +219,7 @@ deleteURL is the path that will be used when the entity instance is passed in de
 
 ```js
 const DemoEntity = define('demoEntity', {
-  putURL: '/SomeApiPath',
+  deleteURL: '/SomeApiPath',
 });
 ```
 
@@ -227,7 +227,7 @@ patchURL is the path that will be used when the entity instance is passed in pat
 
 ```js
 const DemoEntity = define('demoEntity', {
-  putURL: '/SomeApiPath',
+  patchURL: '/SomeApiPath',
 });
 ```
 
