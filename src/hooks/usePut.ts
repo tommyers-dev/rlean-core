@@ -63,6 +63,8 @@ const put = async <Res, Req, T extends EntityDefineOptions<any>>(
 };
 
 /**
+ * usePut
+ *
  * Hook that exposes put()
  *
  * @constructor

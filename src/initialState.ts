@@ -2,6 +2,10 @@ import { RLean } from "..";
 import { getValue } from "@rlean/utils";
 import { EntityDefineOptions, GlobalState } from "./types";
 
+/**
+ * initialState
+ * Creates initial GlobalState object
+ */
 export const initialState = (): GlobalState<any> => {
   const entityDefinitions = getValue(
     RLean,

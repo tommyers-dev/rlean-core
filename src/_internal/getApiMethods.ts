@@ -3,6 +3,11 @@ import RLean from "../RLean";
 import { AxiosAdapter } from "../defaultAdapters";
 import { ApiAdapter, EntityDefineOptions } from "../types";
 
+/**
+ * getApiMethods
+ * Returns all api methods from the adapter in an entity definition, or, if not
+ * defined, from the configurated adapter
+ */
 export const getApiMethods = <T>(definition: EntityDefineOptions<T>) => {
   const api: ApiAdapter = hasValue(definition, "adapters.api")
     ? definition.adapters.api
