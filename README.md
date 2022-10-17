@@ -389,7 +389,7 @@ export const MyReactComponent = memo(() => {
 
 An example of useGet using the optional callback:
 
-```js
+```ts
 useGet(
   {
     entity: DemoEntity,
@@ -402,6 +402,7 @@ useGet(
       // handle error
     }
     if (value) {
+      // If configured correctly, when using Typescript, value will have the type of DemoEntity.
       // Do something with the value. Note that storage is handled for you and the value should be accessed using the getGlobalState hook if possible.
     }
   }
@@ -461,7 +462,7 @@ The call will look like: (uri-from-config)/SomeApiPath?id=1
 
 The usePost hook is used to post against the API and takes an options object and an optional callback function.
 
-```js
+```ts
 import { useGlobalState, usePost } from "@rlean/core";
 import { DemoEntity } from "lib/entities";
 
@@ -472,16 +473,38 @@ const updateDb = async () => {
 };
 ```
 
-Or...
+If the entity has been typed, the body will expect the entity's type. Using the callback function, the `response` will be typed as `APIResponse<unknown>`, but it can be typed by manually typing the post function. This gives more flexibility in the Request and Response typing.
 
-```js
+```ts
 import { useGlobalState, usePost } from "@rlean/core";
 import { DemoEntity } from "lib/entities";
 
 const [post] = usePost();
 
+// response typed as `APIResponse<unknown>`
 const updateDb = async () => {
   await post(
+    {
+      entity: DemoEntity,
+      body: {
+        value: "value",
+      },
+    },
+    (response) => {
+      if (response) {
+        // handle response
+      }
+    }
+  );
+};
+
+// response typed correctly
+const updateDb = async () => {
+  await post<
+    DemoEntityType, // The Response type
+    Omit<DemoEntityType, "id">, // The Request type, `body`
+    typeof DemoEntity // The Expected entity type
+  >(
     {
       entity: DemoEntity,
       body: {
@@ -499,7 +522,7 @@ const updateDb = async () => {
 
 ### usePatch, usePut, & useDelete
 
-The usePatch, usePut, and useDelete hooks work similarly to the usePost hook and have the same syntax.
+The usePatch, usePut, and useDelete hooks work similarly to the usePost hook and have the same syntax. The typings works similarly as well in these function.
 
 ### options
 
