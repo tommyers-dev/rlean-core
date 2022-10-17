@@ -402,7 +402,6 @@ useGet(
       // handle error
     }
     if (value) {
-      // If configured correctly, when using Typescript, value will have the type of DemoEntity.
       // Do something with the value. Note that storage is handled for you and the value should be accessed using the getGlobalState hook if possible.
     }
   }
