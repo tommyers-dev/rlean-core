@@ -1,9 +1,9 @@
-import { useEffect, useCallback, useRef } from 'react';
-import { request, methods, inspectClass } from '../_internal';
-import { useGlobalState } from '../..';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { Store } from '../..';
-import useOfflineQueue from './useOfflineQueue';
+import { useEffect, useCallback, useRef } from "react";
+import { request, methods, inspectClass } from "../_internal";
+import { useGlobalState } from "../..";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { Store } from "../..";
+import useOfflineQueue from "./useOfflineQueue";
 
 // NOT CONVERTED
 /**
@@ -12,14 +12,14 @@ import useOfflineQueue from './useOfflineQueue';
  * @constructor
  * @param {Object} options
  * @param {Function} dispatch
+ * @param {Function} enqueue
  * @param {Function} callback
  */
-const del = async (options, dispatch, callback) => {
+const del = async (options, dispatch, enqueue, callback) => {
   const { definition, body, save } = getHookOptions(options);
   const deleteURL = definition.deleteURL;
   const persistData = definition.persistData;
   const queueOffline = definition.queueOffline;
-  const [enqueue] = useOfflineQueue();
 
   if (deleteURL !== null) {
     try {
@@ -77,16 +77,17 @@ const del = async (options, dispatch, callback) => {
  */
 export default function useDelete(options, callback) {
   const [, dispatch] = useGlobalState();
+  const [enqueue] = useOfflineQueue();
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       (options, callback) => {
-        del(options, dispatch, callback);
+        del(options, dispatch, enqueue, callback);
       },
     ];
   }
 
   useEffect(() => {
-    del(options, dispatch, callback);
+    del(options, dispatch, enqueue, callback);
   }, [params]);
 }

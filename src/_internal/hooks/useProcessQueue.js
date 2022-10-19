@@ -19,7 +19,8 @@ const getIsOnline = () => {
 };
 // NOT CONVERTED
 export default function useProcessQueue() {
-  const [{ rlean_offlineQueue }] = useGlobalState();
+  const [state] = useGlobalState();
+  const rlean_offlineQueue = getValue(state, "rlean_offlineQueue", undefined);
   const [isOnline, setIsOnline] = useState(getIsOnline());
   const [post] = usePost();
   const [del] = useDelete();

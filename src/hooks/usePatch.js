@@ -12,11 +12,10 @@ import useOfflineQueue from "./useOfflineQueue";
  * @param {Function} dispatch
  * @param {Function} [callback=null]
  */
-const patch = async (options, dispatch, callback) => {
+const patch = async (options, dispatch, enqueue, callback) => {
   const { definition, params, body, save } = getHookOptions(options);
   const patchURL = definition.patchURL;
   const queueOffline = definition.queueOffline;
-  const [enqueue] = useOfflineQueue();
 
   if (patchURL !== null) {
     try {
@@ -78,11 +77,12 @@ const patch = async (options, dispatch, callback) => {
  */
 export default function usePatch(options, callback) {
   const [, dispatch] = useGlobalState();
+  const [enqueue] = useOfflineQueue();
 
   if (typeof options === "undefined") {
     return [
       (options, callback) => {
-        patch(options, dispatch, callback);
+        patch(options, dispatch, enqueue, callback);
       },
     ];
   }

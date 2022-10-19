@@ -52,9 +52,6 @@ const save = async <T extends EntityDefineOptions<any>, A>(
  * is true (default). Don't check if current state and new value are different
  * so if there is an infinite loop, the developer will know right away in the
  * console log.
- *
- * @param {Object} options An object containing an instance of the definition whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the definition has multiple types.
- * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
  */
 export default function useSave<T extends EntityDefineOptions<any>>(
   options?: SaveOptions<T>,
