@@ -1,10 +1,15 @@
 import { useEffect } from "react";
-import { request, methods, inspectClass } from "../_internal";
+import { request, inspectClass } from "../_internal";
 import { getHookOptions } from "../_internal/getHookOptions";
 import { useGlobalState } from "../..";
 import { Store } from "../..";
 import useOfflineQueue from "./useOfflineQueue";
-import { APIResponse, EntityDefineOptions, PutOptions } from "../types";
+import {
+  APIResponse,
+  API_METHOD,
+  EntityDefineOptions,
+  PutOptions,
+} from "../types";
 
 /**
  * Function that executes a PUT against the API.
@@ -13,10 +18,10 @@ import { APIResponse, EntityDefineOptions, PutOptions } from "../types";
 const put = async <Res, Req, T extends EntityDefineOptions<any>>(
   options: PutOptions<T, Req> | undefined,
   dispatch: (updateState: any) => void,
+  enqueue: Function,
   callback: (response: APIResponse<Res>, error?: any) => void
 ) => {
   const { definition, params, body, save } = getHookOptions(options);
-  const [enqueue] = useOfflineQueue();
 
   const putURL = definition.putURL;
   const queueOffline = definition.queueOffline;
@@ -32,9 +37,9 @@ const put = async <Res, Req, T extends EntityDefineOptions<any>>(
       let response = null;
 
       if (navigator.onLine) {
-        response = await request(payload, definition, methods.PUT);
+        response = await request(payload, definition, API_METHOD.PUT);
       } else if (queueOffline) {
-        enqueue({ method: methods.PUT, options, callback });
+        enqueue({ method: API_METHOD.PUT, options, callback });
       }
 
       // Don't do a deep compare on the return value against the current value.
@@ -88,6 +93,7 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
   const [, dispatch] = useGlobalState();
+  const [enqueue] = useOfflineQueue();
 
   if (typeof options === "undefined") {
     return [
@@ -95,12 +101,12 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
         options: PutOptions<T, Req> = undefined,
         callback: (response: APIResponse<Res>, error?: any) => void
       ) => {
-        put(options, dispatch, callback);
+        put(options, dispatch, enqueue, callback);
       },
     ];
   }
 
   useEffect(() => {
-    put(options, dispatch, callback);
+    put(options, dispatch, enqueue, callback);
   }, []);
 }
