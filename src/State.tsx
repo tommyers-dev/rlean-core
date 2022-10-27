@@ -20,6 +20,10 @@ type StateProviderProps = {
   children: JSX.Element;
 };
 
+/**
+ * StateProvider<T>
+ * The generic must be the `typeof` the entities config object
+ */
 export function StateProvider<T>({ children }: StateProviderProps) {
   return (
     <StateContext.Provider
@@ -32,5 +36,9 @@ export function StateProvider<T>({ children }: StateProviderProps) {
   );
 }
 
+/**
+ * useGlobalState<T>
+ * The generic must be the `typeof` the entities config object
+ */
 export const useGlobalState = <T,>() =>
   React.useContext(StateContext as React.Context<ContextType<T>>);
