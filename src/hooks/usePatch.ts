@@ -1,18 +1,22 @@
 import { useEffect } from "react";
-import { request, methods, inspectClass } from "../_internal";
-import { useGlobalState } from "../..";
+import { request, inspectClass } from "../_internal";
+import { APIResponse, useGlobalState } from "../..";
 import { getHookOptions } from "../_internal/getHookOptions";
 import { Store } from "../..";
 import useOfflineQueue from "./useOfflineQueue";
-// NOT CONVERTED
+import { API_METHOD, EntityDefineOptions, PatchOptions } from "../types";
+
 /**
  * Function that executes a PATCH against the API.
  *
- * @param {Object} options
- * @param {Function} dispatch
- * @param {Function} [callback=null]
+ * @todo Type dispatch & error
  */
-const patch = async (options, dispatch, enqueue, callback) => {
+const patch = async <Res, Req, T extends EntityDefineOptions<any>>(
+  options: PatchOptions<T, Req> | undefined,
+  dispatch: (updateState: any) => void,
+  enqueue: Function,
+  callback: (response: APIResponse<Res>, error?: any) => void
+) => {
   const { definition, params, body, save } = getHookOptions(options);
   const patchURL = definition.patchURL;
   const queueOffline = definition.queueOffline;
@@ -28,9 +32,9 @@ const patch = async (options, dispatch, enqueue, callback) => {
       let response = null;
 
       if (navigator.onLine) {
-        response = await request(payload, definition, methods.PATCH);
+        response = await request(payload, definition, API_METHOD.PATCH);
       } else if (queueOffline) {
-        enqueue({ method: methods.PATCH, options, callback });
+        enqueue({ method: API_METHOD.PATCH, options, callback });
       }
 
       // Don't do a deep compare on the return value against the current value.
@@ -65,29 +69,30 @@ const patch = async (options, dispatch, enqueue, callback) => {
 /**
  * Hook that exposes patch() safely and funly
  *
- * @constructor
- * @param {Object} options An object containing an instance of the definition whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the definition has multiple types.
- * @param {Function} [callback=null] Optional callback function to be executed after usePatch has executed its logic.
- * @example
- *
  * usePatch({ definition: Definition, body: { value: 'value' } });
  *
  * const [ patch ] = usePatch();
  * patch({ definition: Definition, body: { value: 'value' } });
  */
-export default function usePatch(options, callback) {
+export default function usePatch<Res, Req, T extends EntityDefineOptions<any>>(
+  options?: PatchOptions<T, Req>,
+  _callback: (response: APIResponse<Res>, error?: any) => void = () => {}
+) {
   const [, dispatch] = useGlobalState();
   const [enqueue] = useOfflineQueue();
 
   if (typeof options === "undefined") {
     return [
-      (options, callback) => {
+      <Res, Req, T extends EntityDefineOptions<any>>(
+        options: PatchOptions<T, Req> | undefined,
+        callback: (response: APIResponse<Res>, error?: any) => void
+      ) => {
         patch(options, dispatch, enqueue, callback);
       },
     ];
   }
 
   useEffect(() => {
-    patch(options, dispatch, callback);
-  }, [params]);
+    patch(options, dispatch, enqueue, _callback);
+  }, []);
 }

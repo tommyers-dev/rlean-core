@@ -1,16 +1,16 @@
 import { getValue } from "@rlean/utils";
 import { useGlobalState } from "../..";
-// NOT CONVERTED
-export default function useEntity(key, options) {
+
+export default function useEntity(key: string) {
   const [{ ...state }] = useGlobalState();
 
-  const add = (value) => {
+  const add = (value: any) => {
     const data = getValue(state[key], "data", []);
     data.push(value);
     save({ value });
   };
 
-  const select = (exp) => {
+  const select = (exp: any) => {
     const data = getValue(state[key], "data", []);
 
     return data.filter(exp);
@@ -20,9 +20,9 @@ export default function useEntity(key, options) {
     return getValue(state[key], "data", []);
   };
 
-  const save = (value) => {};
+  const save = (value: any) => {};
 
-  const remove = (exp) => {};
+  const remove = (/* exp: any */) => {};
 
   const clear = () => {};
 

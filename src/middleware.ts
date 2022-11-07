@@ -1,7 +1,12 @@
 import { Store, RLean } from "..";
 import { getValue } from "@rlean/utils";
-// NOT CONVERTED
-async function logActions(definition, state, action) {
+import { ActionType, EntityDefineOptions, GlobalState } from "./types";
+
+async function logActions<T, K>(
+  definition: EntityDefineOptions<T>,
+  state: GlobalState<K>,
+  action: ActionType
+) {
   const stateKey = Object.keys(action)[1].toString();
   const logToConsole = getValue(RLean, "config.logToConsole", false);
 
@@ -22,7 +27,11 @@ async function logActions(definition, state, action) {
   return state;
 }
 
-async function saveToIndexedDB(definition, state, action) {
+async function saveToIndexedDB<T, K>(
+  definition: EntityDefineOptions<T>,
+  state: GlobalState<K>,
+  action: ActionType
+) {
   if (definition.persistData) {
     await Store.set(definition, Object.values(action)[1]);
   }
@@ -30,12 +39,17 @@ async function saveToIndexedDB(definition, state, action) {
   return state;
 }
 
-async function applyMiddleware(definition, state, action, middleware) {
-  return middleware.reduce(async (st, fn) => {
-    const returnable = await fn(definition, st, action);
+async function applyMiddleware<T, K>(
+  definition: EntityDefineOptions<T>,
+  state: GlobalState<K>,
+  action: ActionType,
+  middleware: Function[]
+) {
+  return middleware.map(async (fn) => {
+    const returnable = await fn(definition, state, action);
 
     return returnable;
-  }, state);
+  });
 }
 
 export { applyMiddleware, logActions, saveToIndexedDB };

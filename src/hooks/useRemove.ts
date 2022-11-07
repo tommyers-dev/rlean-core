@@ -1,13 +1,17 @@
 import { useEffect } from "react";
 import { Store, RLean, useGlobalState } from "../..";
 import { getHookOptions } from "../_internal/getHookOptions";
-// NOT CONVERTED
+import { EntityDefineOptions, Options } from "../types";
+
 /**
- * @param {Object} def
- * @param {Function} dispatch
- * @param {Function} [callback=null]
+ * Main remove function from state
+ * It does not executes a DELETE request
  */
-const remove = async (options, dispatch, callback) => {
+const remove = async <T extends EntityDefineOptions<any>>(
+  options: Partial<Options<T>>,
+  dispatch: (updateState: any) => void,
+  callback: Function
+) => {
   if (typeof options === "undefined") {
     return;
   }
@@ -35,12 +39,18 @@ const remove = async (options, dispatch, callback) => {
  * @param {Object} options An object containing an instance of the definition whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the definition has multiple types.
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
  */
-export default function useRemove(options, callback) {
+export default function useRemove<T extends EntityDefineOptions<any>>(
+  options?: Partial<Options<T>>,
+  callback: Function = () => {}
+) {
   const [, dispatch] = useGlobalState();
 
   if (typeof options === "undefined") {
     return [
-      (options, callback) => {
+      <T extends EntityDefineOptions<any>>(
+        options: Partial<Options<T>>,
+        callback: Function = () => {}
+      ) => {
         remove(options, dispatch, callback);
       },
     ];

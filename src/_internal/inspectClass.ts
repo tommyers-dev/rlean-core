@@ -1,11 +1,10 @@
-// NOT CONVERTED
-export const inspectClass = (obj) => {
-  let className;
+export const inspectClass = (obj: Object) => {
+  let className: string;
   let attributes = {};
   const methods = [];
 
   try {
-    let objClass;
+    let objClass: any;
 
     if (typeof obj !== "function") {
       objClass = obj.constructor;

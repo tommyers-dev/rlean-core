@@ -1,7 +1,7 @@
 import localforage from "localforage";
-// NOT CONVERTED
+
 class LocalForage {
-  async set(key, value) {
+  async set(key: string, value: Object) {
     if (!key || value === undefined) {
       throw new Error("Key or value cannot be undefined");
     }
@@ -13,7 +13,7 @@ class LocalForage {
     }
   }
 
-  async setAll(units) {
+  async setAll(units: { key: string; value: Object }[]) {
     if (units === undefined || units.length === 0) {
       throw new Error("Array cannot be null or empty");
     }
@@ -29,13 +29,13 @@ class LocalForage {
     return true;
   }
 
-  async get(key) {
+  async get(key: string) {
     if (!key) {
       throw new Error("Must supply a key in get");
     }
 
     try {
-      const value = await localforage.getItem(key);
+      const value: string = await localforage.getItem(key);
 
       return value == null ? null : JSON.parse(value);
     } catch (err) {
@@ -51,7 +51,7 @@ class LocalForage {
     }
   }
 
-  async remove(key) {
+  async remove(key: string) {
     if (!key) {
       throw new Error("Must supply a key in remove");
     }

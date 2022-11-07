@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import { useGlobalState } from "../..";
-// NOT CONVERTED
-export default async function useRequest(options, method, callback) {
+
+export default async function useRequest(
+  options: any,
+  method: Function,
+  callback: Function
+) {
   const [, dispatch] = useGlobalState();
 
   if (typeof options === "undefined") {
     return [
-      (options, callback) => {
+      (options: any, callback: Function) => {
         method(options, dispatch, callback);
       },
     ];
@@ -18,5 +22,5 @@ export default async function useRequest(options, method, callback) {
     } catch (e) {
       console.log(e);
     }
-  }, [params]);
+  }, []);
 }

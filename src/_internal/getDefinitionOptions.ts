@@ -1,7 +1,11 @@
-import { hasValue } from '@rlean/utils';
-import { convertToType } from './convertToType';
+import { ActionType, EntityDefineOptions, EntityState } from "@/types";
+import { hasValue } from "@rlean/utils";
+import { convertToType } from "./convertToType";
 
-export const getDefinitionOptions = (key: string, options: any) => {
+export const getDefinitionOptions = <T>(
+  key: string,
+  options: Partial<EntityDefineOptions<T>>
+) => {
   const defaultType = `SET_${convertToType(key)}`;
   const addType = `ADD_${convertToType(key)}`;
 
@@ -39,14 +43,14 @@ export const getDefinitionOptions = (key: string, options: any) => {
         [key]: value,
       };
     },
-    reducer: (state: any, action: any) => {
+    reducer: <T>(state: EntityState<T>, action: ActionType) => {
       switch (action.type) {
         case `${defaultType}_IS_LOADING`:
         case `${defaultType}_LAST_UPDATED`:
         case `${defaultType}_ERROR`:
         case defaultType:
           // Create an object if value is a string or number.
-          if (typeof action[key] !== 'object') {
+          if (typeof action[key] !== "object") {
             return {
               ...state,
               value: action[key],
@@ -65,10 +69,14 @@ export const getDefinitionOptions = (key: string, options: any) => {
 
         case addType:
           // add to existing state
-          if (hasValue(state, 'data')) {
+          if (hasValue(state, "data")) {
             return {
               ...state,
-              data: [].concat([], ...state.data, ...action[key].data),
+              data: [].concat(
+                [],
+                ...(state.data as unknown as Array<any>),
+                ...action[key].data
+              ),
             };
           } else {
             return {
