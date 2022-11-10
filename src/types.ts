@@ -21,6 +21,9 @@ export type RLeanConfig<F> = {
     adapter?: any;
     token?: string;
   };
+  storage: {
+    adapter?: any;
+  };
   logToConsole?: boolean;
 };
 
@@ -111,7 +114,7 @@ export interface ApiAdapter {
  * Adapter object
  */
 export type Adapter = {
-  api: ApiAdapter;
+  api?: ApiAdapter;
   storage?: any;
 };
 
@@ -154,6 +157,7 @@ export type EntityDefineOptions<T> = {
   includeInState?: boolean;
   listener?: Function;
   extensions?: any;
+  callback?: Function;
 };
 
 /**

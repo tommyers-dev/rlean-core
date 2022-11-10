@@ -3,7 +3,7 @@ import { Options } from "../types";
 /**
  * @todo definition should be entity??
  */
-export const getOptions = (options: Options<any>) => {
+export const getOptions = <T>(options: Partial<Options<T>>) => {
   if (!options) {
     return {
       definition: null,
