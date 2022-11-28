@@ -7,11 +7,11 @@ import { getDefinitionOptions } from "./_internal";
  */
 export const define = <T>(
   key: string,
-  options: Partial<EntityDefineOptions<T>>,
+  options?: Partial<EntityDefineOptions<T>>,
   callback?: Function
 ): EntityDefineOptions<T> => {
   if (!key) {
-    console.error(`Key is required for definition.`);
+    throw new Error("Key is required for definition.");
   }
 
   const {

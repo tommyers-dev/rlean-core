@@ -1,6 +1,9 @@
 import { inspectClass } from "./";
-// NOT CONVERTED
-export const implement = (testableClass, rules) => {
+
+export const implement = (
+  testableClass: Object,
+  rules: { methods: string[] }
+) => {
   const given = inspectClass(testableClass);
 
   // The inspection message we send back to give information about the interface check.

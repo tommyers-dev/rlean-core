@@ -1,12 +1,20 @@
 import { deepCopy, getValue } from "@rlean/utils";
 import { RLean } from "..";
 import { logActions, saveToIndexedDB, applyMiddleware } from "./middleware";
-// NOT CONVERTED
-export const reducer = ({ ...state }, action) => {
+import { ActionType, EntityDefineOptions, GlobalState } from "./types";
+
+type EntityWithPrototype = {
+  prototype: any;
+} & EntityDefineOptions<any>;
+
+export const reducer = <T>(
+  { ...state }: GlobalState<T>,
+  action: ActionType
+) => {
   const entityDefinitions = getValue(RLean, "config.entities", {});
   const middleware = getValue(RLean, "config.middleware", []);
   const definition = getValue(RLean, "definition", {});
-  const objects = Object.values(entityDefinitions);
+  const objects = Object.values(entityDefinitions) as EntityWithPrototype[];
   const objectsLength = objects.length;
   let combinedReducer = {};
 

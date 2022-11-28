@@ -21,6 +21,9 @@ export type RLeanConfig<F> = {
     adapter?: any;
     token?: string;
   };
+  storage: {
+    adapter?: any;
+  };
   logToConsole?: boolean;
 };
 
@@ -69,7 +72,7 @@ export enum API_METHOD {
  */
 export type RequestPayload<T> = {
   path: string;
-  query: Object;
+  query?: Object;
   body?: T;
   signal?: any;
 };
@@ -111,8 +114,20 @@ export interface ApiAdapter {
  * Adapter object
  */
 export type Adapter = {
-  api: ApiAdapter;
+  api?: ApiAdapter;
+  storage?: any;
 };
+
+/**
+ * Adapter map
+ */
+export type AdapterMap = { storage?: any; api?: ApiAdapter; logger?: any };
+
+/**
+ * Action type
+ * @todo The key should be changed
+ */
+export type ActionType = { type: string; [key: string]: any };
 
 /**
  * Entity definition object
@@ -142,10 +157,11 @@ export type EntityDefineOptions<T> = {
   includeInState?: boolean;
   listener?: Function;
   extensions?: any;
+  callback?: Function;
 };
 
 /**
- * Options typa
+ * Options type
  * Used to define the options for each API Method.
  * The generics are inferred from the EntityDefineOptions<T>
  */
@@ -192,6 +208,20 @@ export type PutOptions<Def extends EntityDefineOptions<any>, Body> = Partial<
  * PostOptions type
  */
 export type PostOptions<Def extends EntityDefineOptions<any>, Body> = Partial<
+  Options<Def, Def extends EntityDefineOptions<infer F> ? F : unknown, Body>
+>;
+
+/**
+ * DeleteOptions type
+ */
+export type DeleteOptions<Def extends EntityDefineOptions<any>, Body> = Partial<
+  Options<Def, Def extends EntityDefineOptions<infer F> ? F : unknown, Body>
+>;
+
+/**
+ * PatchOptions type
+ */
+export type PatchOptions<Def extends EntityDefineOptions<any>, Body> = Partial<
   Options<Def, Def extends EntityDefineOptions<infer F> ? F : unknown, Body>
 >;
 

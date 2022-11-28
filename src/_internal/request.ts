@@ -93,9 +93,9 @@ export const formatPath = (
   throw Error("Could not format the path.");
 };
 
-export const request = async <Res, P, T>(
-  payload: RequestPayload<P>,
-  definition: EntityDefineOptions<T>,
+export const request = async <Res, EntityType>(
+  payload: RequestPayload<EntityType>,
+  definition: EntityDefineOptions<EntityType>,
   method: API_METHOD
 ) => {
   const { get, post, del, put, patch } = getApiMethods(definition);
@@ -129,7 +129,7 @@ export const request = async <Res, P, T>(
     return;
   }
 
-  const apiPayload: AdapterAPIPayload<P> = {
+  const apiPayload: AdapterAPIPayload<EntityType> = {
     url: url + path,
     data: payload.body,
     headers,
@@ -140,19 +140,19 @@ export const request = async <Res, P, T>(
 
   switch (method) {
     case API_METHOD.GET:
-      res = await get<Res, P>(apiPayload);
+      res = await get<Res, EntityType>(apiPayload);
       break;
     case API_METHOD.POST:
-      res = await post<Res, P>(apiPayload);
+      res = await post<Res, EntityType>(apiPayload);
       break;
     case API_METHOD.DELETE:
-      res = await del<Res, P>(apiPayload);
+      res = await del<Res, EntityType>(apiPayload);
       break;
     case API_METHOD.PUT:
-      res = await put<Res, P>(apiPayload);
+      res = await put<Res, EntityType>(apiPayload);
       break;
     case API_METHOD.PATCH:
-      res = await patch<Res, P>(apiPayload);
+      res = await patch<Res, EntityType>(apiPayload);
       break;
     default:
       console.error("Unknown API method specified.");
