@@ -1,66 +1,10 @@
-import { useEffect } from "react";
-import { request, methods, inspectClass } from "../_internal";
-import { useGlobalState } from "../..";
-import { getHookOptions } from "../_internal/getHookOptions";
-import { Store } from "../..";
-import useOfflineQueue from "./useOfflineQueue";
+import { useEffect } from 'react';
+import { request, methods, inspectClass } from '../_internal';
+import { useGlobalState } from '../..';
+import { getHookOptions } from '../_internal/getHookOptions';
+import { Store } from '../..';
+import useOfflineQueue from './useOfflineQueue';
 // NOT CONVERTED
-/**
- * Function that executes a PATCH against the API.
- *
- * @param {Object} options
- * @param {Function} dispatch
- * @param {Function} [callback=null]
- */
-const patch = async (options, dispatch, enqueue, callback) => {
-  const { definition, params, body, save } = getHookOptions(options);
-  const patchURL = definition.patchURL;
-  const queueOffline = definition.queueOffline;
-
-  if (patchURL !== null) {
-    try {
-      const payload = {
-        path: patchURL,
-        query: params,
-        body: body ? Object.assign({}, body) : {},
-      };
-
-      let response = null;
-
-      if (navigator.onLine) {
-        response = await request(payload, definition, methods.PATCH);
-      } else if (queueOffline) {
-        enqueue({ method: methods.PATCH, options, callback });
-      }
-
-      // Don't do a deep compare on the return value against the current value.
-      // The return value will most likely be different regardless. Assume that
-      // if dispatch was provided, we're supposed to use it.
-      if (response && save) {
-        if (definition.persistData) {
-          await Store.set(definition, response.data);
-        }
-
-        await dispatch(await definition.updateState(response.data));
-      }
-
-      if (response && callback) {
-        callback(response);
-      }
-    } catch (error) {
-      if (callback) {
-        callback(null, error);
-      }
-    }
-  } else {
-    const o = inspectClass(definition);
-    console.error(
-      `The ${o.ClassName} object is missing the patchURL attribute.`
-    );
-  }
-
-  return;
-};
 
 /**
  * Hook that exposes patch() safely and funly
@@ -79,7 +23,64 @@ export default function usePatch(options, callback) {
   const [, dispatch] = useGlobalState();
   const [enqueue] = useOfflineQueue();
 
-  if (typeof options === "undefined") {
+  /**
+   * Function that executes a PATCH against the API.
+   *
+   * @param {Object} options
+   * @param {Function} dispatch
+   * @param {Function} [callback=null]
+   */
+  const patch = async (options, dispatch, enqueue, callback) => {
+    const { definition, params, body, save } = getHookOptions(options);
+    const patchURL = definition.patchURL;
+    const queueOffline = definition.queueOffline;
+
+    if (patchURL !== null) {
+      try {
+        const payload = {
+          path: patchURL,
+          query: params,
+          body: body ? Object.assign({}, body) : {},
+        };
+
+        let response = null;
+
+        if (navigator.onLine) {
+          response = await request(payload, definition, methods.PATCH);
+        } else if (queueOffline) {
+          enqueue({ method: methods.PATCH, options, callback });
+        }
+
+        // Don't do a deep compare on the return value against the current value.
+        // The return value will most likely be different regardless. Assume that
+        // if dispatch was provided, we're supposed to use it.
+        if (response && save) {
+          if (definition.persistData) {
+            await Store.set(definition, response.data);
+          }
+
+          await dispatch(await definition.updateState(response.data));
+        }
+
+        if (response && callback) {
+          callback(response);
+        }
+      } catch (error) {
+        if (callback) {
+          callback(null, error);
+        }
+      }
+    } else {
+      const o = inspectClass(definition);
+      console.error(
+        `The ${o.ClassName} object is missing the patchURL attribute.`
+      );
+    }
+
+    return;
+  };
+
+  if (typeof options === 'undefined') {
     return [
       (options, callback) => {
         patch(options, dispatch, enqueue, callback);

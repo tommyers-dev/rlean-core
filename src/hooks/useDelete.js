@@ -1,66 +1,9 @@
-import { useEffect, useCallback, useRef } from "react";
-import { request, methods, inspectClass } from "../_internal";
-import { useGlobalState } from "../..";
-import { getHookOptions } from "../_internal/getHookOptions";
-import { Store } from "../..";
-import useOfflineQueue from "./useOfflineQueue";
-
-// NOT CONVERTED
-/**
- * Function that executes a DELETE against the API.
- *
- * @constructor
- * @param {Object} options
- * @param {Function} dispatch
- * @param {Function} enqueue
- * @param {Function} callback
- */
-const del = async (options, dispatch, enqueue, callback) => {
-  const { definition, body, save } = getHookOptions(options);
-  const deleteURL = definition.deleteURL;
-  const persistData = definition.persistData;
-  const queueOffline = definition.queueOffline;
-
-  if (deleteURL !== null) {
-    try {
-      const payload = {
-        path: deleteURL,
-        body: body ? Object.assign({}, body) : {},
-      };
-
-      let response = null;
-
-      if (navigator.onLine) {
-        response = await request(payload, definition, methods.DELETE);
-      } else if (queueOffline) {
-        enqueue({ method: methods.DELETE, options, callback });
-      }
-
-      if (response && save) {
-        if (persistData) {
-          await Store.set(definition, response.data);
-        }
-
-        await dispatch(await definition.updateState(response.data));
-      }
-
-      if (response && callback) {
-        callback(response);
-      }
-
-      return;
-    } catch (error) {
-      if (callback) {
-        callback(null, error);
-      }
-    }
-  }
-
-  const o = inspectClass(definition);
-  console.error(
-    `The ${o.ClassName} object is missing the deleteURL attribute.`
-  );
-};
+import { useEffect, useCallback, useRef } from 'react';
+import { request, methods, inspectClass } from '../_internal';
+import { useGlobalState } from '../..';
+import { getHookOptions } from '../_internal/getHookOptions';
+import { Store } from '../..';
+import useOfflineQueue from './useOfflineQueue';
 
 /**
  * Hook that exposes del()
@@ -79,7 +22,64 @@ export default function useDelete(options, callback) {
   const [, dispatch] = useGlobalState();
   const [enqueue] = useOfflineQueue();
 
-  if (typeof options === "undefined") {
+  // NOT CONVERTED
+  /**
+   * Function that executes a DELETE against the API.
+   *
+   * @constructor
+   * @param {Object} options
+   * @param {Function} dispatch
+   * @param {Function} enqueue
+   * @param {Function} callback
+   */
+  const del = async (options, dispatch, enqueue, callback) => {
+    const { definition, body, save } = getHookOptions(options);
+    const deleteURL = definition.deleteURL;
+    const persistData = definition.persistData;
+    const queueOffline = definition.queueOffline;
+
+    if (deleteURL !== null) {
+      try {
+        const payload = {
+          path: deleteURL,
+          body: body ? Object.assign({}, body) : {},
+        };
+
+        let response = null;
+
+        if (navigator.onLine) {
+          response = await request(payload, definition, methods.DELETE);
+        } else if (queueOffline) {
+          enqueue({ method: methods.DELETE, options, callback });
+        }
+
+        if (response && save) {
+          if (persistData) {
+            await Store.set(definition, response.data);
+          }
+
+          await dispatch(await definition.updateState(response.data));
+        }
+
+        if (response && callback) {
+          callback(response);
+        }
+
+        return;
+      } catch (error) {
+        if (callback) {
+          callback(null, error);
+        }
+      }
+    }
+
+    const o = inspectClass(definition);
+    console.error(
+      `The ${o.ClassName} object is missing the deleteURL attribute.`
+    );
+  };
+
+  if (typeof options === 'undefined') {
     return [
       (options, callback) => {
         del(options, dispatch, enqueue, callback);
