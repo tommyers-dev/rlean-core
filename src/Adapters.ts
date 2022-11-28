@@ -2,9 +2,15 @@ import RLean from "./RLean";
 import { implement } from "./_internal";
 import { getValue } from "@rlean/utils";
 import { LocalForageAdapter, AxiosAdapter } from "./defaultAdapters";
-// NOT CONVERTED
+import { AdapterMap, ApiAdapter } from "./types";
+
 export default class Adapters {
-  constructor(adapterMap) {
+  public adapterMap: AdapterMap;
+  public api: ApiAdapter;
+  public storage: any;
+  public logger: any;
+
+  constructor(adapterMap: AdapterMap) {
     this.adapterMap = adapterMap ? adapterMap : {};
 
     this.storage = getValue(
@@ -15,29 +21,29 @@ export default class Adapters {
     this.api = getValue(RLean, "config.api.adapter", AxiosAdapter);
 
     for (let key in adapterMap) {
-      this.pipe(key);
+      this.pipe(key as keyof AdapterMap);
     }
   }
 
-  pipe(adapterMap) {
-    switch (adapterMap) {
+  pipe(adapterMapKey: keyof AdapterMap) {
+    switch (adapterMapKey) {
       case "storage":
         this.storage = this.ensureCorrectStorageImplementation(
-          this.adapterMap[adapterMap]
+          this.adapterMap[adapterMapKey]
         );
         break;
       case "api":
-        this.api = this.adapterMap[adapterMap];
+        this.api = this.adapterMap[adapterMapKey];
         break;
       case "logger":
-        this.logger = this.setLoggingEngine(this.adapterMap[adapterMap]);
+        this.logger = this.setLoggingEngine(this.adapterMap[adapterMapKey]);
         break;
       default:
-        this[adapterMap] = this.adapterMap[adapterMap];
+        this[adapterMapKey] = this.adapterMap[adapterMapKey];
     }
   }
 
-  ensureCorrectStorageImplementation(storage) {
+  ensureCorrectStorageImplementation(storage: any) {
     const inspection = implement(storage, {
       methods: ["get", "set", "clear", "remove"],
     });
@@ -49,7 +55,7 @@ export default class Adapters {
     throw new Error(inspection.error.message);
   }
 
-  setLoggingEngine(logger) {
+  setLoggingEngine(logger: any) {
     const inspection = implement(logger, {
       methods: ["trace", "info", "warn", "error"],
     });

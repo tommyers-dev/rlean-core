@@ -1,8 +1,9 @@
 import { getValue, hasValue } from "@rlean/utils";
 import RLean from "../RLean";
 import { LocalForageAdapter } from "../defaultAdapters";
-// NOT CONVERTED
-export const getStorageMethods = (definition) => {
+import { EntityDefineOptions } from "../types";
+
+export const getStorageMethods = (definition: EntityDefineOptions<any>) => {
   const store = hasValue(definition, "adapters.storage")
     ? definition.adapters.storage
     : getValue(RLean, "config.storage.adapter", LocalForageAdapter);

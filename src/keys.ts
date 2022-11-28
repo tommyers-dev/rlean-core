@@ -1,7 +1,7 @@
 import { getValue } from "@rlean/utils";
 import RLean from "./RLean";
 import { convertToType } from "./_internal/convertToType";
-// NOT CONVERTED
+
 const getKeys = () => {
   const entityDefinitions = getValue(RLean, "config.entities", {});
   const entityDefinitionsLength = entityDefinitions.length;

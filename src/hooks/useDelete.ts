@@ -1,21 +1,26 @@
-import { useEffect, useCallback, useRef } from "react";
-import { request, methods, inspectClass } from "../_internal";
-import { useGlobalState } from "../..";
+import { useEffect } from "react";
+import { request, inspectClass } from "../_internal";
+import { APIResponse, useGlobalState } from "../..";
 import { getHookOptions } from "../_internal/getHookOptions";
 import { Store } from "../..";
 import useOfflineQueue from "./useOfflineQueue";
+import {
+  API_METHOD,
+  DeleteOptions,
+  EntityDefineOptions,
+  PatchOptions,
+} from "../types";
 
-// NOT CONVERTED
 /**
  * Function that executes a DELETE against the API.
  *
- * @constructor
- * @param {Object} options
- * @param {Function} dispatch
- * @param {Function} enqueue
- * @param {Function} callback
  */
-const del = async (options, dispatch, enqueue, callback) => {
+const del = async <Res, Req, T extends EntityDefineOptions<any>>(
+  options: Partial<DeleteOptions<T, Req>>,
+  dispatch: Function,
+  enqueue: Function,
+  callback: (response: APIResponse<Res>, error?: any) => void
+) => {
   const { definition, body, save } = getHookOptions(options);
   const deleteURL = definition.deleteURL;
   const persistData = definition.persistData;
@@ -31,9 +36,9 @@ const del = async (options, dispatch, enqueue, callback) => {
       let response = null;
 
       if (navigator.onLine) {
-        response = await request(payload, definition, methods.DELETE);
+        response = await request(payload, definition, API_METHOD.DELETE);
       } else if (queueOffline) {
-        enqueue({ method: methods.DELETE, options, callback });
+        enqueue({ method: API_METHOD.DELETE, options, callback });
       }
 
       if (response && save) {
@@ -65,9 +70,6 @@ const del = async (options, dispatch, enqueue, callback) => {
 /**
  * Hook that exposes del()
  *
- * @constructor
- * @param {Object} options An object containing an instance of the definition whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the definition has multiple types.
- * @param {Function} [callback=null] Optional callback function to be executed after useDelete has executed its logic.
  * @example
  *
  * useDelete({ definition: Definition, body: { value: 'value' } });
@@ -75,13 +77,19 @@ const del = async (options, dispatch, enqueue, callback) => {
  * const [ del ] = useDelete();
  * del({ definition: Definition, body: { value: 'value' } });
  */
-export default function useDelete(options, callback) {
+export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
+  options?: Partial<DeleteOptions<T, Req>>,
+  callback: (response: APIResponse<Res>, error?: any) => void = () => {}
+) {
   const [, dispatch] = useGlobalState();
   const [enqueue] = useOfflineQueue();
 
   if (typeof options === "undefined") {
     return [
-      (options, callback) => {
+      <Res, Req, T extends EntityDefineOptions<any>>(
+        options: PatchOptions<T, Req> | undefined,
+        callback: (response: APIResponse<Res>, error?: any) => void
+      ) => {
         del(options, dispatch, enqueue, callback);
       },
     ];
@@ -89,5 +97,5 @@ export default function useDelete(options, callback) {
 
   useEffect(() => {
     del(options, dispatch, enqueue, callback);
-  }, [params]);
+  }, []);
 }

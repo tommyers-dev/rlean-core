@@ -17,7 +17,7 @@ const getIsOnline = () => {
     ? navigator.onLine
     : true;
 };
-// NOT CONVERTED
+
 export default function useProcessQueue() {
   const [state] = useGlobalState();
   const rlean_offlineQueue = getValue(state, "rlean_offlineQueue", undefined);

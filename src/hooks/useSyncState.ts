@@ -2,13 +2,18 @@ import { useEffect, useCallback, useRef } from "react";
 import { getValue, Compare } from "@rlean/utils";
 import { RLean, useGlobalState, Store } from "../..";
 import { convertToType } from "../_internal";
-// NOT CONVERTED
+import * as entities from "../_internal/entities";
+
 export default function useSyncState() {
   const mountedRef = useRef(true);
   const [{ ...state }, dispatch] = useGlobalState();
 
   const syncState = useCallback(() => {
-    const entityDefinitions = getValue(RLean, "config.entities", {});
+    const entityDefinitions: typeof entities = getValue(
+      RLean,
+      "config.entities",
+      {}
+    );
     const objects = Object.values(entityDefinitions);
 
     objects.map(async (definition) => {
@@ -27,7 +32,8 @@ export default function useSyncState() {
         ) {
           const type = `SET_${convertToType(definition.key)}`;
 
-          dispatch(definition.updateState(storedValue, type));
+          // @todo dispatch doesn't receive any parameters (?)
+          (dispatch as any)(definition.updateState(storedValue, type));
         }
       }
     });
