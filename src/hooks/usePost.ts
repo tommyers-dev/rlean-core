@@ -1,10 +1,14 @@
-import { useCallback, useEffect, useRef } from "react";
-import { request, methods, inspectClass } from "../_internal";
-import { getHookOptions } from "../_internal/getHookOptions";
-import { useGlobalState } from "../..";
-import { Store } from "../..";
-import useOfflineQueue from "./useOfflineQueue";
-import { APIResponse, EntityDefineOptions, PostOptions } from "../types";
+import { useCallback, useEffect, useRef } from 'react';
+import { request, inspectClass } from '../_internal';
+import { getHookOptions } from '../_internal/getHookOptions';
+import { useGlobalState } from '../..';
+import { Store } from '../..';
+import {
+  APIResponse,
+  API_METHOD,
+  EntityDefineOptions,
+  PostOptions,
+} from '../types';
 
 /**
  * Exposed Hook that allows user to access post method
@@ -32,7 +36,6 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
 ) {
   const [, dispatch] = useGlobalState();
   const mountedRef = useRef(true);
-  const [enqueue] = useOfflineQueue();
 
   const post = useCallback(
     async <Res, Req, T extends EntityDefineOptions<any>>(
@@ -43,7 +46,6 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
       const { definition, params, body, save } = getHookOptions(options);
       const postURL = definition.postURL;
       const persistData = definition.persistData;
-      const queueOffline = definition.queueOffline;
 
       if (postURL !== null) {
         try {
@@ -57,13 +59,7 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
               : {},
           };
 
-          let response = null;
-
-          if (navigator.onLine) {
-            response = await request(payload, definition, methods.POST);
-          } else if (queueOffline) {
-            enqueue({ method: methods.POST, options, callback });
-          }
+          const response = await request(payload, definition, API_METHOD.POST);
 
           if (!mountedRef.current) {
             return null;
@@ -95,7 +91,7 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
     [mountedRef]
   );
 
-  if (typeof options === "undefined") {
+  if (typeof options === 'undefined') {
     return [
       <Res, Req, T extends EntityDefineOptions<any> = any>(
         options: PostOptions<T, Req>,

@@ -3,7 +3,6 @@ import { request, inspectClass } from '../_internal';
 import { getHookOptions } from '../_internal/getHookOptions';
 import { useGlobalState } from '../..';
 import { Store } from '../..';
-import useOfflineQueue from './useOfflineQueue';
 import {
   APIResponse,
   API_METHOD,
@@ -37,7 +36,6 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
   const [, dispatch] = useGlobalState();
-  const [enqueue] = useOfflineQueue();
 
   /**
    * Function that executes a PUT against the API.
@@ -46,13 +44,11 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
   const put = async <Res, Req, T extends EntityDefineOptions<any>>(
     options: PutOptions<T, Req> | undefined,
     dispatch: (updateState: any) => void,
-    enqueue: Function,
     callback: (response: APIResponse<Res>, error?: any) => void
   ) => {
     const { definition, params, body, save } = getHookOptions(options);
 
     const putURL = definition.putURL;
-    const queueOffline = definition.queueOffline;
 
     if (putURL !== null) {
       try {
@@ -62,13 +58,7 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
           body: body ? Object.assign({}, body) : {},
         };
 
-        let response = null;
-
-        if (navigator.onLine) {
-          response = await request(payload, definition, API_METHOD.PUT);
-        } else if (queueOffline) {
-          enqueue({ method: API_METHOD.PUT, options, callback });
-        }
+        const response = await request(payload, definition, API_METHOD.PUT);
 
         // Don't do a deep compare on the return value against the current value.
         // The return value will most likely be different regardless. Assume that
@@ -103,12 +93,12 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
         options: PutOptions<T, Req> = undefined,
         callback: (response: APIResponse<Res>, error?: any) => void
       ) => {
-        put(options, dispatch, enqueue, callback);
+        put(options, dispatch, callback);
       },
     ];
   }
 
   useEffect(() => {
-    put(options, dispatch, enqueue, callback);
+    put(options, dispatch, callback);
   }, []);
 }

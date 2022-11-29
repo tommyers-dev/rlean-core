@@ -1,4 +1,4 @@
-import { RLeanConfig } from "./types";
+import { RLeanConfig } from './types';
 // import { getValue } from "@rlean/utils";
 // import { RLean_OfflineQueue } from "./_internal/entities";
 
