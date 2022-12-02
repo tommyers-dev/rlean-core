@@ -1,4 +1,4 @@
-import localforage from "localforage";
+import * as localforage from "localforage";
 
 class LocalForage {
   async set(key: string, value: Object) {
