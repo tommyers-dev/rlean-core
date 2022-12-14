@@ -63,6 +63,8 @@ export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
 
         return;
       } catch (error) {
+        console.error(error);
+
         if (callback) {
           callback(null, error);
         }

@@ -55,6 +55,8 @@ export default function usePatch<Res, Req, T extends EntityDefineOptions<any>>(
           callback(response);
         }
       } catch (error) {
+        console.error(error);
+
         if (callback) {
           callback(null, error);
         }

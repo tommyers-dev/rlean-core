@@ -77,6 +77,8 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
             callback(response);
           }
         } catch (error) {
+          console.error(error);
+
           if (callback) {
             callback(null, error);
           }
