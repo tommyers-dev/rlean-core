@@ -21,7 +21,7 @@ export type RLeanConfig<F> = {
     adapter?: any;
     token?: string;
   };
-  storage: {
+  storage?: {
     adapter?: any;
   };
   logToConsole?: boolean;
@@ -59,11 +59,11 @@ export type EntityState<T> = {
  * API methods
  */
 export enum API_METHOD {
-  DELETE = "DELETE",
-  GET = "GET",
-  PATCH = "PATCH",
-  POST = "POST",
-  PUT = "PUT",
+  DELETE = 'DELETE',
+  GET = 'GET',
+  PATCH = 'PATCH',
+  POST = 'POST',
+  PUT = 'PUT',
 }
 
 /**
