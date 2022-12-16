@@ -17,7 +17,7 @@ import { removeAll } from "./src/removeAll";
 import { StateContext, StateProvider, useGlobalState } from "./src/State";
 import Store from "./src/Store";
 
-import { ApiAdapter, APIResponse } from "./src/types";
+import { ApiAdapter, APIResponse, RLeanConfig } from "./src/types";
 
 export {
   initialState,
@@ -40,8 +40,8 @@ export {
   useSave,
   useGlobalState,
   useSyncState,
-
   // types & interfaces
   ApiAdapter,
   APIResponse,
+  RLeanConfig,
 };

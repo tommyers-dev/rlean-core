@@ -1,5 +1,4 @@
-import { APIResponse } from '../..';
-import { DeleteOptions, EntityDefineOptions, PatchOptions } from '../types';
+import { DeleteOptions, EntityDefineOptions, PatchOptions, APIResponse } from "../types";
 /**
  * Hook that exposes del()
  *

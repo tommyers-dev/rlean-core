@@ -1,4 +1,4 @@
-import { APIResponse, EntityDefineOptions, PostOptions } from '../types';
+import { APIResponse, EntityDefineOptions, PostOptions } from "../types";
 /**
  * Exposed Hook that allows user to access post method
  * If no definition given, returns function to use post to allow conditional operation.

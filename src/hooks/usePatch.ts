@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
-import { request, inspectClass } from '../_internal';
-import { APIResponse, useGlobalState } from '../..';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { Store } from '../..';
-import { API_METHOD, EntityDefineOptions, PatchOptions } from '../types';
+import { useEffect } from "react";
+import { request, inspectClass } from "../_internal";
+import { Store, APIResponse, useGlobalState } from "../..";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { API_METHOD, EntityDefineOptions, PatchOptions } from "../types";
 
 /**
  * Hook that exposes patch() safely and funly
@@ -71,7 +70,7 @@ export default function usePatch<Res, Req, T extends EntityDefineOptions<any>>(
     return;
   };
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       <Res, Req, T extends EntityDefineOptions<any>>(
         options: PatchOptions<T, Req> | undefined,

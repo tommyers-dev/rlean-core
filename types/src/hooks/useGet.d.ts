@@ -1,4 +1,4 @@
-import { EntityState, EntityDefineOptions, GetOptions } from '../types';
+import { EntityState, EntityDefineOptions, GetOptions } from "../types";
 /**
  * useGet - hook
  *

@@ -1,14 +1,13 @@
-import { useEffect } from 'react';
-import { request, inspectClass } from '../_internal';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { useGlobalState } from '../..';
-import { Store } from '../..';
+import { useEffect } from "react";
+import { request, inspectClass } from "../_internal";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { useGlobalState, Store } from "../..";
 import {
   APIResponse,
   API_METHOD,
   EntityDefineOptions,
   PutOptions,
-} from '../types';
+} from "../types";
 
 /**
  * usePut
@@ -89,7 +88,7 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
     }
   };
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       <Res, Req, T extends EntityDefineOptions<any>>(
         options: PutOptions<T, Req> = undefined,

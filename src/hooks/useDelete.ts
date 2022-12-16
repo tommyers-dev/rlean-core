@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
-import { request, inspectClass } from '../_internal';
-import { APIResponse, useGlobalState } from '../..';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { Store } from '../..';
+import { useEffect } from "react";
+import { request, inspectClass } from "../_internal";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { Store, useGlobalState } from "../..";
 import {
   API_METHOD,
   DeleteOptions,
   EntityDefineOptions,
   PatchOptions,
-} from '../types';
+  APIResponse,
+} from "../types";
 
 /**
  * Hook that exposes del()
@@ -77,7 +77,7 @@ export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
     );
   };
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       <Res, Req, T extends EntityDefineOptions<any>>(
         options: PatchOptions<T, Req> | undefined,
