@@ -1,14 +1,13 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { request, inspectClass } from '../_internal';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { useGlobalState } from '../..';
-import { Store } from '../..';
+import { useCallback, useEffect, useRef } from "react";
+import { request, inspectClass } from "../_internal";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { useGlobalState, Store } from "../..";
 import {
   APIResponse,
   API_METHOD,
   EntityDefineOptions,
   PostOptions,
-} from '../types';
+} from "../types";
 
 /**
  * Exposed Hook that allows user to access post method
@@ -93,7 +92,7 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
     [mountedRef]
   );
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       <Res, Req, T extends EntityDefineOptions<any> = any>(
         options: PostOptions<T, Req>,

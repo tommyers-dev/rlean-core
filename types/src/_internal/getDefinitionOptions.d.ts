@@ -1,4 +1,4 @@
-import { EntityDefineOptions } from "@/types";
+import { EntityDefineOptions } from "../types";
 export declare const getDefinitionOptions: <T>(key: string, options: Partial<EntityDefineOptions<T>>) => {
     initialState: {
         [x: string]: any;

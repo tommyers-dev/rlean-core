@@ -1,4 +1,4 @@
-import { ActionType, EntityDefineOptions, EntityState } from "@/types";
+import { ActionType, EntityDefineOptions, EntityState } from "../types";
 import { hasValue } from "@rlean/utils";
 import { convertToType } from "./convertToType";
 

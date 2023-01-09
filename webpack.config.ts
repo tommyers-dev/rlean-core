@@ -5,7 +5,6 @@ module.exports = {
   mode: "none",
   output: {
     filename: "index.js",
-    path: path.resolve(__dirname, "build"),
     libraryTarget: "umd",
   },
   module: {

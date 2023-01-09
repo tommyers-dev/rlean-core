@@ -23,7 +23,7 @@ export declare type RLeanConfig<F> = {
         adapter?: any;
         token?: string;
     };
-    storage: {
+    storage?: {
         adapter?: any;
     };
     logToConsole?: boolean;
