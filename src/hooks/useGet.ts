@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, Ref } from "react";
+import { useEffect, useRef, useState } from "react";
 import { request } from "../_internal/request";
-import { deepCopy, hasValue, getValue } from "@rlean/utils";
+import { deepCopy, hasValue } from "@rlean/utils";
 import { getHookOptions } from "../_internal";
 import { Store } from "../..";
 import {
@@ -10,7 +10,7 @@ import {
   GetOptions,
   API_METHOD,
 } from "../types";
-import RLean from "../RLean";
+import { StateSingleton } from "../StateSingleton";
 
 /**
  * useGet - hook
@@ -27,8 +27,10 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   options: GetOptions<Def> | undefined,
   callback = () => {}
 ): EntityState<Def> | [(options: GetOptions<Def>, callback: Function) => void] {
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const [state, dispatch] = zustand((s: any) => [s.global, s.dispatch]);
+  const [state, dispatch] = StateSingleton.getInstance().state((s: any) => [
+    s.global,
+    s.dispatch,
+  ]);
 
   const [init, setInit] = useState(false);
   const [data, setData] = useState();

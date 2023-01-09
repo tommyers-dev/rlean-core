@@ -1,9 +1,8 @@
-import RLean from "../RLean";
 import { getValue } from "@rlean/utils";
+import { StateSingleton } from "../StateSingleton";
 
 export default function useEntity(key: string) {
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const state = zustand((s) => s.global);
+  const state = StateSingleton.getInstance().state((s) => s.global);
 
   const add = (value: any) => {
     const data = getValue(state[key], "data", []);

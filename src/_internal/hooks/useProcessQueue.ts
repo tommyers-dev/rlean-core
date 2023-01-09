@@ -3,7 +3,7 @@ import { getValue } from "@rlean/utils";
 import { usePatch, usePut, usePost, useDelete, useRemove } from "../../..";
 import { methods } from "..";
 import { RLean_OfflineQueue } from "../entities";
-import RLean from "../../RLean";
+import { StateSingleton } from "../../StateSingleton";
 
 const getIsOnline = () => {
   return typeof navigator !== "undefined" &&
@@ -13,8 +13,7 @@ const getIsOnline = () => {
 };
 
 export default function useProcessQueue() {
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const state = zustand((s: any) => s.global);
+  const state = StateSingleton.getInstance().state((s: any) => s.global);
   const rlean_offlineQueue = getValue(state, "rlean_offlineQueue", undefined);
   const [isOnline, setIsOnline] = useState(getIsOnline());
   const [post] = usePost();

@@ -15,6 +15,7 @@ import RLean from "./src/RLean";
 import { reducer } from "./src/reducer";
 import { removeAll } from "./src/removeAll";
 import Store from "./src/Store";
+import { StateSingleton } from "./src/StateSingleton";
 
 import { ApiAdapter, APIResponse, RLeanConfig } from "./src/types";
 
@@ -36,6 +37,7 @@ export {
   useGet,
   useSave,
   useSyncState,
+  StateSingleton,
 
   // types & interfaces
   ApiAdapter,

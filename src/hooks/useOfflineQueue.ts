@@ -2,12 +2,14 @@ import { useRef } from "react";
 import { getValue } from "@rlean/utils";
 import { useSave } from "../..";
 import * as entities from "../_internal/entities";
-import RLean from "../RLean";
+import { StateSingleton } from "../StateSingleton";
 
 export default function useOfflineQueue() {
   const [save] = useSave();
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const rLean_OfflineQueue = zustand((s: any) => s.global?.rLean_OfflineQueue);
+
+  const rLean_OfflineQueue = StateSingleton.getInstance().state(
+    (s: any) => s.global?.rLean_OfflineQueue
+  );
   const offlineQueueRef = useRef(rLean_OfflineQueue);
 
   const enqueue = (

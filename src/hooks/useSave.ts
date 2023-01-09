@@ -8,7 +8,8 @@ import {
   GlobalState,
   SaveOptions,
 } from "../types";
-import { deepCopy, getValue } from "@rlean/utils";
+import { deepCopy } from "@rlean/utils";
+import { StateSingleton } from "../StateSingleton";
 
 /**
  * Save an object to state, and optionally to store if persistData
@@ -57,8 +58,10 @@ export default function useSave<T extends EntityDefineOptions<any>>(
   options?: SaveOptions<T>,
   callback = () => {}
 ) {
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const [state, dispatch] = zustand((s: any) => [s.global, s.dispatch]);
+  const [state, dispatch] = StateSingleton.getInstance().state((s: any) => [
+    s.global,
+    s.dispatch,
+  ]);
 
   if (typeof options === "undefined") {
     return [

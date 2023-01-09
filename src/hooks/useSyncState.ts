@@ -4,11 +4,14 @@ import { Store } from "../..";
 import { convertToType } from "../_internal";
 import * as entities from "../_internal/entities";
 import RLean from "../RLean";
+import { StateSingleton } from "../StateSingleton";
 
 export default function useSyncState() {
   const mountedRef = useRef(true);
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const [state, dispatch] = zustand((s: any) => [s.global, s.dispatch]);
+  const [state, dispatch] = StateSingleton.getInstance().state((s: any) => [
+    s.global,
+    s.dispatch,
+  ]);
 
   const syncState = useCallback(() => {
     const entityDefinitions: typeof entities = getValue(

@@ -4,8 +4,7 @@ import { APIResponse } from "../..";
 import { getHookOptions } from "../_internal/getHookOptions";
 import { Store } from "../..";
 import { API_METHOD, EntityDefineOptions, PatchOptions } from "../types";
-import { getValue } from "@rlean/utils";
-import RLean from "../RLean";
+import { StateSingleton } from "../StateSingleton";
 
 /**
  * Hook that exposes patch() safely and funly
@@ -19,8 +18,7 @@ export default function usePatch<Res, Req, T extends EntityDefineOptions<any>>(
   options?: PatchOptions<T, Req>,
   _callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const dispatch = zustand((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().state((s) => s.dispatch);
 
   /**
    * Function that executes a PATCH against the API.

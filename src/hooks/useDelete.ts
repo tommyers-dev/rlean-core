@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { request, inspectClass } from "../_internal";
 import { APIResponse } from "../..";
-import { getValue } from "@rlean/utils";
 import { getHookOptions } from "../_internal/getHookOptions";
 import { Store } from "../..";
 import {
@@ -10,7 +9,7 @@ import {
   EntityDefineOptions,
   PatchOptions,
 } from "../types";
-import RLean from "../RLean";
+import { StateSingleton } from "../StateSingleton";
 
 /**
  * Hook that exposes del()
@@ -26,8 +25,7 @@ export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
   options?: Partial<DeleteOptions<T, Req>>,
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const dispatch = zustand((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().state((s) => s.dispatch);
 
   // NOT CONVERTED
   /**

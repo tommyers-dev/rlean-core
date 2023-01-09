@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Store } from "../..";
 import RLean from "../RLean";
+import { StateSingleton } from "../StateSingleton";
 import { getHookOptions } from "../_internal/getHookOptions";
 import { EntityDefineOptions, Options } from "../types";
-import { getValue } from "@rlean/utils";
 
 /**
  * Main remove function from state
@@ -48,8 +48,7 @@ export default function useRemove<T extends EntityDefineOptions<any>>(
   options?: Partial<Options<T>>,
   callback: Function = () => {}
 ) {
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const dispatch = zustand((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().state((s) => s.dispatch);
 
   if (typeof options === "undefined") {
     return [

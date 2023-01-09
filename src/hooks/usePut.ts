@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { request, inspectClass } from "../_internal";
 import { getHookOptions } from "../_internal/getHookOptions";
-import { getValue } from "@rlean/utils";
-
 import { Store } from "../..";
 import {
   APIResponse,
@@ -10,7 +8,7 @@ import {
   EntityDefineOptions,
   PutOptions,
 } from "../types";
-import RLean from "../RLean";
+import { StateSingleton } from "../StateSingleton";
 
 /**
  * usePut
@@ -37,8 +35,7 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
   options?: PutOptions<T, Req>,
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const dispatch = zustand((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().state((s) => s.dispatch);
 
   /**
    * Function that executes a PUT against the API.

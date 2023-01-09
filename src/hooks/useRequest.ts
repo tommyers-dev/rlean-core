@@ -1,14 +1,12 @@
 import { useEffect } from "react";
-import { getValue } from "@rlean/utils";
-import RLean from "../RLean";
+import { StateSingleton } from "../StateSingleton";
 
 export default async function useRequest(
   options: any,
   method: Function,
   callback: Function
 ) {
-  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
-  const dispatch = zustand((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().state((s) => s.dispatch);
 
   if (typeof options === "undefined") {
     return [
