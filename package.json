@@ -2,7 +2,8 @@
   "name": "@rlean/core",
   "version": "2.0.19+18",
   "description": "Lean React Enterprise Framework with Hooks",
-  "main": "build/index.js",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "jest",
     "start": "webpack --watch",
@@ -44,7 +45,7 @@
     "ts-loader": "^9.3.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4",
-    "webpack": "^5.73.0",
-    "webpack-cli": "^4.10.0"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }

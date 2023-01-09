@@ -1,2 +1,0 @@
-import { Options, HookOptions, EntityDefineOptions } from "../types";
-export declare const getHookOptions: <T extends EntityDefineOptions<any>, F_1 extends Partial<Options<T, T extends EntityDefineOptions<infer F> ? F : unknown, (T extends EntityDefineOptions<infer F> ? F : unknown) extends infer T_1 ? T_1 extends (T extends EntityDefineOptions<infer F> ? F : unknown) ? T_1 extends unknown[] ? unknown : T_1 : never : never>>>(options: F_1) => HookOptions<T>;

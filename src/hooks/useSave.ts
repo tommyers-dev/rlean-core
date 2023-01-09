@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import RLean from "../RLean";
 import { getHookOptions } from "../_internal";
-import { Store } from "../..";
 import {
   EntityDefineOptions,
   EntityState,
@@ -10,6 +9,7 @@ import {
 } from "../types";
 import { deepCopy } from "@rlean/utils";
 import { StateSingleton } from "../StateSingleton";
+import { Store } from "../..";
 
 /**
  * Save an object to state, and optionally to store if persistData

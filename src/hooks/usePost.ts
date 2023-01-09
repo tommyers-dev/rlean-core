@@ -9,7 +9,6 @@ import {
   EntityDefineOptions,
   PostOptions,
 } from "../types";
-
 import { StateSingleton } from "../StateSingleton";
 
 /**
