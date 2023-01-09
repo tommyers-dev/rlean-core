@@ -1,14 +1,16 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { request, inspectClass } from '../_internal';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { useGlobalState } from '../..';
-import { Store } from '../..';
+import { useCallback, useEffect, useRef } from "react";
+import { request, inspectClass } from "../_internal";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { Store } from "../..";
+import { getValue } from "@rlean/utils";
+
 import {
   APIResponse,
   API_METHOD,
   EntityDefineOptions,
   PostOptions,
-} from '../types';
+} from "../types";
+import RLean from "../RLean";
 
 /**
  * Exposed Hook that allows user to access post method
@@ -34,7 +36,8 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
   options?: PostOptions<Def, Req>,
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
-  const [, dispatch] = useGlobalState();
+  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
+  const dispatch = zustand((s) => s.dispatch);
   const mountedRef = useRef(true);
 
   const post = useCallback(
@@ -93,7 +96,7 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
     [mountedRef]
   );
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       <Res, Req, T extends EntityDefineOptions<any> = any>(
         options: PostOptions<T, Req>,

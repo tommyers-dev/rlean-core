@@ -1,12 +1,14 @@
 import { useEffect } from "react";
-import { useGlobalState } from "../..";
+import { getValue } from "@rlean/utils";
+import RLean from "../RLean";
 
 export default async function useRequest(
   options: any,
   method: Function,
   callback: Function
 ) {
-  const [, dispatch] = useGlobalState();
+  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
+  const dispatch = zustand((s) => s.dispatch);
 
   if (typeof options === "undefined") {
     return [

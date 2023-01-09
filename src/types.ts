@@ -1,10 +1,7 @@
 /**
  * Main context type
  */
-export type ContextType<T> = [
-  state: GlobalState<T>,
-  dispatch: React.DispatchWithoutAction
-];
+export type ContextType<T> = [state: GlobalState<T>, dispatch: Function];
 
 /**
  * Configuration type for RLean
@@ -33,7 +30,7 @@ export type RLeanConfig<F> = {
  * The generic is the object containing all entities' definitions. Infers the
  * entity data type and wraps it with EntityState
  */
-export type GlobalState<F> = {
+export type GlobalState<F = {}> = {
   [K in keyof F as Uncapitalize<string & K>]: F[K] extends EntityDefineOptions<
     infer A
   >
@@ -59,11 +56,11 @@ export type EntityState<T> = {
  * API methods
  */
 export enum API_METHOD {
-  DELETE = 'DELETE',
-  GET = 'GET',
-  PATCH = 'PATCH',
-  POST = 'POST',
-  PUT = 'PUT',
+  DELETE = "DELETE",
+  GET = "GET",
+  PATCH = "PATCH",
+  POST = "POST",
+  PUT = "PUT",
 }
 
 /**

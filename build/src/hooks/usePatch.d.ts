@@ -1,5 +1,5 @@
-import { APIResponse } from '../..';
-import { EntityDefineOptions, PatchOptions } from '../types';
+import { APIResponse } from "../..";
+import { EntityDefineOptions, PatchOptions } from "../types";
 /**
  * Hook that exposes patch() safely and funly
  *

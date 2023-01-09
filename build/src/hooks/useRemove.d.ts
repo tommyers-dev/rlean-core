@@ -1,4 +1,4 @@
-import { EntityDefineOptions, Options } from '../types';
+import { EntityDefineOptions, Options } from "../types";
 /**
  * Clear an object from the store if persistData is true (default).
  *

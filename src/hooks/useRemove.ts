@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
-import { Store, RLean, useGlobalState } from '../..';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { EntityDefineOptions, Options } from '../types';
+import { useEffect } from "react";
+import { Store } from "../..";
+import RLean from "../RLean";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { EntityDefineOptions, Options } from "../types";
+import { getValue } from "@rlean/utils";
 
 /**
  * Main remove function from state
@@ -12,7 +14,7 @@ const remove = async <T extends EntityDefineOptions<any>>(
   dispatch: (updateState: any) => void,
   callback: Function
 ) => {
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return;
   }
 
@@ -46,9 +48,10 @@ export default function useRemove<T extends EntityDefineOptions<any>>(
   options?: Partial<Options<T>>,
   callback: Function = () => {}
 ) {
-  const [, dispatch] = useGlobalState();
+  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
+  const dispatch = zustand((s) => s.dispatch);
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       <T extends EntityDefineOptions<any>>(
         options: Partial<Options<T>>,

@@ -1,14 +1,16 @@
-import { useEffect } from 'react';
-import { request, inspectClass } from '../_internal';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { useGlobalState } from '../..';
-import { Store } from '../..';
+import { useEffect } from "react";
+import { request, inspectClass } from "../_internal";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { getValue } from "@rlean/utils";
+
+import { Store } from "../..";
 import {
   APIResponse,
   API_METHOD,
   EntityDefineOptions,
   PutOptions,
-} from '../types';
+} from "../types";
+import RLean from "../RLean";
 
 /**
  * usePut
@@ -35,7 +37,8 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
   options?: PutOptions<T, Req>,
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
-  const [, dispatch] = useGlobalState();
+  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
+  const dispatch = zustand((s) => s.dispatch);
 
   /**
    * Function that executes a PUT against the API.
@@ -89,7 +92,7 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
     }
   };
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       <Res, Req, T extends EntityDefineOptions<any>>(
         options: PutOptions<T, Req> = undefined,

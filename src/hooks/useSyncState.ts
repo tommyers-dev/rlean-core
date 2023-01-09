@@ -1,12 +1,14 @@
 import { useEffect, useCallback, useRef } from "react";
 import { getValue, Compare } from "@rlean/utils";
-import { RLean, useGlobalState, Store } from "../..";
+import { Store } from "../..";
 import { convertToType } from "../_internal";
 import * as entities from "../_internal/entities";
+import RLean from "../RLean";
 
 export default function useSyncState() {
   const mountedRef = useRef(true);
-  const [{ ...state }, dispatch] = useGlobalState();
+  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
+  const [state, dispatch] = zustand((s: any) => [s.global, s.dispatch]);
 
   const syncState = useCallback(() => {
     const entityDefinitions: typeof entities = getValue(

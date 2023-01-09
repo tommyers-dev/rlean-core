@@ -1,4 +1,4 @@
-import { APIResponse, EntityDefineOptions, PutOptions } from '../types';
+import { APIResponse, EntityDefineOptions, PutOptions } from "../types";
 /**
  * usePut
  *

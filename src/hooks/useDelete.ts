@@ -1,14 +1,16 @@
-import { useEffect } from 'react';
-import { request, inspectClass } from '../_internal';
-import { APIResponse, useGlobalState } from '../..';
-import { getHookOptions } from '../_internal/getHookOptions';
-import { Store } from '../..';
+import { useEffect } from "react";
+import { request, inspectClass } from "../_internal";
+import { APIResponse } from "../..";
+import { getValue } from "@rlean/utils";
+import { getHookOptions } from "../_internal/getHookOptions";
+import { Store } from "../..";
 import {
   API_METHOD,
   DeleteOptions,
   EntityDefineOptions,
   PatchOptions,
-} from '../types';
+} from "../types";
+import RLean from "../RLean";
 
 /**
  * Hook that exposes del()
@@ -24,7 +26,8 @@ export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
   options?: Partial<DeleteOptions<T, Req>>,
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
-  const [, dispatch] = useGlobalState();
+  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
+  const dispatch = zustand((s) => s.dispatch);
 
   // NOT CONVERTED
   /**
@@ -77,7 +80,7 @@ export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
     );
   };
 
-  if (typeof options === 'undefined') {
+  if (typeof options === "undefined") {
     return [
       <Res, Req, T extends EntityDefineOptions<any>>(
         options: PatchOptions<T, Req> | undefined,

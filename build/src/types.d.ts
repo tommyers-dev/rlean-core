@@ -1,11 +1,7 @@
-/// <reference types="react" />
 /**
  * Main context type
  */
-export declare type ContextType<T> = [
-    state: GlobalState<T>,
-    dispatch: React.DispatchWithoutAction
-];
+export declare type ContextType<T> = [state: GlobalState<T>, dispatch: Function];
 /**
  * Configuration type for RLean
  * Type this using the entities object
@@ -23,7 +19,7 @@ export declare type RLeanConfig<F> = {
         adapter?: any;
         token?: string;
     };
-    storage: {
+    storage?: {
         adapter?: any;
     };
     logToConsole?: boolean;

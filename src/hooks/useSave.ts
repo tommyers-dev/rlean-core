@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useGlobalState, RLean } from "../..";
+import RLean from "../RLean";
 import { getHookOptions } from "../_internal";
 import { Store } from "../..";
 import {
@@ -8,7 +8,7 @@ import {
   GlobalState,
   SaveOptions,
 } from "../types";
-import { deepCopy } from "@rlean/utils";
+import { deepCopy, getValue } from "@rlean/utils";
 
 /**
  * Save an object to state, and optionally to store if persistData
@@ -57,7 +57,8 @@ export default function useSave<T extends EntityDefineOptions<any>>(
   options?: SaveOptions<T>,
   callback = () => {}
 ) {
-  const [{ ...state }, dispatch] = useGlobalState();
+  const zustand = getValue(RLean, "state", {}) as typeof RLean.state;
+  const [state, dispatch] = zustand((s: any) => [s.global, s.dispatch]);
 
   if (typeof options === "undefined") {
     return [
