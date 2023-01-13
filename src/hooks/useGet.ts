@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { request } from "../_internal/request";
 import { deepCopy, hasValue } from "@rlean/utils";
 import { getHookOptions } from "../_internal";
-import { Store } from "../..";
+import { Store } from "..";
 import {
   EntityState,
   GlobalState,

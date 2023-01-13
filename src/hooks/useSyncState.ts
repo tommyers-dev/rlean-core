@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useRef } from "react";
 import { getValue, Compare } from "@rlean/utils";
-import { Store } from "../..";
+import { Store } from "..";
 import { convertToType } from "../_internal";
 import * as entities from "../_internal/entities";
 import RLean from "../RLean";

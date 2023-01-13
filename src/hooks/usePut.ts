@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { request, inspectClass } from "../_internal";
 import { getHookOptions } from "../_internal/getHookOptions";
-import { Store } from "../..";
+import { Store } from "..";
 import {
   APIResponse,
   API_METHOD,

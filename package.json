@@ -26,6 +26,9 @@
     "url": "https://github.com/tommyers-dev/rlean-core/issues"
   },
   "homepage": "https://github.com/tommyers-dev/rlean-core#readme",
+  "peerDependencies": {
+    "react": "^16.13.0"
+  },
   "dependencies": {
     "@rlean/utils": "^1.0.0",
     "@types/node": "^17.0.34",
@@ -35,6 +38,7 @@
     "zustand": "^4.2.0"
   },
   "devDependencies": {
+    "@types/react": "^18.0.15",
     "jest": "^24.9.0",
     "jsdoc": "^3.6.3",
     "react-test-renderer": "^16.11.0",

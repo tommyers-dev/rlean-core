@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { request, inspectClass } from "../_internal";
-import { APIResponse } from "../..";
+import { APIResponse } from "..";
 import { getHookOptions } from "../_internal/getHookOptions";
-import { Store } from "../..";
+import { Store } from "..";
 import { API_METHOD, EntityDefineOptions, PatchOptions } from "../types";
 import { StateSingleton } from "../StateSingleton";
 

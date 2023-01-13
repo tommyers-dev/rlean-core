@@ -1,4 +1,4 @@
-import { APIResponse } from "../..";
+import { APIResponse } from "..";
 import { DeleteOptions, EntityDefineOptions, PatchOptions } from "../types";
 /**
  * Hook that exposes del()

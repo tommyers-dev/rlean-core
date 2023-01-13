@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Store } from "../..";
+import { Store } from "..";
 import RLean from "../RLean";
 import { StateSingleton } from "../StateSingleton";
 import { getHookOptions } from "../_internal/getHookOptions";

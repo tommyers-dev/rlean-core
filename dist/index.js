@@ -6846,14 +6846,14 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.reducer = void 0;
 var utils_1 = __webpack_require__(3);
-var __1 = __webpack_require__(0);
+var _1 = __webpack_require__(0);
 var middleware_1 = __webpack_require__(55);
 var reducer = function (_a, action) {
     var _b, _c;
     var state = __rest(_a, []);
-    var entityDefinitions = (0, utils_1.getValue)(__1.RLean, "config.entities", {});
-    var middleware = (0, utils_1.getValue)(__1.RLean, "config.middleware", []);
-    var definition = (0, utils_1.getValue)(__1.RLean, "definition", {});
+    var entityDefinitions = (0, utils_1.getValue)(_1.RLean, "config.entities", {});
+    var middleware = (0, utils_1.getValue)(_1.RLean, "config.middleware", []);
+    var definition = (0, utils_1.getValue)(_1.RLean, "definition", {});
     var objects = Object.values(entityDefinitions);
     var objectsLength = objects.length;
     var combinedReducer = {};
@@ -6930,7 +6930,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.saveToIndexedDB = exports.logActions = exports.applyMiddleware = void 0;
-var __1 = __webpack_require__(0);
+var _1 = __webpack_require__(0);
 var utils_1 = __webpack_require__(3);
 function logActions(definition, state, action) {
     return __awaiter(this, void 0, void 0, function () {
@@ -6938,7 +6938,7 @@ function logActions(definition, state, action) {
         var _a;
         return __generator(this, function (_b) {
             stateKey = Object.keys(action)[1].toString();
-            logToConsole = (0, utils_1.getValue)(__1.RLean, "config.logToConsole", false);
+            logToConsole = (0, utils_1.getValue)(_1.RLean, "config.logToConsole", false);
             if (logToConsole) {
                 console.log("state", state);
                 console.log("dispatching ".concat(action.type), (_a = {}, _a[stateKey] = action[stateKey], _a));
@@ -6960,7 +6960,7 @@ function saveToIndexedDB(definition, state, action) {
             switch (_a.label) {
                 case 0:
                     if (!definition.persistData) return [3 /*break*/, 2];
-                    return [4 /*yield*/, __1.Store.set(definition, Object.values(action)[1])];
+                    return [4 /*yield*/, _1.Store.set(definition, Object.values(action)[1])];
                 case 1:
                     _a.sent();
                     _a.label = 2;
@@ -8691,7 +8691,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.removeAll = void 0;
-var __1 = __webpack_require__(0);
+var _1 = __webpack_require__(0);
 /**
  * Clear all data from the store and from session.
  */
@@ -8699,7 +8699,7 @@ var removeAll = function () { return __awaiter(void 0, void 0, void 0, function 
     return __generator(this, function (_a) {
         sessionStorage.clear();
         localStorage.clear();
-        __1.Store.clear();
+        _1.Store.clear();
         return [2 /*return*/];
     });
 }); };

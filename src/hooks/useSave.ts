@@ -9,7 +9,7 @@ import {
 } from "../types";
 import { deepCopy } from "@rlean/utils";
 import { StateSingleton } from "../StateSingleton";
-import { Store } from "../..";
+import { Store } from "..";
 
 /**
  * Save an object to state, and optionally to store if persistData

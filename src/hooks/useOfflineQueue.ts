@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { getValue } from "@rlean/utils";
-import { useSave } from "../..";
+import { useSave } from "..";
 import * as entities from "../_internal/entities";
 import { StateSingleton } from "../StateSingleton";
 

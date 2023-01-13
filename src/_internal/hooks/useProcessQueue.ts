@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getValue } from "@rlean/utils";
-import { usePatch, usePut, usePost, useDelete, useRemove } from "../../..";
+import { usePatch, usePut, usePost, useDelete, useRemove } from "../..";
 import { methods } from "..";
 import { RLean_OfflineQueue } from "../entities";
 import { StateSingleton } from "../../StateSingleton";
