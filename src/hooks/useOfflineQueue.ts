@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { getValue } from "@rlean/utils";
-import { useSave, useGlobalState } from "../..";
+import { useSave, useGlobalState } from "..";
 import * as entities from "../_internal/entities";
 
 export default function useOfflineQueue() {

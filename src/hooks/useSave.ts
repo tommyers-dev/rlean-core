@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useGlobalState, RLean, Store } from "../..";
+import { useGlobalState, RLean, Store } from "..";
 import { getHookOptions } from "../_internal";
 import {
   EntityDefineOptions,

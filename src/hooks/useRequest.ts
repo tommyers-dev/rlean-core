@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useGlobalState } from "../..";
+import { useGlobalState } from "..";
 
 export default async function useRequest(
   options: any,

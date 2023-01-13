@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { request, inspectClass } from "../_internal";
-import { Store, APIResponse, useGlobalState } from "../..";
+import { Store, APIResponse, useGlobalState } from "..";
 import { getHookOptions } from "../_internal/getHookOptions";
 import { API_METHOD, EntityDefineOptions, PatchOptions } from "../types";
 
