@@ -7,7 +7,7 @@ import {
   usePost,
   useDelete,
   useRemove,
-} from "../../..";
+} from "../..";
 import { methods } from "..";
 import { RLean_OfflineQueue } from "../entities";
 

@@ -1,5 +1,5 @@
 import { getValue } from "@rlean/utils";
-import { useGlobalState } from "../..";
+import { useGlobalState } from "..";
 
 export default function useEntity(key: string) {
   const [{ ...state }] = useGlobalState();

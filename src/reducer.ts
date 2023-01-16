@@ -1,6 +1,6 @@
 import { deepCopy, getValue } from "@rlean/utils";
-import { RLean } from "..";
-import { logActions, saveToIndexedDB, applyMiddleware } from "./middleware";
+import { RLean } from ".";
+import { logActions, applyMiddleware } from "./middleware";
 import { ActionType, EntityDefineOptions, GlobalState } from "./types";
 
 type EntityWithPrototype = {

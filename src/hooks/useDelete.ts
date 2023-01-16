@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { request, inspectClass } from "../_internal";
 import { getHookOptions } from "../_internal/getHookOptions";
-import { Store, useGlobalState } from "../..";
+import { Store, useGlobalState } from "..";
 import {
   API_METHOD,
   DeleteOptions,

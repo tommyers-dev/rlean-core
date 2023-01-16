@@ -1,4 +1,4 @@
-import { Store, RLean } from "..";
+import { Store, RLean } from ".";
 import { getValue } from "@rlean/utils";
 import { ActionType, EntityDefineOptions, GlobalState } from "./types";
 

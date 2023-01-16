@@ -16,5 +16,32 @@ import { reducer } from "./reducer";
 import { removeAll } from "./removeAll";
 import { StateContext, StateProvider, useGlobalState } from "./State";
 import Store from "./Store";
+
 import { ApiAdapter, APIResponse, RLeanConfig } from "./types";
-export { initialState, define, keys, Adapters, useRequest, usePatch, usePost, usePut, useDelete, RLean, reducer, useRemove, removeAll, StateContext, StateProvider, Store, useGet, useSave, useGlobalState, useSyncState, ApiAdapter, APIResponse, RLeanConfig, };
+
+export {
+  initialState,
+  define,
+  keys,
+  Adapters,
+  useRequest,
+  usePatch,
+  usePost,
+  usePut,
+  useDelete,
+  RLean,
+  reducer,
+  useRemove,
+  removeAll,
+  StateContext,
+  StateProvider,
+  Store,
+  useGet,
+  useSave,
+  useGlobalState,
+  useSyncState,
+  // types & interfaces
+  ApiAdapter,
+  APIResponse,
+  RLeanConfig,
+};
