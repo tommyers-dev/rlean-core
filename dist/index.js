@@ -16,7 +16,7 @@ return /******/ (() => { // webpackBootstrap
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StateSingleton = exports.useSyncState = exports.useSave = exports.useGet = exports.Store = exports.removeAll = exports.useRemove = exports.reducer = exports.RLean = exports.useDelete = exports.usePut = exports.usePost = exports.usePatch = exports.useRequest = exports.Adapters = exports.keys = exports.define = exports.initialState = void 0;
+exports.RLeanBaseHooks = exports.StateSingleton = exports.useSyncState = exports.useSave = exports.useGet = exports.Store = exports.removeAll = exports.useRemove = exports.reducer = exports.RLean = exports.useDelete = exports.usePut = exports.usePost = exports.usePatch = exports.useRequest = exports.Adapters = exports.keys = exports.define = exports.initialState = void 0;
 var initialState_1 = __webpack_require__(1);
 Object.defineProperty(exports, "initialState", ({ enumerable: true, get: function () { return initialState_1.initialState; } }));
 var Adapters_1 = __webpack_require__(4);
@@ -53,6 +53,8 @@ var Store_1 = __webpack_require__(73);
 exports.Store = Store_1.default;
 var StateSingleton_1 = __webpack_require__(53);
 Object.defineProperty(exports, "StateSingleton", ({ enumerable: true, get: function () { return StateSingleton_1.StateSingleton; } }));
+var BaseHooks_1 = __webpack_require__(74);
+Object.defineProperty(exports, "RLeanBaseHooks", ({ enumerable: true, get: function () { return BaseHooks_1.RLeanBaseHooks; } }));
 
 
 /***/ }),
@@ -8624,6 +8626,7 @@ function useSyncState() {
                         return [4 /*yield*/, __1.Store.get(definition)];
                     case 1:
                         storedValue = _a.sent();
+                        console.log("Getting data for", definition.key, storedValue);
                         if (storedValue &&
                             !utils_1.Compare.deepCompare(storedValue, stateValue).isEqual) {
                             type = "SET_".concat((0, _internal_1.convertToType)(definition.key));
@@ -8902,6 +8905,22 @@ var Store = /** @class */ (function () {
     return Store;
 }());
 exports["default"] = new Store();
+
+
+/***/ }),
+/* 74 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RLeanBaseHooks = void 0;
+var useSyncState_1 = __webpack_require__(71);
+function RLeanBaseHooks() {
+    (0, useSyncState_1.default)();
+    return null;
+}
+exports.RLeanBaseHooks = RLeanBaseHooks;
 
 
 /***/ })
