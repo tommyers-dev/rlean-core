@@ -10,4 +10,6 @@ import { EntityState, EntityDefineOptions, GetOptions } from "../types";
  *
  * @todo Type the response callback. See usePost and usePut for reference.
  */
-export default function useGet<Def extends EntityDefineOptions<any>>(options: GetOptions<Def> | undefined, callback?: () => void): EntityState<Def> | [(options: GetOptions<Def>, callback: Function) => void];
+export default function useGet<Def extends EntityDefineOptions<any>>(options?: GetOptions<Def> | undefined | null, callback?: (res: any, err?: any) => void): EntityState<Def> | [
+    (options: GetOptions<Def> | undefined, callback: Function | undefined) => void
+];

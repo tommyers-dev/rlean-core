@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState, Ref } from "react";
-import { request } from "../_internal/request";
-import { deepCopy, hasValue } from "@rlean/utils";
-import { useGlobalState } from "../State";
-import { getHookOptions } from "../_internal";
-import { Store } from "..";
+import { useEffect, useRef, useState, Ref } from 'react';
+import { request } from '../_internal/request';
+import { deepCopy, hasValue } from '@rlean/utils';
+import { useGlobalState } from '../State';
+import { getHookOptions } from '../_internal';
+import { Store } from '..';
 import {
   EntityState,
   GlobalState,
   EntityDefineOptions,
   GetOptions,
   API_METHOD,
-} from "../types";
+} from '../types';
 
 /**
  * useGet - hook
@@ -24,9 +24,16 @@ import {
  * @todo Type the response callback. See usePost and usePut for reference.
  */
 export default function useGet<Def extends EntityDefineOptions<any>>(
-  options: GetOptions<Def> | undefined,
-  callback = () => {}
-): EntityState<Def> | [(options: GetOptions<Def>, callback: Function) => void] {
+  options: GetOptions<Def> | undefined | null = null,
+  callback = (res: any, err: any = null) => {}
+):
+  | EntityState<Def>
+  | [
+      (
+        options: GetOptions<Def> | undefined,
+        callback: Function | undefined
+      ) => void
+    ] {
   const [{ ...state }, dispatch] = useGlobalState();
   const [init, setInit] = useState(false);
   const [data, setData] = useState();
@@ -36,11 +43,11 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   const [lastUpdated, setLastUpdated] = useState();
   const stateRef = useRef(state);
   const abortCtrl =
-    typeof new AbortController() === "undefined"
+    typeof new AbortController() === 'undefined'
       ? {
           signal: null,
           abort: () =>
-            console.warn("Browser does not support fetch canceling."),
+            console.warn('Browser does not support fetch canceling.'),
         }
       : new AbortController();
   let dependencies = [];
@@ -59,14 +66,14 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
     const currentState: GlobalState<A> = stateRef.current;
 
     // definition does not include a get call
-    if (!hasValue(definition, "getURL")) {
+    if (!hasValue(definition, 'getURL')) {
       return null;
     }
 
     // check for null params
     if (!definition.nullableParams) {
       for (let key in params) {
-        if (typeof params[key] === "undefined" || params[key] === null) {
+        if (typeof params[key] === 'undefined' || params[key] === null) {
           return null;
         }
       }
@@ -186,7 +193,7 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
     await get(options, stateRef, dispatch, callback, true);
   };
 
-  if (typeof options === "undefined") {
+  if (typeof options === 'undefined' || options === null) {
     return [
       (options, callback) => {
         get(options, stateRef, dispatch, callback);
@@ -206,7 +213,7 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
       canceled = true;
       abortCtrl.abort();
     };
-  }, [...dependencies]);
+  }, dependencies);
 
   return {
     data,

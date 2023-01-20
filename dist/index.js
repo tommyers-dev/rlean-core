@@ -6902,15 +6902,6 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var react_1 = __webpack_require__(52);
 var request_1 = __webpack_require__(13);
@@ -6932,7 +6923,10 @@ var types_1 = __webpack_require__(12);
  */
 function useGet(options, callback) {
     var _this = this;
-    if (callback === void 0) { callback = function () { }; }
+    if (options === void 0) { options = null; }
+    if (callback === void 0) { callback = function (res, err) {
+        if (err === void 0) { err = null; }
+    }; }
     var _a = (0, State_1.useGlobalState)(), _b = _a[0], dispatch = _a[1], state = __rest(_b, []);
     var _c = (0, react_1.useState)(false), init = _c[0], setInit = _c[1];
     var _d = (0, react_1.useState)(), data = _d[0], setData = _d[1];
@@ -7087,7 +7081,7 @@ function useGet(options, callback) {
             }
         });
     }); };
-    if (typeof options === "undefined") {
+    if (typeof options === 'undefined' || options === null) {
         return [
             function (options, callback) {
                 get(options, stateRef, dispatch, callback);
@@ -7104,7 +7098,7 @@ function useGet(options, callback) {
             canceled = true;
             abortCtrl.abort();
         };
-    }, __spreadArray([], dependencies, true));
+    }, dependencies);
     return {
         data: data,
         error: error,
