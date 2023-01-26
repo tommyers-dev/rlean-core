@@ -48,7 +48,7 @@ export default function useRemove<T extends EntityDefineOptions<any>>(
   options?: Partial<Options<T>>,
   callback: Function = () => {}
 ) {
-  const dispatch = StateSingleton.getInstance().state((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().zustand((s) => s.dispatch);
 
   if (typeof options === "undefined") {
     return [

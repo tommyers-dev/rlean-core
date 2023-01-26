@@ -2,7 +2,7 @@ import { getValue } from "@rlean/utils";
 import { StateSingleton } from "../StateSingleton";
 
 export default function useEntity(key: string) {
-  const state = StateSingleton.getInstance().state((s) => s.global);
+  const state = StateSingleton.getInstance().zustand((s) => s.state);
 
   const add = (value: any) => {
     const data = getValue(state[key], "data", []);

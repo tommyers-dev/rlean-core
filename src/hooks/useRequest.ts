@@ -6,7 +6,7 @@ export default async function useRequest(
   method: Function,
   callback: Function
 ) {
-  const dispatch = StateSingleton.getInstance().state((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().zustand((s) => s.dispatch);
 
   if (typeof options === "undefined") {
     return [

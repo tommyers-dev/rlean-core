@@ -8,23 +8,26 @@ import RLean from "./RLean";
 export class StateSingleton<T = {}> {
   static instance: StateSingleton;
 
-  public state: UseBoundStore<
-    StoreApi<{ global: GlobalState<T>; dispatch: any }>
+  public zustand: UseBoundStore<
+    StoreApi<{ state: GlobalState<T>; dispatch: any }>
   >;
+
+  public select: UseBoundStore<StoreApi<{ state: GlobalState<T> }>>;
 
   private constructor() {
     const configEntities = getValue(RLean, "config.entities", {}) as any;
 
-    this.state = create<{
-      global: GlobalState<typeof configEntities>;
+    this.zustand = create<{
+      state: GlobalState<typeof configEntities>;
       dispatch: any;
     }>((set) => ({
-      global: initialState(configEntities),
+      state: initialState(configEntities),
       dispatch: (args: any) => {
-        set((state) => {
-          const nextState = reducer(state, args) as any;
-          // The next state contains also the rest of the entities' state, but
-          // set as undefined
+        set((zustandState) => {
+          const nextState = reducer(zustandState, args) as any;
+
+          // nextState contains also the rest of the entities' state, but
+          // undefined, so we delete them
           Object.keys(nextState).forEach((key) => {
             if (nextState[key] === undefined) {
               delete nextState[key];
@@ -32,19 +35,29 @@ export class StateSingleton<T = {}> {
           });
 
           return {
-            global: { ...state.global, ...nextState },
+            state: { ...zustandState.state, ...nextState },
           };
         });
       },
     }));
+
+    this.select = this.zustand as any;
   }
 
   public static getInstance<T>(): StateSingleton<T> {
     if (!StateSingleton.instance) {
       StateSingleton.instance = new StateSingleton();
     }
+
     return StateSingleton.instance as {
-      state: UseBoundStore<StoreApi<{ global: GlobalState<T>; dispatch: any }>>;
+      zustand: UseBoundStore<
+        StoreApi<{ state: GlobalState<T>; dispatch: any }>
+      >;
+      select: UseBoundStore<StoreApi<{ state: GlobalState<T> }>>;
     };
   }
 }
+
+export const RLeanState = <T>() => ({
+  select: StateSingleton.getInstance<T>().select,
+});

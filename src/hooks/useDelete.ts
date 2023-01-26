@@ -25,7 +25,7 @@ export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
   options?: Partial<DeleteOptions<T, Req>>,
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
-  const dispatch = StateSingleton.getInstance().state((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().zustand((s) => s.dispatch);
 
   // NOT CONVERTED
   /**

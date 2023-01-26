@@ -27,7 +27,7 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   options: GetOptions<Def> | undefined,
   callback = () => {}
 ): EntityState<Def> | [(options: GetOptions<Def>, callback: Function) => void] {
-  const [state, dispatch] = StateSingleton.getInstance().state((s: any) => [
+  const [state, dispatch] = StateSingleton.getInstance().zustand((s: any) => [
     s.global,
     s.dispatch,
   ]);

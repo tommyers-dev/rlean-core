@@ -7,7 +7,7 @@ import { StateSingleton } from "../StateSingleton";
 export default function useOfflineQueue() {
   const [save] = useSave();
 
-  const rLean_OfflineQueue = StateSingleton.getInstance().state(
+  const rLean_OfflineQueue = StateSingleton.getInstance().zustand(
     (s: any) => s.global?.rLean_OfflineQueue
   );
   const offlineQueueRef = useRef(rLean_OfflineQueue);

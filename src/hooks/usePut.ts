@@ -35,7 +35,7 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
   options?: PutOptions<T, Req>,
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
-  const dispatch = StateSingleton.getInstance().state((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().zustand((s) => s.dispatch);
 
   /**
    * Function that executes a PUT against the API.

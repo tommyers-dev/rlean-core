@@ -13,7 +13,7 @@ const getIsOnline = () => {
 };
 
 export default function useProcessQueue() {
-  const state = StateSingleton.getInstance().state((s: any) => s.global);
+  const state = StateSingleton.getInstance().zustand((s: any) => s.global);
   const rlean_offlineQueue = getValue(state, "rlean_offlineQueue", undefined);
   const [isOnline, setIsOnline] = useState(getIsOnline());
   const [post] = usePost();

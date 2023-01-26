@@ -35,7 +35,7 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
   options?: PostOptions<Def, Req>,
   callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
-  const dispatch = StateSingleton.getInstance().state((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().zustand((s) => s.dispatch);
   const mountedRef = useRef(true);
 
   const post = useCallback(

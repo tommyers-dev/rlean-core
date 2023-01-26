@@ -16,7 +16,7 @@ return /******/ (() => { // webpackBootstrap
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RLeanBaseHooks = exports.StateSingleton = exports.useSyncState = exports.useSave = exports.useGet = exports.Store = exports.removeAll = exports.useRemove = exports.reducer = exports.RLean = exports.useDelete = exports.usePut = exports.usePost = exports.usePatch = exports.useRequest = exports.Adapters = exports.keys = exports.define = exports.initialState = void 0;
+exports.RLeanBaseHooks = exports.RLeanState = exports.StateSingleton = exports.useSyncState = exports.useSave = exports.useGet = exports.Store = exports.removeAll = exports.useRemove = exports.reducer = exports.RLean = exports.useDelete = exports.usePut = exports.usePost = exports.usePatch = exports.useRequest = exports.Adapters = exports.keys = exports.define = exports.initialState = void 0;
 var initialState_1 = __webpack_require__(1);
 Object.defineProperty(exports, "initialState", ({ enumerable: true, get: function () { return initialState_1.initialState; } }));
 var Adapters_1 = __webpack_require__(4);
@@ -53,6 +53,7 @@ var Store_1 = __webpack_require__(73);
 exports.Store = Store_1.default;
 var StateSingleton_1 = __webpack_require__(53);
 Object.defineProperty(exports, "StateSingleton", ({ enumerable: true, get: function () { return StateSingleton_1.StateSingleton; } }));
+Object.defineProperty(exports, "RLeanState", ({ enumerable: true, get: function () { return StateSingleton_1.RLeanState; } }));
 var BaseHooks_1 = __webpack_require__(74);
 Object.defineProperty(exports, "RLeanBaseHooks", ({ enumerable: true, get: function () { return BaseHooks_1.RLeanBaseHooks; } }));
 
@@ -6744,7 +6745,7 @@ var save = function (options, state, dispatch, callback) {
  */
 function useSave(options, callback) {
     if (callback === void 0) { callback = function () { }; }
-    var _a = StateSingleton_1.StateSingleton.getInstance().state(function (s) { return [
+    var _a = StateSingleton_1.StateSingleton.getInstance().zustand(function (s) { return [
         s.global,
         s.dispatch,
     ]; }), state = _a[0], dispatch = _a[1];
@@ -6789,7 +6790,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StateSingleton = void 0;
+exports.RLeanState = exports.StateSingleton = void 0;
 var initialState_1 = __webpack_require__(1);
 var reducer_1 = __webpack_require__(54);
 var zustand_1 = __webpack_require__(56);
@@ -6798,24 +6799,25 @@ var RLean_1 = __webpack_require__(2);
 var StateSingleton = /** @class */ (function () {
     function StateSingleton() {
         var configEntities = (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
-        this.state = (0, zustand_1.default)(function (set) { return ({
-            global: (0, initialState_1.initialState)(configEntities),
+        this.zustand = (0, zustand_1.default)(function (set) { return ({
+            state: (0, initialState_1.initialState)(configEntities),
             dispatch: function (args) {
-                set(function (state) {
-                    var nextState = (0, reducer_1.reducer)(state, args);
-                    // The next state contains also the rest of the entities' state, but
-                    // set as undefined
+                set(function (zustandState) {
+                    var nextState = (0, reducer_1.reducer)(zustandState, args);
+                    // nextState contains also the rest of the entities' state, but
+                    // undefined, so we delete them
                     Object.keys(nextState).forEach(function (key) {
                         if (nextState[key] === undefined) {
                             delete nextState[key];
                         }
                     });
                     return {
-                        global: __assign(__assign({}, state.global), nextState),
+                        state: __assign(__assign({}, zustandState.state), nextState),
                     };
                 });
             },
         }); });
+        this.select = this.zustand;
     }
     StateSingleton.getInstance = function () {
         if (!StateSingleton.instance) {
@@ -6826,6 +6828,10 @@ var StateSingleton = /** @class */ (function () {
     return StateSingleton;
 }());
 exports.StateSingleton = StateSingleton;
+var RLeanState = function () { return ({
+    select: StateSingleton.getInstance().select,
+}); };
+exports.RLeanState = RLeanState;
 
 
 /***/ }),
@@ -7604,7 +7610,7 @@ function useRequest(options, method, callback) {
     return __awaiter(this, void 0, void 0, function () {
         var dispatch;
         return __generator(this, function (_a) {
-            dispatch = StateSingleton_1.StateSingleton.getInstance().state(function (s) { return s.dispatch; });
+            dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(function (s) { return s.dispatch; });
             if (typeof options === "undefined") {
                 return [2 /*return*/, [
                         function (options, callback) {
@@ -7700,7 +7706,7 @@ var StateSingleton_1 = __webpack_require__(53);
 function useGet(options, callback) {
     var _this = this;
     if (callback === void 0) { callback = function () { }; }
-    var _a = StateSingleton_1.StateSingleton.getInstance().state(function (s) { return [
+    var _a = StateSingleton_1.StateSingleton.getInstance().zustand(function (s) { return [
         s.global,
         s.dispatch,
     ]; }), state = _a[0], dispatch = _a[1];
@@ -7950,7 +7956,7 @@ var StateSingleton_1 = __webpack_require__(53);
 function usePatch(options, _callback) {
     var _this = this;
     if (_callback === void 0) { _callback = function () { }; }
-    var dispatch = StateSingleton_1.StateSingleton.getInstance().state(function (s) { return s.dispatch; });
+    var dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(function (s) { return s.dispatch; });
     /**
      * Function that executes a PATCH against the API.
      *
@@ -8097,7 +8103,7 @@ var StateSingleton_1 = __webpack_require__(53);
 function usePost(options, callback) {
     var _this = this;
     if (callback === void 0) { callback = function () { }; }
-    var dispatch = StateSingleton_1.StateSingleton.getInstance().state(function (s) { return s.dispatch; });
+    var dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(function (s) { return s.dispatch; });
     var mountedRef = (0, react_1.useRef)(true);
     var post = (0, react_1.useCallback)(function (options, dispatch, callback) { return __awaiter(_this, void 0, void 0, function () {
         var _a, definition, params, body, save, postURL, persistData, payload, response, error_1, o;
@@ -8244,7 +8250,7 @@ var StateSingleton_1 = __webpack_require__(53);
 function usePut(options, callback) {
     var _this = this;
     if (callback === void 0) { callback = function () { }; }
-    var dispatch = StateSingleton_1.StateSingleton.getInstance().state(function (s) { return s.dispatch; });
+    var dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(function (s) { return s.dispatch; });
     /**
      * Function that executes a PUT against the API.
      *
@@ -8379,7 +8385,7 @@ var StateSingleton_1 = __webpack_require__(53);
 function useDelete(options, callback) {
     var _this = this;
     if (callback === void 0) { callback = function () { }; }
-    var dispatch = StateSingleton_1.StateSingleton.getInstance().state(function (s) { return s.dispatch; });
+    var dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(function (s) { return s.dispatch; });
     // NOT CONVERTED
     /**
      * Function that executes a DELETE against the API.
@@ -8537,7 +8543,7 @@ var remove = function (options, dispatch, callback) { return __awaiter(void 0, v
  */
 function useRemove(options, callback) {
     if (callback === void 0) { callback = function () { }; }
-    var dispatch = StateSingleton_1.StateSingleton.getInstance().state(function (s) { return s.dispatch; });
+    var dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(function (s) { return s.dispatch; });
     if (typeof options === "undefined") {
         return [
             function (options, callback) {
@@ -8605,8 +8611,8 @@ var StateSingleton_1 = __webpack_require__(53);
 function useSyncState() {
     var _this = this;
     var mountedRef = (0, react_1.useRef)(true);
-    var _a = StateSingleton_1.StateSingleton.getInstance().state(function (s) { return [
-        s.global,
+    var _a = StateSingleton_1.StateSingleton.getInstance().zustand(function (s) { return [
+        s.state,
         s.dispatch,
     ]; }), state = _a[0], dispatch = _a[1];
     var syncState = (0, react_1.useCallback)(function () {
@@ -8626,7 +8632,6 @@ function useSyncState() {
                         return [4 /*yield*/, __1.Store.get(definition)];
                     case 1:
                         storedValue = _a.sent();
-                        console.log("Getting data for", definition.key, storedValue);
                         if (storedValue &&
                             !utils_1.Compare.deepCompare(storedValue, stateValue).isEqual) {
                             type = "SET_".concat((0, _internal_1.convertToType)(definition.key));
