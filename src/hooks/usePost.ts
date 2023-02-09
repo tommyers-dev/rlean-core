@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useRef } from "react";
-import { request, inspectClass } from "../_internal";
-import { getHookOptions } from "../_internal/getHookOptions";
-import { useGlobalState, Store } from "..";
+import { useCallback, useEffect, useRef } from 'react';
+import { request, inspectClass } from '../_internal';
+import { getHookOptions } from '../_internal/getHookOptions';
+import { useGlobalState, Store } from '..';
 import {
   APIResponse,
   API_METHOD,
   EntityDefineOptions,
   PostOptions,
-} from "../types";
+} from '../types';
 
 /**
  * Exposed Hook that allows user to access post method
@@ -26,7 +26,7 @@ import {
  *
  * usePost({ definition: Definition, body: { value: 'value' } });
  *
- * const [ post ] = usePost();
+ * const post = usePost();
  * post({ definition: Definition, body: { value: 'value' } });
  */
 export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
@@ -92,15 +92,13 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
     [mountedRef]
   );
 
-  if (typeof options === "undefined") {
-    return [
-      <Res, Req, T extends EntityDefineOptions<any> = any>(
-        options: PostOptions<T, Req>,
-        callback: (response: APIResponse<Res>, error?: any) => void
-      ) => {
-        post(options, dispatch, callback);
-      },
-    ];
+  if (typeof options === 'undefined') {
+    return <Res, Req, T extends EntityDefineOptions<any> = any>(
+      options: PostOptions<T, Req>,
+      callback: (response: APIResponse<Res>, error?: any) => void
+    ) => {
+      post(options, dispatch, callback);
+    };
   }
 
   // params.push(post);

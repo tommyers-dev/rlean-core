@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { Store, RLean, useGlobalState } from "..";
-import { getHookOptions } from "../_internal/getHookOptions";
-import { EntityDefineOptions, Options } from "../types";
+import { useEffect } from 'react';
+import { Store, RLean, useGlobalState } from '..';
+import { getHookOptions } from '../_internal/getHookOptions';
+import { EntityDefineOptions, Options } from '../types';
 
 /**
  * Main remove function from state
@@ -12,7 +12,7 @@ const remove = async <T extends EntityDefineOptions<any>>(
   dispatch: (updateState: any) => void,
   callback: Function
 ) => {
-  if (typeof options === "undefined") {
+  if (typeof options === 'undefined') {
     return;
   }
 
@@ -48,15 +48,13 @@ export default function useRemove<T extends EntityDefineOptions<any>>(
 ) {
   const [, dispatch] = useGlobalState();
 
-  if (typeof options === "undefined") {
-    return [
-      <T extends EntityDefineOptions<any>>(
-        options: Partial<Options<T>>,
-        callback: Function = () => {}
-      ) => {
-        remove(options, dispatch, callback);
-      },
-    ];
+  if (typeof options === 'undefined') {
+    return <T extends EntityDefineOptions<any>>(
+      options: Partial<Options<T>>,
+      callback: Function = () => {}
+    ) => {
+      remove(options, dispatch, callback);
+    };
   }
 
   useEffect(() => {

@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { useGlobalState, RLean, Store } from "..";
-import { getHookOptions } from "../_internal";
+import { useEffect } from 'react';
+import { deepCopy } from '@rlean/utils';
+import { useGlobalState, RLean, Store } from '..';
+import { getHookOptions } from '../_internal';
 import {
   EntityDefineOptions,
   EntityState,
   GlobalState,
   SaveOptions,
-} from "../types";
-import { deepCopy } from "@rlean/utils";
+} from '../types';
 
 /**
  * Save an object to state, and optionally to store if persistData
@@ -21,7 +21,7 @@ const save = async <T extends EntityDefineOptions<any>, A>(
   dispatch: (updateState: any) => void = () => {},
   callback = () => {}
 ) => {
-  if (typeof options === "undefined" || typeof options.value === "undefined") {
+  if (typeof options === 'undefined' || typeof options.value === 'undefined') {
     return;
   }
 
@@ -58,15 +58,13 @@ export default function useSave<T extends EntityDefineOptions<any>>(
 ) {
   const [{ ...state }, dispatch] = useGlobalState();
 
-  if (typeof options === "undefined") {
-    return [
-      <T extends EntityDefineOptions<any>>(
-        options: SaveOptions<T> = undefined,
-        callback = () => {}
-      ) => {
-        save(options, state, dispatch, callback);
-      },
-    ];
+  if (typeof options === 'undefined') {
+    return <T extends EntityDefineOptions<any>>(
+      options: SaveOptions<T> = undefined,
+      callback = () => {}
+    ) => {
+      save(options, state, dispatch, callback);
+    };
   }
 
   useEffect(() => {

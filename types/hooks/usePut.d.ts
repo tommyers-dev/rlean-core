@@ -1,4 +1,4 @@
-import { APIResponse, EntityDefineOptions, PutOptions } from "../types";
+import { APIResponse, EntityDefineOptions, PutOptions } from '../types';
 /**
  * usePut
  *
@@ -17,7 +17,7 @@ import { APIResponse, EntityDefineOptions, PutOptions } from "../types";
  *
  * usePut({ definition: Definition, body: { value: 'value' } });
  *
- * const [put] = usePut();
+ * const put = usePut();
  * put({ definition: Definition, body: { value: 'value' } })
  */
-export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(options?: PutOptions<T, Req>, callback?: (response: APIResponse<Res>, error?: any) => void): (<Res_1, Req_1, T_1 extends EntityDefineOptions<any>>(options: Partial<import("../types").Options<T_1, T_1 extends EntityDefineOptions<infer F> ? F : unknown, Req_1>>, callback: (response: APIResponse<Res_1>, error?: any) => void) => void)[];
+export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(options?: PutOptions<T, Req>, callback?: (response: APIResponse<Res>, error?: any) => void): <Res_1, Req_1, T_1 extends EntityDefineOptions<any>>(options: Partial<import("../types").Options<T_1, T_1 extends EntityDefineOptions<infer F> ? F : unknown, Req_1>>, callback: (response: APIResponse<Res_1>, error?: any) => void) => void;

@@ -1,8 +1,8 @@
-import { useEffect, useCallback, useRef } from "react";
-import { getValue, Compare } from "@rlean/utils";
-import { RLean, useGlobalState, Store } from "..";
-import { convertToType } from "../_internal";
-import * as entities from "../_internal/entities";
+import { useEffect, useCallback, useRef } from 'react';
+import { getValue, Compare } from '@rlean/utils';
+import { RLean, useGlobalState, Store } from '..';
+import { convertToType } from '../_internal';
+import * as entities from '../_internal/entities';
 
 export default function useSyncState() {
   const mountedRef = useRef(true);
@@ -11,12 +11,12 @@ export default function useSyncState() {
   const syncState = useCallback(() => {
     const entityDefinitions: typeof entities = getValue(
       RLean,
-      "config.entities",
+      'config.entities',
       {}
     );
     const objects = Object.values(entityDefinitions);
 
-    objects.map(async (definition) => {
+    objects.map(async definition => {
       if (!mountedRef.current) {
         return null;
       }

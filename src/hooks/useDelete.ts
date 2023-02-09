@@ -1,14 +1,13 @@
-import { useEffect } from "react";
-import { request, inspectClass } from "../_internal";
-import { getHookOptions } from "../_internal/getHookOptions";
-import { Store, useGlobalState } from "..";
+import { useEffect } from 'react';
+import { request, inspectClass } from '../_internal';
+import { getHookOptions } from '../_internal/getHookOptions';
+import { Store, useGlobalState } from '..';
 import {
   API_METHOD,
   DeleteOptions,
   EntityDefineOptions,
-  PatchOptions,
   APIResponse,
-} from "../types";
+} from '../types';
 
 /**
  * Hook that exposes del()
@@ -17,7 +16,7 @@ import {
  *
  * useDelete({ definition: Definition, body: { value: 'value' } });
  *
- * const [ del ] = useDelete();
+ * const del = useDelete();
  * del({ definition: Definition, body: { value: 'value' } });
  */
 export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
@@ -35,7 +34,11 @@ export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
    * @param {Function} dispatch
    * @param {Function} callback
    */
-  const del = async (options, dispatch, callback) => {
+  const del = async (
+    options: any,
+    dispatch: any,
+    callback: Function | null = null
+  ) => {
     const { definition, body, save } = getHookOptions(options);
     const deleteURL = definition.deleteURL;
     const persistData = definition.persistData;
@@ -77,15 +80,13 @@ export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
     );
   };
 
-  if (typeof options === "undefined") {
-    return [
-      <Res, Req, T extends EntityDefineOptions<any>>(
-        options: PatchOptions<T, Req> | undefined,
-        callback: (response: APIResponse<Res>, error?: any) => void
-      ) => {
-        del(options, dispatch, callback);
-      },
-    ];
+  if (typeof options === 'undefined') {
+    return <Res, Req, T extends EntityDefineOptions<any>>(
+      options: DeleteOptions<T, Req> | undefined,
+      callback: (response: APIResponse<Res>, error?: any) => void
+    ) => {
+      del(options, dispatch, callback);
+    };
   }
 
   useEffect(() => {

@@ -24,16 +24,9 @@ import {
  * @todo Type the response callback. See usePost and usePut for reference.
  */
 export default function useGet<Def extends EntityDefineOptions<any>>(
-  options: GetOptions<Def> | undefined | null = null,
+  options?: GetOptions<Def>,
   callback = (res: any, err: any = null) => {}
-):
-  | EntityState<Def>
-  | [
-      (
-        options: GetOptions<Def> | undefined,
-        callback: Function | undefined
-      ) => void
-    ] {
+) {
   const [{ ...state }, dispatch] = useGlobalState();
   const [init, setInit] = useState(false);
   const [data, setData] = useState();
@@ -55,11 +48,11 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   let isMounted = true;
   let canceled = false;
 
-  const get = async <A, T extends EntityDefineOptions<any>>(
+  const get = async <T extends EntityDefineOptions<any>, A>(
     options: GetOptions<T> | undefined,
     stateRef: any,
     dispatch: (updateState: any) => void,
-    callback: Function,
+    callback = (res: any, err?: any) => {},
     isRefetch: boolean = false
   ) => {
     const { definition, params, type } = getHookOptions(options);
@@ -194,11 +187,12 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   };
 
   if (typeof options === 'undefined' || options === null) {
-    return [
-      (options, callback) => {
-        get(options, stateRef, dispatch, callback);
-      },
-    ];
+    return <Def extends EntityDefineOptions<any>>(
+      options: GetOptions<Def>,
+      callback = (response: any, error?: any) => {}
+    ) => {
+      get(options, stateRef, dispatch, callback);
+    };
   }
 
   if (options && options.params) {
@@ -215,15 +209,15 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
     };
   }, dependencies);
 
-  return {
-    data,
-    error,
-    isLoading,
-    isRefetching,
-    lastUpdated,
-    canceled,
-    init,
-    // get,
-    // refetch,
-  };
+  // return {
+  //   data,
+  //   error,
+  //   isLoading,
+  //   isRefetching,
+  //   lastUpdated,
+  //   canceled,
+  //   init,
+  //   // get,
+  //   // refetch,
+  // };
 }
