@@ -14,8 +14,9 @@ import useSyncState from "./hooks/useSyncState";
 import RLean from "./RLean";
 import { reducer } from "./reducer";
 import { removeAll } from "./removeAll";
-import { StateContext, StateProvider, useGlobalState } from "./State";
 import Store from "./Store";
+import { StateSingleton, RLeanState } from "./StateSingleton";
+import { RLeanBaseHooks } from "./BaseHooks";
 
 import { ApiAdapter, APIResponse, RLeanConfig } from "./types";
 
@@ -33,13 +34,13 @@ export {
   reducer,
   useRemove,
   removeAll,
-  StateContext,
-  StateProvider,
   Store,
   useGet,
   useSave,
-  useGlobalState,
   useSyncState,
+  StateSingleton,
+  RLeanState,
+  RLeanBaseHooks,
   // types & interfaces
   ApiAdapter,
   APIResponse,

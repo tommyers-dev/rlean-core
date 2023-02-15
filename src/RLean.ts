@@ -1,4 +1,5 @@
-import { RLeanConfig } from './types';
+import { RLeanConfig } from "./types";
+
 // import { getValue } from "@rlean/utils";
 // import { RLean_OfflineQueue } from "./_internal/entities";
 
@@ -6,7 +7,7 @@ import { RLeanConfig } from './types';
  * RLean Class
  * Contains the configuration object. Type is inferred using the config object.
  */
-class RLean<T> {
+class RLeanClass<T> {
   public definition: any;
   public config: RLeanConfig<T>;
 
@@ -30,4 +31,4 @@ class RLean<T> {
   }
 }
 
-export default new RLean();
+export default new RLeanClass();

@@ -1,4 +1,4 @@
-import { EntityState, EntityDefineOptions, GetOptions } from "../types";
+import { EntityState, EntityDefineOptions, GetOptions } from '../types';
 /**
  * useGet - hook
  *
@@ -10,6 +10,4 @@ import { EntityState, EntityDefineOptions, GetOptions } from "../types";
  *
  * @todo Type the response callback. See usePost and usePut for reference.
  */
-export default function useGet<Def extends EntityDefineOptions<any>>(options?: GetOptions<Def> | undefined | null, callback?: (res: any, err?: any) => void): EntityState<Def> | [
-    (options: GetOptions<Def> | undefined, callback: Function | undefined) => void
-];
+export default function useGet<Def extends EntityDefineOptions<any>>(options: GetOptions<Def> | undefined, callback?: () => void): EntityState<Def> | (<Def extends EntityDefineOptions<any>>(options: GetOptions<Def>, callback?: (response: any, error?: any) => void) => void);

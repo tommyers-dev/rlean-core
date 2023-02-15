@@ -6,12 +6,10 @@ import { EntityDefineOptions, GlobalState } from "./types";
  * initialState
  * Creates initial GlobalState object
  */
-export const initialState = (): GlobalState<any> => {
-  const entityDefinitions = getValue(
-    RLean,
-    "config.entities",
-    {}
-  ) as EntityDefineOptions<any>[];
+export const initialState = (entities?: Object): GlobalState<any> => {
+  const entityDefinitions =
+    entities ??
+    (getValue(RLean, "config.entities", {}) as EntityDefineOptions<any>[]);
   const objects = Object.values(entityDefinitions);
   const objectsLength = objects.length;
   let combinedInitialState = {};

@@ -1,1 +1,1 @@
-export default function useOfflineQueue(): ((params: any) => void)[];
+export default function useOfflineQueue(): (params: any) => void;

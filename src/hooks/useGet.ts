@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState, Ref } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { request } from '../_internal/request';
 import { deepCopy, hasValue } from '@rlean/utils';
-import { useGlobalState } from '../State';
 import { getHookOptions } from '../_internal';
 import { Store } from '..';
 import {
@@ -11,6 +10,7 @@ import {
   GetOptions,
   API_METHOD,
 } from '../types';
+import { StateSingleton } from '../StateSingleton';
 
 /**
  * useGet - hook
@@ -24,17 +24,19 @@ import {
  * @todo Type the response callback. See usePost and usePut for reference.
  */
 export default function useGet<Def extends EntityDefineOptions<any>>(
-  options: GetOptions<Def> | undefined | null = null,
-  callback = (res: any, err: any = null) => {}
+  options: GetOptions<Def> | undefined,
+  callback?: () => void
 ):
   | EntityState<Def>
-  | [
-      (
-        options: GetOptions<Def> | undefined,
-        callback: Function | undefined
-      ) => void
-    ] {
-  const [{ ...state }, dispatch] = useGlobalState();
+  | (<Def extends EntityDefineOptions<any>>(
+      options: GetOptions<Def>,
+      callback?: (response: any, error?: any) => void
+    ) => void) {
+  const [state, dispatch] = StateSingleton.getInstance().zustand((s: any) => [
+    s.global,
+    s.dispatch,
+  ]);
+
   const [init, setInit] = useState(false);
   const [data, setData] = useState();
   const [error, setError] = useState();
@@ -55,11 +57,11 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   let isMounted = true;
   let canceled = false;
 
-  const get = async <A, T extends EntityDefineOptions<any>>(
+  const get = async <T extends EntityDefineOptions<any>, A>(
     options: GetOptions<T> | undefined,
     stateRef: any,
     dispatch: (updateState: any) => void,
-    callback: Function,
+    callback = (res: any, err?: any) => {},
     isRefetch: boolean = false
   ) => {
     const { definition, params, type } = getHookOptions(options);
@@ -194,11 +196,12 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   };
 
   if (typeof options === 'undefined' || options === null) {
-    return [
-      (options, callback) => {
-        get(options, stateRef, dispatch, callback);
-      },
-    ];
+    return <Def extends EntityDefineOptions<any>>(
+      options: GetOptions<Def>,
+      callback?: (response: any, error?: any) => void
+    ) => {
+      get(options, stateRef, dispatch, callback);
+    };
   }
 
   if (options && options.params) {
@@ -214,16 +217,4 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
       abortCtrl.abort();
     };
   }, dependencies);
-
-  return {
-    data,
-    error,
-    isLoading,
-    isRefetching,
-    lastUpdated,
-    canceled,
-    init,
-    // get,
-    // refetch,
-  };
 }

@@ -1,22 +1,23 @@
-import { useEffect } from "react";
-import { request, inspectClass } from "../_internal";
-import { Store, APIResponse, useGlobalState } from "..";
-import { getHookOptions } from "../_internal/getHookOptions";
-import { API_METHOD, EntityDefineOptions, PatchOptions } from "../types";
+import { useEffect } from 'react';
+import { request, inspectClass } from '../_internal';
+import { APIResponse, Store } from '..';
+import { getHookOptions } from '../_internal/getHookOptions';
+import { API_METHOD, EntityDefineOptions, PatchOptions } from '../types';
+import { StateSingleton } from '../StateSingleton';
 
 /**
  * Hook that exposes patch() safely and funly
  *
  * usePatch({ definition: Definition, body: { value: 'value' } });
  *
- * const [ patch ] = usePatch();
+ * const patch = usePatch();
  * patch({ definition: Definition, body: { value: 'value' } });
  */
 export default function usePatch<Res, Req, T extends EntityDefineOptions<any>>(
   options?: PatchOptions<T, Req>,
   _callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
-  const [, dispatch] = useGlobalState();
+  const dispatch = StateSingleton.getInstance().zustand(s => s.dispatch);
 
   /**
    * Function that executes a PATCH against the API.
@@ -25,7 +26,11 @@ export default function usePatch<Res, Req, T extends EntityDefineOptions<any>>(
    * @param {Function} dispatch
    * @param {Function} [callback=null]
    */
-  const patch = async (options, dispatch, callback) => {
+  const patch = async (
+    options: any,
+    dispatch: any,
+    callback: Function | null
+  ) => {
     const { definition, params, body, save } = getHookOptions(options);
     const patchURL = definition.patchURL;
 
@@ -70,15 +75,13 @@ export default function usePatch<Res, Req, T extends EntityDefineOptions<any>>(
     return;
   };
 
-  if (typeof options === "undefined") {
-    return [
-      <Res, Req, T extends EntityDefineOptions<any>>(
-        options: PatchOptions<T, Req> | undefined,
-        callback: (response: APIResponse<Res>, error?: any) => void
-      ) => {
-        patch(options, dispatch, callback);
-      },
-    ];
+  if (typeof options === 'undefined') {
+    return <Res, Req, T extends EntityDefineOptions<any>>(
+      options: PatchOptions<T, Req> | undefined,
+      callback: (response: APIResponse<Res>, error?: any) => void
+    ) => {
+      patch(options, dispatch, callback);
+    };
   }
 
   useEffect(() => {

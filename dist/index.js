@@ -16,45 +16,46 @@ return /******/ (() => { // webpackBootstrap
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.useSyncState = exports.useGlobalState = exports.useSave = exports.useGet = exports.Store = exports.StateProvider = exports.StateContext = exports.removeAll = exports.useRemove = exports.reducer = exports.RLean = exports.useDelete = exports.usePut = exports.usePost = exports.usePatch = exports.useRequest = exports.Adapters = exports.keys = exports.define = exports.initialState = void 0;
-var initialState_1 = __webpack_require__(1);
+exports.RLeanBaseHooks = exports.RLeanState = exports.StateSingleton = exports.useSyncState = exports.useSave = exports.useGet = exports.Store = exports.removeAll = exports.useRemove = exports.reducer = exports.RLean = exports.useDelete = exports.usePut = exports.usePost = exports.usePatch = exports.useRequest = exports.Adapters = exports.keys = exports.define = exports.initialState = void 0;
+const initialState_1 = __webpack_require__(1);
 Object.defineProperty(exports, "initialState", ({ enumerable: true, get: function () { return initialState_1.initialState; } }));
-var Adapters_1 = __webpack_require__(4);
+const Adapters_1 = __webpack_require__(4);
 exports.Adapters = Adapters_1.default;
-var define_1 = __webpack_require__(49);
+const define_1 = __webpack_require__(49);
 Object.defineProperty(exports, "define", ({ enumerable: true, get: function () { return define_1.define; } }));
-var keys_1 = __webpack_require__(50);
+const keys_1 = __webpack_require__(50);
 Object.defineProperty(exports, "keys", ({ enumerable: true, get: function () { return keys_1.keys; } }));
-var useSave_1 = __webpack_require__(51);
+const useSave_1 = __webpack_require__(51);
 exports.useSave = useSave_1.default;
-var useRequest_1 = __webpack_require__(53);
+const useRequest_1 = __webpack_require__(64);
 exports.useRequest = useRequest_1.default;
-var useGet_1 = __webpack_require__(54);
+const useGet_1 = __webpack_require__(65);
 exports.useGet = useGet_1.default;
-var usePatch_1 = __webpack_require__(60);
+const usePatch_1 = __webpack_require__(66);
 exports.usePatch = usePatch_1.default;
-var usePost_1 = __webpack_require__(61);
+const usePost_1 = __webpack_require__(67);
 exports.usePost = usePost_1.default;
-var usePut_1 = __webpack_require__(62);
+const usePut_1 = __webpack_require__(68);
 exports.usePut = usePut_1.default;
-var useDelete_1 = __webpack_require__(63);
+const useDelete_1 = __webpack_require__(69);
 exports.useDelete = useDelete_1.default;
-var useRemove_1 = __webpack_require__(64);
+const useRemove_1 = __webpack_require__(70);
 exports.useRemove = useRemove_1.default;
-var useSyncState_1 = __webpack_require__(65);
+const useSyncState_1 = __webpack_require__(71);
 exports.useSyncState = useSyncState_1.default;
-var RLean_1 = __webpack_require__(2);
+const RLean_1 = __webpack_require__(2);
 exports.RLean = RLean_1.default;
-var reducer_1 = __webpack_require__(66);
+const reducer_1 = __webpack_require__(54);
 Object.defineProperty(exports, "reducer", ({ enumerable: true, get: function () { return reducer_1.reducer; } }));
-var removeAll_1 = __webpack_require__(68);
+const removeAll_1 = __webpack_require__(72);
 Object.defineProperty(exports, "removeAll", ({ enumerable: true, get: function () { return removeAll_1.removeAll; } }));
-var State_1 = __webpack_require__(55);
-Object.defineProperty(exports, "StateContext", ({ enumerable: true, get: function () { return State_1.StateContext; } }));
-Object.defineProperty(exports, "StateProvider", ({ enumerable: true, get: function () { return State_1.StateProvider; } }));
-Object.defineProperty(exports, "useGlobalState", ({ enumerable: true, get: function () { return State_1.useGlobalState; } }));
-var Store_1 = __webpack_require__(69);
+const Store_1 = __webpack_require__(73);
 exports.Store = Store_1.default;
+const StateSingleton_1 = __webpack_require__(53);
+Object.defineProperty(exports, "StateSingleton", ({ enumerable: true, get: function () { return StateSingleton_1.StateSingleton; } }));
+Object.defineProperty(exports, "RLeanState", ({ enumerable: true, get: function () { return StateSingleton_1.RLeanState; } }));
+const BaseHooks_1 = __webpack_require__(74);
+Object.defineProperty(exports, "RLeanBaseHooks", ({ enumerable: true, get: function () { return BaseHooks_1.RLeanBaseHooks; } }));
 
 
 /***/ }),
@@ -65,18 +66,18 @@ exports.Store = Store_1.default;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.initialState = void 0;
-var RLean_1 = __webpack_require__(2);
-var utils_1 = __webpack_require__(3);
+const RLean_1 = __webpack_require__(2);
+const utils_1 = __webpack_require__(3);
 /**
  * initialState
  * Creates initial GlobalState object
  */
-var initialState = function () {
-    var entityDefinitions = (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
-    var objects = Object.values(entityDefinitions);
-    var objectsLength = objects.length;
-    var combinedInitialState = {};
-    for (var i = 0; i < objectsLength; i += 1) {
+const initialState = (entities) => {
+    const entityDefinitions = entities !== null && entities !== void 0 ? entities : (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
+    const objects = Object.values(entityDefinitions);
+    const objectsLength = objects.length;
+    let combinedInitialState = {};
+    for (let i = 0; i < objectsLength; i += 1) {
         if (objects[i].includeInState) {
             Object.assign(combinedInitialState, objects[i].initialState);
         }
@@ -88,46 +89,10 @@ exports.initialState = initialState;
 
 /***/ }),
 /* 2 */
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 // import { getValue } from "@rlean/utils";
 // import { RLean_OfflineQueue } from "./_internal/entities";
@@ -135,32 +100,24 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
  * RLean Class
  * Contains the configuration object. Type is inferred using the config object.
  */
-var RLean = /** @class */ (function () {
-    function RLean() {
+class RLeanClass {
+    async init(config) {
+        // const entities = getValue(config, "entities", {});
+        // Here, the offlinequeue is added as entity but without a key
+        // it could be added expanding the T with an specific RleanOfflineQueue
+        /*
+        const entities = config.entities ?? {};
+        config.entities = { ...entities, RLean_OfflineQueue };
+        */
+        this.config = config;
     }
-    RLean.prototype.init = function (config) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                // const entities = getValue(config, "entities", {});
-                // Here, the offlinequeue is added as entity but without a key
-                // it could be added expanding the T with an specific RleanOfflineQueue
-                /*
-                const entities = config.entities ?? {};
-                config.entities = { ...entities, RLean_OfflineQueue };
-                */
-                this.config = config;
-                return [2 /*return*/];
-            });
-        });
-    };
-    RLean.prototype.setToken = function (token) {
+    setToken(token) {
         if (token) {
             this.config.api.token = token;
         }
-    };
-    return RLean;
-}());
-exports["default"] = new RLean();
+    }
+}
+exports["default"] = new RLeanClass();
 
 
 /***/ }),
@@ -843,20 +800,20 @@ module.exports = __webpack_exports__;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var RLean_1 = __webpack_require__(2);
-var _internal_1 = __webpack_require__(5);
-var utils_1 = __webpack_require__(3);
-var defaultAdapters_1 = __webpack_require__(15);
-var Adapters = /** @class */ (function () {
-    function Adapters(adapterMap) {
+const RLean_1 = __webpack_require__(2);
+const _internal_1 = __webpack_require__(5);
+const utils_1 = __webpack_require__(3);
+const defaultAdapters_1 = __webpack_require__(15);
+class Adapters {
+    constructor(adapterMap) {
         this.adapterMap = adapterMap ? adapterMap : {};
         this.storage = (0, utils_1.getValue)(RLean_1.default, "config.storage.adapter", defaultAdapters_1.LocalForageAdapter);
         this.api = (0, utils_1.getValue)(RLean_1.default, "config.api.adapter", defaultAdapters_1.AxiosAdapter);
-        for (var key in adapterMap) {
+        for (let key in adapterMap) {
             this.pipe(key);
         }
     }
-    Adapters.prototype.pipe = function (adapterMapKey) {
+    pipe(adapterMapKey) {
         switch (adapterMapKey) {
             case "storage":
                 this.storage = this.ensureCorrectStorageImplementation(this.adapterMap[adapterMapKey]);
@@ -870,27 +827,26 @@ var Adapters = /** @class */ (function () {
             default:
                 this[adapterMapKey] = this.adapterMap[adapterMapKey];
         }
-    };
-    Adapters.prototype.ensureCorrectStorageImplementation = function (storage) {
-        var inspection = (0, _internal_1.implement)(storage, {
+    }
+    ensureCorrectStorageImplementation(storage) {
+        const inspection = (0, _internal_1.implement)(storage, {
             methods: ["get", "set", "clear", "remove"],
         });
         if (inspection.passed) {
             return storage;
         }
         throw new Error(inspection.error.message);
-    };
-    Adapters.prototype.setLoggingEngine = function (logger) {
-        var inspection = (0, _internal_1.implement)(logger, {
+    }
+    setLoggingEngine(logger) {
+        const inspection = (0, _internal_1.implement)(logger, {
             methods: ["trace", "info", "warn", "error"],
         });
         if (inspection.passed) {
             return logger;
         }
         throw new Error(inspection.error.message);
-    };
-    return Adapters;
-}());
+    }
+}
 exports["default"] = Adapters;
 
 
@@ -902,23 +858,23 @@ exports["default"] = Adapters;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getStorageMethods = exports.getApiMethods = exports.convertToType = exports.getDefinitionOptions = exports.getHookOptions = exports.request = exports.methods = exports.implement = exports.inspectClass = void 0;
-var convertToType_1 = __webpack_require__(6);
+const convertToType_1 = __webpack_require__(6);
 Object.defineProperty(exports, "convertToType", ({ enumerable: true, get: function () { return convertToType_1.convertToType; } }));
-var getHookOptions_1 = __webpack_require__(7);
+const getHookOptions_1 = __webpack_require__(7);
 Object.defineProperty(exports, "getHookOptions", ({ enumerable: true, get: function () { return getHookOptions_1.getHookOptions; } }));
-var getDefinitionOptions_1 = __webpack_require__(8);
+const getDefinitionOptions_1 = __webpack_require__(8);
 Object.defineProperty(exports, "getDefinitionOptions", ({ enumerable: true, get: function () { return getDefinitionOptions_1.getDefinitionOptions; } }));
-var inspectClass_1 = __webpack_require__(9);
+const inspectClass_1 = __webpack_require__(9);
 Object.defineProperty(exports, "inspectClass", ({ enumerable: true, get: function () { return inspectClass_1.inspectClass; } }));
-var implement_1 = __webpack_require__(10);
+const implement_1 = __webpack_require__(10);
 Object.defineProperty(exports, "implement", ({ enumerable: true, get: function () { return implement_1.implement; } }));
-var methods_1 = __webpack_require__(11);
+const methods_1 = __webpack_require__(11);
 Object.defineProperty(exports, "methods", ({ enumerable: true, get: function () { return methods_1.methods; } }));
-var request_1 = __webpack_require__(13);
+const request_1 = __webpack_require__(13);
 Object.defineProperty(exports, "request", ({ enumerable: true, get: function () { return request_1.request; } }));
-var getApiMethods_1 = __webpack_require__(14);
+const getApiMethods_1 = __webpack_require__(14);
 Object.defineProperty(exports, "getApiMethods", ({ enumerable: true, get: function () { return getApiMethods_1.getApiMethods; } }));
-var getStorageMethods_1 = __webpack_require__(48);
+const getStorageMethods_1 = __webpack_require__(48);
 Object.defineProperty(exports, "getStorageMethods", ({ enumerable: true, get: function () { return getStorageMethods_1.getStorageMethods; } }));
 
 
@@ -934,7 +890,7 @@ exports.convertToType = void 0;
  * convertToType
  * Creates all upper case string separating capitalized words with an underscore
  */
-var convertToType = function (s) {
+const convertToType = (s) => {
     return s
         ? s.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1_$2").toUpperCase()
         : null;
@@ -950,10 +906,10 @@ exports.convertToType = convertToType;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getHookOptions = void 0;
-var utils_1 = __webpack_require__(3);
-var RLean_1 = __webpack_require__(2);
-var convertToType_1 = __webpack_require__(6);
-var getHookOptions = function (options) {
+const utils_1 = __webpack_require__(3);
+const RLean_1 = __webpack_require__(2);
+const convertToType_1 = __webpack_require__(6);
+const getHookOptions = (options) => {
     var _a, _b, _c, _d;
     if (!options) {
         return {
@@ -966,18 +922,18 @@ var getHookOptions = function (options) {
             key: null,
         };
     }
-    var entityDefinitions = (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
-    var entities = Object.values(entityDefinitions);
-    var definition = options.key
-        ? entities.find(function (entity) { return entity.key === options.key; })
+    const entityDefinitions = (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
+    const entities = Object.values(entityDefinitions);
+    const definition = options.key
+        ? entities.find((entity) => entity.key === options.key)
         : (_a = options.entity) !== null && _a !== void 0 ? _a : null;
-    var key = definition.key;
-    var add = options.add;
+    const key = definition.key;
+    const add = options.add;
     return {
-        definition: definition,
+        definition,
         params: (_b = options.params) !== null && _b !== void 0 ? _b : null,
         value: typeof options.value !== "undefined" ? options.value : null,
-        type: add ? "ADD_".concat((0, convertToType_1.convertToType)(key)) : (_c = options.type) !== null && _c !== void 0 ? _c : null,
+        type: add ? `ADD_${(0, convertToType_1.convertToType)(key)}` : (_c = options.type) !== null && _c !== void 0 ? _c : null,
         body: (_d = options.body) !== null && _d !== void 0 ? _d : null,
         save: options.save,
     };
@@ -987,49 +943,27 @@ exports.getHookOptions = getHookOptions;
 
 /***/ }),
 /* 8 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getDefinitionOptions = void 0;
-var utils_1 = __webpack_require__(3);
-var convertToType_1 = __webpack_require__(6);
-var getDefinitionOptions = function (key, options) {
-    var _a;
-    var _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
-    var defaultType = "SET_".concat((0, convertToType_1.convertToType)(key));
-    var addType = "ADD_".concat((0, convertToType_1.convertToType)(key));
-    var getInitialState = function () {
-        var _a;
-        var value = (_a = {}, _a[key] = null, _a);
+const utils_1 = __webpack_require__(3);
+const convertToType_1 = __webpack_require__(6);
+const getDefinitionOptions = (key, options) => {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
+    const defaultType = `SET_${(0, convertToType_1.convertToType)(key)}`;
+    const addType = `ADD_${(0, convertToType_1.convertToType)(key)}`;
+    const getInitialState = () => {
+        const value = { [key]: null };
         if (options && options.getURL) {
             value.isLoading = false;
             value.lastUpdated = null;
         }
         return value;
     };
-    var defaultOptions = {
+    const defaultOptions = {
         initialState: getInitialState(),
         getURL: null,
         postURL: null,
@@ -1046,36 +980,34 @@ var getDefinitionOptions = function (key, options) {
         includeInState: true,
         queueOffline: false,
         type: defaultType,
-        updateState: function (value, givenType) {
-            var _a;
-            return _a = {
-                    type: givenType !== null && givenType !== void 0 ? givenType : defaultType
-                },
-                _a[key] = value,
-                _a;
+        updateState: (value, givenType) => {
+            return {
+                type: givenType !== null && givenType !== void 0 ? givenType : defaultType,
+                [key]: value,
+            };
         },
-        reducer: function (state, action) {
+        reducer: (state, action) => {
             switch (action.type) {
-                case "".concat(defaultType, "_IS_LOADING"):
-                case "".concat(defaultType, "_LAST_UPDATED"):
-                case "".concat(defaultType, "_ERROR"):
+                case `${defaultType}_IS_LOADING`:
+                case `${defaultType}_LAST_UPDATED`:
+                case `${defaultType}_ERROR`:
                 case defaultType:
                     // Create an object if value is a string or number.
                     if (typeof action[key] !== "object") {
-                        return __assign(__assign({}, state), { value: action[key] });
+                        return Object.assign(Object.assign({}, state), { value: action[key] });
                     }
                     // If there is no value to set, clear state for this definition.
                     if (!action[key]) {
                         return null;
                     }
-                    return __assign(__assign({}, state), action[key]);
+                    return Object.assign(Object.assign({}, state), action[key]);
                 case addType:
                     // add to existing state
                     if ((0, utils_1.hasValue)(state, "data")) {
-                        return __assign(__assign({}, state), { data: [].concat.apply([], __spreadArray(__spreadArray([[]], state.data, false), action[key].data, false)) });
+                        return Object.assign(Object.assign({}, state), { data: [].concat([], ...state.data, ...action[key].data) });
                     }
                     else {
-                        return __assign(__assign({}, state), action[key]);
+                        return Object.assign(Object.assign({}, state), action[key]);
                     }
                 default:
                     return state;
@@ -1086,46 +1018,47 @@ var getDefinitionOptions = function (key, options) {
     if (!options) {
         return defaultOptions;
     }
-    var initialState = options.initialState
-        ? (_a = {}, _a[key] = options.initialState, _a) : defaultOptions.initialState;
-    var getURL = (_b = options.getURL) !== null && _b !== void 0 ? _b : defaultOptions.getURL;
-    var postURL = (_c = options.postURL) !== null && _c !== void 0 ? _c : defaultOptions.postURL;
-    var putURL = (_d = options.putURL) !== null && _d !== void 0 ? _d : defaultOptions.putURL;
-    var patchURL = (_e = options.patchURL) !== null && _e !== void 0 ? _e : defaultOptions.patchURL;
-    var deleteURL = (_f = options.deleteURL) !== null && _f !== void 0 ? _f : defaultOptions.deleteURL;
-    var nullableParams = (_g = options.nullableParams) !== null && _g !== void 0 ? _g : defaultOptions.nullableParams;
-    var persistData = (_h = options.persistData) !== null && _h !== void 0 ? _h : defaultOptions.persistData;
-    var preferStore = (_j = options.preferStore) !== null && _j !== void 0 ? _j : defaultOptions.preferStore;
-    var progressiveLoading = (_k = options.progressiveLoading) !== null && _k !== void 0 ? _k : defaultOptions.progressiveLoading;
-    var syncInterval = (_l = options.syncInterval) !== null && _l !== void 0 ? _l : defaultOptions.syncInterval;
-    var syncAfterTimeElapsed = (_m = options.syncAfterTimeElapsed) !== null && _m !== void 0 ? _m : defaultOptions.syncAfterTimeElapsed;
-    var adapters = (_o = options.adapters) !== null && _o !== void 0 ? _o : defaultOptions.adapters;
-    var queueOffline = (_p = options.queueOffline) !== null && _p !== void 0 ? _p : defaultOptions.queueOffline;
-    var type = (_q = options.type) !== null && _q !== void 0 ? _q : defaultOptions.type;
-    var updateState = (_r = options.updateState) !== null && _r !== void 0 ? _r : defaultOptions.updateState;
-    var reducer = (_s = options.reducer) !== null && _s !== void 0 ? _s : defaultOptions.reducer;
-    var includeInState = (_t = options.includeInState) !== null && _t !== void 0 ? _t : defaultOptions.includeInState;
-    var listener = (_u = options.listener) !== null && _u !== void 0 ? _u : defaultOptions.listener;
+    const initialState = options.initialState
+        ? { [key]: options.initialState }
+        : defaultOptions.initialState;
+    const getURL = (_a = options.getURL) !== null && _a !== void 0 ? _a : defaultOptions.getURL;
+    const postURL = (_b = options.postURL) !== null && _b !== void 0 ? _b : defaultOptions.postURL;
+    const putURL = (_c = options.putURL) !== null && _c !== void 0 ? _c : defaultOptions.putURL;
+    const patchURL = (_d = options.patchURL) !== null && _d !== void 0 ? _d : defaultOptions.patchURL;
+    const deleteURL = (_e = options.deleteURL) !== null && _e !== void 0 ? _e : defaultOptions.deleteURL;
+    const nullableParams = (_f = options.nullableParams) !== null && _f !== void 0 ? _f : defaultOptions.nullableParams;
+    const persistData = (_g = options.persistData) !== null && _g !== void 0 ? _g : defaultOptions.persistData;
+    const preferStore = (_h = options.preferStore) !== null && _h !== void 0 ? _h : defaultOptions.preferStore;
+    const progressiveLoading = (_j = options.progressiveLoading) !== null && _j !== void 0 ? _j : defaultOptions.progressiveLoading;
+    const syncInterval = (_k = options.syncInterval) !== null && _k !== void 0 ? _k : defaultOptions.syncInterval;
+    const syncAfterTimeElapsed = (_l = options.syncAfterTimeElapsed) !== null && _l !== void 0 ? _l : defaultOptions.syncAfterTimeElapsed;
+    const adapters = (_m = options.adapters) !== null && _m !== void 0 ? _m : defaultOptions.adapters;
+    const queueOffline = (_o = options.queueOffline) !== null && _o !== void 0 ? _o : defaultOptions.queueOffline;
+    const type = (_p = options.type) !== null && _p !== void 0 ? _p : defaultOptions.type;
+    const updateState = (_q = options.updateState) !== null && _q !== void 0 ? _q : defaultOptions.updateState;
+    const reducer = (_r = options.reducer) !== null && _r !== void 0 ? _r : defaultOptions.reducer;
+    const includeInState = (_s = options.includeInState) !== null && _s !== void 0 ? _s : defaultOptions.includeInState;
+    const listener = (_t = options.listener) !== null && _t !== void 0 ? _t : defaultOptions.listener;
     return {
-        initialState: initialState,
-        getURL: getURL,
-        postURL: postURL,
-        putURL: putURL,
-        patchURL: patchURL,
-        deleteURL: deleteURL,
-        nullableParams: nullableParams,
-        persistData: persistData,
-        preferStore: preferStore,
-        progressiveLoading: progressiveLoading,
-        syncInterval: syncInterval,
-        syncAfterTimeElapsed: syncAfterTimeElapsed,
-        adapters: adapters,
-        queueOffline: queueOffline,
-        type: type,
-        updateState: updateState,
-        reducer: reducer,
-        includeInState: includeInState,
-        listener: listener,
+        initialState,
+        getURL,
+        postURL,
+        putURL,
+        patchURL,
+        deleteURL,
+        nullableParams,
+        persistData,
+        preferStore,
+        progressiveLoading,
+        syncInterval,
+        syncAfterTimeElapsed,
+        adapters,
+        queueOffline,
+        type,
+        updateState,
+        reducer,
+        includeInState,
+        listener,
     };
 };
 exports.getDefinitionOptions = getDefinitionOptions;
@@ -1139,12 +1072,12 @@ exports.getDefinitionOptions = getDefinitionOptions;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.inspectClass = void 0;
-var inspectClass = function (obj) {
-    var className;
-    var attributes = {};
-    var methods = [];
+const inspectClass = (obj) => {
+    let className;
+    let attributes = {};
+    const methods = [];
     try {
-        var objClass = void 0;
+        let objClass;
         if (typeof obj !== "function") {
             objClass = obj.constructor;
         }
@@ -1152,14 +1085,14 @@ var inspectClass = function (obj) {
             objClass = obj;
         }
         className = objClass.name;
-        var classProto_1 = objClass.prototype;
-        Object.getOwnPropertyNames(classProto_1).forEach(function (m) {
-            var t = typeof classProto_1[m];
+        const classProto = objClass.prototype;
+        Object.getOwnPropertyNames(classProto).forEach(function (m) {
+            const t = typeof classProto[m];
             if (t === "function") {
                 methods.push(m);
             }
             else {
-                attributes[m] = classProto_1[m];
+                attributes[m] = classProto[m];
             }
         });
     }
@@ -1180,13 +1113,13 @@ exports.inspectClass = inspectClass;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.implement = void 0;
-var _1 = __webpack_require__(5);
-var implement = function (testableClass, rules) {
-    var given = (0, _1.inspectClass)(testableClass);
+const _1 = __webpack_require__(5);
+const implement = (testableClass, rules) => {
+    const given = (0, _1.inspectClass)(testableClass);
     // The inspection message we send back to give information about the interface check.
-    var inspectionMessage = {
-        rules: rules,
-        given: given,
+    const inspectionMessage = {
+        rules,
+        given,
         error: {
             type: "",
             message: "",
@@ -1195,7 +1128,7 @@ var implement = function (testableClass, rules) {
         },
         passed: true,
     };
-    var rulesDifferential = rules.methods.filter(function (method) {
+    const rulesDifferential = rules.methods.filter((method) => {
         if (given.Methods.indexOf(method) < 0) {
             return method;
         }
@@ -1205,7 +1138,7 @@ var implement = function (testableClass, rules) {
         inspectionMessage.passed = false;
         inspectionMessage.error.invalidMethods = [];
         inspectionMessage.error.methodsNotIncluded = rulesDifferential;
-        inspectionMessage.error.message = "".concat(inspectionMessage.error.type, ": In class ").concat(inspectionMessage.given.ClassName, ", we could not find required methods ").concat(inspectionMessage.error.methodsNotIncluded);
+        inspectionMessage.error.message = `${inspectionMessage.error.type}: In class ${inspectionMessage.given.ClassName}, we could not find required methods ${inspectionMessage.error.methodsNotIncluded}`;
     }
     return inspectionMessage;
 };
@@ -1220,7 +1153,7 @@ exports.implement = implement;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.methods = void 0;
-var types_1 = __webpack_require__(12);
+const types_1 = __webpack_require__(12);
 exports.methods = types_1.API_METHOD;
 
 
@@ -1247,57 +1180,21 @@ var API_METHOD;
 
 /***/ }),
 /* 13 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.request = exports.formatPath = void 0;
-var RLean_1 = __webpack_require__(2);
-var utils_1 = __webpack_require__(3);
-var getApiMethods_1 = __webpack_require__(14);
-var types_1 = __webpack_require__(12);
-var formatPath = function (path, payloadQuery, payloadBody, method, nullableParams) {
+const RLean_1 = __webpack_require__(2);
+const utils_1 = __webpack_require__(3);
+const getApiMethods_1 = __webpack_require__(14);
+const types_1 = __webpack_require__(12);
+const formatPath = (path, payloadQuery, payloadBody, method, nullableParams) => {
     // Check for null params if they aren't allowed.
     if (!nullableParams) {
         if (payloadQuery) {
-            for (var key in payloadQuery) {
+            for (let key in payloadQuery) {
                 if (typeof payloadQuery[key] === "undefined" ||
                     payloadQuery[key] === null) {
                     // Params cannot be null.
@@ -1306,7 +1203,7 @@ var formatPath = function (path, payloadQuery, payloadBody, method, nullablePara
             }
         }
         if (payloadBody) {
-            for (var key in payloadBody) {
+            for (let key in payloadBody) {
                 if (typeof payloadBody[key] === "undefined" ||
                     payloadBody[key] === null) {
                     // Params cannot be null.
@@ -1321,31 +1218,31 @@ var formatPath = function (path, payloadQuery, payloadBody, method, nullablePara
     }
     // If payloadQuery exists, return the path with the params appended.
     if (path && payloadQuery) {
-        var returnValue = "";
+        let returnValue = "";
         // Create an array of all payload keys.
-        var queryStringKeys_1 = [];
-        for (var key in payloadQuery) {
-            queryStringKeys_1.push(key);
+        const queryStringKeys = [];
+        for (let key in payloadQuery) {
+            queryStringKeys.push(key);
         }
         // Replace all the :key instances with the actual values given.
         returnValue = path
             .split("/")
-            .map(function (section) {
+            .map((section) => {
             if (section.includes(":")) {
-                var key = section.match(/:(.*)/).pop();
+                const key = section.match(/:(.*)/).pop();
                 // Remove key from queryStringKeys array since it is a path param.
-                var index = queryStringKeys_1.indexOf(key);
-                queryStringKeys_1.splice(index, 1);
+                const index = queryStringKeys.indexOf(key);
+                queryStringKeys.splice(index, 1);
                 return section.replace(":" + key, payloadQuery[key]);
             }
             return section;
         })
             .join("/");
-        var query = [];
+        const query = [];
         // Create query string with query string params.
-        for (var key in payloadQuery) {
-            if (queryStringKeys_1.includes(key)) {
-                query.push("".concat(key, "=").concat(payloadQuery[key]));
+        for (let key in payloadQuery) {
+            if (queryStringKeys.includes(key)) {
+                query.push(`${key}=${payloadQuery[key]}`);
             }
         }
         if (query.length > 0) {
@@ -1356,71 +1253,54 @@ var formatPath = function (path, payloadQuery, payloadBody, method, nullablePara
     throw Error("Could not format the path.");
 };
 exports.formatPath = formatPath;
-var request = function (payload, definition, method) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, get, post, del, put, patch, nullableParams, apiUriOverride, headers, url, token, path, apiPayload, res, _b;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
-            case 0:
-                _a = (0, getApiMethods_1.getApiMethods)(definition), get = _a.get, post = _a.post, del = _a.del, put = _a.put, patch = _a.patch;
-                nullableParams = definition.nullableParams;
-                apiUriOverride = definition.apiUriOverride;
-                headers = (0, utils_1.getValue)(RLean_1.default, "config.api.headers", {});
-                url = apiUriOverride
-                    ? apiUriOverride
-                    : (0, utils_1.getValue)(RLean_1.default, "config.api.baseURL", "");
-                token = (0, utils_1.getValue)(RLean_1.default, "config.api.token", null);
-                if (token) {
-                    headers.Authorization = "Bearer ".concat(token);
-                }
-                path = (0, exports.formatPath)(payload.path, payload.query, payload.body, method, nullableParams);
-                // No path specified. Return undefined.
-                if (path === undefined || path === "") {
-                    console.warn("Path is required.");
-                    return [2 /*return*/];
-                }
-                apiPayload = {
-                    url: url + path,
-                    data: payload.body,
-                    headers: headers,
-                    signal: payload.signal,
-                };
-                res = null;
-                _b = method;
-                switch (_b) {
-                    case types_1.API_METHOD.GET: return [3 /*break*/, 1];
-                    case types_1.API_METHOD.POST: return [3 /*break*/, 3];
-                    case types_1.API_METHOD.DELETE: return [3 /*break*/, 5];
-                    case types_1.API_METHOD.PUT: return [3 /*break*/, 7];
-                    case types_1.API_METHOD.PATCH: return [3 /*break*/, 9];
-                }
-                return [3 /*break*/, 11];
-            case 1: return [4 /*yield*/, get(apiPayload)];
-            case 2:
-                res = _c.sent();
-                return [3 /*break*/, 12];
-            case 3: return [4 /*yield*/, post(apiPayload)];
-            case 4:
-                res = _c.sent();
-                return [3 /*break*/, 12];
-            case 5: return [4 /*yield*/, del(apiPayload)];
-            case 6:
-                res = _c.sent();
-                return [3 /*break*/, 12];
-            case 7: return [4 /*yield*/, put(apiPayload)];
-            case 8:
-                res = _c.sent();
-                return [3 /*break*/, 12];
-            case 9: return [4 /*yield*/, patch(apiPayload)];
-            case 10:
-                res = _c.sent();
-                return [3 /*break*/, 12];
-            case 11:
-                console.error("Unknown API method specified.");
-                return [3 /*break*/, 12];
-            case 12: return [2 /*return*/, res];
-        }
-    });
-}); };
+const request = async (payload, definition, method) => {
+    const { get, post, del, put, patch } = (0, getApiMethods_1.getApiMethods)(definition);
+    const nullableParams = definition.nullableParams;
+    const apiUriOverride = definition.apiUriOverride;
+    // @todo type headers on RLeanConfig type
+    let headers = (0, utils_1.getValue)(RLean_1.default, "config.api.headers", {});
+    const url = apiUriOverride
+        ? apiUriOverride
+        : (0, utils_1.getValue)(RLean_1.default, "config.api.baseURL", "");
+    const token = (0, utils_1.getValue)(RLean_1.default, "config.api.token", null);
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
+    }
+    const path = (0, exports.formatPath)(payload.path, payload.query, payload.body, method, nullableParams);
+    // No path specified. Return undefined.
+    if (path === undefined || path === "") {
+        console.warn(`Path is required.`);
+        return;
+    }
+    const apiPayload = {
+        url: url + path,
+        data: payload.body,
+        headers,
+        signal: payload.signal,
+    };
+    let res = null;
+    switch (method) {
+        case types_1.API_METHOD.GET:
+            res = await get(apiPayload);
+            break;
+        case types_1.API_METHOD.POST:
+            res = await post(apiPayload);
+            break;
+        case types_1.API_METHOD.DELETE:
+            res = await del(apiPayload);
+            break;
+        case types_1.API_METHOD.PUT:
+            res = await put(apiPayload);
+            break;
+        case types_1.API_METHOD.PATCH:
+            res = await patch(apiPayload);
+            break;
+        default:
+            console.error("Unknown API method specified.");
+            break;
+    }
+    return res;
+};
 exports.request = request;
 
 
@@ -1432,24 +1312,24 @@ exports.request = request;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getApiMethods = void 0;
-var utils_1 = __webpack_require__(3);
-var RLean_1 = __webpack_require__(2);
-var defaultAdapters_1 = __webpack_require__(15);
+const utils_1 = __webpack_require__(3);
+const RLean_1 = __webpack_require__(2);
+const defaultAdapters_1 = __webpack_require__(15);
 /**
  * getApiMethods
  * Returns all api methods from the adapter in an entity definition, or, if not
  * defined, from the configurated adapter
  */
-var getApiMethods = function (definition) {
-    var api = (0, utils_1.hasValue)(definition, "adapters.api")
+const getApiMethods = (definition) => {
+    const api = (0, utils_1.hasValue)(definition, "adapters.api")
         ? definition.adapters.api
         : (0, utils_1.getValue)(RLean_1.default, "config.api.adapter", defaultAdapters_1.AxiosAdapter);
-    var get = api.get;
-    var put = api.put;
-    var post = api.post;
-    var del = api.del;
-    var patch = api.patch;
-    return { get: get, put: put, post: post, del: del, patch: patch };
+    const get = api.get;
+    const put = api.put;
+    const post = api.post;
+    const del = api.del;
+    const patch = api.patch;
+    return { get, put, post, del, patch };
 };
 exports.getApiMethods = getApiMethods;
 
@@ -1462,157 +1342,68 @@ exports.getApiMethods = getApiMethods;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LocalForageAdapter = exports.AxiosAdapter = void 0;
-var AxiosAdapter_1 = __webpack_require__(16);
+const AxiosAdapter_1 = __webpack_require__(16);
 exports.AxiosAdapter = AxiosAdapter_1.default;
-var LocalForageAdapter_1 = __webpack_require__(46);
+const LocalForageAdapter_1 = __webpack_require__(46);
 exports.LocalForageAdapter = LocalForageAdapter_1.default;
 
 
 /***/ }),
 /* 16 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var axios_1 = __webpack_require__(17);
-var types_1 = __webpack_require__(12);
-var AxiosAdapter = /** @class */ (function () {
-    function AxiosAdapter() {
+const axios_1 = __webpack_require__(17);
+const types_1 = __webpack_require__(12);
+class AxiosAdapter {
+    async get(apiPayload) {
+        const { url, headers, signal } = apiPayload;
+        const response = await axios_1.default.get(url, headers);
+        return response;
     }
-    AxiosAdapter.prototype.get = function (apiPayload) {
-        return __awaiter(this, void 0, void 0, function () {
-            var url, headers, signal, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        url = apiPayload.url, headers = apiPayload.headers, signal = apiPayload.signal;
-                        return [4 /*yield*/, axios_1.default.get(url, headers)];
-                    case 1:
-                        response = _a.sent();
-                        return [2 /*return*/, response];
-                }
-            });
-        });
-    };
-    AxiosAdapter.prototype.post = function (apiPayload) {
-        return __awaiter(this, void 0, void 0, function () {
-            var url, data, headers, signal, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        url = apiPayload.url, data = apiPayload.data, headers = apiPayload.headers, signal = apiPayload.signal;
-                        return [4 /*yield*/, (0, axios_1.default)({
-                                method: types_1.API_METHOD.POST,
-                                url: url,
-                                data: data,
-                                headers: headers,
-                            })];
-                    case 1:
-                        response = (_a.sent());
-                        return [2 /*return*/, response];
-                }
-            });
-        });
-    };
-    AxiosAdapter.prototype.put = function (apiPayload) {
-        return __awaiter(this, void 0, void 0, function () {
-            var url, data, headers, signal, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        url = apiPayload.url, data = apiPayload.data, headers = apiPayload.headers, signal = apiPayload.signal;
-                        return [4 /*yield*/, (0, axios_1.default)({
-                                method: types_1.API_METHOD.PUT,
-                                url: url,
-                                data: data,
-                                headers: headers,
-                            })];
-                    case 1:
-                        response = (_a.sent());
-                        return [2 /*return*/, response];
-                }
-            });
-        });
-    };
-    AxiosAdapter.prototype.del = function (apiPayload) {
-        return __awaiter(this, void 0, void 0, function () {
-            var url, data, headers, signal, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        url = apiPayload.url, data = apiPayload.data, headers = apiPayload.headers, signal = apiPayload.signal;
-                        return [4 /*yield*/, (0, axios_1.default)({
-                                method: types_1.API_METHOD.DELETE,
-                                url: url,
-                                data: data,
-                                headers: headers,
-                            })];
-                    case 1:
-                        response = (_a.sent());
-                        return [2 /*return*/, response];
-                }
-            });
-        });
-    };
-    AxiosAdapter.prototype.patch = function (apiPayload) {
-        return __awaiter(this, void 0, void 0, function () {
-            var url, data, headers, signal, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        url = apiPayload.url, data = apiPayload.data, headers = apiPayload.headers, signal = apiPayload.signal;
-                        return [4 /*yield*/, (0, axios_1.default)({
-                                method: types_1.API_METHOD.PATCH,
-                                url: url,
-                                data: data,
-                                headers: headers,
-                            })];
-                    case 1:
-                        response = (_a.sent());
-                        return [2 /*return*/, response];
-                }
-            });
-        });
-    };
-    return AxiosAdapter;
-}());
+    async post(apiPayload) {
+        const { url, data, headers, signal } = apiPayload;
+        const response = (await (0, axios_1.default)({
+            method: types_1.API_METHOD.POST,
+            url,
+            data,
+            headers,
+        }));
+        return response;
+    }
+    async put(apiPayload) {
+        const { url, data, headers, signal } = apiPayload;
+        const response = (await (0, axios_1.default)({
+            method: types_1.API_METHOD.PUT,
+            url,
+            data,
+            headers,
+        }));
+        return response;
+    }
+    async del(apiPayload) {
+        const { url, data, headers, signal } = apiPayload;
+        const response = (await (0, axios_1.default)({
+            method: types_1.API_METHOD.DELETE,
+            url,
+            data,
+            headers,
+        }));
+        return response;
+    }
+    async patch(apiPayload) {
+        const { url, data, headers, signal } = apiPayload;
+        const response = (await (0, axios_1.default)({
+            method: types_1.API_METHOD.PATCH,
+            url,
+            data,
+            headers,
+        }));
+        return response;
+    }
+}
 exports["default"] = new AxiosAdapter();
 
 
@@ -3565,177 +3356,70 @@ module.exports = function isAxiosError(payload) {
 
 /***/ }),
 /* 46 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var localforage = __webpack_require__(47);
-var LocalForage = /** @class */ (function () {
-    function LocalForage() {
+const localforage = __webpack_require__(47);
+class LocalForage {
+    async set(key, value) {
+        if (!key || value === undefined) {
+            throw new Error("Key or value cannot be undefined");
+        }
+        try {
+            await localforage.setItem(key, JSON.stringify(value));
+        }
+        catch (err) {
+            console.error(err);
+        }
     }
-    LocalForage.prototype.set = function (key, value) {
-        return __awaiter(this, void 0, void 0, function () {
-            var err_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!key || value === undefined) {
-                            throw new Error("Key or value cannot be undefined");
-                        }
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, localforage.setItem(key, JSON.stringify(value))];
-                    case 2:
-                        _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_1 = _a.sent();
-                        console.error(err_1);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
-            });
+    async setAll(units) {
+        if (units === undefined || units.length === 0) {
+            throw new Error("Array cannot be null or empty");
+        }
+        units.forEach(async (kvPair) => {
+            try {
+                await this.set(kvPair.key, kvPair.value);
+            }
+            catch (err) {
+                console.error(err);
+            }
         });
-    };
-    LocalForage.prototype.setAll = function (units) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                if (units === undefined || units.length === 0) {
-                    throw new Error("Array cannot be null or empty");
-                }
-                units.forEach(function (kvPair) { return __awaiter(_this, void 0, void 0, function () {
-                    var err_2;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0:
-                                _a.trys.push([0, 2, , 3]);
-                                return [4 /*yield*/, this.set(kvPair.key, kvPair.value)];
-                            case 1:
-                                _a.sent();
-                                return [3 /*break*/, 3];
-                            case 2:
-                                err_2 = _a.sent();
-                                console.error(err_2);
-                                return [3 /*break*/, 3];
-                            case 3: return [2 /*return*/];
-                        }
-                    });
-                }); });
-                return [2 /*return*/, true];
-            });
-        });
-    };
-    LocalForage.prototype.get = function (key) {
-        return __awaiter(this, void 0, void 0, function () {
-            var value, err_3;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!key) {
-                            throw new Error("Must supply a key in get");
-                        }
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, localforage.getItem(key)];
-                    case 2:
-                        value = _a.sent();
-                        return [2 /*return*/, value == null ? null : JSON.parse(value)];
-                    case 3:
-                        err_3 = _a.sent();
-                        console.error("LocalForage getItem error: ".concat(err_3));
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    LocalForage.prototype.clear = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var err_4;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, localforage.clear()];
-                    case 1:
-                        _a.sent();
-                        return [3 /*break*/, 3];
-                    case 2:
-                        err_4 = _a.sent();
-                        console.error(err_4);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    LocalForage.prototype.remove = function (key) {
-        return __awaiter(this, void 0, void 0, function () {
-            var err_5;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!key) {
-                            throw new Error("Must supply a key in remove");
-                        }
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, localforage.removeItem(key)];
-                    case 2:
-                        _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_5 = _a.sent();
-                        console.error(err_5);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    return LocalForage;
-}());
+        return true;
+    }
+    async get(key) {
+        if (!key) {
+            throw new Error("Must supply a key in get");
+        }
+        try {
+            const value = await localforage.getItem(key);
+            return value == null ? null : JSON.parse(value);
+        }
+        catch (err) {
+            console.error(`LocalForage getItem error: ${err}`);
+        }
+    }
+    async clear() {
+        try {
+            await localforage.clear();
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
+    async remove(key) {
+        if (!key) {
+            throw new Error("Must supply a key in remove");
+        }
+        try {
+            await localforage.removeItem(key);
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
+}
 exports["default"] = new LocalForage();
 
 
@@ -6569,53 +6253,60 @@ module.exports = localforage_js;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getStorageMethods = void 0;
-var utils_1 = __webpack_require__(3);
-var RLean_1 = __webpack_require__(2);
-var defaultAdapters_1 = __webpack_require__(15);
-var getStorageMethods = function (definition) {
-    var store = (0, utils_1.hasValue)(definition, "adapters.storage")
+const utils_1 = __webpack_require__(3);
+const RLean_1 = __webpack_require__(2);
+const defaultAdapters_1 = __webpack_require__(15);
+const getStorageMethods = (definition) => {
+    const store = (0, utils_1.hasValue)(definition, "adapters.storage")
         ? definition.adapters.storage
         : (0, utils_1.getValue)(RLean_1.default, "config.storage.adapter", defaultAdapters_1.LocalForageAdapter);
-    var setStorage = store.set;
-    var getStorage = store.get;
-    var removeStorage = store.remove;
-    var clearStorage = store.clear;
-    return { setStorage: setStorage, getStorage: getStorage, removeStorage: removeStorage, clearStorage: clearStorage };
+    const setStorage = store.set;
+    const getStorage = store.get;
+    const removeStorage = store.remove;
+    const clearStorage = store.clear;
+    return { setStorage, getStorage, removeStorage, clearStorage };
 };
 exports.getStorageMethods = getStorageMethods;
 
 
 /***/ }),
 /* 49 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.define = void 0;
-var _internal_1 = __webpack_require__(5);
+const _internal_1 = __webpack_require__(5);
 /**
  * define
  * Creates base entity definition using data type as generic
  */
-var define = function (key, options, callback) {
+const define = (key, options, callback) => {
     var _a;
     if (!key) {
         throw new Error("Key is required for definition.");
     }
-    var _b = (0, _internal_1.getDefinitionOptions)(key, options), initialState = _b.initialState, getURL = _b.getURL, postURL = _b.postURL, putURL = _b.putURL, patchURL = _b.patchURL, deleteURL = _b.deleteURL, persistData = _b.persistData, preferStore = _b.preferStore, progressiveLoading = _b.progressiveLoading, syncAfterTimeElapsed = _b.syncAfterTimeElapsed, adapters = _b.adapters, type = _b.type, reducer = _b.reducer, updateState = _b.updateState, nullableParams = _b.nullableParams, includeInState = _b.includeInState, queueOffline = _b.queueOffline;
-    return __assign({ key: key, initialState: initialState, getURL: getURL, postURL: postURL, patchURL: patchURL, putURL: putURL, deleteURL: deleteURL, persistData: persistData, preferStore: preferStore, progressiveLoading: progressiveLoading, syncAfterTimeElapsed: syncAfterTimeElapsed, adapters: adapters, type: type, reducer: reducer, updateState: updateState, callback: callback, nullableParams: nullableParams, includeInState: includeInState, queueOffline: queueOffline }, ((_a = options === null || options === void 0 ? void 0 : options.extensions) !== null && _a !== void 0 ? _a : {}));
+    const { initialState, getURL, postURL, putURL, patchURL, deleteURL, persistData, preferStore, progressiveLoading, syncAfterTimeElapsed, adapters, type, reducer, updateState, nullableParams, includeInState, queueOffline, } = (0, _internal_1.getDefinitionOptions)(key, options);
+    return Object.assign({ key,
+        initialState,
+        getURL,
+        postURL,
+        patchURL,
+        putURL,
+        deleteURL,
+        persistData,
+        preferStore,
+        progressiveLoading,
+        syncAfterTimeElapsed,
+        adapters,
+        type,
+        reducer,
+        updateState,
+        callback,
+        nullableParams,
+        includeInState,
+        queueOffline }, ((_a = options === null || options === void 0 ? void 0 : options.extensions) !== null && _a !== void 0 ? _a : {}));
 };
 exports.define = define;
 
@@ -6628,19 +6319,18 @@ exports.define = define;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.keys = void 0;
-var utils_1 = __webpack_require__(3);
-var RLean_1 = __webpack_require__(2);
-var convertToType_1 = __webpack_require__(6);
-var getKeys = function () {
-    var _a;
-    var entityDefinitions = (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
-    var entityDefinitionsLength = entityDefinitions.length;
-    var keys = {};
-    for (var i = 0; i < entityDefinitionsLength; i += 1) {
-        var key = (0, convertToType_1.convertToType)(entityDefinitions[i].key);
-        Object.assign(keys, (_a = {},
-            _a[key] = entityDefinitions[i].key,
-            _a));
+const utils_1 = __webpack_require__(3);
+const RLean_1 = __webpack_require__(2);
+const convertToType_1 = __webpack_require__(6);
+const getKeys = () => {
+    const entityDefinitions = (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
+    const entityDefinitionsLength = entityDefinitions.length;
+    const keys = {};
+    for (let i = 0; i < entityDefinitionsLength; i += 1) {
+        const key = (0, convertToType_1.convertToType)(entityDefinitions[i].key);
+        Object.assign(keys, {
+            [key]: entityDefinitions[i].key,
+        });
     }
     return Object.freeze(keys);
 };
@@ -6649,101 +6339,40 @@ exports.keys = getKeys();
 
 /***/ }),
 /* 51 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __webpack_require__(52);
-var __1 = __webpack_require__(0);
-var _internal_1 = __webpack_require__(5);
-var utils_1 = __webpack_require__(3);
+const react_1 = __webpack_require__(52);
+const RLean_1 = __webpack_require__(2);
+const _internal_1 = __webpack_require__(5);
+const utils_1 = __webpack_require__(3);
+const StateSingleton_1 = __webpack_require__(53);
+const __1 = __webpack_require__(0);
 /**
  * Save an object to state, and optionally to store if persistData
  * is true (default). Don't check if current state and new value are different
  * so if there is an infinite loop, the developer will know right away in the
  * console log.
  */
-var save = function (options, state, dispatch, callback) {
-    if (dispatch === void 0) { dispatch = function () { }; }
-    if (callback === void 0) { callback = function () { }; }
-    return __awaiter(void 0, void 0, void 0, function () {
-        var _a, definition, value, type, stateValue;
-        return __generator(this, function (_b) {
-            if (typeof options === "undefined" || typeof options.value === "undefined") {
-                return [2 /*return*/];
-            }
-            _a = (0, _internal_1.getHookOptions)(options), definition = _a.definition, value = _a.value, type = _a.type;
-            stateValue = state && state[definition.key] ? (0, utils_1.deepCopy)(state[definition.key]) : {};
-            if (definition.persistData) {
-                __1.Store.set(definition, value);
-            }
-            __1.RLean.definition = definition;
-            dispatch(definition.updateState(__assign(__assign({}, stateValue), value), type));
-            if (callback) {
-                callback();
-            }
-            return [2 /*return*/];
-        });
-    });
+const save = async (options, state, dispatch = () => { }, callback = () => { }) => {
+    if (typeof options === 'undefined' || typeof options.value === 'undefined') {
+        return;
+    }
+    const { definition, value, type } = (0, _internal_1.getHookOptions)(options);
+    //const stateValue: EntityState<
+    //  T extends EntityDefineOptions<infer F> ? F : unknown
+    //> = state && state[definition.key] ? deepCopy(state[definition.key]) : {};
+    const stateValue = state && state[definition.key] ? (0, utils_1.deepCopy)(state[definition.key]) : {};
+    if (definition.persistData) {
+        __1.Store.set(definition, value);
+    }
+    RLean_1.default.definition = definition;
+    dispatch(definition.updateState(Object.assign(Object.assign({}, stateValue), value), type));
+    if (callback) {
+        callback();
+    }
 };
 /**
  * Save an object to state, and optionally to store if persistData
@@ -6751,19 +6380,17 @@ var save = function (options, state, dispatch, callback) {
  * so if there is an infinite loop, the developer will know right away in the
  * console log.
  */
-function useSave(options, callback) {
-    if (callback === void 0) { callback = function () { }; }
-    var _a = (0, __1.useGlobalState)(), _b = _a[0], dispatch = _a[1], state = __rest(_b, []);
-    if (typeof options === "undefined") {
-        return [
-            function (options, callback) {
-                if (options === void 0) { options = undefined; }
-                if (callback === void 0) { callback = function () { }; }
-                save(options, state, dispatch, callback);
-            },
-        ];
+function useSave(options, callback = () => { }) {
+    const [state, dispatch] = StateSingleton_1.StateSingleton.getInstance().zustand((s) => [
+        s.global,
+        s.dispatch,
+    ]);
+    if (typeof options === 'undefined') {
+        return (options = undefined, callback = () => { }) => {
+            save(options, state, dispatch, callback);
+        };
     }
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         save(options, dispatch, callback);
     }, [dispatch]);
 }
@@ -6779,74 +6406,52 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__52__;
 
 /***/ }),
 /* 53 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __webpack_require__(52);
-var __1 = __webpack_require__(0);
-function useRequest(options, method, callback) {
-    return __awaiter(this, void 0, void 0, function () {
-        var _a, dispatch;
-        return __generator(this, function (_b) {
-            _a = (0, __1.useGlobalState)(), dispatch = _a[1];
-            if (typeof options === "undefined") {
-                return [2 /*return*/, [
-                        function (options, callback) {
-                            method(options, dispatch, callback);
-                        },
-                    ]];
-            }
-            (0, react_1.useEffect)(function () {
-                try {
-                    method(options, dispatch, callback);
-                }
-                catch (e) {
-                    console.log(e);
-                }
-            }, []);
-            return [2 /*return*/];
-        });
-    });
+exports.RLeanState = exports.StateSingleton = void 0;
+const initialState_1 = __webpack_require__(1);
+const reducer_1 = __webpack_require__(54);
+const zustand_1 = __webpack_require__(56);
+const utils_1 = __webpack_require__(3);
+const RLean_1 = __webpack_require__(2);
+class StateSingleton {
+    constructor() {
+        const configEntities = (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
+        this.zustand = (0, zustand_1.default)((set) => ({
+            state: (0, initialState_1.initialState)(configEntities),
+            dispatch: (args) => {
+                set((zustandState) => {
+                    const nextState = (0, reducer_1.reducer)(zustandState, args);
+                    // nextState contains also the rest of the entities' state, but
+                    // undefined, so we delete them
+                    Object.keys(nextState).forEach((key) => {
+                        if (nextState[key] === undefined) {
+                            delete nextState[key];
+                        }
+                    });
+                    return {
+                        state: Object.assign(Object.assign({}, zustandState.state), nextState),
+                    };
+                });
+            },
+        }));
+        this.select = this.zustand;
+    }
+    static getInstance() {
+        if (!StateSingleton.instance) {
+            StateSingleton.instance = new StateSingleton();
+        }
+        return StateSingleton.instance;
+    }
 }
-exports["default"] = useRequest;
+exports.StateSingleton = StateSingleton;
+const RLeanState = () => ({
+    select: StateSingleton.getInstance().select,
+});
+exports.RLeanState = RLeanState;
 
 
 /***/ }),
@@ -6855,42 +6460,6 @@ exports["default"] = useRequest;
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -6903,13 +6472,693 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __webpack_require__(52);
-var request_1 = __webpack_require__(13);
-var utils_1 = __webpack_require__(3);
-var State_1 = __webpack_require__(55);
-var _internal_1 = __webpack_require__(5);
-var __1 = __webpack_require__(0);
-var types_1 = __webpack_require__(12);
+exports.reducer = void 0;
+const utils_1 = __webpack_require__(3);
+const _1 = __webpack_require__(0);
+const middleware_1 = __webpack_require__(55);
+const reducer = (_a, action) => {
+    var state = __rest(_a, []);
+    const entityDefinitions = (0, utils_1.getValue)(_1.RLean, "config.entities", {});
+    const middleware = (0, utils_1.getValue)(_1.RLean, "config.middleware", []);
+    const definition = (0, utils_1.getValue)(_1.RLean, "definition", {});
+    const objects = Object.values(entityDefinitions);
+    const objectsLength = objects.length;
+    let combinedReducer = {};
+    for (let i = 0; i < objectsLength; i += 1) {
+        if (objects[i].prototype) {
+            const key = objects[i].prototype.key;
+            const value = state[key];
+            if (objects[i].prototype.includeInState) {
+                Object.assign(combinedReducer, {
+                    [key]: objects[i].prototype.reducer(value, action),
+                });
+            }
+        }
+        else {
+            const key = objects[i].key;
+            const value = state[key];
+            if (objects[i].includeInState) {
+                Object.assign(combinedReducer, {
+                    [key]: objects[i].reducer(value, action),
+                });
+            }
+        }
+    }
+    const nextState = (0, utils_1.deepCopy)(state);
+    middleware.push(middleware_1.logActions);
+    // middleware.push(saveToIndexedDB);
+    (0, middleware_1.applyMiddleware)(definition, nextState, action, middleware);
+    return combinedReducer;
+};
+exports.reducer = reducer;
+
+
+/***/ }),
+/* 55 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.saveToIndexedDB = exports.logActions = exports.applyMiddleware = void 0;
+const _1 = __webpack_require__(0);
+const utils_1 = __webpack_require__(3);
+async function logActions(definition, state, action) {
+    const stateKey = Object.keys(action)[1].toString();
+    const logToConsole = (0, utils_1.getValue)(_1.RLean, "config.logToConsole", false);
+    if (logToConsole) {
+        console.log(`state`, state);
+        console.log(`dispatching ${action.type}`, { [stateKey]: action[stateKey] });
+    }
+    // TODO: stateKey is flawed. Doesn't work for nested state objects. Fix it.
+    // const stateKey = Object.keys(action)[1].toString();
+    // const stateValue = action[stateKey];
+    // TODO: Update state object to display next state instead of current state. Previous attempt was flawed.
+    // nextState[stateKey] = stateValue;
+    // console.log(`next state`, state);
+    return state;
+}
+exports.logActions = logActions;
+async function saveToIndexedDB(definition, state, action) {
+    if (definition.persistData) {
+        await _1.Store.set(definition, Object.values(action)[1]);
+    }
+    return state;
+}
+exports.saveToIndexedDB = saveToIndexedDB;
+async function applyMiddleware(definition, state, action, middleware) {
+    return middleware.map(async (fn) => {
+        const returnable = await fn(definition, state, action);
+        return returnable;
+    });
+}
+exports.applyMiddleware = applyMiddleware;
+
+
+/***/ }),
+/* 56 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createStore": () => (/* reexport safe */ zustand_vanilla__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   "default": () => (/* binding */ create),
+/* harmony export */   "useStore": () => (/* binding */ useStore)
+/* harmony export */ });
+/* harmony import */ var zustand_vanilla__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(52);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var use_sync_external_store_shim_with_selector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(58);
+
+
+
+
+
+
+const { useSyncExternalStoreWithSelector } = use_sync_external_store_shim_with_selector_js__WEBPACK_IMPORTED_MODULE_2__;
+function useStore(api, selector = api.getState, equalityFn) {
+  const slice = useSyncExternalStoreWithSelector(
+    api.subscribe,
+    api.getState,
+    api.getServerState || api.getState,
+    selector,
+    equalityFn
+  );
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useDebugValue)(slice);
+  return slice;
+}
+const createImpl = (createState) => {
+  const api = typeof createState === "function" ? (0,zustand_vanilla__WEBPACK_IMPORTED_MODULE_0__["default"])(createState) : createState;
+  const useBoundStore = (selector, equalityFn) => useStore(api, selector, equalityFn);
+  Object.assign(useBoundStore, api);
+  return useBoundStore;
+};
+const create = (createState) => createState ? createImpl(createState) : createImpl;
+
+
+
+
+/***/ }),
+/* 57 */
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ createStore)
+/* harmony export */ });
+const createStoreImpl = (createState) => {
+  let state;
+  const listeners = /* @__PURE__ */ new Set();
+  const setState = (partial, replace) => {
+    const nextState = typeof partial === "function" ? partial(state) : partial;
+    if (!Object.is(nextState, state)) {
+      const previousState = state;
+      state = (replace != null ? replace : typeof nextState !== "object") ? nextState : Object.assign({}, state, nextState);
+      listeners.forEach((listener) => listener(state, previousState));
+    }
+  };
+  const getState = () => state;
+  const subscribe = (listener) => {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  };
+  const destroy = () => listeners.clear();
+  const api = { setState, getState, subscribe, destroy };
+  state = createState(setState, getState, api);
+  return api;
+};
+const createStore = (createState) => createState ? createStoreImpl(createState) : createStoreImpl;
+
+
+
+
+/***/ }),
+/* 58 */
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(59);
+} else {
+  module.exports = __webpack_require__(63);
+}
+
+
+/***/ }),
+/* 59 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/**
+ * @license React
+ * use-sync-external-store-shim/with-selector.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+var h=__webpack_require__(52),n=__webpack_require__(60);function p(a,b){return a===b&&(0!==a||1/a===1/b)||a!==a&&b!==b}var q="function"===typeof Object.is?Object.is:p,r=n.useSyncExternalStore,t=h.useRef,u=h.useEffect,v=h.useMemo,w=h.useDebugValue;
+exports.useSyncExternalStoreWithSelector=function(a,b,e,l,g){var c=t(null);if(null===c.current){var f={hasValue:!1,value:null};c.current=f}else f=c.current;c=v(function(){function a(a){if(!c){c=!0;d=a;a=l(a);if(void 0!==g&&f.hasValue){var b=f.value;if(g(b,a))return k=b}return k=a}b=k;if(q(d,a))return b;var e=l(a);if(void 0!==g&&g(b,e))return b;d=a;return k=e}var c=!1,d,k,m=void 0===e?null:e;return[function(){return a(b())},null===m?void 0:function(){return a(m())}]},[b,e,l,g]);var d=r(a,c[0],c[1]);
+u(function(){f.hasValue=!0;f.value=d},[d]);w(d);return d};
+
+
+/***/ }),
+/* 60 */
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(61);
+} else {
+  module.exports = __webpack_require__(62);
+}
+
+
+/***/ }),
+/* 61 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/**
+ * @license React
+ * use-sync-external-store-shim.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+var e=__webpack_require__(52);function h(a,b){return a===b&&(0!==a||1/a===1/b)||a!==a&&b!==b}var k="function"===typeof Object.is?Object.is:h,l=e.useState,m=e.useEffect,n=e.useLayoutEffect,p=e.useDebugValue;function q(a,b){var d=b(),f=l({inst:{value:d,getSnapshot:b}}),c=f[0].inst,g=f[1];n(function(){c.value=d;c.getSnapshot=b;r(c)&&g({inst:c})},[a,d,b]);m(function(){r(c)&&g({inst:c});return a(function(){r(c)&&g({inst:c})})},[a]);p(d);return d}
+function r(a){var b=a.getSnapshot;a=a.value;try{var d=b();return!k(a,d)}catch(f){return!0}}function t(a,b){return b()}var u="undefined"===typeof window||"undefined"===typeof window.document||"undefined"===typeof window.document.createElement?t:q;exports.useSyncExternalStore=void 0!==e.useSyncExternalStore?e.useSyncExternalStore:u;
+
+
+/***/ }),
+/* 62 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/**
+ * @license React
+ * use-sync-external-store-shim.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+if (process.env.NODE_ENV !== "production") {
+  (function() {
+
+          'use strict';
+
+/* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+if (
+  typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' &&
+  typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart ===
+    'function'
+) {
+  __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
+}
+          var React = __webpack_require__(52);
+
+var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+
+function error(format) {
+  {
+    {
+      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      }
+
+      printWarning('error', format, args);
+    }
+  }
+}
+
+function printWarning(level, format, args) {
+  // When changing this logic, you might want to also
+  // update consoleWithStackDev.www.js as well.
+  {
+    var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
+    var stack = ReactDebugCurrentFrame.getStackAddendum();
+
+    if (stack !== '') {
+      format += '%s';
+      args = args.concat([stack]);
+    } // eslint-disable-next-line react-internal/safe-string-coercion
+
+
+    var argsWithFormat = args.map(function (item) {
+      return String(item);
+    }); // Careful: RN currently depends on this prefix
+
+    argsWithFormat.unshift('Warning: ' + format); // We intentionally don't use spread (or .apply) directly because it
+    // breaks IE9: https://github.com/facebook/react/issues/13610
+    // eslint-disable-next-line react-internal/no-production-logging
+
+    Function.prototype.apply.call(console[level], console, argsWithFormat);
+  }
+}
+
+/**
+ * inlined Object.is polyfill to avoid requiring consumers ship their own
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ */
+function is(x, y) {
+  return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y // eslint-disable-line no-self-compare
+  ;
+}
+
+var objectIs = typeof Object.is === 'function' ? Object.is : is;
+
+// dispatch for CommonJS interop named imports.
+
+var useState = React.useState,
+    useEffect = React.useEffect,
+    useLayoutEffect = React.useLayoutEffect,
+    useDebugValue = React.useDebugValue;
+var didWarnOld18Alpha = false;
+var didWarnUncachedGetSnapshot = false; // Disclaimer: This shim breaks many of the rules of React, and only works
+// because of a very particular set of implementation details and assumptions
+// -- change any one of them and it will break. The most important assumption
+// is that updates are always synchronous, because concurrent rendering is
+// only available in versions of React that also have a built-in
+// useSyncExternalStore API. And we only use this shim when the built-in API
+// does not exist.
+//
+// Do not assume that the clever hacks used by this hook also work in general.
+// The point of this shim is to replace the need for hacks by other libraries.
+
+function useSyncExternalStore(subscribe, getSnapshot, // Note: The shim does not use getServerSnapshot, because pre-18 versions of
+// React do not expose a way to check if we're hydrating. So users of the shim
+// will need to track that themselves and return the correct value
+// from `getSnapshot`.
+getServerSnapshot) {
+  {
+    if (!didWarnOld18Alpha) {
+      if (React.startTransition !== undefined) {
+        didWarnOld18Alpha = true;
+
+        error('You are using an outdated, pre-release alpha of React 18 that ' + 'does not support useSyncExternalStore. The ' + 'use-sync-external-store shim will not work correctly. Upgrade ' + 'to a newer pre-release.');
+      }
+    }
+  } // Read the current snapshot from the store on every render. Again, this
+  // breaks the rules of React, and only works here because of specific
+  // implementation details, most importantly that updates are
+  // always synchronous.
+
+
+  var value = getSnapshot();
+
+  {
+    if (!didWarnUncachedGetSnapshot) {
+      var cachedValue = getSnapshot();
+
+      if (!objectIs(value, cachedValue)) {
+        error('The result of getSnapshot should be cached to avoid an infinite loop');
+
+        didWarnUncachedGetSnapshot = true;
+      }
+    }
+  } // Because updates are synchronous, we don't queue them. Instead we force a
+  // re-render whenever the subscribed state changes by updating an some
+  // arbitrary useState hook. Then, during render, we call getSnapshot to read
+  // the current value.
+  //
+  // Because we don't actually use the state returned by the useState hook, we
+  // can save a bit of memory by storing other stuff in that slot.
+  //
+  // To implement the early bailout, we need to track some things on a mutable
+  // object. Usually, we would put that in a useRef hook, but we can stash it in
+  // our useState hook instead.
+  //
+  // To force a re-render, we call forceUpdate({inst}). That works because the
+  // new object always fails an equality check.
+
+
+  var _useState = useState({
+    inst: {
+      value: value,
+      getSnapshot: getSnapshot
+    }
+  }),
+      inst = _useState[0].inst,
+      forceUpdate = _useState[1]; // Track the latest getSnapshot function with a ref. This needs to be updated
+  // in the layout phase so we can access it during the tearing check that
+  // happens on subscribe.
+
+
+  useLayoutEffect(function () {
+    inst.value = value;
+    inst.getSnapshot = getSnapshot; // Whenever getSnapshot or subscribe changes, we need to check in the
+    // commit phase if there was an interleaved mutation. In concurrent mode
+    // this can happen all the time, but even in synchronous mode, an earlier
+    // effect may have mutated the store.
+
+    if (checkIfSnapshotChanged(inst)) {
+      // Force a re-render.
+      forceUpdate({
+        inst: inst
+      });
+    }
+  }, [subscribe, value, getSnapshot]);
+  useEffect(function () {
+    // Check for changes right before subscribing. Subsequent changes will be
+    // detected in the subscription handler.
+    if (checkIfSnapshotChanged(inst)) {
+      // Force a re-render.
+      forceUpdate({
+        inst: inst
+      });
+    }
+
+    var handleStoreChange = function () {
+      // TODO: Because there is no cross-renderer API for batching updates, it's
+      // up to the consumer of this library to wrap their subscription event
+      // with unstable_batchedUpdates. Should we try to detect when this isn't
+      // the case and print a warning in development?
+      // The store changed. Check if the snapshot changed since the last time we
+      // read from the store.
+      if (checkIfSnapshotChanged(inst)) {
+        // Force a re-render.
+        forceUpdate({
+          inst: inst
+        });
+      }
+    }; // Subscribe to the store and return a clean-up function.
+
+
+    return subscribe(handleStoreChange);
+  }, [subscribe]);
+  useDebugValue(value);
+  return value;
+}
+
+function checkIfSnapshotChanged(inst) {
+  var latestGetSnapshot = inst.getSnapshot;
+  var prevValue = inst.value;
+
+  try {
+    var nextValue = latestGetSnapshot();
+    return !objectIs(prevValue, nextValue);
+  } catch (error) {
+    return true;
+  }
+}
+
+function useSyncExternalStore$1(subscribe, getSnapshot, getServerSnapshot) {
+  // Note: The shim does not use getServerSnapshot, because pre-18 versions of
+  // React do not expose a way to check if we're hydrating. So users of the shim
+  // will need to track that themselves and return the correct value
+  // from `getSnapshot`.
+  return getSnapshot();
+}
+
+var canUseDOM = !!(typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined');
+
+var isServerEnvironment = !canUseDOM;
+
+var shim = isServerEnvironment ? useSyncExternalStore$1 : useSyncExternalStore;
+var useSyncExternalStore$2 = React.useSyncExternalStore !== undefined ? React.useSyncExternalStore : shim;
+
+exports.useSyncExternalStore = useSyncExternalStore$2;
+          /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+if (
+  typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' &&
+  typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop ===
+    'function'
+) {
+  __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
+}
+        
+  })();
+}
+
+
+/***/ }),
+/* 63 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/**
+ * @license React
+ * use-sync-external-store-shim/with-selector.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+if (process.env.NODE_ENV !== "production") {
+  (function() {
+
+          'use strict';
+
+/* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+if (
+  typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' &&
+  typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart ===
+    'function'
+) {
+  __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
+}
+          var React = __webpack_require__(52);
+var shim = __webpack_require__(60);
+
+/**
+ * inlined Object.is polyfill to avoid requiring consumers ship their own
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ */
+function is(x, y) {
+  return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y // eslint-disable-line no-self-compare
+  ;
+}
+
+var objectIs = typeof Object.is === 'function' ? Object.is : is;
+
+var useSyncExternalStore = shim.useSyncExternalStore;
+
+// for CommonJS interop.
+
+var useRef = React.useRef,
+    useEffect = React.useEffect,
+    useMemo = React.useMemo,
+    useDebugValue = React.useDebugValue; // Same as useSyncExternalStore, but supports selector and isEqual arguments.
+
+function useSyncExternalStoreWithSelector(subscribe, getSnapshot, getServerSnapshot, selector, isEqual) {
+  // Use this to track the rendered snapshot.
+  var instRef = useRef(null);
+  var inst;
+
+  if (instRef.current === null) {
+    inst = {
+      hasValue: false,
+      value: null
+    };
+    instRef.current = inst;
+  } else {
+    inst = instRef.current;
+  }
+
+  var _useMemo = useMemo(function () {
+    // Track the memoized state using closure variables that are local to this
+    // memoized instance of a getSnapshot function. Intentionally not using a
+    // useRef hook, because that state would be shared across all concurrent
+    // copies of the hook/component.
+    var hasMemo = false;
+    var memoizedSnapshot;
+    var memoizedSelection;
+
+    var memoizedSelector = function (nextSnapshot) {
+      if (!hasMemo) {
+        // The first time the hook is called, there is no memoized result.
+        hasMemo = true;
+        memoizedSnapshot = nextSnapshot;
+
+        var _nextSelection = selector(nextSnapshot);
+
+        if (isEqual !== undefined) {
+          // Even if the selector has changed, the currently rendered selection
+          // may be equal to the new selection. We should attempt to reuse the
+          // current value if possible, to preserve downstream memoizations.
+          if (inst.hasValue) {
+            var currentSelection = inst.value;
+
+            if (isEqual(currentSelection, _nextSelection)) {
+              memoizedSelection = currentSelection;
+              return currentSelection;
+            }
+          }
+        }
+
+        memoizedSelection = _nextSelection;
+        return _nextSelection;
+      } // We may be able to reuse the previous invocation's result.
+
+
+      // We may be able to reuse the previous invocation's result.
+      var prevSnapshot = memoizedSnapshot;
+      var prevSelection = memoizedSelection;
+
+      if (objectIs(prevSnapshot, nextSnapshot)) {
+        // The snapshot is the same as last time. Reuse the previous selection.
+        return prevSelection;
+      } // The snapshot has changed, so we need to compute a new selection.
+
+
+      // The snapshot has changed, so we need to compute a new selection.
+      var nextSelection = selector(nextSnapshot); // If a custom isEqual function is provided, use that to check if the data
+      // has changed. If it hasn't, return the previous selection. That signals
+      // to React that the selections are conceptually equal, and we can bail
+      // out of rendering.
+
+      // If a custom isEqual function is provided, use that to check if the data
+      // has changed. If it hasn't, return the previous selection. That signals
+      // to React that the selections are conceptually equal, and we can bail
+      // out of rendering.
+      if (isEqual !== undefined && isEqual(prevSelection, nextSelection)) {
+        return prevSelection;
+      }
+
+      memoizedSnapshot = nextSnapshot;
+      memoizedSelection = nextSelection;
+      return nextSelection;
+    }; // Assigning this to a constant so that Flow knows it can't change.
+
+
+    // Assigning this to a constant so that Flow knows it can't change.
+    var maybeGetServerSnapshot = getServerSnapshot === undefined ? null : getServerSnapshot;
+
+    var getSnapshotWithSelector = function () {
+      return memoizedSelector(getSnapshot());
+    };
+
+    var getServerSnapshotWithSelector = maybeGetServerSnapshot === null ? undefined : function () {
+      return memoizedSelector(maybeGetServerSnapshot());
+    };
+    return [getSnapshotWithSelector, getServerSnapshotWithSelector];
+  }, [getSnapshot, getServerSnapshot, selector, isEqual]),
+      getSelection = _useMemo[0],
+      getServerSelection = _useMemo[1];
+
+  var value = useSyncExternalStore(subscribe, getSelection, getServerSelection);
+  useEffect(function () {
+    inst.hasValue = true;
+    inst.value = value;
+  }, [value]);
+  useDebugValue(value);
+  return value;
+}
+
+exports.useSyncExternalStoreWithSelector = useSyncExternalStoreWithSelector;
+          /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+if (
+  typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' &&
+  typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop ===
+    'function'
+) {
+  __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
+}
+        
+  })();
+}
+
+
+/***/ }),
+/* 64 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const react_1 = __webpack_require__(52);
+const StateSingleton_1 = __webpack_require__(53);
+async function useRequest(options, method, callback) {
+    const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand((s) => s.dispatch);
+    if (typeof options === 'undefined') {
+        return (options, callback = null) => {
+            method(options, dispatch, callback);
+        };
+    }
+    (0, react_1.useEffect)(() => {
+        try {
+            method(options, dispatch, callback);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }, []);
+}
+exports["default"] = useRequest;
+
+
+/***/ }),
+/* 65 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const react_1 = __webpack_require__(52);
+const request_1 = __webpack_require__(13);
+const utils_1 = __webpack_require__(3);
+const _internal_1 = __webpack_require__(5);
+const __1 = __webpack_require__(0);
+const types_1 = __webpack_require__(12);
+const StateSingleton_1 = __webpack_require__(53);
 /**
  * useGet - hook
  *
@@ -6922,404 +7171,175 @@ var types_1 = __webpack_require__(12);
  * @todo Type the response callback. See usePost and usePut for reference.
  */
 function useGet(options, callback) {
-    var _this = this;
-    if (options === void 0) { options = null; }
-    if (callback === void 0) { callback = function (res, err) {
-        if (err === void 0) { err = null; }
-    }; }
-    var _a = (0, State_1.useGlobalState)(), _b = _a[0], dispatch = _a[1], state = __rest(_b, []);
-    var _c = (0, react_1.useState)(false), init = _c[0], setInit = _c[1];
-    var _d = (0, react_1.useState)(), data = _d[0], setData = _d[1];
-    var _e = (0, react_1.useState)(), error = _e[0], setError = _e[1];
-    var _f = (0, react_1.useState)(), isLoading = _f[0], setIsLoading = _f[1];
-    var _g = (0, react_1.useState)(false), isRefetching = _g[0], setIsRefetching = _g[1];
-    var _h = (0, react_1.useState)(), lastUpdated = _h[0], setLastUpdated = _h[1];
-    var stateRef = (0, react_1.useRef)(state);
-    var abortCtrl = typeof new AbortController() === "undefined"
+    const [state, dispatch] = StateSingleton_1.StateSingleton.getInstance().zustand((s) => [
+        s.global,
+        s.dispatch,
+    ]);
+    const [init, setInit] = (0, react_1.useState)(false);
+    const [data, setData] = (0, react_1.useState)();
+    const [error, setError] = (0, react_1.useState)();
+    const [isLoading, setIsLoading] = (0, react_1.useState)();
+    const [isRefetching, setIsRefetching] = (0, react_1.useState)(false);
+    const [lastUpdated, setLastUpdated] = (0, react_1.useState)();
+    const stateRef = (0, react_1.useRef)(state);
+    const abortCtrl = typeof new AbortController() === 'undefined'
         ? {
             signal: null,
-            abort: function () {
-                return console.warn("Browser does not support fetch canceling.");
-            },
+            abort: () => console.warn('Browser does not support fetch canceling.'),
         }
         : new AbortController();
-    var dependencies = [];
+    let dependencies = [];
     // these should be useRef variables instead
-    var isMounted = true;
-    var canceled = false;
-    var get = function (options, stateRef, dispatch, callback, isRefetch) {
-        if (isRefetch === void 0) { isRefetch = false; }
-        return __awaiter(_this, void 0, void 0, function () {
-            var _a, definition, params, type, currentState, key, stateValue, payload, res, err_1;
-            var _this = this;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = (0, _internal_1.getHookOptions)(options), definition = _a.definition, params = _a.params, type = _a.type;
-                        currentState = stateRef.current;
-                        // definition does not include a get call
-                        if (!(0, utils_1.hasValue)(definition, "getURL")) {
-                            return [2 /*return*/, null];
-                        }
-                        // check for null params
-                        if (!definition.nullableParams) {
-                            for (key in params) {
-                                if (typeof params[key] === "undefined" || params[key] === null) {
-                                    return [2 /*return*/, null];
-                                }
-                            }
-                        }
-                        stateValue = currentState && currentState[definition.key]
-                            ? (0, utils_1.deepCopy)(currentState[definition.key])
-                            : {};
-                        stateValue.refetch = function () { return refetch(); };
-                        _b.label = 1;
-                    case 1:
-                        _b.trys.push([1, 3, , 4]);
-                        if (isMounted) {
-                            setIsLoading(true);
-                            setInit(true);
-                            if (isRefetch) {
-                                setIsRefetching(true);
-                            }
-                        }
-                        stateValue.isLoading = true;
-                        stateValue.init = true;
-                        if (isRefetch) {
-                            stateValue.isRefetching = true;
-                        }
-                        // set initial loading state
-                        if (definition.persistData) {
-                            __1.Store.set(definition, stateValue);
-                        }
-                        if (definition.includeInState) {
-                            dispatch(definition.updateState(stateValue, "".concat(definition.type, "_IS_LOADING")));
-                        }
-                        if (definition.preferStore) {
-                            return [2 /*return*/, null];
-                        }
-                        payload = {
-                            path: definition.getURL,
-                            query: params,
-                            signal: abortCtrl.signal,
-                        };
-                        return [4 /*yield*/, (0, request_1.request)(payload, definition, types_1.API_METHOD.GET)];
-                    case 2:
-                        res = _b.sent();
-                        if (res) {
-                            stateValue.data = res.data;
-                            stateValue.isLoading = false;
-                            stateValue.lastUpdated = new Date();
-                            stateValue.isRefetching = false;
-                        }
-                        else {
-                            stateValue.isLoading = false;
-                        }
-                        if (isMounted) {
-                            setData(stateValue.data);
-                            setIsLoading(stateValue.isLoading);
-                            setLastUpdated(stateValue.lastUpdated);
-                            setIsRefetching(stateValue.isRefetching);
-                        }
-                        // persist updated value with new loading status
-                        if (definition.persistData) {
-                            __1.Store.set(definition, stateValue);
-                        }
-                        if (definition.includeInState) {
-                            dispatch(definition.updateState(stateValue, type));
-                        }
-                        if (callback) {
-                            callback(res);
-                        }
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_1 = _b.sent();
-                        console.error(err_1);
-                        stateValue.error = err_1;
-                        stateValue.isLoading = false;
-                        if (isMounted) {
-                            setError(stateValue.error);
-                            setIsLoading(stateValue.isLoading);
-                        }
-                        if (definition.includeInState) {
-                            dispatch(definition.updateState(stateValue, "".concat(definition.type, "_ERROR")));
-                        }
-                        if (callback) {
-                            callback(null, err_1);
-                        }
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/, {
-                            data: data,
-                            error: error,
-                            isLoading: isLoading,
-                            isRefetching: isRefetching,
-                            lastUpdated: lastUpdated,
-                            canceled: canceled,
-                            init: init,
-                            refetch: function () { return __awaiter(_this, void 0, void 0, function () {
-                                return __generator(this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0: return [4 /*yield*/, get(options, stateRef, dispatch, callback, true)];
-                                        case 1:
-                                            _a.sent();
-                                            return [2 /*return*/];
-                                    }
-                                });
-                            }); },
-                        }];
+    let isMounted = true;
+    let canceled = false;
+    const get = async (options, stateRef, dispatch, callback = (res, err) => { }, isRefetch = false) => {
+        const { definition, params, type } = (0, _internal_1.getHookOptions)(options);
+        const currentState = stateRef.current;
+        // definition does not include a get call
+        if (!(0, utils_1.hasValue)(definition, 'getURL')) {
+            return null;
+        }
+        // check for null params
+        if (!definition.nullableParams) {
+            for (let key in params) {
+                if (typeof params[key] === 'undefined' || params[key] === null) {
+                    return null;
                 }
-            });
-        });
-    };
-    var refetch = function () { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, get(options, stateRef, dispatch, callback, true)];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/];
             }
-        });
-    }); };
-    if (typeof options === 'undefined' || options === null) {
-        return [
-            function (options, callback) {
-                get(options, stateRef, dispatch, callback);
+        }
+        const stateValue = currentState && currentState[definition.key]
+            ? (0, utils_1.deepCopy)(currentState[definition.key])
+            : {};
+        stateValue.refetch = () => refetch();
+        try {
+            if (isMounted) {
+                setIsLoading(true);
+                setInit(true);
+                if (isRefetch) {
+                    setIsRefetching(true);
+                }
+            }
+            stateValue.isLoading = true;
+            stateValue.init = true;
+            if (isRefetch) {
+                stateValue.isRefetching = true;
+            }
+            // set initial loading state
+            if (definition.persistData) {
+                __1.Store.set(definition, stateValue);
+            }
+            if (definition.includeInState) {
+                dispatch(definition.updateState(stateValue, `${definition.type}_IS_LOADING`));
+            }
+            if (definition.preferStore) {
+                return null;
+            }
+            const payload = {
+                path: definition.getURL,
+                query: params,
+                signal: abortCtrl.signal,
+            };
+            const res = await (0, request_1.request)(payload, definition, types_1.API_METHOD.GET);
+            if (res) {
+                stateValue.data = res.data;
+                stateValue.isLoading = false;
+                stateValue.lastUpdated = new Date();
+                stateValue.isRefetching = false;
+            }
+            else {
+                stateValue.isLoading = false;
+            }
+            if (isMounted) {
+                setData(stateValue.data);
+                setIsLoading(stateValue.isLoading);
+                setLastUpdated(stateValue.lastUpdated);
+                setIsRefetching(stateValue.isRefetching);
+            }
+            // persist updated value with new loading status
+            if (definition.persistData) {
+                __1.Store.set(definition, stateValue);
+            }
+            if (definition.includeInState) {
+                dispatch(definition.updateState(stateValue, type));
+            }
+            if (callback) {
+                callback(res);
+            }
+        }
+        catch (err) {
+            console.error(err);
+            stateValue.error = err;
+            stateValue.isLoading = false;
+            if (isMounted) {
+                setError(stateValue.error);
+                setIsLoading(stateValue.isLoading);
+            }
+            if (definition.includeInState) {
+                dispatch(definition.updateState(stateValue, `${definition.type}_ERROR`));
+            }
+            if (callback) {
+                callback(null, err);
+            }
+        }
+        return {
+            data,
+            error,
+            isLoading,
+            isRefetching,
+            lastUpdated,
+            canceled,
+            init,
+            refetch: async () => {
+                await get(options, stateRef, dispatch, callback, true);
             },
-        ];
+        };
+    };
+    const refetch = async () => {
+        await get(options, stateRef, dispatch, callback, true);
+    };
+    if (typeof options === 'undefined' || options === null) {
+        return (options, callback) => {
+            get(options, stateRef, dispatch, callback);
+        };
     }
     if (options && options.params) {
         dependencies = Object.values(options.params);
     }
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         get(options, stateRef, dispatch, callback);
-        return function () {
+        return () => {
             isMounted = false;
             canceled = true;
             abortCtrl.abort();
         };
     }, dependencies);
-    return {
-        data: data,
-        error: error,
-        isLoading: isLoading,
-        isRefetching: isRefetching,
-        lastUpdated: lastUpdated,
-        canceled: canceled,
-        init: init,
-        // get,
-        // refetch,
-    };
 }
 exports["default"] = useGet;
 
 
 /***/ }),
-/* 55 */
+/* 66 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.useGlobalState = exports.StateProvider = exports.StateContext = void 0;
-// import React, { createContext, useContext, useReducer } from "react";
-var React = __webpack_require__(52);
-var _1 = __webpack_require__(0);
-var hooks_1 = __webpack_require__(56);
-exports.StateContext = React.createContext([]);
-var SyncState = function () {
-    (0, _1.useSyncState)();
-    return null;
-};
-var ProcessQueue = function () {
-    (0, hooks_1.useProcessQueue)();
-    return null;
-};
-/**
- * StateProvider<T>
- * The generic must be the `typeof` the entities config object
- */
-function StateProvider(_a) {
-    var children = _a.children;
-    return (React.createElement(exports.StateContext.Provider, { value: React.useReducer(_1.reducer, (0, _1.initialState)()) },
-        React.createElement(ProcessQueue, null),
-        React.createElement(SyncState, null),
-        children));
-}
-exports.StateProvider = StateProvider;
-/**
- * useGlobalState<T>
- * The generic must be the `typeof` the entities config object
- */
-var useGlobalState = function () {
-    return React.useContext(exports.StateContext);
-};
-exports.useGlobalState = useGlobalState;
-
-
-/***/ }),
-/* 56 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.useProcessQueue = void 0;
-var useProcessQueue_1 = __webpack_require__(57);
-exports.useProcessQueue = useProcessQueue_1.default;
-
-
-/***/ }),
-/* 57 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __webpack_require__(52);
-var utils_1 = __webpack_require__(3);
-var __1 = __webpack_require__(0);
-var __2 = __webpack_require__(5);
-var entities_1 = __webpack_require__(58);
-var getIsOnline = function () {
-    return typeof navigator !== "undefined" &&
-        typeof navigator.onLine === "boolean"
-        ? navigator.onLine
-        : true;
-};
-function useProcessQueue() {
-    var state = (0, __1.useGlobalState)()[0];
-    var rlean_offlineQueue = (0, utils_1.getValue)(state, "rlean_offlineQueue", undefined);
-    var _a = (0, react_1.useState)(getIsOnline()), isOnline = _a[0], setIsOnline = _a[1];
-    var post = (0, __1.usePost)()[0];
-    var del = (0, __1.useDelete)()[0];
-    var put = (0, __1.usePut)()[0];
-    var patch = (0, __1.usePatch)()[0];
-    var remove = (0, __1.useRemove)()[0];
-    var goOnline = function () { return setIsOnline(true); };
-    var goOffline = function () { return setIsOnline(false); };
-    (0, react_1.useEffect)(function () {
-        window.addEventListener("online", goOnline);
-        window.addEventListener("offline", goOffline);
-        if (isOnline) {
-            var data = (0, utils_1.getValue)(rlean_offlineQueue, "data", []);
-            for (var i = 0; i < data.length; i += 1) {
-                var method = data[i].method;
-                var options = data[i].options;
-                var callback = data[i].callback;
-                switch (method) {
-                    case __2.methods.POST:
-                        post(options, callback);
-                        break;
-                    case __2.methods.PUT:
-                        put(options, callback);
-                        break;
-                    case __2.methods.PATCH:
-                        patch(options, callback);
-                        break;
-                    case __2.methods.DELETE:
-                        del(options, callback);
-                        break;
-                    default:
-                        // unrecognized method
-                        break;
-                }
-            }
-            remove({ entity: entities_1.RLean_OfflineQueue });
-            return function () {
-                window.removeEventListener("online", goOnline);
-                window.removeEventListener("offline", goOffline);
-            };
-        }
-    }, [isOnline]);
-}
-exports["default"] = useProcessQueue;
-
-
-/***/ }),
-/* 58 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RLean_OfflineQueue = void 0;
-var RLean_OfflineQueue_1 = __webpack_require__(59);
-exports.RLean_OfflineQueue = RLean_OfflineQueue_1.default;
-
-
-/***/ }),
-/* 59 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-var define_1 = __webpack_require__(49);
-var RLean_OfflineQueue = (0, define_1.define)("rlean_offlineQueue", {});
-exports["default"] = RLean_OfflineQueue;
-
-
-/***/ }),
-/* 60 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __webpack_require__(52);
-var _internal_1 = __webpack_require__(5);
-var __1 = __webpack_require__(0);
-var getHookOptions_1 = __webpack_require__(7);
-var types_1 = __webpack_require__(12);
+const react_1 = __webpack_require__(52);
+const _internal_1 = __webpack_require__(5);
+const __1 = __webpack_require__(0);
+const getHookOptions_1 = __webpack_require__(7);
+const types_1 = __webpack_require__(12);
+const StateSingleton_1 = __webpack_require__(53);
 /**
  * Hook that exposes patch() safely and funly
  *
  * usePatch({ definition: Definition, body: { value: 'value' } });
  *
- * const [ patch ] = usePatch();
+ * const patch = usePatch();
  * patch({ definition: Definition, body: { value: 'value' } });
  */
-function usePatch(options, _callback) {
-    var _this = this;
-    if (_callback === void 0) { _callback = function () { }; }
-    var _a = (0, __1.useGlobalState)(), dispatch = _a[1];
+function usePatch(options, _callback = () => { }) {
+    const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(s => s.dispatch);
     /**
      * Function that executes a PATCH against the API.
      *
@@ -7327,67 +7347,49 @@ function usePatch(options, _callback) {
      * @param {Function} dispatch
      * @param {Function} [callback=null]
      */
-    var patch = function (options, dispatch, callback) { return __awaiter(_this, void 0, void 0, function () {
-        var _a, definition, params, body, save, patchURL, payload, response, _b, error_1, o;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0:
-                    _a = (0, getHookOptions_1.getHookOptions)(options), definition = _a.definition, params = _a.params, body = _a.body, save = _a.save;
-                    patchURL = definition.patchURL;
-                    if (!(patchURL !== null)) return [3 /*break*/, 10];
-                    _c.label = 1;
-                case 1:
-                    _c.trys.push([1, 8, , 9]);
-                    payload = {
-                        path: patchURL,
-                        query: params,
-                        body: body ? Object.assign({}, body) : {},
-                    };
-                    return [4 /*yield*/, (0, _internal_1.request)(payload, definition, types_1.API_METHOD.PATCH)];
-                case 2:
-                    response = _c.sent();
-                    if (!(response && save)) return [3 /*break*/, 7];
-                    if (!definition.persistData) return [3 /*break*/, 4];
-                    return [4 /*yield*/, __1.Store.set(definition, response.data)];
-                case 3:
-                    _c.sent();
-                    _c.label = 4;
-                case 4:
-                    _b = dispatch;
-                    return [4 /*yield*/, definition.updateState(response.data)];
-                case 5: return [4 /*yield*/, _b.apply(void 0, [_c.sent()])];
-                case 6:
-                    _c.sent();
-                    _c.label = 7;
-                case 7:
-                    if (response && callback) {
-                        callback(response);
+    const patch = async (options, dispatch, callback) => {
+        const { definition, params, body, save } = (0, getHookOptions_1.getHookOptions)(options);
+        const patchURL = definition.patchURL;
+        if (patchURL !== null) {
+            try {
+                const payload = {
+                    path: patchURL,
+                    query: params,
+                    body: body ? Object.assign({}, body) : {},
+                };
+                const response = await (0, _internal_1.request)(payload, definition, types_1.API_METHOD.PATCH);
+                // Don't do a deep compare on the return value against the current value.
+                // The return value will most likely be different regardless. Assume that
+                // if dispatch was provided, we're supposed to use it.
+                if (response && save) {
+                    if (definition.persistData) {
+                        await __1.Store.set(definition, response.data);
                     }
-                    return [3 /*break*/, 9];
-                case 8:
-                    error_1 = _c.sent();
-                    console.error(error_1);
-                    if (callback) {
-                        callback(null, error_1);
-                    }
-                    return [3 /*break*/, 9];
-                case 9: return [3 /*break*/, 11];
-                case 10:
-                    o = (0, _internal_1.inspectClass)(definition);
-                    console.error("The ".concat(o.ClassName, " object is missing the patchURL attribute."));
-                    _c.label = 11;
-                case 11: return [2 /*return*/];
+                    await dispatch(await definition.updateState(response.data));
+                }
+                if (response && callback) {
+                    callback(response);
+                }
             }
-        });
-    }); };
-    if (typeof options === "undefined") {
-        return [
-            function (options, callback) {
-                patch(options, dispatch, callback);
-            },
-        ];
+            catch (error) {
+                console.error(error);
+                if (callback) {
+                    callback(null, error);
+                }
+            }
+        }
+        else {
+            const o = (0, _internal_1.inspectClass)(definition);
+            console.error(`The ${o.ClassName} object is missing the patchURL attribute.`);
+        }
+        return;
+    };
+    if (typeof options === 'undefined') {
+        return (options, callback) => {
+            patch(options, dispatch, callback);
+        };
     }
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         patch(options, dispatch, _callback);
     }, []);
 }
@@ -7395,53 +7397,18 @@ exports["default"] = usePatch;
 
 
 /***/ }),
-/* 61 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/* 67 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __webpack_require__(52);
-var _internal_1 = __webpack_require__(5);
-var getHookOptions_1 = __webpack_require__(7);
-var __1 = __webpack_require__(0);
-var types_1 = __webpack_require__(12);
+const react_1 = __webpack_require__(52);
+const _internal_1 = __webpack_require__(5);
+const getHookOptions_1 = __webpack_require__(7);
+const __1 = __webpack_require__(0);
+const types_1 = __webpack_require__(12);
+const StateSingleton_1 = __webpack_require__(53);
 /**
  * Exposed Hook that allows user to access post method
  * If no definition given, returns function to use post to allow conditional operation.
@@ -7459,78 +7426,62 @@ var types_1 = __webpack_require__(12);
  *
  * usePost({ definition: Definition, body: { value: 'value' } });
  *
- * const [ post ] = usePost();
+ * const post = usePost();
  * post({ definition: Definition, body: { value: 'value' } });
  */
-function usePost(options, callback) {
-    var _this = this;
-    if (callback === void 0) { callback = function () { }; }
-    var _a = (0, __1.useGlobalState)(), dispatch = _a[1];
-    var mountedRef = (0, react_1.useRef)(true);
-    var post = (0, react_1.useCallback)(function (options, dispatch, callback) { return __awaiter(_this, void 0, void 0, function () {
-        var _a, definition, params, body, save, postURL, persistData, payload, response, error_1, o;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    _a = (0, getHookOptions_1.getHookOptions)(options), definition = _a.definition, params = _a.params, body = _a.body, save = _a.save;
-                    postURL = definition.postURL;
-                    persistData = definition.persistData;
-                    if (!(postURL !== null)) return [3 /*break*/, 5];
-                    _b.label = 1;
-                case 1:
-                    _b.trys.push([1, 3, , 4]);
-                    payload = {
-                        path: postURL,
-                        query: params,
-                        body: body
-                            ? Array.isArray(body)
-                                ? Object.assign([], body)
-                                : Object.assign({}, body)
-                            : {},
-                    };
-                    return [4 /*yield*/, (0, _internal_1.request)(payload, definition, types_1.API_METHOD.POST)];
-                case 2:
-                    response = _b.sent();
-                    if (!mountedRef.current) {
-                        return [2 /*return*/, null];
+function usePost(options, callback = () => { }) {
+    const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(s => s.dispatch);
+    const mountedRef = (0, react_1.useRef)(true);
+    const post = (0, react_1.useCallback)(async (options, dispatch, callback) => {
+        const { definition, params, body, save } = (0, getHookOptions_1.getHookOptions)(options);
+        const postURL = definition.postURL;
+        const persistData = definition.persistData;
+        if (postURL !== null) {
+            try {
+                const payload = {
+                    path: postURL,
+                    query: params,
+                    body: body
+                        ? Array.isArray(body)
+                            ? Object.assign([], body)
+                            : Object.assign({}, body)
+                        : {},
+                };
+                const response = await (0, _internal_1.request)(payload, definition, types_1.API_METHOD.POST);
+                if (!mountedRef.current) {
+                    return null;
+                }
+                if (response && save) {
+                    if (persistData) {
+                        __1.Store.set(definition, response.data);
                     }
-                    if (response && save) {
-                        if (persistData) {
-                            __1.Store.set(definition, response.data);
-                        }
-                        dispatch(definition.updateState(response.data));
-                    }
-                    if (callback && response) {
-                        callback(response);
-                    }
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _b.sent();
-                    console.error(error_1);
-                    if (callback) {
-                        callback(null, error_1);
-                    }
-                    return [3 /*break*/, 4];
-                case 4: return [3 /*break*/, 6];
-                case 5:
-                    o = (0, _internal_1.inspectClass)(definition);
-                    console.error("The ".concat(o.ClassName, " object is missing the postURL attribute."));
-                    _b.label = 6;
-                case 6: return [2 /*return*/];
+                    dispatch(definition.updateState(response.data));
+                }
+                if (callback && response) {
+                    callback(response);
+                }
             }
-        });
-    }); }, [mountedRef]);
-    if (typeof options === "undefined") {
-        return [
-            function (options, callback) {
-                post(options, dispatch, callback);
-            },
-        ];
+            catch (error) {
+                console.error(error);
+                if (callback) {
+                    callback(null, error);
+                }
+            }
+        }
+        else {
+            const o = (0, _internal_1.inspectClass)(definition);
+            console.error(`The ${o.ClassName} object is missing the postURL attribute.`);
+        }
+    }, [mountedRef]);
+    if (typeof options === 'undefined') {
+        return (options, callback) => {
+            post(options, dispatch, callback);
+        };
     }
     // params.push(post);
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         post(options, dispatch, callback);
-        return function () {
+        return () => {
             mountedRef.current = false; // clean up
         };
         // }, [params]);
@@ -7540,53 +7491,18 @@ exports["default"] = usePost;
 
 
 /***/ }),
-/* 62 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/* 68 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __webpack_require__(52);
-var _internal_1 = __webpack_require__(5);
-var getHookOptions_1 = __webpack_require__(7);
-var __1 = __webpack_require__(0);
-var types_1 = __webpack_require__(12);
+const react_1 = __webpack_require__(52);
+const _internal_1 = __webpack_require__(5);
+const getHookOptions_1 = __webpack_require__(7);
+const __1 = __webpack_require__(0);
+const types_1 = __webpack_require__(12);
+const StateSingleton_1 = __webpack_require__(53);
 /**
  * usePut
  *
@@ -7605,79 +7521,57 @@ var types_1 = __webpack_require__(12);
  *
  * usePut({ definition: Definition, body: { value: 'value' } });
  *
- * const [put] = usePut();
+ * const put = usePut();
  * put({ definition: Definition, body: { value: 'value' } })
  */
-function usePut(options, callback) {
-    var _this = this;
-    if (callback === void 0) { callback = function () { }; }
-    var _a = (0, __1.useGlobalState)(), dispatch = _a[1];
+function usePut(options, callback = () => { }) {
+    const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand((s) => s.dispatch);
     /**
      * Function that executes a PUT against the API.
      *
      */
-    var put = function (options, dispatch, callback) { return __awaiter(_this, void 0, void 0, function () {
-        var _a, definition, params, body, save, putURL, payload, response, _b, error_1, o;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0:
-                    _a = (0, getHookOptions_1.getHookOptions)(options), definition = _a.definition, params = _a.params, body = _a.body, save = _a.save;
-                    putURL = definition.putURL;
-                    if (!(putURL !== null)) return [3 /*break*/, 10];
-                    _c.label = 1;
-                case 1:
-                    _c.trys.push([1, 8, , 9]);
-                    payload = {
-                        path: putURL,
-                        query: params,
-                        body: body ? Object.assign({}, body) : {},
-                    };
-                    return [4 /*yield*/, (0, _internal_1.request)(payload, definition, types_1.API_METHOD.PUT)];
-                case 2:
-                    response = _c.sent();
-                    if (!(response && save)) return [3 /*break*/, 7];
-                    if (!definition.persistData) return [3 /*break*/, 4];
-                    return [4 /*yield*/, __1.Store.set(definition, response.data)];
-                case 3:
-                    _c.sent();
-                    _c.label = 4;
-                case 4:
-                    _b = dispatch;
-                    return [4 /*yield*/, definition.updateState(response.data)];
-                case 5: return [4 /*yield*/, _b.apply(void 0, [_c.sent()])];
-                case 6:
-                    _c.sent();
-                    _c.label = 7;
-                case 7:
-                    if (response && callback) {
-                        callback(response);
+    const put = async (options, dispatch, callback) => {
+        const { definition, params, body, save } = (0, getHookOptions_1.getHookOptions)(options);
+        const putURL = definition.putURL;
+        if (putURL !== null) {
+            try {
+                const payload = {
+                    path: putURL,
+                    query: params,
+                    body: body ? Object.assign({}, body) : {},
+                };
+                const response = await (0, _internal_1.request)(payload, definition, types_1.API_METHOD.PUT);
+                // Don't do a deep compare on the return value against the current value.
+                // The return value will most likely be different regardless. Assume that
+                // if dispatch was provided, we're supposed to use it.
+                if (response && save) {
+                    if (definition.persistData) {
+                        await __1.Store.set(definition, response.data);
                     }
-                    return [3 /*break*/, 9];
-                case 8:
-                    error_1 = _c.sent();
-                    console.error(error_1);
-                    if (callback) {
-                        callback(null, error_1);
-                    }
-                    return [3 /*break*/, 9];
-                case 9: return [3 /*break*/, 11];
-                case 10:
-                    o = (0, _internal_1.inspectClass)(definition);
-                    console.error("The ".concat(o.ClassName, " object is missing the putURL attribute."));
-                    _c.label = 11;
-                case 11: return [2 /*return*/];
+                    await dispatch(await definition.updateState(response.data));
+                }
+                if (response && callback) {
+                    callback(response);
+                }
             }
-        });
-    }); };
-    if (typeof options === "undefined") {
-        return [
-            function (options, callback) {
-                if (options === void 0) { options = undefined; }
-                put(options, dispatch, callback);
-            },
-        ];
+            catch (error) {
+                console.error(error);
+                if (callback) {
+                    callback(null, error);
+                }
+            }
+        }
+        else {
+            const o = (0, _internal_1.inspectClass)(definition);
+            console.error(`The ${o.ClassName} object is missing the putURL attribute.`);
+        }
+    };
+    if (typeof options === 'undefined') {
+        return (options = undefined, callback) => {
+            put(options, dispatch, callback);
+        };
     }
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         put(options, dispatch, callback);
     }, []);
 }
@@ -7685,53 +7579,18 @@ exports["default"] = usePut;
 
 
 /***/ }),
-/* 63 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/* 69 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __webpack_require__(52);
-var _internal_1 = __webpack_require__(5);
-var getHookOptions_1 = __webpack_require__(7);
-var __1 = __webpack_require__(0);
-var types_1 = __webpack_require__(12);
+const react_1 = __webpack_require__(52);
+const _internal_1 = __webpack_require__(5);
+const getHookOptions_1 = __webpack_require__(7);
+const __1 = __webpack_require__(0);
+const types_1 = __webpack_require__(12);
+const StateSingleton_1 = __webpack_require__(53);
 /**
  * Hook that exposes del()
  *
@@ -7739,13 +7598,11 @@ var types_1 = __webpack_require__(12);
  *
  * useDelete({ definition: Definition, body: { value: 'value' } });
  *
- * const [ del ] = useDelete();
+ * const del = useDelete();
  * del({ definition: Definition, body: { value: 'value' } });
  */
-function useDelete(options, callback) {
-    var _this = this;
-    if (callback === void 0) { callback = function () { }; }
-    var _a = (0, __1.useGlobalState)(), dispatch = _a[1];
+function useDelete(options, callback = () => { }) {
+    const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand((s) => s.dispatch);
     // NOT CONVERTED
     /**
      * Function that executes a DELETE against the API.
@@ -7755,65 +7612,44 @@ function useDelete(options, callback) {
      * @param {Function} dispatch
      * @param {Function} callback
      */
-    var del = function (options, dispatch, callback) { return __awaiter(_this, void 0, void 0, function () {
-        var _a, definition, body, save, deleteURL, persistData, payload, response, _b, error_1, o;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0:
-                    _a = (0, getHookOptions_1.getHookOptions)(options), definition = _a.definition, body = _a.body, save = _a.save;
-                    deleteURL = definition.deleteURL;
-                    persistData = definition.persistData;
-                    if (!(deleteURL !== null)) return [3 /*break*/, 9];
-                    _c.label = 1;
-                case 1:
-                    _c.trys.push([1, 8, , 9]);
-                    payload = {
-                        path: deleteURL,
-                        body: body ? Object.assign({}, body) : {},
-                    };
-                    return [4 /*yield*/, (0, _internal_1.request)(payload, definition, types_1.API_METHOD.DELETE)];
-                case 2:
-                    response = _c.sent();
-                    if (!(response && save)) return [3 /*break*/, 7];
-                    if (!persistData) return [3 /*break*/, 4];
-                    return [4 /*yield*/, __1.Store.set(definition, response.data)];
-                case 3:
-                    _c.sent();
-                    _c.label = 4;
-                case 4:
-                    _b = dispatch;
-                    return [4 /*yield*/, definition.updateState(response.data)];
-                case 5: return [4 /*yield*/, _b.apply(void 0, [_c.sent()])];
-                case 6:
-                    _c.sent();
-                    _c.label = 7;
-                case 7:
-                    if (response && callback) {
-                        callback(response);
+    const del = async (options, dispatch, callback = null) => {
+        const { definition, body, save } = (0, getHookOptions_1.getHookOptions)(options);
+        const deleteURL = definition.deleteURL;
+        const persistData = definition.persistData;
+        if (deleteURL !== null) {
+            try {
+                const payload = {
+                    path: deleteURL,
+                    body: body ? Object.assign({}, body) : {},
+                };
+                const response = await (0, _internal_1.request)(payload, definition, types_1.API_METHOD.DELETE);
+                if (response && save) {
+                    if (persistData) {
+                        await __1.Store.set(definition, response.data);
                     }
-                    return [2 /*return*/];
-                case 8:
-                    error_1 = _c.sent();
-                    console.error(error_1);
-                    if (callback) {
-                        callback(null, error_1);
-                    }
-                    return [3 /*break*/, 9];
-                case 9:
-                    o = (0, _internal_1.inspectClass)(definition);
-                    console.error("The ".concat(o.ClassName, " object is missing the deleteURL attribute."));
-                    return [2 /*return*/];
+                    await dispatch(await definition.updateState(response.data));
+                }
+                if (response && callback) {
+                    callback(response);
+                }
+                return;
             }
-        });
-    }); };
-    if (typeof options === "undefined") {
-        return [
-            function (options, callback) {
-                del(options, dispatch, callback);
-            },
-        ];
+            catch (error) {
+                console.error(error);
+                if (callback) {
+                    callback(null, error);
+                }
+            }
+        }
+        const o = (0, _internal_1.inspectClass)(definition);
+        console.error(`The ${o.ClassName} object is missing the deleteURL attribute.`);
+    };
+    if (typeof options === 'undefined') {
+        return (options, callback) => {
+            del(options, dispatch, callback);
+        };
     }
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         del(options, dispatch, callback);
     }, []);
 }
@@ -7821,77 +7657,39 @@ exports["default"] = useDelete;
 
 
 /***/ }),
-/* 64 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/* 70 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __webpack_require__(52);
-var __1 = __webpack_require__(0);
-var getHookOptions_1 = __webpack_require__(7);
+const react_1 = __webpack_require__(52);
+const __1 = __webpack_require__(0);
+const RLean_1 = __webpack_require__(2);
+const StateSingleton_1 = __webpack_require__(53);
+const getHookOptions_1 = __webpack_require__(7);
 /**
  * Main remove function from state
  * It does not executes a DELETE request
  */
-var remove = function (options, dispatch, callback) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, definition, type, persistData;
-    return __generator(this, function (_b) {
-        if (typeof options === "undefined") {
-            return [2 /*return*/];
-        }
-        _a = (0, getHookOptions_1.getHookOptions)(options), definition = _a.definition, type = _a.type;
-        persistData = definition.persistData;
-        if (persistData) {
-            __1.Store.remove(definition);
-        }
-        // Reset the state of the definition.
-        __1.RLean.definition = definition;
-        if (dispatch) {
-            dispatch(definition.updateState(null, type));
-        }
-        if (callback) {
-            callback();
-        }
-        return [2 /*return*/];
-    });
-}); };
+const remove = async (options, dispatch, callback) => {
+    if (typeof options === 'undefined') {
+        return;
+    }
+    const { definition, type } = (0, getHookOptions_1.getHookOptions)(options);
+    const persistData = definition.persistData;
+    if (persistData) {
+        __1.Store.remove(definition);
+    }
+    // Reset the state of the definition.
+    RLean_1.default.definition = definition;
+    if (dispatch) {
+        dispatch(definition.updateState(null, type));
+    }
+    if (callback) {
+        callback();
+    }
+};
 /**
  * Clear an object from the store if persistData is true (default).
  *
@@ -7899,18 +7697,14 @@ var remove = function (options, dispatch, callback) { return __awaiter(void 0, v
  * @param {Object} options An object containing an instance of the definition whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the definition has multiple types.
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
  */
-function useRemove(options, callback) {
-    if (callback === void 0) { callback = function () { }; }
-    var _a = (0, __1.useGlobalState)(), dispatch = _a[1];
-    if (typeof options === "undefined") {
-        return [
-            function (options, callback) {
-                if (callback === void 0) { callback = function () { }; }
-                remove(options, dispatch, callback);
-            },
-        ];
+function useRemove(options, callback = () => { }) {
+    const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand((s) => s.dispatch);
+    if (typeof options === 'undefined') {
+        return (options, callback = () => { }) => {
+            remove(options, dispatch, callback);
+        };
     }
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         remove(options, dispatch, callback);
     }, [dispatch]);
 }
@@ -7918,99 +7712,47 @@ exports["default"] = useRemove;
 
 
 /***/ }),
-/* 65 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/* 71 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var react_1 = __webpack_require__(52);
-var utils_1 = __webpack_require__(3);
-var __1 = __webpack_require__(0);
-var _internal_1 = __webpack_require__(5);
+const react_1 = __webpack_require__(52);
+const utils_1 = __webpack_require__(3);
+const __1 = __webpack_require__(0);
+const _internal_1 = __webpack_require__(5);
+const RLean_1 = __webpack_require__(2);
+const StateSingleton_1 = __webpack_require__(53);
 function useSyncState() {
-    var _this = this;
-    var mountedRef = (0, react_1.useRef)(true);
-    var _a = (0, __1.useGlobalState)(), _b = _a[0], dispatch = _a[1], state = __rest(_b, []);
-    var syncState = (0, react_1.useCallback)(function () {
-        var entityDefinitions = (0, utils_1.getValue)(__1.RLean, "config.entities", {});
-        var objects = Object.values(entityDefinitions);
-        objects.map(function (definition) { return __awaiter(_this, void 0, void 0, function () {
-            var key, stateValue, storedValue, type;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!mountedRef.current) {
-                            return [2 /*return*/, null];
-                        }
-                        if (!(definition.persistData && definition.includeInState)) return [3 /*break*/, 2];
-                        key = definition.key;
-                        stateValue = state[key];
-                        return [4 /*yield*/, __1.Store.get(definition)];
-                    case 1:
-                        storedValue = _a.sent();
-                        if (storedValue &&
-                            !utils_1.Compare.deepCompare(storedValue, stateValue).isEqual) {
-                            type = "SET_".concat((0, _internal_1.convertToType)(definition.key));
-                            // @todo dispatch doesn't receive any parameters (?)
-                            dispatch(definition.updateState(storedValue, type));
-                        }
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
+    const mountedRef = (0, react_1.useRef)(true);
+    const [state, dispatch] = StateSingleton_1.StateSingleton.getInstance().zustand((s) => [
+        s.state,
+        s.dispatch,
+    ]);
+    const syncState = (0, react_1.useCallback)(() => {
+        const entityDefinitions = (0, utils_1.getValue)(RLean_1.default, 'config.entities', {});
+        const objects = Object.values(entityDefinitions);
+        objects.map(async (definition) => {
+            if (!mountedRef.current) {
+                return null;
+            }
+            if (definition.persistData && definition.includeInState) {
+                const key = definition.key;
+                const stateValue = state[key];
+                const storedValue = await __1.Store.get(definition);
+                if (storedValue &&
+                    !utils_1.Compare.deepCompare(storedValue, stateValue).isEqual) {
+                    const type = `SET_${(0, _internal_1.convertToType)(definition.key)}`;
+                    // @todo dispatch doesn't receive any parameters (?)
+                    dispatch(definition.updateState(storedValue, type));
                 }
-            });
-        }); });
+            }
+        });
     }, [mountedRef]);
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         syncState();
-        return function () {
+        return () => {
             mountedRef.current = false;
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -8020,425 +7762,126 @@ exports["default"] = useSyncState;
 
 
 /***/ }),
-/* 66 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/* 72 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.reducer = void 0;
-var utils_1 = __webpack_require__(3);
-var _1 = __webpack_require__(0);
-var middleware_1 = __webpack_require__(67);
-var reducer = function (_a, action) {
-    var _b, _c;
-    var state = __rest(_a, []);
-    var entityDefinitions = (0, utils_1.getValue)(_1.RLean, "config.entities", {});
-    var middleware = (0, utils_1.getValue)(_1.RLean, "config.middleware", []);
-    var definition = (0, utils_1.getValue)(_1.RLean, "definition", {});
-    var objects = Object.values(entityDefinitions);
-    var objectsLength = objects.length;
-    var combinedReducer = {};
-    for (var i = 0; i < objectsLength; i += 1) {
-        if (objects[i].prototype) {
-            var key = objects[i].prototype.key;
-            var value = state[key];
-            if (objects[i].prototype.includeInState) {
-                Object.assign(combinedReducer, (_b = {},
-                    _b[key] = objects[i].prototype.reducer(value, action),
-                    _b));
-            }
-        }
-        else {
-            var key = objects[i].key;
-            var value = state[key];
-            if (objects[i].includeInState) {
-                Object.assign(combinedReducer, (_c = {},
-                    _c[key] = objects[i].reducer(value, action),
-                    _c));
-            }
-        }
-    }
-    var nextState = (0, utils_1.deepCopy)(state);
-    middleware.push(middleware_1.logActions);
-    // middleware.push(saveToIndexedDB);
-    (0, middleware_1.applyMiddleware)(definition, nextState, action, middleware);
-    return combinedReducer;
-};
-exports.reducer = reducer;
-
-
-/***/ }),
-/* 67 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.saveToIndexedDB = exports.logActions = exports.applyMiddleware = void 0;
-var _1 = __webpack_require__(0);
-var utils_1 = __webpack_require__(3);
-function logActions(definition, state, action) {
-    return __awaiter(this, void 0, void 0, function () {
-        var stateKey, logToConsole;
-        var _a;
-        return __generator(this, function (_b) {
-            stateKey = Object.keys(action)[1].toString();
-            logToConsole = (0, utils_1.getValue)(_1.RLean, "config.logToConsole", false);
-            if (logToConsole) {
-                console.log("state", state);
-                console.log("dispatching ".concat(action.type), (_a = {}, _a[stateKey] = action[stateKey], _a));
-            }
-            // TODO: stateKey is flawed. Doesn't work for nested state objects. Fix it.
-            // const stateKey = Object.keys(action)[1].toString();
-            // const stateValue = action[stateKey];
-            // TODO: Update state object to display next state instead of current state. Previous attempt was flawed.
-            // nextState[stateKey] = stateValue;
-            // console.log(`next state`, state);
-            return [2 /*return*/, state];
-        });
-    });
-}
-exports.logActions = logActions;
-function saveToIndexedDB(definition, state, action) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    if (!definition.persistData) return [3 /*break*/, 2];
-                    return [4 /*yield*/, _1.Store.set(definition, Object.values(action)[1])];
-                case 1:
-                    _a.sent();
-                    _a.label = 2;
-                case 2: return [2 /*return*/, state];
-            }
-        });
-    });
-}
-exports.saveToIndexedDB = saveToIndexedDB;
-function applyMiddleware(definition, state, action, middleware) {
-    return __awaiter(this, void 0, void 0, function () {
-        var _this = this;
-        return __generator(this, function (_a) {
-            return [2 /*return*/, middleware.map(function (fn) { return __awaiter(_this, void 0, void 0, function () {
-                    var returnable;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0: return [4 /*yield*/, fn(definition, state, action)];
-                            case 1:
-                                returnable = _a.sent();
-                                return [2 /*return*/, returnable];
-                        }
-                    });
-                }); })];
-        });
-    });
-}
-exports.applyMiddleware = applyMiddleware;
-
-
-/***/ }),
-/* 68 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.removeAll = void 0;
-var _1 = __webpack_require__(0);
+const _1 = __webpack_require__(0);
 /**
  * Clear all data from the store and from session.
  */
-var removeAll = function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        sessionStorage.clear();
-        localStorage.clear();
-        _1.Store.clear();
-        return [2 /*return*/];
-    });
-}); };
+const removeAll = async () => {
+    sessionStorage.clear();
+    localStorage.clear();
+    _1.Store.clear();
+};
 exports.removeAll = removeAll;
 
 
 /***/ }),
-/* 69 */
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/* 73 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-var getStorageMethods_1 = __webpack_require__(48);
-var Store = /** @class */ (function () {
-    function Store() {
-    }
+const getStorageMethods_1 = __webpack_require__(48);
+class Store {
     /*
      * Makes the 'set' call to local storage to store data
      */
-    Store.prototype.set = function (definition, value) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, setStorage, getStorage, key, updatedValue, err_1;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = (0, getStorageMethods_1.getStorageMethods)(definition), setStorage = _a.setStorage, getStorage = _a.getStorage;
-                        key = definition.key;
-                        _b.label = 1;
-                    case 1:
-                        _b.trys.push([1, 4, , 5]);
-                        return [4 /*yield*/, setStorage(key, value)];
-                    case 2:
-                        _b.sent();
-                        return [4 /*yield*/, getStorage(key)];
-                    case 3:
-                        updatedValue = _b.sent();
-                        if (updatedValue === undefined) {
-                            throw new Error("Could not set ".concat(key, " = ").concat(value));
-                        }
-                        return [2 /*return*/, { key: key, value: value }];
-                    case 4:
-                        err_1 = _b.sent();
-                        console.log(err_1);
-                        return [3 /*break*/, 5];
-                    case 5: return [2 /*return*/];
-                }
-            });
-        });
-    };
+    async set(definition, value) {
+        const { setStorage, getStorage } = (0, getStorageMethods_1.getStorageMethods)(definition);
+        const key = definition.key;
+        try {
+            await setStorage(key, value);
+            const updatedValue = await getStorage(key);
+            if (updatedValue === undefined) {
+                throw new Error(`Could not set ${key} = ${value}`);
+            }
+            return { key, value };
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
     /*
      * Makes the 'get' call to local storage to get some data
      */
-    Store.prototype.get = function (definition) {
-        return __awaiter(this, void 0, void 0, function () {
-            var getStorage, key, value, err_2;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        getStorage = (0, getStorageMethods_1.getStorageMethods)(definition).getStorage;
-                        key = definition.key;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, getStorage(key)];
-                    case 2:
-                        value = _a.sent();
-                        return [2 /*return*/, value];
-                    case 3:
-                        err_2 = _a.sent();
-                        console.log(err_2);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
-            });
+    async get(definition) {
+        const { getStorage } = (0, getStorageMethods_1.getStorageMethods)(definition);
+        const key = definition.key;
+        try {
+            const value = await getStorage(key);
+            return value;
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+    async setAll(units) {
+        const { setStorage } = (0, getStorageMethods_1.getStorageMethods)(null);
+        if (units === undefined || units.length === 0) {
+            throw new Error("Array cannot be null or empty");
+        }
+        units.forEach(async (unit) => {
+            try {
+                await setStorage(unit.key, unit.value);
+            }
+            catch (e) {
+                console.log(e);
+            }
         });
-    };
-    Store.prototype.setAll = function (units) {
-        return __awaiter(this, void 0, void 0, function () {
-            var setStorage;
-            var _this = this;
-            return __generator(this, function (_a) {
-                setStorage = (0, getStorageMethods_1.getStorageMethods)(null).setStorage;
-                if (units === undefined || units.length === 0) {
-                    throw new Error("Array cannot be null or empty");
-                }
-                units.forEach(function (unit) { return __awaiter(_this, void 0, void 0, function () {
-                    var e_1;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0:
-                                _a.trys.push([0, 2, , 3]);
-                                return [4 /*yield*/, setStorage(unit.key, unit.value)];
-                            case 1:
-                                _a.sent();
-                                return [3 /*break*/, 3];
-                            case 2:
-                                e_1 = _a.sent();
-                                console.log(e_1);
-                                return [3 /*break*/, 3];
-                            case 3: return [2 /*return*/];
-                        }
-                    });
-                }); });
-                return [2 /*return*/, true];
-            });
-        });
-    };
+        return true;
+    }
     /*
      * Makes the 'clear' call to local storage to get clear local storage
      * Uses the storage engine found by decideWhichEngine, either adapter or default.
      */
-    Store.prototype.clear = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var clearStorage, err_3;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        clearStorage = (0, getStorageMethods_1.getStorageMethods)(null).clearStorage;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, clearStorage()];
-                    case 2:
-                        _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_3 = _a.sent();
-                        console.error(err_3);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
+    async clear() {
+        const { clearStorage } = (0, getStorageMethods_1.getStorageMethods)(null);
+        try {
+            await clearStorage();
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
     /*
      * Makes the 'remove' call to local storage to get remove a value from local storage
      * Uses the storage engine found by decideWhichEngine, either adapter or default.
      */
-    Store.prototype.remove = function (definition) {
-        return __awaiter(this, void 0, void 0, function () {
-            var removeStorage, key, err_4;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        removeStorage = (0, getStorageMethods_1.getStorageMethods)(definition).removeStorage;
-                        key = definition.key;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, removeStorage(key)];
-                    case 2:
-                        _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_4 = _a.sent();
-                        console.log(err_4);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    return Store;
-}());
+    async remove(definition) {
+        const { removeStorage } = (0, getStorageMethods_1.getStorageMethods)(definition);
+        const key = definition.key;
+        try {
+            await removeStorage(key);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+}
 exports["default"] = new Store();
+
+
+/***/ }),
+/* 74 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RLeanBaseHooks = void 0;
+const useSyncState_1 = __webpack_require__(71);
+function RLeanBaseHooks() {
+    (0, useSyncState_1.default)();
+    return null;
+}
+exports.RLeanBaseHooks = RLeanBaseHooks;
 
 
 /***/ })
@@ -8469,6 +7912,30 @@ exports["default"] = new Store();
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -8479,6 +7946,22 @@ exports["default"] = new Store();
 /******/ 				if (typeof window === 'object') return window;
 /******/ 			}
 /******/ 		})();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
 /******/ 	})();
 /******/ 	
 /************************************************************************/

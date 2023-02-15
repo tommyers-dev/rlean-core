@@ -1,11 +1,7 @@
-/// <reference types="react" />
 /**
  * Main context type
  */
-export declare type ContextType<T> = [
-    state: GlobalState<T>,
-    dispatch: React.DispatchWithoutAction
-];
+export declare type ContextType<T> = [state: GlobalState<T>, dispatch: Function];
 /**
  * Configuration type for RLean
  * Type this using the entities object
@@ -34,7 +30,7 @@ export declare type RLeanConfig<F> = {
  * The generic is the object containing all entities' definitions. Infers the
  * entity data type and wraps it with EntityState
  */
-export declare type GlobalState<F> = {
+export declare type GlobalState<F = {}> = {
     [K in keyof F as Uncapitalize<string & K>]: F[K] extends EntityDefineOptions<infer A> ? EntityState<A> : never;
 };
 /**

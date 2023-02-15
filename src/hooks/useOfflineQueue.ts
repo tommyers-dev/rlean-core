@@ -1,11 +1,15 @@
-import { useRef } from "react";
-import { getValue } from "@rlean/utils";
-import { useSave, useGlobalState } from "..";
-import * as entities from "../_internal/entities";
+import { useRef } from 'react';
+import { getValue } from '@rlean/utils';
+import { useSave } from '..';
+import * as entities from '../_internal/entities';
+import { StateSingleton } from '../StateSingleton';
 
 export default function useOfflineQueue() {
-  const [save] = useSave();
-  const [{ rLean_OfflineQueue }] = useGlobalState<typeof entities>();
+  const save = useSave();
+
+  const rLean_OfflineQueue = StateSingleton.getInstance().zustand(
+    (s: any) => s.global?.rLean_OfflineQueue
+  );
   const offlineQueueRef = useRef(rLean_OfflineQueue);
 
   const enqueue = (
@@ -13,7 +17,7 @@ export default function useOfflineQueue() {
     rlean_offlineQueueRef: typeof offlineQueueRef
   ) => {
     const { method, options, callback } = params;
-    const data = getValue(rlean_offlineQueueRef, "data", []);
+    const data = getValue(rlean_offlineQueueRef, 'data', []);
     data.push({ method, options, callback });
 
     const stateValue = { data };
@@ -21,9 +25,7 @@ export default function useOfflineQueue() {
     save({ entity: entities.RLean_OfflineQueue, value: stateValue, add: true });
   };
 
-  return [
-    (params: any) => {
-      enqueue(params, offlineQueueRef);
-    },
-  ];
+  return (params: any) => {
+    enqueue(params, offlineQueueRef);
+  };
 }

@@ -1,19 +1,17 @@
 import { useEffect } from "react";
-import { useGlobalState } from "..";
+import { StateSingleton } from "../StateSingleton";
 
 export default async function useRequest(
   options: any,
   method: Function,
   callback: Function
 ) {
-  const [, dispatch] = useGlobalState();
+  const dispatch = StateSingleton.getInstance().zustand((s) => s.dispatch);
 
-  if (typeof options === "undefined") {
-    return [
-      (options: any, callback: Function) => {
-        method(options, dispatch, callback);
-      },
-    ];
+  if (typeof options === 'undefined') {
+    return (options: any, callback: Function | null = null) => {
+      method(options, dispatch, callback);
+    };
   }
 
   useEffect(() => {
