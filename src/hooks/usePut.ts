@@ -28,7 +28,7 @@ import { StateSingleton } from "../StateSingleton";
  *
  * usePut({ definition: Definition, body: { value: 'value' } });
  *
- * const [put] = usePut();
+ * const put = usePut();
  * put({ definition: Definition, body: { value: 'value' } })
  */
 export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
@@ -89,15 +89,13 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
     }
   };
 
-  if (typeof options === "undefined") {
-    return [
-      <Res, Req, T extends EntityDefineOptions<any>>(
-        options: PutOptions<T, Req> = undefined,
-        callback: (response: APIResponse<Res>, error?: any) => void
-      ) => {
-        put(options, dispatch, callback);
-      },
-    ];
+  if (typeof options === 'undefined') {
+    return <Res, Req, T extends EntityDefineOptions<any>>(
+      options: PutOptions<T, Req> = undefined,
+      callback: (response: APIResponse<Res>, error?: any) => void
+    ) => {
+      put(options, dispatch, callback);
+    };
   }
 
   useEffect(() => {

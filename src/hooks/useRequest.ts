@@ -8,12 +8,10 @@ export default async function useRequest(
 ) {
   const dispatch = StateSingleton.getInstance().zustand((s) => s.dispatch);
 
-  if (typeof options === "undefined") {
-    return [
-      (options: any, callback: Function) => {
-        method(options, dispatch, callback);
-      },
-    ];
+  if (typeof options === 'undefined') {
+    return (options: any, callback: Function | null = null) => {
+      method(options, dispatch, callback);
+    };
   }
 
   useEffect(() => {

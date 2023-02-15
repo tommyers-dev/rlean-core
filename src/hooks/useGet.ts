@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { request } from "../_internal/request";
-import { deepCopy, hasValue } from "@rlean/utils";
-import { getHookOptions } from "../_internal";
-import { Store } from "..";
+import { useEffect, useRef, useState } from 'react';
+import { request } from '../_internal/request';
+import { deepCopy, hasValue } from '@rlean/utils';
+import { getHookOptions } from '../_internal';
+import { Store } from '..';
 import {
   EntityState,
   GlobalState,
   EntityDefineOptions,
   GetOptions,
   API_METHOD,
-} from "../types";
-import { StateSingleton } from "../StateSingleton";
+} from '../types';
+import { StateSingleton } from '../StateSingleton';
 
 /**
  * useGet - hook
@@ -25,8 +25,13 @@ import { StateSingleton } from "../StateSingleton";
  */
 export default function useGet<Def extends EntityDefineOptions<any>>(
   options: GetOptions<Def> | undefined,
-  callback = () => {}
-): EntityState<Def> | [(options: GetOptions<Def>, callback: Function) => void] {
+  callback?: () => void
+):
+  | EntityState<Def>
+  | (<Def extends EntityDefineOptions<any>>(
+      options: GetOptions<Def>,
+      callback?: (response: any, error?: any) => void
+    ) => void) {
   const [state, dispatch] = StateSingleton.getInstance().zustand((s: any) => [
     s.global,
     s.dispatch,
@@ -40,11 +45,11 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   const [lastUpdated, setLastUpdated] = useState();
   const stateRef = useRef(state);
   const abortCtrl =
-    typeof new AbortController() === "undefined"
+    typeof new AbortController() === 'undefined'
       ? {
           signal: null,
           abort: () =>
-            console.warn("Browser does not support fetch canceling."),
+            console.warn('Browser does not support fetch canceling.'),
         }
       : new AbortController();
   let dependencies = [];
@@ -52,25 +57,25 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   let isMounted = true;
   let canceled = false;
 
-  const get = async <A, T extends EntityDefineOptions<any>>(
+  const get = async <T extends EntityDefineOptions<any>, A>(
     options: GetOptions<T> | undefined,
     stateRef: any,
     dispatch: (updateState: any) => void,
-    callback: Function,
+    callback = (res: any, err?: any) => {},
     isRefetch: boolean = false
   ) => {
     const { definition, params, type } = getHookOptions(options);
     const currentState: GlobalState<A> = stateRef.current;
 
     // definition does not include a get call
-    if (!hasValue(definition, "getURL")) {
+    if (!hasValue(definition, 'getURL')) {
       return null;
     }
 
     // check for null params
     if (!definition.nullableParams) {
       for (let key in params) {
-        if (typeof params[key] === "undefined" || params[key] === null) {
+        if (typeof params[key] === 'undefined' || params[key] === null) {
           return null;
         }
       }
@@ -190,12 +195,13 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
     await get(options, stateRef, dispatch, callback, true);
   };
 
-  if (typeof options === "undefined") {
-    return [
-      (options, callback) => {
-        get(options, stateRef, dispatch, callback);
-      },
-    ];
+  if (typeof options === 'undefined' || options === null) {
+    return <Def extends EntityDefineOptions<any>>(
+      options: GetOptions<Def>,
+      callback?: (response: any, error?: any) => void
+    ) => {
+      get(options, stateRef, dispatch, callback);
+    };
   }
 
   if (options && options.params) {
@@ -210,17 +216,5 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
       canceled = true;
       abortCtrl.abort();
     };
-  }, [...dependencies]);
-
-  return {
-    data,
-    error,
-    isLoading,
-    isRefetching,
-    lastUpdated,
-    canceled,
-    init,
-    // get,
-    // refetch,
-  };
+  }, dependencies);
 }

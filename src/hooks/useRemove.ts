@@ -14,7 +14,7 @@ const remove = async <T extends EntityDefineOptions<any>>(
   dispatch: (updateState: any) => void,
   callback: Function
 ) => {
-  if (typeof options === "undefined") {
+  if (typeof options === 'undefined') {
     return;
   }
 
@@ -50,15 +50,13 @@ export default function useRemove<T extends EntityDefineOptions<any>>(
 ) {
   const dispatch = StateSingleton.getInstance().zustand((s) => s.dispatch);
 
-  if (typeof options === "undefined") {
-    return [
-      <T extends EntityDefineOptions<any>>(
-        options: Partial<Options<T>>,
-        callback: Function = () => {}
-      ) => {
-        remove(options, dispatch, callback);
-      },
-    ];
+  if (typeof options === 'undefined') {
+    return <T extends EntityDefineOptions<any>>(
+      options: Partial<Options<T>>,
+      callback: Function = () => {}
+    ) => {
+      remove(options, dispatch, callback);
+    };
   }
 
   useEffect(() => {
