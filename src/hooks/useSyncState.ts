@@ -6,6 +6,9 @@ import * as entities from "../_internal/entities";
 import RLean from "../RLean";
 import { StateSingleton } from "../StateSingleton";
 
+/**
+ * Sync state from storage at mount
+ */
 export default function useSyncState() {
   const mountedRef = useRef(true);
   const [state, dispatch] = StateSingleton.getInstance().zustand((s: any) => [

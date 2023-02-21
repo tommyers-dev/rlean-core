@@ -38,7 +38,7 @@ export const rLean = {
 In the index.js file at the root of the project, include the following imports:
 
 ```js
-import { RLean, StateProvider } from "@rlean/core";
+import { RLean, RLeanBaseHooks } from "@rlean/core";
 import { rLean as config } from "config";
 ```
 
@@ -48,21 +48,12 @@ Initialize the @rlean/core package:
 RLean.init(config);
 ```
 
-And wrap the App component in the StateProvider:
+And mount the RLeanBaseHooks component:
 
 ```js
 ReactDom.render(
   <StateProvider>
-    <App />
-  </StateProvider>
-);
-```
-
-If you are using typescript, the StateProvider should be typed like this:
-
-```ts
-ReactDom.render(
-  <StateProvider<typeof config.entities>>
+    <RLeanBaseHooks />
     <App />
   </StateProvider>
 );
@@ -206,7 +197,7 @@ If query string params will be used, don't include them in the attribute. The qu
 
 ### Entity define options
 
-The define function has two required parameters, the key of the entity and its options. This is their definitions:
+The `define` function has two required parameters, the key of the entity and its options. This is their definitions:
 
 ```ts
 type EntityDefineOptions<T> = {
@@ -232,6 +223,7 @@ type EntityDefineOptions<T> = {
   includeInState?: boolean;
   listener?: Function;
   extensions?: any;
+  callback?: Function;
 };
 
 const define = <T>(
@@ -261,29 +253,7 @@ const DemoEntity = define("demoEntity", {
 });
 ```
 
-`putURL` is the path that will be used when the entity instance is passed in put.
-
-```js
-const DemoEntity = define("demoEntity", {
-  putURL: "/SomeApiPath",
-});
-```
-
-`deleteURL` is the path that will be used when the entity instance is passed in del.
-
-```js
-const DemoEntity = define("demoEntity", {
-  deleteURL: "/SomeApiPath",
-});
-```
-
-`patchURL` is the path that will be used when the entity instance is passed in patch.
-
-```js
-const DemoEntity = define("demoEntity", {
-  patchURL: "/SomeApiPath",
-});
-```
+`getURL`, `putURL`, `deleteURL` and `patchURL` are the paths when the entity instance is passed in GET, PUT, DELETE and PATCH respectively.
 
 `nullableParams` is false by default. If an optional param is not needed by the web app, simply omit it. the purpose of this attribute is to prevent unnecessary calls to the API before the param objects have been initialized. This is available as an override in case null is a valid value for a param. This cannot be set for individual params, but rather at the entity level.
 
@@ -345,18 +315,37 @@ If using the optional type to update a part of the object in state instead of th
 
 ## Custom hooks and functions
 
-### useGlobalState
+### State select
 
-Use the useGlobalState custom hook to access global state.
+Use the select function within the RLeanState object to access global state.
 
 ```ts
-import { useGlobalState } from "@rlean/core";
+import { RLeanState } from "@rlean/core";
 import * as entities from "lib/entities";
 
-const [{ stateObject, anotherStateObject }] = useGlobalState<typeof entities>();
+const [entityA, entityB] = RLeanState<typeof entities>().select(({ state }) => [
+  state.entityA,
+  state.entityB,
+]);
 ```
 
-Typing the useGlobalState using the typeof entities, we will be able to autocomplete all state objects. These objects will have the type of `EntityState<EntityType>`.
+Typing the RLeanState using the `typeof entities`, we will be able to autocomplete all state objects. These objects will have the type of `EntityState<EntityType>`.
+
+#### Entity autocompletion
+
+When using the selector with typescript to use the autocompletion feature, the `key` of the entities saved in state will be the uncapitalized version of the entity object name.
+
+That is, if the entity is define like so:
+
+```ts
+const DemoEntityX = define<DemoEntityType>("demoEntity", {
+  getURL: "/SomeApiPath",
+  postURL: "/SomeApiPath",
+  nullableParams: true,
+});
+```
+
+Then the state in the selector will be `demoEntityX`. Note that it is not the value set in the first parameter of the `define` function.
 
 ### useGet
 
@@ -366,13 +355,16 @@ The useGet custom hook is what populates all of your state objects based on what
 
 ```js
 import React, { memo } from 'react';
-import { useGlobalState, useGet } from '@rlean/core';
+import { RLeanState, useGet } from '@rlean/core';
 import { getValue } from '@rlean/utils';
 import { Spinner } from 'some-ui-library';
-import { DemoEntity } from 'lib/entities';
+import * as entities, { DemoEntity } from 'lib/entities';
 
 export const MyReactComponent = memo(() => {
-	const [{ demoEntity, someStateValue, isLoading }] = useGlobalState();
+  const [demoEntity, someStateValue] = RLeanState<typeof entities>().select(({ state }) => [
+    state.demoEntity,
+    state.entityB.data,
+  ]);
 
 	const id = getValue(someStateValue, 'id', null);
   useGet({ entity: DemoEntity, params: { id } });
@@ -402,7 +394,7 @@ useGet(
       // handle error
     }
     if (value) {
-      // Do something with the value. Note that storage is handled for you and the value should be accessed using the getGlobalState hook if possible.
+      // Do something with the value. Note that storage is handled for you and the value should be accessed using the RLeanState selector if possible
     }
   }
 );
@@ -412,13 +404,16 @@ It's also possible to use the useGet hook in this way:
 
 ```js
 import React, { memo } from 'react';
-import { useGlobalState, useGet } from '@rlean/core';
+import { RLeanState, useGet } from '@rlean/core';
 import { getValue } from '@rlean/utils';
 import { Spinner } from 'some-ui-library';
-import { DemoEntity } from 'lib/entities';
+import * as entities, { DemoEntity } from 'lib/entities';
 
 export const MyReactComponent = memo(() => {
-  const [{ demoEntity, someStateValue }] = useGlobalState();
+  const [demoEntity, someStateValue] = RLeanState<typeof entities>().select(({ state }) => [
+    state.demoEntity,
+    state.entityB.data,
+  ]);
   const [get] = useGet();
 
 	const id = getValue(someStateValue, 'id', null);
@@ -462,7 +457,7 @@ The call will look like: (uri-from-config)/SomeApiPath?id=1
 The usePost hook is used to post against the API and takes an options object and an optional callback function.
 
 ```ts
-import { useGlobalState, usePost } from "@rlean/core";
+import { RLeanState, usePost } from "@rlean/core";
 import { DemoEntity } from "lib/entities";
 
 const [post] = usePost();
@@ -475,7 +470,7 @@ const updateDb = async () => {
 If the entity has been typed, the body will expect the entity's type. Using the callback function, the `response` will be typed as `APIResponse<unknown>`, but it can be typed by manually typing the post function. This gives more flexibility in the Request and Response typing.
 
 ```ts
-import { useGlobalState, usePost } from "@rlean/core";
+import { RLeanState, usePost } from "@rlean/core";
 import { DemoEntity } from "lib/entities";
 
 const [post] = usePost();
@@ -532,7 +527,7 @@ The options that are available for use with useGet are **entity** and **params**
 The useSave hook is used when saving a state value, and takes an options object that includes the entity being updated and the new value, and an optional type. Saving a value will update state and storage if the persistData attribute is 'true' on the entity (the default setting).
 
 ```js
-import { useGlobalState, useSave } from "@rlean/core";
+import { RLeanState, useSave } from "@rlean/core";
 import { DemoEntity } from "lib/entities";
 
 const [save] = useSave();
@@ -547,7 +542,7 @@ const buttonClicked = async (newValue) => {
 The useRemove hook is used to remove an object from state and storage if applicable, and takes an options object that includes the entity being updated.
 
 ```js
-import { useGlobalState, useRemove } from "@rlean/core";
+import { RLeanState, useRemove } from "@rlean/core";
 import { DemoEntity } from "lib/entities";
 
 const [remove] = useRemove();
@@ -568,12 +563,12 @@ The removeAll function is an asynchronous function that is used to clear all sto
 isLoading is a property that is included by default on the entity if the state object is populated by an API call. This can be used to render loading animations.
 
 ```js
-import { useGlobalState } from "@rlean/core";
+import { RLeanState } from "@rlean/core";
 import { Spinner } from "some-ui-library";
 import { DemoEntity } from "lib/entities";
 
 export const MyReactComponent = () => {
-  const [{ demoEntity }] = useGlobalState();
+  const demoEntity = RLeanState().select(({ state }) => state.demoEntity);
 
   if (demoEntity.isLoading) {
     return <Spinner />;
@@ -603,12 +598,12 @@ Calling the refetch function on an entity will cause the get function to execute
 
 ```js
 import React from "react";
-import { useGlobalState, useGet } from "@rlean/core";
+import { RLeanState, useGet } from "@rlean/core";
 import { Spinner } from "some-ui-library";
 import { DemoEntity } from "lib/entities";
 
 export const MyReactComponent = () => {
-  const [{ demoEntity }] = useGlobalState();
+  const demoEntity = RLeanState().select(({ state }) => state.demoEntity);
   const id = 1;
 
   useGet({ entity: DemoEntity, params: { id } });

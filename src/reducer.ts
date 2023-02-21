@@ -7,6 +7,10 @@ type EntityWithPrototype = {
   prototype: any;
 } & EntityDefineOptions<any>;
 
+/**
+ * reducer
+ * Gets next state value
+ */
 export const reducer = <T>(
   { ...state }: GlobalState<T>,
   action: ActionType
