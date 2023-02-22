@@ -6856,6 +6856,10 @@ exports.reducer = void 0;
 var utils_1 = __webpack_require__(3);
 var _1 = __webpack_require__(0);
 var middleware_1 = __webpack_require__(55);
+/**
+ * reducer
+ * Gets next state value
+ */
 var reducer = function (_a, action) {
     var _b, _c;
     var state = __rest(_a, []);
@@ -8608,6 +8612,9 @@ var __1 = __webpack_require__(0);
 var _internal_1 = __webpack_require__(5);
 var RLean_1 = __webpack_require__(2);
 var StateSingleton_1 = __webpack_require__(53);
+/**
+ * Sync state from storage at mount
+ */
 function useSyncState() {
     var _this = this;
     var mountedRef = (0, react_1.useRef)(true);
@@ -8921,6 +8928,11 @@ exports["default"] = new Store();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RLeanBaseHooks = void 0;
 var useSyncState_1 = __webpack_require__(71);
+/**
+ * RLeanBaseHooks
+ *
+ * Used to mount hooks to maintain proper functionality of RLean
+ */
 function RLeanBaseHooks() {
     (0, useSyncState_1.default)();
     return null;

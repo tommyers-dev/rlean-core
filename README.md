@@ -349,7 +349,7 @@ Then the state in the selector will be `demoEntityX`. Note that it is not the va
 
 ### useGet
 
-The useGet custom hook is what populates all of your state objects based on whatever properties are set in your entity, and can be called from any component that relies on that state object. A dependency will be created for the param values, so if the params change, the custom hook will fire again. If no params are set, the custom hook will fire only once. useGet also takes an optional callback param that will be provided with the state value set in the custom hook, as well as the response if an API call is made. Note that the component is wrapped in React Memo, as all components using state values should be. This package uses Context API under the hood and this will prevent components from re-rendering unnecessarily.
+The useGet custom hook is what populates all of your state objects based on whatever properties are set in your entity, and can be called from any component that relies on that state object. A dependency will be created for the param values, so if the params change, the custom hook will fire again. If no params are set, the custom hook will fire only once. useGet also takes an optional callback param that will be provided with the state value set in the custom hook, as well as the response if an API call is made. Note that the component is wrapped in React Memo, as all components using state values should be. This package uses Zustand under the hood and this will prevent components from re-rendering unnecessarily.
 
 > Note: this also relies on @rlean/utils to check that ID of someStateValue exists before attempting to use the value. This approach also assumes that demoEntity cannot be null, and that the initial state value is null, but an empty value from the API is a valid value.
 
@@ -414,7 +414,7 @@ export const MyReactComponent = memo(() => {
     state.demoEntity,
     state.entityB.data,
   ]);
-  const [get] = useGet();
+  const get = useGet();
 
 	const id = getValue(someStateValue, 'id', null);
 
@@ -460,7 +460,7 @@ The usePost hook is used to post against the API and takes an options object and
 import { RLeanState, usePost } from "@rlean/core";
 import { DemoEntity } from "lib/entities";
 
-const [post] = usePost();
+const post = usePost();
 
 const updateDb = async () => {
   await post({ entity: DemoEntity, body: { value: "value" } });
@@ -473,7 +473,7 @@ If the entity has been typed, the body will expect the entity's type. Using the 
 import { RLeanState, usePost } from "@rlean/core";
 import { DemoEntity } from "lib/entities";
 
-const [post] = usePost();
+const post = usePost();
 
 // response typed as `APIResponse<unknown>`
 const updateDb = async () => {
@@ -530,7 +530,7 @@ The useSave hook is used when saving a state value, and takes an options object 
 import { RLeanState, useSave } from "@rlean/core";
 import { DemoEntity } from "lib/entities";
 
-const [save] = useSave();
+const save = useSave();
 
 const buttonClicked = async (newValue) => {
   await save({ entity: DemoEntity, value: newValue });
@@ -545,7 +545,7 @@ The useRemove hook is used to remove an object from state and storage if applica
 import { RLeanState, useRemove } from "@rlean/core";
 import { DemoEntity } from "lib/entities";
 
-const [remove] = useRemove();
+const remove = useRemove();
 
 const removeValue = async () => {
   await remove({ entity: DemoEntity });
@@ -635,8 +635,6 @@ The isRefetching property works similarly to the isLoading property, but is used
 LastUpdated is a model that is include by default if there are entities that make calls against the API to populate one or more objects in state. This state object is used by the syncAfterTimeElapsed model attribute, but is also useful for debugging.
 
 ## Tips
-
-- Wrap your functional components in [React memo](https://reactjs.org/docs/react-api.html#reactmemo). This package uses Context API for state management. Using [React memo](https://reactjs.org/docs/react-api.html#reactmemo) will prevent your components from re-rendering unnecessarily when there are state changes that your components don't care about.
 
 - Make sure entities are included in the export files in the lib/entities folder. If they are not all exported from the index.js file, those objects will not work.
 - Make sure entities and utilities are included in the export files in the lib/entities and lib/utilities folder. If they are not all exported from the index.js files in each of those folders, those objects will not work.

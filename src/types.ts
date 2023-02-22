@@ -1,9 +1,4 @@
 /**
- * Main context type
- */
-export type ContextType<T> = [state: GlobalState<T>, dispatch: Function];
-
-/**
  * Configuration type for RLean
  * Type this using the entities object
  */
