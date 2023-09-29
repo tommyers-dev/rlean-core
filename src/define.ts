@@ -1,5 +1,5 @@
-import { EntityDefineOptions } from "./types";
-import { getDefinitionOptions } from "./_internal";
+import { EntityDefineOptions } from './types';
+import { getDefinitionOptions } from './_internal';
 
 /**
  * define
@@ -11,10 +11,11 @@ export const define = <T>(
   callback?: Function
 ): EntityDefineOptions<T> => {
   if (!key) {
-    throw new Error("Key is required for definition.");
+    throw new Error('Key is required for definition.');
   }
 
   const {
+    baseURLOverride,
     initialState,
     getURL,
     postURL,
@@ -36,6 +37,7 @@ export const define = <T>(
 
   return {
     key,
+    baseURLOverride,
     initialState,
     getURL,
     postURL,

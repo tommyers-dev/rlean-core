@@ -1,12 +1,12 @@
-import RLean from "../RLean";
-import { getValue } from "@rlean/utils";
-import { getApiMethods } from "./getApiMethods";
+import RLean from '../RLean';
+import { getValue } from '@rlean/utils';
+import { getApiMethods } from './getApiMethods';
 import {
   AdapterAPIPayload,
   API_METHOD,
   EntityDefineOptions,
   RequestPayload,
-} from "../types";
+} from '../types';
 
 export const formatPath = (
   path: string,
@@ -20,7 +20,7 @@ export const formatPath = (
     if (payloadQuery) {
       for (let key in payloadQuery) {
         if (
-          typeof payloadQuery[key] === "undefined" ||
+          typeof payloadQuery[key] === 'undefined' ||
           payloadQuery[key] === null
         ) {
           // Params cannot be null.
@@ -31,7 +31,7 @@ export const formatPath = (
     if (payloadBody) {
       for (let key in payloadBody) {
         if (
-          typeof payloadBody[key] === "undefined" ||
+          typeof payloadBody[key] === 'undefined' ||
           payloadBody[key] === null
         ) {
           // Params cannot be null.
@@ -48,7 +48,7 @@ export const formatPath = (
 
   // If payloadQuery exists, return the path with the params appended.
   if (path && payloadQuery) {
-    let returnValue = "";
+    let returnValue = '';
 
     // Create an array of all payload keys.
     const queryStringKeys = [];
@@ -58,21 +58,21 @@ export const formatPath = (
 
     // Replace all the :key instances with the actual values given.
     returnValue = path
-      .split("/")
-      .map((section) => {
-        if (section.includes(":")) {
+      .split('/')
+      .map(section => {
+        if (section.includes(':')) {
           const key = section.match(/:(.*)/).pop();
 
           // Remove key from queryStringKeys array since it is a path param.
           const index = queryStringKeys.indexOf(key);
           queryStringKeys.splice(index, 1);
 
-          return section.replace(":" + key, payloadQuery[key]);
+          return section.replace(':' + key, payloadQuery[key]);
         }
 
         return section;
       })
-      .join("/");
+      .join('/');
 
     const query = [];
 
@@ -84,13 +84,13 @@ export const formatPath = (
     }
 
     if (query.length > 0) {
-      returnValue += "?" + query.join("&");
+      returnValue += '?' + query.join('&');
     }
 
     return returnValue;
   }
 
-  throw Error("Could not format the path.");
+  throw Error('Could not format the path.');
 };
 
 export const request = async <Res, EntityType>(
@@ -101,15 +101,15 @@ export const request = async <Res, EntityType>(
   const { get, post, del, put, patch } = getApiMethods(definition);
 
   const nullableParams = definition.nullableParams;
-  const apiUriOverride = definition.apiUriOverride;
+  const baseURLOverride = definition.baseURLOverride;
 
   // @todo type headers on RLeanConfig type
-  let headers = getValue(RLean, "config.api.headers", {});
+  let headers = getValue(RLean, 'config.api.headers', {});
 
-  const url: string = apiUriOverride
-    ? apiUriOverride
-    : getValue(RLean, "config.api.baseURL", "");
-  const token: string = getValue(RLean, "config.api.token", null);
+  const url: string = baseURLOverride
+    ? baseURLOverride
+    : getValue(RLean, 'config.api.baseURL', '');
+  const token: string = getValue(RLean, 'config.api.token', null);
 
   if (token) {
     headers.Authorization = `Bearer ${token}`;
@@ -124,7 +124,7 @@ export const request = async <Res, EntityType>(
   );
 
   // No path specified. Return undefined.
-  if (path === undefined || path === "") {
+  if (path === undefined || path === '') {
     console.warn(`Path is required.`);
     return;
   }
@@ -155,7 +155,7 @@ export const request = async <Res, EntityType>(
       res = await patch<Res, EntityType>(apiPayload);
       break;
     default:
-      console.error("Unknown API method specified.");
+      console.error('Unknown API method specified.');
       break;
   }
 

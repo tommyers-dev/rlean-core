@@ -1,8 +1,9 @@
-import { EntityDefineOptions } from "../types";
+import { EntityDefineOptions } from '../types';
 export declare const getDefinitionOptions: <T>(key: string, options: Partial<EntityDefineOptions<T>>) => {
     initialState: {
         [x: string]: any;
     };
+    baseURLOverride: any;
     getURL: any;
     postURL: any;
     putURL: any;
@@ -21,4 +22,5 @@ export declare const getDefinitionOptions: <T>(key: string, options: Partial<Ent
     reducer: Function;
     includeInState: boolean;
     listener: any;
+    transformation: any;
 };

@@ -1,6 +1,6 @@
-import { ActionType, EntityDefineOptions, EntityState } from "../types";
-import { hasValue } from "@rlean/utils";
-import { convertToType } from "./convertToType";
+import { ActionType, EntityDefineOptions, EntityState } from '../types';
+import { hasValue } from '@rlean/utils';
+import { convertToType } from './convertToType';
 
 export const getDefinitionOptions = <T>(
   key: string,
@@ -22,6 +22,7 @@ export const getDefinitionOptions = <T>(
 
   const defaultOptions = {
     initialState: getInitialState(),
+    baseURLOverride: null,
     getURL: null,
     postURL: null,
     putURL: null,
@@ -50,7 +51,7 @@ export const getDefinitionOptions = <T>(
         case `${defaultType}_ERROR`:
         case defaultType:
           // Create an object if value is a string or number.
-          if (typeof action[key] !== "object") {
+          if (typeof action[key] !== 'object') {
             return {
               ...state,
               value: action[key],
@@ -69,7 +70,7 @@ export const getDefinitionOptions = <T>(
 
         case addType:
           // add to existing state
-          if (hasValue(state, "data")) {
+          if (hasValue(state, 'data')) {
             return {
               ...state,
               data: [].concat(
@@ -90,12 +91,15 @@ export const getDefinitionOptions = <T>(
       }
     },
     listener: null,
+    transformation: null,
   };
 
   if (!options) {
     return defaultOptions;
   }
 
+  const baseURLOverride =
+    options.baseURLOverride ?? defaultOptions.baseURLOverride;
   const initialState = options.initialState
     ? { [key]: options.initialState }
     : defaultOptions.initialState;
@@ -121,9 +125,12 @@ export const getDefinitionOptions = <T>(
   const includeInState =
     options.includeInState ?? defaultOptions.includeInState;
   const listener = options.listener ?? defaultOptions.listener;
+  const transformation =
+    options.transformation ?? defaultOptions.transformation;
 
   return {
     initialState,
+    baseURLOverride,
     getURL,
     postURL,
     putURL,
@@ -142,5 +149,6 @@ export const getDefinitionOptions = <T>(
     reducer,
     includeInState,
     listener,
+    transformation,
   };
 };

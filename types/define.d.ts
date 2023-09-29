@@ -1,4 +1,4 @@
-import { EntityDefineOptions } from "./types";
+import { EntityDefineOptions } from './types';
 /**
  * define
  * Creates base entity definition using data type as generic

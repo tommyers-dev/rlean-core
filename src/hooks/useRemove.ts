@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { Store } from "..";
-import RLean from "../RLean";
-import { StateSingleton } from "../StateSingleton";
-import { getHookOptions } from "../_internal/getHookOptions";
-import { EntityDefineOptions, Options } from "../types";
+import { useEffect } from 'react';
+import { Store } from '..';
+import RLean from '../RLean';
+import { StateSingleton } from '../StateSingleton';
+import { getHookOptions } from '../_internal/getHookOptions';
+import { EntityDefineOptions, Options } from '../types';
 
 /**
  * Main remove function from state
- * It does not executes a DELETE request
+ * It does not execute a DELETE request
  */
 const remove = async <T extends EntityDefineOptions<any>>(
   options: Partial<Options<T>>,
@@ -48,7 +48,7 @@ export default function useRemove<T extends EntityDefineOptions<any>>(
   options?: Partial<Options<T>>,
   callback: Function = () => {}
 ) {
-  const dispatch = StateSingleton.getInstance().zustand((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().zustand(s => s.dispatch);
 
   if (typeof options === 'undefined') {
     return <T extends EntityDefineOptions<any>>(

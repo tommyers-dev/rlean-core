@@ -1,4 +1,5 @@
-import { RLeanConfig } from "./types";
+import { RLeanConfig } from './types';
+import { removeAll } from './removeAll';
 
 // import { getValue } from "@rlean/utils";
 // import { RLean_OfflineQueue } from "./_internal/entities";
@@ -7,7 +8,7 @@ import { RLeanConfig } from "./types";
  * RLean Class
  * Contains the configuration object. Type is inferred using the config object.
  */
-class RLeanClass<T> {
+class RLean<T> {
   public definition: any;
   public config: RLeanConfig<T>;
 
@@ -29,6 +30,10 @@ class RLeanClass<T> {
       this.config.api.token = token;
     }
   }
+
+  clear() {
+    removeAll();
+  }
 }
 
-export default new RLeanClass();
+export default new RLean();

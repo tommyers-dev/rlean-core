@@ -7,7 +7,7 @@
 		var a = typeof exports === 'object' ? factory(require("react")) : factory(root["React"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(self, (__WEBPACK_EXTERNAL_MODULE__52__) => {
+})(this, (__WEBPACK_EXTERNAL_MODULE__53__) => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ([
 /* 0 */
@@ -19,39 +19,39 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RLeanBaseHooks = exports.RLeanState = exports.StateSingleton = exports.useSyncState = exports.useSave = exports.useGet = exports.Store = exports.removeAll = exports.useRemove = exports.reducer = exports.RLean = exports.useDelete = exports.usePut = exports.usePost = exports.usePatch = exports.useRequest = exports.Adapters = exports.keys = exports.define = exports.initialState = void 0;
 const initialState_1 = __webpack_require__(1);
 Object.defineProperty(exports, "initialState", ({ enumerable: true, get: function () { return initialState_1.initialState; } }));
-const Adapters_1 = __webpack_require__(4);
+const Adapters_1 = __webpack_require__(5);
 exports.Adapters = Adapters_1.default;
-const define_1 = __webpack_require__(49);
+const define_1 = __webpack_require__(50);
 Object.defineProperty(exports, "define", ({ enumerable: true, get: function () { return define_1.define; } }));
-const keys_1 = __webpack_require__(50);
+const keys_1 = __webpack_require__(51);
 Object.defineProperty(exports, "keys", ({ enumerable: true, get: function () { return keys_1.keys; } }));
-const useSave_1 = __webpack_require__(51);
+const useSave_1 = __webpack_require__(52);
 exports.useSave = useSave_1.default;
-const useRequest_1 = __webpack_require__(64);
+const useRequest_1 = __webpack_require__(65);
 exports.useRequest = useRequest_1.default;
-const useGet_1 = __webpack_require__(65);
+const useGet_1 = __webpack_require__(66);
 exports.useGet = useGet_1.default;
-const usePatch_1 = __webpack_require__(66);
+const usePatch_1 = __webpack_require__(67);
 exports.usePatch = usePatch_1.default;
-const usePost_1 = __webpack_require__(67);
+const usePost_1 = __webpack_require__(68);
 exports.usePost = usePost_1.default;
-const usePut_1 = __webpack_require__(68);
+const usePut_1 = __webpack_require__(69);
 exports.usePut = usePut_1.default;
-const useDelete_1 = __webpack_require__(69);
+const useDelete_1 = __webpack_require__(70);
 exports.useDelete = useDelete_1.default;
-const useRemove_1 = __webpack_require__(70);
+const useRemove_1 = __webpack_require__(71);
 exports.useRemove = useRemove_1.default;
-const useSyncState_1 = __webpack_require__(71);
+const useSyncState_1 = __webpack_require__(72);
 exports.useSyncState = useSyncState_1.default;
 const RLean_1 = __webpack_require__(2);
 exports.RLean = RLean_1.default;
-const reducer_1 = __webpack_require__(54);
+const reducer_1 = __webpack_require__(55);
 Object.defineProperty(exports, "reducer", ({ enumerable: true, get: function () { return reducer_1.reducer; } }));
-const removeAll_1 = __webpack_require__(72);
+const removeAll_1 = __webpack_require__(3);
 Object.defineProperty(exports, "removeAll", ({ enumerable: true, get: function () { return removeAll_1.removeAll; } }));
 const Store_1 = __webpack_require__(73);
 exports.Store = Store_1.default;
-const StateSingleton_1 = __webpack_require__(53);
+const StateSingleton_1 = __webpack_require__(54);
 Object.defineProperty(exports, "StateSingleton", ({ enumerable: true, get: function () { return StateSingleton_1.StateSingleton; } }));
 Object.defineProperty(exports, "RLeanState", ({ enumerable: true, get: function () { return StateSingleton_1.RLeanState; } }));
 const BaseHooks_1 = __webpack_require__(74);
@@ -67,7 +67,7 @@ Object.defineProperty(exports, "RLeanBaseHooks", ({ enumerable: true, get: funct
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.initialState = void 0;
 const RLean_1 = __webpack_require__(2);
-const utils_1 = __webpack_require__(3);
+const utils_1 = __webpack_require__(4);
 /**
  * initialState
  * Creates initial GlobalState object
@@ -89,18 +89,19 @@ exports.initialState = initialState;
 
 /***/ }),
 /* 2 */
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+const removeAll_1 = __webpack_require__(3);
 // import { getValue } from "@rlean/utils";
 // import { RLean_OfflineQueue } from "./_internal/entities";
 /**
  * RLean Class
  * Contains the configuration object. Type is inferred using the config object.
  */
-class RLeanClass {
+class RLean {
     async init(config) {
         // const entities = getValue(config, "entities", {});
         // Here, the offlinequeue is added as entity but without a key
@@ -116,12 +117,35 @@ class RLeanClass {
             this.config.api.token = token;
         }
     }
+    clear() {
+        (0, removeAll_1.removeAll)();
+    }
 }
-exports["default"] = new RLeanClass();
+exports["default"] = new RLean();
 
 
 /***/ }),
 /* 3 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.removeAll = void 0;
+const _1 = __webpack_require__(0);
+/**
+ * Clear all data from the store and from session.
+ */
+const removeAll = async () => {
+    sessionStorage.clear();
+    localStorage.clear();
+    _1.Store.clear();
+};
+exports.removeAll = removeAll;
+
+
+/***/ }),
+/* 4 */
 /***/ ((module) => {
 
 /******/ (() => { // webpackBootstrap
@@ -794,16 +818,16 @@ module.exports = __webpack_exports__;
 ;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const RLean_1 = __webpack_require__(2);
-const _internal_1 = __webpack_require__(5);
-const utils_1 = __webpack_require__(3);
-const defaultAdapters_1 = __webpack_require__(15);
+const _internal_1 = __webpack_require__(6);
+const utils_1 = __webpack_require__(4);
+const defaultAdapters_1 = __webpack_require__(16);
 class Adapters {
     constructor(adapterMap) {
         this.adapterMap = adapterMap ? adapterMap : {};
@@ -851,35 +875,35 @@ exports["default"] = Adapters;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getStorageMethods = exports.getApiMethods = exports.convertToType = exports.getDefinitionOptions = exports.getHookOptions = exports.request = exports.methods = exports.implement = exports.inspectClass = void 0;
-const convertToType_1 = __webpack_require__(6);
+const convertToType_1 = __webpack_require__(7);
 Object.defineProperty(exports, "convertToType", ({ enumerable: true, get: function () { return convertToType_1.convertToType; } }));
-const getHookOptions_1 = __webpack_require__(7);
+const getHookOptions_1 = __webpack_require__(8);
 Object.defineProperty(exports, "getHookOptions", ({ enumerable: true, get: function () { return getHookOptions_1.getHookOptions; } }));
-const getDefinitionOptions_1 = __webpack_require__(8);
+const getDefinitionOptions_1 = __webpack_require__(9);
 Object.defineProperty(exports, "getDefinitionOptions", ({ enumerable: true, get: function () { return getDefinitionOptions_1.getDefinitionOptions; } }));
-const inspectClass_1 = __webpack_require__(9);
+const inspectClass_1 = __webpack_require__(10);
 Object.defineProperty(exports, "inspectClass", ({ enumerable: true, get: function () { return inspectClass_1.inspectClass; } }));
-const implement_1 = __webpack_require__(10);
+const implement_1 = __webpack_require__(11);
 Object.defineProperty(exports, "implement", ({ enumerable: true, get: function () { return implement_1.implement; } }));
-const methods_1 = __webpack_require__(11);
+const methods_1 = __webpack_require__(12);
 Object.defineProperty(exports, "methods", ({ enumerable: true, get: function () { return methods_1.methods; } }));
-const request_1 = __webpack_require__(13);
+const request_1 = __webpack_require__(14);
 Object.defineProperty(exports, "request", ({ enumerable: true, get: function () { return request_1.request; } }));
-const getApiMethods_1 = __webpack_require__(14);
+const getApiMethods_1 = __webpack_require__(15);
 Object.defineProperty(exports, "getApiMethods", ({ enumerable: true, get: function () { return getApiMethods_1.getApiMethods; } }));
-const getStorageMethods_1 = __webpack_require__(48);
+const getStorageMethods_1 = __webpack_require__(49);
 Object.defineProperty(exports, "getStorageMethods", ({ enumerable: true, get: function () { return getStorageMethods_1.getStorageMethods; } }));
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -899,16 +923,16 @@ exports.convertToType = convertToType;
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getHookOptions = void 0;
-const utils_1 = __webpack_require__(3);
+const utils_1 = __webpack_require__(4);
 const RLean_1 = __webpack_require__(2);
-const convertToType_1 = __webpack_require__(6);
+const convertToType_1 = __webpack_require__(7);
 const getHookOptions = (options) => {
     var _a, _b, _c, _d;
     if (!options) {
@@ -942,17 +966,17 @@ exports.getHookOptions = getHookOptions;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getDefinitionOptions = void 0;
-const utils_1 = __webpack_require__(3);
-const convertToType_1 = __webpack_require__(6);
+const utils_1 = __webpack_require__(4);
+const convertToType_1 = __webpack_require__(7);
 const getDefinitionOptions = (key, options) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
     const defaultType = `SET_${(0, convertToType_1.convertToType)(key)}`;
     const addType = `ADD_${(0, convertToType_1.convertToType)(key)}`;
     const getInitialState = () => {
@@ -965,6 +989,7 @@ const getDefinitionOptions = (key, options) => {
     };
     const defaultOptions = {
         initialState: getInitialState(),
+        baseURLOverride: null,
         getURL: null,
         postURL: null,
         putURL: null,
@@ -993,7 +1018,7 @@ const getDefinitionOptions = (key, options) => {
                 case `${defaultType}_ERROR`:
                 case defaultType:
                     // Create an object if value is a string or number.
-                    if (typeof action[key] !== "object") {
+                    if (typeof action[key] !== 'object') {
                         return Object.assign(Object.assign({}, state), { value: action[key] });
                     }
                     // If there is no value to set, clear state for this definition.
@@ -1003,7 +1028,7 @@ const getDefinitionOptions = (key, options) => {
                     return Object.assign(Object.assign({}, state), action[key]);
                 case addType:
                     // add to existing state
-                    if ((0, utils_1.hasValue)(state, "data")) {
+                    if ((0, utils_1.hasValue)(state, 'data')) {
                         return Object.assign(Object.assign({}, state), { data: [].concat([], ...state.data, ...action[key].data) });
                     }
                     else {
@@ -1014,33 +1039,37 @@ const getDefinitionOptions = (key, options) => {
             }
         },
         listener: null,
+        transformation: null,
     };
     if (!options) {
         return defaultOptions;
     }
+    const baseURLOverride = (_a = options.baseURLOverride) !== null && _a !== void 0 ? _a : defaultOptions.baseURLOverride;
     const initialState = options.initialState
         ? { [key]: options.initialState }
         : defaultOptions.initialState;
-    const getURL = (_a = options.getURL) !== null && _a !== void 0 ? _a : defaultOptions.getURL;
-    const postURL = (_b = options.postURL) !== null && _b !== void 0 ? _b : defaultOptions.postURL;
-    const putURL = (_c = options.putURL) !== null && _c !== void 0 ? _c : defaultOptions.putURL;
-    const patchURL = (_d = options.patchURL) !== null && _d !== void 0 ? _d : defaultOptions.patchURL;
-    const deleteURL = (_e = options.deleteURL) !== null && _e !== void 0 ? _e : defaultOptions.deleteURL;
-    const nullableParams = (_f = options.nullableParams) !== null && _f !== void 0 ? _f : defaultOptions.nullableParams;
-    const persistData = (_g = options.persistData) !== null && _g !== void 0 ? _g : defaultOptions.persistData;
-    const preferStore = (_h = options.preferStore) !== null && _h !== void 0 ? _h : defaultOptions.preferStore;
-    const progressiveLoading = (_j = options.progressiveLoading) !== null && _j !== void 0 ? _j : defaultOptions.progressiveLoading;
-    const syncInterval = (_k = options.syncInterval) !== null && _k !== void 0 ? _k : defaultOptions.syncInterval;
-    const syncAfterTimeElapsed = (_l = options.syncAfterTimeElapsed) !== null && _l !== void 0 ? _l : defaultOptions.syncAfterTimeElapsed;
-    const adapters = (_m = options.adapters) !== null && _m !== void 0 ? _m : defaultOptions.adapters;
-    const queueOffline = (_o = options.queueOffline) !== null && _o !== void 0 ? _o : defaultOptions.queueOffline;
-    const type = (_p = options.type) !== null && _p !== void 0 ? _p : defaultOptions.type;
-    const updateState = (_q = options.updateState) !== null && _q !== void 0 ? _q : defaultOptions.updateState;
-    const reducer = (_r = options.reducer) !== null && _r !== void 0 ? _r : defaultOptions.reducer;
-    const includeInState = (_s = options.includeInState) !== null && _s !== void 0 ? _s : defaultOptions.includeInState;
-    const listener = (_t = options.listener) !== null && _t !== void 0 ? _t : defaultOptions.listener;
+    const getURL = (_b = options.getURL) !== null && _b !== void 0 ? _b : defaultOptions.getURL;
+    const postURL = (_c = options.postURL) !== null && _c !== void 0 ? _c : defaultOptions.postURL;
+    const putURL = (_d = options.putURL) !== null && _d !== void 0 ? _d : defaultOptions.putURL;
+    const patchURL = (_e = options.patchURL) !== null && _e !== void 0 ? _e : defaultOptions.patchURL;
+    const deleteURL = (_f = options.deleteURL) !== null && _f !== void 0 ? _f : defaultOptions.deleteURL;
+    const nullableParams = (_g = options.nullableParams) !== null && _g !== void 0 ? _g : defaultOptions.nullableParams;
+    const persistData = (_h = options.persistData) !== null && _h !== void 0 ? _h : defaultOptions.persistData;
+    const preferStore = (_j = options.preferStore) !== null && _j !== void 0 ? _j : defaultOptions.preferStore;
+    const progressiveLoading = (_k = options.progressiveLoading) !== null && _k !== void 0 ? _k : defaultOptions.progressiveLoading;
+    const syncInterval = (_l = options.syncInterval) !== null && _l !== void 0 ? _l : defaultOptions.syncInterval;
+    const syncAfterTimeElapsed = (_m = options.syncAfterTimeElapsed) !== null && _m !== void 0 ? _m : defaultOptions.syncAfterTimeElapsed;
+    const adapters = (_o = options.adapters) !== null && _o !== void 0 ? _o : defaultOptions.adapters;
+    const queueOffline = (_p = options.queueOffline) !== null && _p !== void 0 ? _p : defaultOptions.queueOffline;
+    const type = (_q = options.type) !== null && _q !== void 0 ? _q : defaultOptions.type;
+    const updateState = (_r = options.updateState) !== null && _r !== void 0 ? _r : defaultOptions.updateState;
+    const reducer = (_s = options.reducer) !== null && _s !== void 0 ? _s : defaultOptions.reducer;
+    const includeInState = (_t = options.includeInState) !== null && _t !== void 0 ? _t : defaultOptions.includeInState;
+    const listener = (_u = options.listener) !== null && _u !== void 0 ? _u : defaultOptions.listener;
+    const transformation = (_v = options.transformation) !== null && _v !== void 0 ? _v : defaultOptions.transformation;
     return {
         initialState,
+        baseURLOverride,
         getURL,
         postURL,
         putURL,
@@ -1059,13 +1088,14 @@ const getDefinitionOptions = (key, options) => {
         reducer,
         includeInState,
         listener,
+        transformation,
     };
 };
 exports.getDefinitionOptions = getDefinitionOptions;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1106,14 +1136,14 @@ exports.inspectClass = inspectClass;
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.implement = void 0;
-const _1 = __webpack_require__(5);
+const _1 = __webpack_require__(6);
 const implement = (testableClass, rules) => {
     const given = (0, _1.inspectClass)(testableClass);
     // The inspection message we send back to give information about the interface check.
@@ -1146,19 +1176,19 @@ exports.implement = implement;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.methods = void 0;
-const types_1 = __webpack_require__(12);
+const types_1 = __webpack_require__(13);
 exports.methods = types_1.API_METHOD;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1179,7 +1209,7 @@ var API_METHOD;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -1187,15 +1217,15 @@ var API_METHOD;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.request = exports.formatPath = void 0;
 const RLean_1 = __webpack_require__(2);
-const utils_1 = __webpack_require__(3);
-const getApiMethods_1 = __webpack_require__(14);
-const types_1 = __webpack_require__(12);
+const utils_1 = __webpack_require__(4);
+const getApiMethods_1 = __webpack_require__(15);
+const types_1 = __webpack_require__(13);
 const formatPath = (path, payloadQuery, payloadBody, method, nullableParams) => {
     // Check for null params if they aren't allowed.
     if (!nullableParams) {
         if (payloadQuery) {
             for (let key in payloadQuery) {
-                if (typeof payloadQuery[key] === "undefined" ||
+                if (typeof payloadQuery[key] === 'undefined' ||
                     payloadQuery[key] === null) {
                     // Params cannot be null.
                     return;
@@ -1204,7 +1234,7 @@ const formatPath = (path, payloadQuery, payloadBody, method, nullableParams) => 
         }
         if (payloadBody) {
             for (let key in payloadBody) {
-                if (typeof payloadBody[key] === "undefined" ||
+                if (typeof payloadBody[key] === 'undefined' ||
                     payloadBody[key] === null) {
                     // Params cannot be null.
                     return;
@@ -1218,7 +1248,7 @@ const formatPath = (path, payloadQuery, payloadBody, method, nullableParams) => 
     }
     // If payloadQuery exists, return the path with the params appended.
     if (path && payloadQuery) {
-        let returnValue = "";
+        let returnValue = '';
         // Create an array of all payload keys.
         const queryStringKeys = [];
         for (let key in payloadQuery) {
@@ -1226,18 +1256,18 @@ const formatPath = (path, payloadQuery, payloadBody, method, nullableParams) => 
         }
         // Replace all the :key instances with the actual values given.
         returnValue = path
-            .split("/")
-            .map((section) => {
-            if (section.includes(":")) {
+            .split('/')
+            .map(section => {
+            if (section.includes(':')) {
                 const key = section.match(/:(.*)/).pop();
                 // Remove key from queryStringKeys array since it is a path param.
                 const index = queryStringKeys.indexOf(key);
                 queryStringKeys.splice(index, 1);
-                return section.replace(":" + key, payloadQuery[key]);
+                return section.replace(':' + key, payloadQuery[key]);
             }
             return section;
         })
-            .join("/");
+            .join('/');
         const query = [];
         // Create query string with query string params.
         for (let key in payloadQuery) {
@@ -1246,29 +1276,29 @@ const formatPath = (path, payloadQuery, payloadBody, method, nullableParams) => 
             }
         }
         if (query.length > 0) {
-            returnValue += "?" + query.join("&");
+            returnValue += '?' + query.join('&');
         }
         return returnValue;
     }
-    throw Error("Could not format the path.");
+    throw Error('Could not format the path.');
 };
 exports.formatPath = formatPath;
 const request = async (payload, definition, method) => {
     const { get, post, del, put, patch } = (0, getApiMethods_1.getApiMethods)(definition);
     const nullableParams = definition.nullableParams;
-    const apiUriOverride = definition.apiUriOverride;
+    const baseURLOverride = definition.baseURLOverride;
     // @todo type headers on RLeanConfig type
-    let headers = (0, utils_1.getValue)(RLean_1.default, "config.api.headers", {});
-    const url = apiUriOverride
-        ? apiUriOverride
-        : (0, utils_1.getValue)(RLean_1.default, "config.api.baseURL", "");
-    const token = (0, utils_1.getValue)(RLean_1.default, "config.api.token", null);
+    let headers = (0, utils_1.getValue)(RLean_1.default, 'config.api.headers', {});
+    const url = baseURLOverride
+        ? baseURLOverride
+        : (0, utils_1.getValue)(RLean_1.default, 'config.api.baseURL', '');
+    const token = (0, utils_1.getValue)(RLean_1.default, 'config.api.token', null);
     if (token) {
         headers.Authorization = `Bearer ${token}`;
     }
     const path = (0, exports.formatPath)(payload.path, payload.query, payload.body, method, nullableParams);
     // No path specified. Return undefined.
-    if (path === undefined || path === "") {
+    if (path === undefined || path === '') {
         console.warn(`Path is required.`);
         return;
     }
@@ -1296,7 +1326,7 @@ const request = async (payload, definition, method) => {
             res = await patch(apiPayload);
             break;
         default:
-            console.error("Unknown API method specified.");
+            console.error('Unknown API method specified.');
             break;
     }
     return res;
@@ -1305,16 +1335,16 @@ exports.request = request;
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getApiMethods = void 0;
-const utils_1 = __webpack_require__(3);
+const utils_1 = __webpack_require__(4);
 const RLean_1 = __webpack_require__(2);
-const defaultAdapters_1 = __webpack_require__(15);
+const defaultAdapters_1 = __webpack_require__(16);
 /**
  * getApiMethods
  * Returns all api methods from the adapter in an entity definition, or, if not
@@ -1335,28 +1365,28 @@ exports.getApiMethods = getApiMethods;
 
 
 /***/ }),
-/* 15 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.LocalForageAdapter = exports.AxiosAdapter = void 0;
-const AxiosAdapter_1 = __webpack_require__(16);
-exports.AxiosAdapter = AxiosAdapter_1.default;
-const LocalForageAdapter_1 = __webpack_require__(46);
-exports.LocalForageAdapter = LocalForageAdapter_1.default;
-
-
-/***/ }),
 /* 16 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const axios_1 = __webpack_require__(17);
-const types_1 = __webpack_require__(12);
+exports.LocalForageAdapter = exports.AxiosAdapter = void 0;
+const AxiosAdapter_1 = __webpack_require__(17);
+exports.AxiosAdapter = AxiosAdapter_1.default;
+const LocalForageAdapter_1 = __webpack_require__(47);
+exports.LocalForageAdapter = LocalForageAdapter_1.default;
+
+
+/***/ }),
+/* 17 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const axios_1 = __webpack_require__(18);
+const types_1 = __webpack_require__(13);
 class AxiosAdapter {
     async get(apiPayload) {
         const { url, headers, signal } = apiPayload;
@@ -1408,23 +1438,23 @@ exports["default"] = new AxiosAdapter();
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__(18);
+module.exports = __webpack_require__(19);
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
-var bind = __webpack_require__(20);
-var Axios = __webpack_require__(21);
-var mergeConfig = __webpack_require__(39);
-var defaults = __webpack_require__(26);
+var utils = __webpack_require__(20);
+var bind = __webpack_require__(21);
+var Axios = __webpack_require__(22);
+var mergeConfig = __webpack_require__(40);
+var defaults = __webpack_require__(27);
 
 /**
  * Create an instance of Axios
@@ -1457,18 +1487,18 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(42);
-axios.CancelToken = __webpack_require__(43);
-axios.isCancel = __webpack_require__(38);
+axios.Cancel = __webpack_require__(43);
+axios.CancelToken = __webpack_require__(44);
+axios.isCancel = __webpack_require__(39);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(44);
+axios.spread = __webpack_require__(45);
 
 // Expose isAxiosError
-axios.isAxiosError = __webpack_require__(45);
+axios.isAxiosError = __webpack_require__(46);
 
 module.exports = axios;
 
@@ -1477,13 +1507,13 @@ module.exports["default"] = axios;
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var bind = __webpack_require__(20);
+var bind = __webpack_require__(21);
 
 // utils is a library of generic helper functions non-specific to axios
 
@@ -1833,7 +1863,7 @@ module.exports = {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ ((module) => {
 
 "use strict";
@@ -1851,18 +1881,18 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
-var buildURL = __webpack_require__(22);
-var InterceptorManager = __webpack_require__(23);
-var dispatchRequest = __webpack_require__(24);
-var mergeConfig = __webpack_require__(39);
-var validator = __webpack_require__(40);
+var utils = __webpack_require__(20);
+var buildURL = __webpack_require__(23);
+var InterceptorManager = __webpack_require__(24);
+var dispatchRequest = __webpack_require__(25);
+var mergeConfig = __webpack_require__(40);
+var validator = __webpack_require__(41);
 
 var validators = validator.validators;
 /**
@@ -2006,13 +2036,13 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
+var utils = __webpack_require__(20);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -2083,13 +2113,13 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
+var utils = __webpack_require__(20);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -2144,16 +2174,16 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
-var transformData = __webpack_require__(25);
-var isCancel = __webpack_require__(38);
-var defaults = __webpack_require__(26);
+var utils = __webpack_require__(20);
+var transformData = __webpack_require__(26);
+var isCancel = __webpack_require__(39);
+var defaults = __webpack_require__(27);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -2233,14 +2263,14 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
-var defaults = __webpack_require__(26);
+var utils = __webpack_require__(20);
+var defaults = __webpack_require__(27);
 
 /**
  * Transform the data for a request or a response
@@ -2262,15 +2292,15 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
-var normalizeHeaderName = __webpack_require__(27);
-var enhanceError = __webpack_require__(28);
+var utils = __webpack_require__(20);
+var normalizeHeaderName = __webpack_require__(28);
+var enhanceError = __webpack_require__(29);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -2286,10 +2316,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(29);
+    adapter = __webpack_require__(30);
   } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(29);
+    adapter = __webpack_require__(30);
   }
   return adapter;
 }
@@ -2403,13 +2433,13 @@ module.exports = defaults;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
+var utils = __webpack_require__(20);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -2422,7 +2452,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ ((module) => {
 
 "use strict";
@@ -2471,20 +2501,20 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
-var settle = __webpack_require__(30);
-var cookies = __webpack_require__(32);
-var buildURL = __webpack_require__(22);
-var buildFullPath = __webpack_require__(33);
-var parseHeaders = __webpack_require__(36);
-var isURLSameOrigin = __webpack_require__(37);
-var createError = __webpack_require__(31);
+var utils = __webpack_require__(20);
+var settle = __webpack_require__(31);
+var cookies = __webpack_require__(33);
+var buildURL = __webpack_require__(23);
+var buildFullPath = __webpack_require__(34);
+var parseHeaders = __webpack_require__(37);
+var isURLSameOrigin = __webpack_require__(38);
+var createError = __webpack_require__(32);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -2667,13 +2697,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var createError = __webpack_require__(31);
+var createError = __webpack_require__(32);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -2699,13 +2729,13 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(28);
+var enhanceError = __webpack_require__(29);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -2724,13 +2754,13 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
+var utils = __webpack_require__(20);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -2784,14 +2814,14 @@ module.exports = (
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var isAbsoluteURL = __webpack_require__(34);
-var combineURLs = __webpack_require__(35);
+var isAbsoluteURL = __webpack_require__(35);
+var combineURLs = __webpack_require__(36);
 
 /**
  * Creates a new URL by combining the baseURL with the requestedURL,
@@ -2811,7 +2841,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ ((module) => {
 
 "use strict";
@@ -2832,7 +2862,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ ((module) => {
 
 "use strict";
@@ -2853,13 +2883,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
+var utils = __webpack_require__(20);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -2913,13 +2943,13 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
+var utils = __webpack_require__(20);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -2988,7 +3018,7 @@ module.exports = (
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ ((module) => {
 
 "use strict";
@@ -3000,13 +3030,13 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var utils = __webpack_require__(19);
+var utils = __webpack_require__(20);
 
 /**
  * Config-specific merge-function which creates a new config-object
@@ -3094,13 +3124,13 @@ module.exports = function mergeConfig(config1, config2) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var pkg = __webpack_require__(41);
+var pkg = __webpack_require__(42);
 
 var validators = {};
 
@@ -3206,14 +3236,14 @@ module.exports = {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ ((module) => {
 
 "use strict";
@@ -3239,13 +3269,13 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(42);
+var Cancel = __webpack_require__(43);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -3303,7 +3333,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ ((module) => {
 
 "use strict";
@@ -3337,7 +3367,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ ((module) => {
 
 "use strict";
@@ -3355,13 +3385,13 @@ module.exports = function isAxiosError(payload) {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const localforage = __webpack_require__(47);
+const localforage = __webpack_require__(48);
 class LocalForage {
     async set(key, value) {
         if (!key || value === undefined) {
@@ -3424,7 +3454,7 @@ exports["default"] = new LocalForage();
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*!
@@ -6246,16 +6276,16 @@ module.exports = localforage_js;
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getStorageMethods = void 0;
-const utils_1 = __webpack_require__(3);
+const utils_1 = __webpack_require__(4);
 const RLean_1 = __webpack_require__(2);
-const defaultAdapters_1 = __webpack_require__(15);
+const defaultAdapters_1 = __webpack_require__(16);
 const getStorageMethods = (definition) => {
     const store = (0, utils_1.hasValue)(definition, "adapters.storage")
         ? definition.adapters.storage
@@ -6270,14 +6300,14 @@ exports.getStorageMethods = getStorageMethods;
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.define = void 0;
-const _internal_1 = __webpack_require__(5);
+const _internal_1 = __webpack_require__(6);
 /**
  * define
  * Creates base entity definition using data type as generic
@@ -6285,10 +6315,11 @@ const _internal_1 = __webpack_require__(5);
 const define = (key, options, callback) => {
     var _a;
     if (!key) {
-        throw new Error("Key is required for definition.");
+        throw new Error('Key is required for definition.');
     }
-    const { initialState, getURL, postURL, putURL, patchURL, deleteURL, persistData, preferStore, progressiveLoading, syncAfterTimeElapsed, adapters, type, reducer, updateState, nullableParams, includeInState, queueOffline, } = (0, _internal_1.getDefinitionOptions)(key, options);
+    const { baseURLOverride, initialState, getURL, postURL, putURL, patchURL, deleteURL, persistData, preferStore, progressiveLoading, syncAfterTimeElapsed, adapters, type, reducer, updateState, nullableParams, includeInState, queueOffline, } = (0, _internal_1.getDefinitionOptions)(key, options);
     return Object.assign({ key,
+        baseURLOverride,
         initialState,
         getURL,
         postURL,
@@ -6312,16 +6343,16 @@ exports.define = define;
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.keys = void 0;
-const utils_1 = __webpack_require__(3);
+const utils_1 = __webpack_require__(4);
 const RLean_1 = __webpack_require__(2);
-const convertToType_1 = __webpack_require__(6);
+const convertToType_1 = __webpack_require__(7);
 const getKeys = () => {
     const entityDefinitions = (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
     const entityDefinitionsLength = entityDefinitions.length;
@@ -6338,17 +6369,17 @@ exports.keys = getKeys();
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const react_1 = __webpack_require__(52);
+const react_1 = __webpack_require__(53);
 const RLean_1 = __webpack_require__(2);
-const _internal_1 = __webpack_require__(5);
-const utils_1 = __webpack_require__(3);
-const StateSingleton_1 = __webpack_require__(53);
+const _internal_1 = __webpack_require__(6);
+const utils_1 = __webpack_require__(4);
+const StateSingleton_1 = __webpack_require__(54);
 const __1 = __webpack_require__(0);
 /**
  * Save an object to state, and optionally to store if persistData
@@ -6398,14 +6429,14 @@ exports["default"] = useSave;
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE__52__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__53__;
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -6413,9 +6444,9 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__52__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RLeanState = exports.StateSingleton = void 0;
 const initialState_1 = __webpack_require__(1);
-const reducer_1 = __webpack_require__(54);
-const zustand_1 = __webpack_require__(56);
-const utils_1 = __webpack_require__(3);
+const reducer_1 = __webpack_require__(55);
+const zustand_1 = __webpack_require__(57);
+const utils_1 = __webpack_require__(4);
 const RLean_1 = __webpack_require__(2);
 class StateSingleton {
     constructor() {
@@ -6455,7 +6486,7 @@ exports.RLeanState = RLeanState;
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -6473,9 +6504,9 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.reducer = void 0;
-const utils_1 = __webpack_require__(3);
+const utils_1 = __webpack_require__(4);
 const _1 = __webpack_require__(0);
-const middleware_1 = __webpack_require__(55);
+const middleware_1 = __webpack_require__(56);
 const reducer = (_a, action) => {
     var state = __rest(_a, []);
     const entityDefinitions = (0, utils_1.getValue)(_1.RLean, "config.entities", {});
@@ -6514,7 +6545,7 @@ exports.reducer = reducer;
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -6522,7 +6553,7 @@ exports.reducer = reducer;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.saveToIndexedDB = exports.logActions = exports.applyMiddleware = void 0;
 const _1 = __webpack_require__(0);
-const utils_1 = __webpack_require__(3);
+const utils_1 = __webpack_require__(4);
 async function logActions(definition, state, action) {
     const stateKey = Object.keys(action)[1].toString();
     const logToConsole = (0, utils_1.getValue)(_1.RLean, "config.logToConsole", false);
@@ -6556,7 +6587,7 @@ exports.applyMiddleware = applyMiddleware;
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6566,10 +6597,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ create),
 /* harmony export */   "useStore": () => (/* binding */ useStore)
 /* harmony export */ });
-/* harmony import */ var zustand_vanilla__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(52);
+/* harmony import */ var zustand_vanilla__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(58);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(53);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var use_sync_external_store_shim_with_selector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(58);
+/* harmony import */ var use_sync_external_store_shim_with_selector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(59);
 
 
 
@@ -6600,7 +6631,7 @@ const create = (createState) => createState ? createImpl(createState) : createIm
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6635,21 +6666,21 @@ const createStore = (createState) => createState ? createStoreImpl(createState) 
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(59);
+  module.exports = __webpack_require__(60);
 } else {
-  module.exports = __webpack_require__(63);
+  module.exports = __webpack_require__(64);
 }
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -6662,27 +6693,27 @@ if (process.env.NODE_ENV === 'production') {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var h=__webpack_require__(52),n=__webpack_require__(60);function p(a,b){return a===b&&(0!==a||1/a===1/b)||a!==a&&b!==b}var q="function"===typeof Object.is?Object.is:p,r=n.useSyncExternalStore,t=h.useRef,u=h.useEffect,v=h.useMemo,w=h.useDebugValue;
+var h=__webpack_require__(53),n=__webpack_require__(61);function p(a,b){return a===b&&(0!==a||1/a===1/b)||a!==a&&b!==b}var q="function"===typeof Object.is?Object.is:p,r=n.useSyncExternalStore,t=h.useRef,u=h.useEffect,v=h.useMemo,w=h.useDebugValue;
 exports.useSyncExternalStoreWithSelector=function(a,b,e,l,g){var c=t(null);if(null===c.current){var f={hasValue:!1,value:null};c.current=f}else f=c.current;c=v(function(){function a(a){if(!c){c=!0;d=a;a=l(a);if(void 0!==g&&f.hasValue){var b=f.value;if(g(b,a))return k=b}return k=a}b=k;if(q(d,a))return b;var e=l(a);if(void 0!==g&&g(b,e))return b;d=a;return k=e}var c=!1,d,k,m=void 0===e?null:e;return[function(){return a(b())},null===m?void 0:function(){return a(m())}]},[b,e,l,g]);var d=r(a,c[0],c[1]);
 u(function(){f.hasValue=!0;f.value=d},[d]);w(d);return d};
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(61);
-} else {
   module.exports = __webpack_require__(62);
+} else {
+  module.exports = __webpack_require__(63);
 }
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -6695,12 +6726,12 @@ if (process.env.NODE_ENV === 'production') {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var e=__webpack_require__(52);function h(a,b){return a===b&&(0!==a||1/a===1/b)||a!==a&&b!==b}var k="function"===typeof Object.is?Object.is:h,l=e.useState,m=e.useEffect,n=e.useLayoutEffect,p=e.useDebugValue;function q(a,b){var d=b(),f=l({inst:{value:d,getSnapshot:b}}),c=f[0].inst,g=f[1];n(function(){c.value=d;c.getSnapshot=b;r(c)&&g({inst:c})},[a,d,b]);m(function(){r(c)&&g({inst:c});return a(function(){r(c)&&g({inst:c})})},[a]);p(d);return d}
+var e=__webpack_require__(53);function h(a,b){return a===b&&(0!==a||1/a===1/b)||a!==a&&b!==b}var k="function"===typeof Object.is?Object.is:h,l=e.useState,m=e.useEffect,n=e.useLayoutEffect,p=e.useDebugValue;function q(a,b){var d=b(),f=l({inst:{value:d,getSnapshot:b}}),c=f[0].inst,g=f[1];n(function(){c.value=d;c.getSnapshot=b;r(c)&&g({inst:c})},[a,d,b]);m(function(){r(c)&&g({inst:c});return a(function(){r(c)&&g({inst:c})})},[a]);p(d);return d}
 function r(a){var b=a.getSnapshot;a=a.value;try{var d=b();return!k(a,d)}catch(f){return!0}}function t(a,b){return b()}var u="undefined"===typeof window||"undefined"===typeof window.document||"undefined"===typeof window.document.createElement?t:q;exports.useSyncExternalStore=void 0!==e.useSyncExternalStore?e.useSyncExternalStore:u;
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -6729,7 +6760,7 @@ if (
 ) {
   __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
 }
-          var React = __webpack_require__(52);
+          var React = __webpack_require__(53);
 
 var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 
@@ -6946,7 +6977,7 @@ if (
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -6975,8 +7006,8 @@ if (
 ) {
   __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
 }
-          var React = __webpack_require__(52);
-var shim = __webpack_require__(60);
+          var React = __webpack_require__(53);
+var shim = __webpack_require__(61);
 
 /**
  * inlined Object.is polyfill to avoid requiring consumers ship their own
@@ -7118,14 +7149,14 @@ if (
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const react_1 = __webpack_require__(52);
-const StateSingleton_1 = __webpack_require__(53);
+const react_1 = __webpack_require__(53);
+const StateSingleton_1 = __webpack_require__(54);
 async function useRequest(options, method, callback) {
     const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand((s) => s.dispatch);
     if (typeof options === 'undefined') {
@@ -7146,19 +7177,19 @@ exports["default"] = useRequest;
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const react_1 = __webpack_require__(52);
-const request_1 = __webpack_require__(13);
-const utils_1 = __webpack_require__(3);
-const _internal_1 = __webpack_require__(5);
+const react_1 = __webpack_require__(53);
+const request_1 = __webpack_require__(14);
+const utils_1 = __webpack_require__(4);
+const _internal_1 = __webpack_require__(6);
 const __1 = __webpack_require__(0);
-const types_1 = __webpack_require__(12);
-const StateSingleton_1 = __webpack_require__(53);
+const types_1 = __webpack_require__(13);
+const StateSingleton_1 = __webpack_require__(54);
 /**
  * useGet - hook
  *
@@ -7241,7 +7272,12 @@ function useGet(options, callback) {
             };
             const res = await (0, request_1.request)(payload, definition, types_1.API_METHOD.GET);
             if (res) {
-                stateValue.data = res.data;
+                // Transform data if transformation function is set for entity definition.
+                stateValue.data =
+                    definition.transformation &&
+                        typeof definition.transformation === 'function'
+                        ? definition.transformation(res.data)
+                        : res.data;
                 stateValue.isLoading = false;
                 stateValue.lastUpdated = new Date();
                 stateValue.isRefetching = false;
@@ -7318,18 +7354,18 @@ exports["default"] = useGet;
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const react_1 = __webpack_require__(52);
-const _internal_1 = __webpack_require__(5);
+const react_1 = __webpack_require__(53);
+const _internal_1 = __webpack_require__(6);
 const __1 = __webpack_require__(0);
-const getHookOptions_1 = __webpack_require__(7);
-const types_1 = __webpack_require__(12);
-const StateSingleton_1 = __webpack_require__(53);
+const getHookOptions_1 = __webpack_require__(8);
+const types_1 = __webpack_require__(13);
+const StateSingleton_1 = __webpack_require__(54);
 /**
  * Hook that exposes patch() safely and funly
  *
@@ -7397,18 +7433,18 @@ exports["default"] = usePatch;
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const react_1 = __webpack_require__(52);
-const _internal_1 = __webpack_require__(5);
-const getHookOptions_1 = __webpack_require__(7);
+const react_1 = __webpack_require__(53);
+const _internal_1 = __webpack_require__(6);
+const getHookOptions_1 = __webpack_require__(8);
 const __1 = __webpack_require__(0);
-const types_1 = __webpack_require__(12);
-const StateSingleton_1 = __webpack_require__(53);
+const types_1 = __webpack_require__(13);
+const StateSingleton_1 = __webpack_require__(54);
 /**
  * Exposed Hook that allows user to access post method
  * If no definition given, returns function to use post to allow conditional operation.
@@ -7491,18 +7527,18 @@ exports["default"] = usePost;
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const react_1 = __webpack_require__(52);
-const _internal_1 = __webpack_require__(5);
-const getHookOptions_1 = __webpack_require__(7);
+const react_1 = __webpack_require__(53);
+const _internal_1 = __webpack_require__(6);
+const getHookOptions_1 = __webpack_require__(8);
 const __1 = __webpack_require__(0);
-const types_1 = __webpack_require__(12);
-const StateSingleton_1 = __webpack_require__(53);
+const types_1 = __webpack_require__(13);
+const StateSingleton_1 = __webpack_require__(54);
 /**
  * usePut
  *
@@ -7579,18 +7615,18 @@ exports["default"] = usePut;
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const react_1 = __webpack_require__(52);
-const _internal_1 = __webpack_require__(5);
-const getHookOptions_1 = __webpack_require__(7);
+const react_1 = __webpack_require__(53);
+const _internal_1 = __webpack_require__(6);
+const getHookOptions_1 = __webpack_require__(8);
 const __1 = __webpack_require__(0);
-const types_1 = __webpack_require__(12);
-const StateSingleton_1 = __webpack_require__(53);
+const types_1 = __webpack_require__(13);
+const StateSingleton_1 = __webpack_require__(54);
 /**
  * Hook that exposes del()
  *
@@ -7657,20 +7693,20 @@ exports["default"] = useDelete;
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const react_1 = __webpack_require__(52);
+const react_1 = __webpack_require__(53);
 const __1 = __webpack_require__(0);
 const RLean_1 = __webpack_require__(2);
-const StateSingleton_1 = __webpack_require__(53);
-const getHookOptions_1 = __webpack_require__(7);
+const StateSingleton_1 = __webpack_require__(54);
+const getHookOptions_1 = __webpack_require__(8);
 /**
  * Main remove function from state
- * It does not executes a DELETE request
+ * It does not execute a DELETE request
  */
 const remove = async (options, dispatch, callback) => {
     if (typeof options === 'undefined') {
@@ -7698,7 +7734,7 @@ const remove = async (options, dispatch, callback) => {
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
  */
 function useRemove(options, callback = () => { }) {
-    const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand((s) => s.dispatch);
+    const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(s => s.dispatch);
     if (typeof options === 'undefined') {
         return (options, callback = () => { }) => {
             remove(options, dispatch, callback);
@@ -7712,18 +7748,18 @@ exports["default"] = useRemove;
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const react_1 = __webpack_require__(52);
-const utils_1 = __webpack_require__(3);
+const react_1 = __webpack_require__(53);
+const utils_1 = __webpack_require__(4);
 const __1 = __webpack_require__(0);
-const _internal_1 = __webpack_require__(5);
+const _internal_1 = __webpack_require__(6);
 const RLean_1 = __webpack_require__(2);
-const StateSingleton_1 = __webpack_require__(53);
+const StateSingleton_1 = __webpack_require__(54);
 function useSyncState() {
     const mountedRef = (0, react_1.useRef)(true);
     const [state, dispatch] = StateSingleton_1.StateSingleton.getInstance().zustand((s) => [
@@ -7762,33 +7798,13 @@ exports["default"] = useSyncState;
 
 
 /***/ }),
-/* 72 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.removeAll = void 0;
-const _1 = __webpack_require__(0);
-/**
- * Clear all data from the store and from session.
- */
-const removeAll = async () => {
-    sessionStorage.clear();
-    localStorage.clear();
-    _1.Store.clear();
-};
-exports.removeAll = removeAll;
-
-
-/***/ }),
 /* 73 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const getStorageMethods_1 = __webpack_require__(48);
+const getStorageMethods_1 = __webpack_require__(49);
 class Store {
     /*
      * Makes the 'set' call to local storage to store data
@@ -7876,7 +7892,7 @@ exports["default"] = new Store();
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RLeanBaseHooks = void 0;
-const useSyncState_1 = __webpack_require__(71);
+const useSyncState_1 = __webpack_require__(72);
 function RLeanBaseHooks() {
     (0, useSyncState_1.default)();
     return null;

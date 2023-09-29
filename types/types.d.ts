@@ -126,6 +126,7 @@ export declare type ActionType = {
  */
 export declare type EntityDefineOptions<T> = {
     key: string;
+    baseURLOverride?: string;
     initialState?: Partial<T>;
     getURL?: string;
     postURL?: string;
@@ -148,6 +149,7 @@ export declare type EntityDefineOptions<T> = {
     listener?: Function;
     extensions?: any;
     callback?: Function;
+    transformation?: Function;
 };
 /**
  * Options type

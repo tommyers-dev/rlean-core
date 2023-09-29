@@ -56,11 +56,11 @@ export type EntityState<T> = {
  * API methods
  */
 export enum API_METHOD {
-  DELETE = "DELETE",
-  GET = "GET",
-  PATCH = "PATCH",
-  POST = "POST",
-  PUT = "PUT",
+  DELETE = 'DELETE',
+  GET = 'GET',
+  PATCH = 'PATCH',
+  POST = 'POST',
+  PUT = 'PUT',
 }
 
 /**
@@ -133,6 +133,7 @@ export type ActionType = { type: string; [key: string]: any };
  */
 export type EntityDefineOptions<T> = {
   key: string;
+  baseURLOverride?: string;
   initialState?: Partial<T>;
   getURL?: string;
   postURL?: string;
@@ -155,6 +156,7 @@ export type EntityDefineOptions<T> = {
   listener?: Function;
   extensions?: any;
   callback?: Function;
+  transformation?: Function;
 };
 
 /**

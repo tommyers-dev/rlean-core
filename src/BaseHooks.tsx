@@ -1,5 +1,5 @@
-import React from "react";
-import useSyncState from "./hooks/useSyncState";
+import React from 'react';
+import useSyncState from './hooks/useSyncState';
 
 export function RLeanBaseHooks() {
   useSyncState();
