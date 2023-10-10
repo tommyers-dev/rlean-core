@@ -24,14 +24,9 @@ import { StateSingleton } from '../StateSingleton';
  * @todo Type the response callback. See usePost and usePut for reference.
  */
 export default function useGet<Def extends EntityDefineOptions<any>>(
-  options: GetOptions<Def> | undefined,
+  options?: GetOptions<Def> | undefined,
   callback?: () => void
-):
-  | EntityState<Def>
-  | (<Def extends EntityDefineOptions<any>>(
-      options: GetOptions<Def>,
-      callback?: (response: any, error?: any) => void
-    ) => void) {
+) {
   const [state, dispatch] = StateSingleton.getInstance().zustand((s: any) => [
     s.global,
     s.dispatch,
