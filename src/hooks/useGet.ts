@@ -64,7 +64,6 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   ) => {
     const { definition, params, type } = getHookOptions(options);
 
-    //const currentState: GlobalState<A> = state;
     const currentState: GlobalState<A> = innerStateRef.current;
 
     // definition does not include a get call

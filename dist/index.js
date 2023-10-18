@@ -7264,7 +7264,6 @@ function useGet(options, callback) {
     }, [state]);
     const get = async (options, innerStateRef, dispatch, callback = (res, err) => { }, isRefetch = false) => {
         const { definition, params, type } = (0, _internal_1.getHookOptions)(options);
-        //const currentState: GlobalState<A> = state;
         const currentState = innerStateRef.current;
         // definition does not include a get call
         if (!(0, utils_1.hasValue)(definition, 'getURL')) {
