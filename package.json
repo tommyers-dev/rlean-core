@@ -1,6 +1,6 @@
 {
   "name": "@rlean/core",
-  "version": "3.0.14-11",
+  "version": "3.0.15",
   "description": "Lean React Enterprise Framework with Hooks",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -35,7 +35,7 @@
     "axios": "^0.21.1",
     "localforage": "^1.7.3",
     "regenerator-runtime": "^0.13.3",
-    "zustand": "^4.2.0"
+    "zustand": "^4.4.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",

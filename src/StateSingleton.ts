@@ -1,6 +1,6 @@
 import { initialState } from "./initialState";
 import { reducer } from "./reducer";
-import create, { UseBoundStore, StoreApi } from "zustand";
+import { create, UseBoundStore, StoreApi } from "zustand";
 import { GlobalState } from "./types";
 import { getValue } from "@rlean/utils";
 import RLean from "./RLean";

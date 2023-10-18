@@ -51,161 +51,162 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   let isMounted = true;
   let canceled = false;
 
-  const get = useCallback(
-    async <T extends EntityDefineOptions<any>, A>(
-      options: GetOptions<T> | undefined,
-      stateRef: any,
-      dispatch: (updateState: any) => void,
-      callback = (res: any, err?: any) => {},
-      isRefetch: boolean = false
-    ) => {
-      const { definition, params, type } = getHookOptions(options);
-      const currentState: GlobalState<A> = state;
-      // const currentState: GlobalState<A> = stateRef.current;
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
-      // definition does not include a get call
-      if (!hasValue(definition, 'getURL')) {
+  const get = async <T extends EntityDefineOptions<any>, A>(
+    options: GetOptions<T> | undefined,
+    innerStateRef: any,
+    dispatch: (updateState: any) => void,
+    callback = (res: any, err?: any) => {},
+    isRefetch: boolean = false
+  ) => {
+    const { definition, params, type } = getHookOptions(options);
+
+    //const currentState: GlobalState<A> = state;
+    const currentState: GlobalState<A> = innerStateRef.current;
+
+    // definition does not include a get call
+    if (!hasValue(definition, 'getURL')) {
+      return null;
+    }
+
+    // check for null params
+    if (!definition.nullableParams) {
+      for (let key in params) {
+        if (typeof params[key] === 'undefined' || params[key] === null) {
+          return null;
+        }
+      }
+    }
+
+    const stateValue =
+      currentState && currentState[definition.key]
+        ? deepCopy(currentState[definition.key])
+        : {};
+    stateValue.refetch = () => refetch(options);
+
+    try {
+      /*
+        if (
+          stateValue[definition.key] &&
+          stateValue[definition.key].isRefetching
+        ) {
+          return stateValue;
+        }
+        */
+
+      if (isMounted) {
+        setIsLoading(true);
+        setInit(true);
+
+        if (isRefetch) {
+          setIsRefetching(true);
+        }
+      }
+
+      stateValue.isLoading = true;
+      stateValue.init = true;
+
+      if (isRefetch) {
+        stateValue.isRefetching = true;
+      }
+
+      // set initial loading state
+      if (definition.persistData) {
+        Store.set(definition, stateValue);
+      }
+
+      if (definition.includeInState) {
+        dispatch(
+          definition.updateState(stateValue, `${definition.type}_IS_LOADING`)
+        );
+      }
+
+      if (definition.preferStore) {
         return null;
       }
 
-      // check for null params
-      if (!definition.nullableParams) {
-        for (let key in params) {
-          if (typeof params[key] === 'undefined' || params[key] === null) {
-            return null;
-          }
-        }
-      }
-
-      const stateValue =
-        currentState && currentState[definition.key]
-          ? deepCopy(currentState[definition.key])
-          : {};
-      stateValue.refetch = () => refetch(options);
-      //stateValue.refetch = () => refetch();
-
-      try {
-        /*
-      if (
-        stateValue[definition.key] &&
-        stateValue[definition.key].isRefetching
-      ) {
-        return;
-      }
-      */
-
-        if (isMounted) {
-          setIsLoading(true);
-          setInit(true);
-
-          if (isRefetch) {
-            setIsRefetching(true);
-          }
-        }
-
-        stateValue.isLoading = true;
-        stateValue.init = true;
-
-        if (isRefetch) {
-          stateValue.isRefetching = true;
-        }
-
-        // set initial loading state
-        if (definition.persistData) {
-          Store.set(definition, stateValue);
-        }
-
-        if (definition.includeInState) {
-          dispatch(
-            definition.updateState(stateValue, `${definition.type}_IS_LOADING`)
-          );
-        }
-
-        if (definition.preferStore) {
-          return null;
-        }
-
-        const payload = {
-          path: definition.getURL,
-          query: params,
-          signal: abortCtrl.signal,
-        };
-
-        const res = await request(payload, definition, API_METHOD.GET);
-
-        if (res) {
-          // Transform data if transformation function is set for entity definition.
-          stateValue.data =
-            definition.transformation &&
-            typeof definition.transformation === 'function'
-              ? definition.transformation(res.data)
-              : res.data;
-          stateValue.isLoading = false;
-          stateValue.lastUpdated = new Date();
-          stateValue.isRefetching = false;
-        } else {
-          stateValue.isLoading = false;
-        }
-
-        if (isMounted) {
-          setData(stateValue.data);
-          setIsLoading(stateValue.isLoading);
-          setLastUpdated(stateValue.lastUpdated);
-          setIsRefetching(stateValue.isRefetching);
-        }
-
-        // persist updated value with new loading status
-        if (definition.persistData) {
-          Store.set(definition, stateValue);
-        }
-
-        if (definition.includeInState) {
-          dispatch(definition.updateState(stateValue, type));
-        }
-
-        if (callback) {
-          callback(res);
-        }
-      } catch (err) {
-        console.error(err);
-
-        stateValue.error = err;
-        stateValue.isLoading = false;
-
-        if (isMounted) {
-          setError(stateValue.error);
-          setIsLoading(stateValue.isLoading);
-        }
-
-        if (definition.includeInState) {
-          dispatch(
-            definition.updateState(stateValue, `${definition.type}_ERROR`)
-          );
-        }
-
-        if (callback) {
-          callback(null, err);
-        }
-      }
-
-      return {
-        data,
-        error,
-        isLoading,
-        isRefetching,
-        lastUpdated,
-        canceled,
-        init,
-        refetch: async () => {
-          await get(options, state, dispatch, callback, true);
-        },
+      const payload = {
+        path: definition.getURL,
+        query: params,
+        signal: abortCtrl.signal,
       };
-    },
-    [state]
-  );
+
+      const res = await request(payload, definition, API_METHOD.GET);
+
+      if (res) {
+        // Transform data if transformation function is set for entity definition.
+        stateValue.data =
+          definition.transformation &&
+          typeof definition.transformation === 'function'
+            ? definition.transformation(res.data)
+            : res.data;
+        stateValue.isLoading = false;
+        stateValue.lastUpdated = new Date();
+        stateValue.isRefetching = false;
+      } else {
+        stateValue.isLoading = false;
+      }
+
+      if (isMounted) {
+        setData(stateValue.data);
+        setIsLoading(stateValue.isLoading);
+        setLastUpdated(stateValue.lastUpdated);
+        setIsRefetching(stateValue.isRefetching);
+      }
+
+      // persist updated value with new loading status
+      if (definition.persistData) {
+        Store.set(definition, stateValue);
+      }
+
+      if (definition.includeInState) {
+        dispatch(definition.updateState(stateValue, type));
+      }
+
+      if (callback) {
+        callback(res);
+      }
+    } catch (err) {
+      console.error(err);
+
+      stateValue.error = err;
+      stateValue.isLoading = false;
+
+      if (isMounted) {
+        setError(stateValue.error);
+        setIsLoading(stateValue.isLoading);
+      }
+
+      if (definition.includeInState) {
+        dispatch(
+          definition.updateState(stateValue, `${definition.type}_ERROR`)
+        );
+      }
+
+      if (callback) {
+        callback(null, err);
+      }
+    }
+
+    return {
+      data,
+      error,
+      isLoading,
+      isRefetching,
+      lastUpdated,
+      canceled,
+      init,
+      refetch: async () => {
+        await get(options, stateRef, dispatch, callback, true);
+      },
+    };
+  };
 
   const refetch = async (inner_options?: any) => {
-    await get(inner_options ?? options, state, dispatch, callback, true);
+    await get(options ?? inner_options, stateRef, dispatch, callback, true);
   };
 
   if (typeof options === 'undefined' || options === null) {
