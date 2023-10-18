@@ -88,15 +88,6 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
     stateValue.refetch = () => refetch(options);
 
     try {
-      /*
-        if (
-          stateValue[definition.key] &&
-          stateValue[definition.key].isRefetching
-        ) {
-          return stateValue;
-        }
-        */
-
       if (isMounted) {
         setIsLoading(true);
         setInit(true);
