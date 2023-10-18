@@ -27,5 +27,5 @@ module.exports = {
       root: "React",
     },
   },
-  devtool: "inline-source-map",
+  //devtool: "inline-source-map",
 };
