@@ -6413,7 +6413,7 @@ const save = async (options, state, dispatch = () => { }, callback = () => { }) 
  */
 function useSave(options, callback = () => { }) {
     const [state, dispatch] = StateSingleton_1.StateSingleton.getInstance().zustand((s) => [
-        s.global,
+        s.state,
         s.dispatch,
     ]);
     if (typeof options === 'undefined') {
@@ -6451,7 +6451,7 @@ const RLean_1 = __webpack_require__(2);
 class StateSingleton {
     constructor() {
         const configEntities = (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
-        this.zustand = (0, zustand_1.default)((set) => ({
+        this.zustand = (0, zustand_1.create)((set) => ({
             state: (0, initialState_1.initialState)(configEntities),
             dispatch: (args) => {
                 set((zustandState) => {
@@ -6593,8 +6593,9 @@ exports.applyMiddleware = applyMiddleware;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createStore": () => (/* reexport safe */ zustand_vanilla__WEBPACK_IMPORTED_MODULE_0__["default"]),
-/* harmony export */   "default": () => (/* binding */ create),
+/* harmony export */   "create": () => (/* binding */ create),
+/* harmony export */   "createStore": () => (/* reexport safe */ zustand_vanilla__WEBPACK_IMPORTED_MODULE_0__.createStore),
+/* harmony export */   "default": () => (/* binding */ react),
 /* harmony export */   "useStore": () => (/* binding */ useStore)
 /* harmony export */ });
 /* harmony import */ var zustand_vanilla__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(58);
@@ -6606,9 +6607,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const { useSyncExternalStoreWithSelector } = use_sync_external_store_shim_with_selector_js__WEBPACK_IMPORTED_MODULE_2__;
+let didWarnAboutEqualityFn = false;
 function useStore(api, selector = api.getState, equalityFn) {
+  if (process.env.NODE_ENV !== "production" && equalityFn && !didWarnAboutEqualityFn) {
+    console.warn(
+      "[DEPRECATED] Use `createWithEqualityFn` instead of `create` or use `useStoreWithEqualityFn` instead of `useStore`. They can be imported from 'zustand/traditional'. https://github.com/pmndrs/zustand/discussions/1937"
+    );
+    didWarnAboutEqualityFn = true;
+  }
   const slice = useSyncExternalStoreWithSelector(
     api.subscribe,
     api.getState,
@@ -6620,12 +6627,25 @@ function useStore(api, selector = api.getState, equalityFn) {
   return slice;
 }
 const createImpl = (createState) => {
-  const api = typeof createState === "function" ? (0,zustand_vanilla__WEBPACK_IMPORTED_MODULE_0__["default"])(createState) : createState;
+  if (process.env.NODE_ENV !== "production" && typeof createState !== "function") {
+    console.warn(
+      "[DEPRECATED] Passing a vanilla store will be unsupported in a future version. Instead use `import { useStore } from 'zustand'`."
+    );
+  }
+  const api = typeof createState === "function" ? (0,zustand_vanilla__WEBPACK_IMPORTED_MODULE_0__.createStore)(createState) : createState;
   const useBoundStore = (selector, equalityFn) => useStore(api, selector, equalityFn);
   Object.assign(useBoundStore, api);
   return useBoundStore;
 };
 const create = (createState) => createState ? createImpl(createState) : createImpl;
+var react = (createState) => {
+  if (process.env.NODE_ENV !== "production") {
+    console.warn(
+      "[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`."
+    );
+  }
+  return create(createState);
+};
 
 
 
@@ -6637,7 +6657,8 @@ const create = (createState) => createState ? createImpl(createState) : createIm
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createStore)
+/* harmony export */   "createStore": () => (/* binding */ createStore),
+/* harmony export */   "default": () => (/* binding */ vanilla)
 /* harmony export */ });
 const createStoreImpl = (createState) => {
   let state;
@@ -6655,12 +6676,27 @@ const createStoreImpl = (createState) => {
     listeners.add(listener);
     return () => listeners.delete(listener);
   };
-  const destroy = () => listeners.clear();
+  const destroy = () => {
+    if (( false ? 0 : void 0) !== "production") {
+      console.warn(
+        "[DEPRECATED] The `destroy` method will be unsupported in a future version. Instead use unsubscribe function returned by subscribe. Everything will be garbage-collected if store is garbage-collected."
+      );
+    }
+    listeners.clear();
+  };
   const api = { setState, getState, subscribe, destroy };
   state = createState(setState, getState, api);
   return api;
 };
 const createStore = (createState) => createState ? createStoreImpl(createState) : createStoreImpl;
+var vanilla = (createState) => {
+  if (( false ? 0 : void 0) !== "production") {
+    console.warn(
+      "[DEPRECATED] Default export is deprecated. Instead use import { createStore } from 'zustand/vanilla'."
+    );
+  }
+  return createStore(createState);
+};
 
 
 
@@ -7203,7 +7239,7 @@ const StateSingleton_1 = __webpack_require__(54);
  */
 function useGet(options, callback) {
     const [state, dispatch] = StateSingleton_1.StateSingleton.getInstance().zustand((s) => [
-        s.global,
+        s.state,
         s.dispatch,
     ]);
     const [init, setInit] = (0, react_1.useState)(false);
@@ -7223,9 +7259,12 @@ function useGet(options, callback) {
     // these should be useRef variables instead
     let isMounted = true;
     let canceled = false;
-    const get = async (options, stateRef, dispatch, callback = (res, err) => { }, isRefetch = false) => {
+    (0, react_1.useEffect)(() => {
+        stateRef.current = state;
+    }, [state]);
+    const get = async (options, innerStateRef, dispatch, callback = (res, err) => { }, isRefetch = false) => {
         const { definition, params, type } = (0, _internal_1.getHookOptions)(options);
-        const currentState = stateRef.current;
+        const currentState = innerStateRef.current;
         // definition does not include a get call
         if (!(0, utils_1.hasValue)(definition, 'getURL')) {
             return null;
@@ -7241,7 +7280,7 @@ function useGet(options, callback) {
         const stateValue = currentState && currentState[definition.key]
             ? (0, utils_1.deepCopy)(currentState[definition.key])
             : {};
-        stateValue.refetch = () => refetch();
+        stateValue.refetch = () => refetch(options);
         try {
             if (isMounted) {
                 setIsLoading(true);
@@ -7330,8 +7369,8 @@ function useGet(options, callback) {
             },
         };
     };
-    const refetch = async () => {
-        await get(options, stateRef, dispatch, callback, true);
+    const refetch = async (inner_options) => {
+        await get(options !== null && options !== void 0 ? options : inner_options, stateRef, dispatch, callback, true);
     };
     if (typeof options === 'undefined' || options === null) {
         return (options, callback) => {

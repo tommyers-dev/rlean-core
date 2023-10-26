@@ -59,7 +59,7 @@ export default function useSave<T extends EntityDefineOptions<any>>(
   callback = () => {}
 ) {
   const [state, dispatch] = StateSingleton.getInstance().zustand((s: any) => [
-    s.global,
+    s.state,
     s.dispatch,
   ]);
 

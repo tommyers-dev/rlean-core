@@ -8,7 +8,8 @@
     "jsx": "react",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "allowJs": true
+    "allowJs": true,
+    "inlineSourceMap": false 
   },
   "exclude": ["dist", "webpack*"]
 }

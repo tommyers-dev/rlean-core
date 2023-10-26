@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { request } from '../_internal/request';
 import { deepCopy, hasValue } from '@rlean/utils';
 import { getHookOptions } from '../_internal';
 import { Store } from '..';
 import {
-  EntityState,
   GlobalState,
   EntityDefineOptions,
   GetOptions,
@@ -24,11 +23,11 @@ import { StateSingleton } from '../StateSingleton';
  * @todo Type the response callback. See usePost and usePut for reference.
  */
 export default function useGet<Def extends EntityDefineOptions<any>>(
-  options?: GetOptions<Def> | undefined,
-  callback?: () => void
+  options?: GetOptions<Def>,
+  callback?: (response: any, error?: any) => void
 ) {
   const [state, dispatch] = StateSingleton.getInstance().zustand((s: any) => [
-    s.global,
+    s.state,
     s.dispatch,
   ]);
 
@@ -52,15 +51,20 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
   let isMounted = true;
   let canceled = false;
 
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
+
   const get = async <T extends EntityDefineOptions<any>, A>(
     options: GetOptions<T> | undefined,
-    stateRef: any,
+    innerStateRef: any,
     dispatch: (updateState: any) => void,
     callback = (res: any, err?: any) => {},
     isRefetch: boolean = false
   ) => {
     const { definition, params, type } = getHookOptions(options);
-    const currentState: GlobalState<A> = stateRef.current;
+
+    const currentState: GlobalState<A> = innerStateRef.current;
 
     // definition does not include a get call
     if (!hasValue(definition, 'getURL')) {
@@ -80,7 +84,7 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
       currentState && currentState[definition.key]
         ? deepCopy(currentState[definition.key])
         : {};
-    stateValue.refetch = () => refetch();
+    stateValue.refetch = () => refetch(options);
 
     try {
       if (isMounted) {
@@ -191,8 +195,8 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
     };
   };
 
-  const refetch = async () => {
-    await get(options, stateRef, dispatch, callback, true);
+  const refetch = async (inner_options?: any) => {
+    await get(options ?? inner_options, stateRef, dispatch, callback, true);
   };
 
   if (typeof options === 'undefined' || options === null) {
