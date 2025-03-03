@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { request, inspectClass } from "../_internal";
-import { getHookOptions } from "../_internal/getHookOptions";
-import { Store } from "..";
+import { useEffect } from 'react';
+import { request, inspectClass } from '../_internal';
+import { getHookOptions } from '../_internal/getHookOptions';
+import { Store } from '..';
 import {
   APIResponse,
   API_METHOD,
   EntityDefineOptions,
   PutOptions,
-} from "../types";
-import { StateSingleton } from "../StateSingleton";
+} from '../types';
+import { StateSingleton } from '../StateSingleton';
 
 /**
  * usePut
@@ -33,9 +33,9 @@ import { StateSingleton } from "../StateSingleton";
  */
 export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
   options?: PutOptions<T, Req>,
-  callback: (response: APIResponse<Res>, error?: any) => void = () => {}
+  callback?: (response: APIResponse<Res>, error?: any) => void
 ) {
-  const dispatch = StateSingleton.getInstance().zustand((s) => s.dispatch);
+  const dispatch = StateSingleton.getInstance().zustand(s => s.dispatch);
 
   /**
    * Function that executes a PUT against the API.
@@ -92,7 +92,7 @@ export default function usePut<Res, Req, T extends EntityDefineOptions<any>>(
   if (typeof options === 'undefined') {
     return <Res, Req, T extends EntityDefineOptions<any>>(
       options: PutOptions<T, Req> = undefined,
-      callback: (response: APIResponse<Res>, error?: any) => void
+      callback?: (response: APIResponse<Res>, error?: any) => void
     ) => {
       put(options, dispatch, callback);
     };

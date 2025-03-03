@@ -946,20 +946,20 @@ const getHookOptions = (options) => {
             key: null,
         };
     }
-    const entityDefinitions = (0, utils_1.getValue)(RLean_1.default, "config.entities", {});
+    const entityDefinitions = (0, utils_1.getValue)(RLean_1.default, 'config.entities', {});
     const entities = Object.values(entityDefinitions);
     const definition = options.key
-        ? entities.find((entity) => entity.key === options.key)
+        ? entities.find(entity => entity.key === options.key)
         : (_a = options.entity) !== null && _a !== void 0 ? _a : null;
     const key = definition.key;
     const add = options.add;
     return {
         definition,
         params: (_b = options.params) !== null && _b !== void 0 ? _b : null,
-        value: typeof options.value !== "undefined" ? options.value : null,
+        value: typeof options.value !== 'undefined' ? options.value : null,
         type: add ? `ADD_${(0, convertToType_1.convertToType)(key)}` : (_c = options.type) !== null && _c !== void 0 ? _c : null,
         body: (_d = options.body) !== null && _d !== void 0 ? _d : null,
-        save: options.save,
+        save: options.save ? true : false,
     };
 };
 exports.getHookOptions = getHookOptions;
@@ -7263,6 +7263,7 @@ function useGet(options, callback) {
         stateRef.current = state;
     }, [state]);
     const get = async (options, innerStateRef, dispatch, callback = (res, err) => { }, isRefetch = false) => {
+        var _a;
         const { definition, params, type } = (0, _internal_1.getHookOptions)(options);
         const currentState = innerStateRef.current;
         // definition does not include a get call
@@ -7311,18 +7312,25 @@ function useGet(options, callback) {
             };
             const res = await (0, request_1.request)(payload, definition, types_1.API_METHOD.GET);
             if (res) {
-                // Transform data if transformation function is set for entity definition.
-                stateValue.data =
-                    definition.transformation &&
-                        typeof definition.transformation === 'function'
-                        ? definition.transformation(res.data)
-                        : res.data;
-                stateValue.isLoading = false;
-                stateValue.lastUpdated = new Date();
-                stateValue.isRefetching = false;
+                if ((_a = res === null || res === void 0 ? void 0 : res.status) === null || _a === void 0 ? void 0 : _a.toString().startsWith('2')) {
+                    // Transform data if transformation function is set for entity definition.
+                    stateValue.data =
+                        definition.transformation &&
+                            typeof definition.transformation === 'function'
+                            ? definition.transformation(res.data)
+                            : res.data;
+                    stateValue.isLoading = false;
+                    stateValue.lastUpdated = new Date();
+                    stateValue.isRefetching = false;
+                }
+                else {
+                    // failed to fetch data
+                    stateValue.data = null;
+                }
             }
             else {
                 stateValue.isLoading = false;
+                stateValue.data = null;
             }
             if (isMounted) {
                 setData(stateValue.data);
@@ -7343,6 +7351,7 @@ function useGet(options, callback) {
         }
         catch (err) {
             console.error(err);
+            stateValue.data = null;
             stateValue.error = err;
             stateValue.isLoading = false;
             if (isMounted) {
@@ -7413,7 +7422,7 @@ const StateSingleton_1 = __webpack_require__(54);
  * const patch = usePatch();
  * patch({ definition: Definition, body: { value: 'value' } });
  */
-function usePatch(options, _callback = () => { }) {
+function usePatch(options, callback = () => { }) {
     const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(s => s.dispatch);
     /**
      * Function that executes a PATCH against the API.
@@ -7465,7 +7474,7 @@ function usePatch(options, _callback = () => { }) {
         };
     }
     (0, react_1.useEffect)(() => {
-        patch(options, dispatch, _callback);
+        patch(options, dispatch, callback);
     }, []);
 }
 exports["default"] = usePatch;
@@ -7504,7 +7513,7 @@ const StateSingleton_1 = __webpack_require__(54);
  * const post = usePost();
  * post({ definition: Definition, body: { value: 'value' } });
  */
-function usePost(options, callback = () => { }) {
+function usePost(options, callback) {
     const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(s => s.dispatch);
     const mountedRef = (0, react_1.useRef)(true);
     const post = (0, react_1.useCallback)(async (options, dispatch, callback) => {
@@ -7599,8 +7608,8 @@ const StateSingleton_1 = __webpack_require__(54);
  * const put = usePut();
  * put({ definition: Definition, body: { value: 'value' } })
  */
-function usePut(options, callback = () => { }) {
-    const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand((s) => s.dispatch);
+function usePut(options, callback) {
+    const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(s => s.dispatch);
     /**
      * Function that executes a PUT against the API.
      *
@@ -7676,7 +7685,7 @@ const StateSingleton_1 = __webpack_require__(54);
  * const del = useDelete();
  * del({ definition: Definition, body: { value: 'value' } });
  */
-function useDelete(options, callback = () => { }) {
+function useDelete(options, callback) {
     const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand((s) => s.dispatch);
     // NOT CONVERTED
     /**
@@ -7772,7 +7781,7 @@ const remove = async (options, dispatch, callback) => {
  * @param {Object} options An object containing an instance of the definition whose state needs to be populated, an optional params object if an API call needs to be made, and an optional type if the definition has multiple types.
  * @param {Function} [callback=null] Optional callback function to be executed after useSave has executed its logic.
  */
-function useRemove(options, callback = () => { }) {
+function useRemove(options, callback) {
     const dispatch = StateSingleton_1.StateSingleton.getInstance().zustand(s => s.dispatch);
     if (typeof options === 'undefined') {
         return (options, callback = () => { }) => {

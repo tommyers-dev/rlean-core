@@ -127,17 +127,23 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
       const res = await request(payload, definition, API_METHOD.GET);
 
       if (res) {
-        // Transform data if transformation function is set for entity definition.
-        stateValue.data =
-          definition.transformation &&
-          typeof definition.transformation === 'function'
-            ? definition.transformation(res.data)
-            : res.data;
-        stateValue.isLoading = false;
-        stateValue.lastUpdated = new Date();
-        stateValue.isRefetching = false;
+        if (res?.status?.toString().startsWith('2')) {
+          // Transform data if transformation function is set for entity definition.
+          stateValue.data =
+            definition.transformation &&
+            typeof definition.transformation === 'function'
+              ? definition.transformation(res.data)
+              : res.data;
+          stateValue.isLoading = false;
+          stateValue.lastUpdated = new Date();
+          stateValue.isRefetching = false;
+        } else {
+          // failed to fetch data
+          stateValue.data = null;
+        }
       } else {
         stateValue.isLoading = false;
+        stateValue.data = null;
       }
 
       if (isMounted) {
@@ -162,6 +168,7 @@ export default function useGet<Def extends EntityDefineOptions<any>>(
     } catch (err) {
       console.error(err);
 
+      stateValue.data = null;
       stateValue.error = err;
       stateValue.isLoading = false;
 

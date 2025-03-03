@@ -32,7 +32,7 @@ import { StateSingleton } from '../StateSingleton';
  */
 export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
   options?: PostOptions<Def, Req>,
-  callback: (response: APIResponse<Res>, error?: any) => void = () => {}
+  callback?: (response: APIResponse<Res>, error?: any) => void
 ) {
   const dispatch = StateSingleton.getInstance().zustand(s => s.dispatch);
   const mountedRef = useRef(true);
@@ -41,7 +41,7 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
     async <Res, Req, T extends EntityDefineOptions<any>>(
       options: PostOptions<T, Req> | undefined,
       dispatch: (updateState: any) => void,
-      callback: (response: APIResponse<Res>, error?: any) => void
+      callback?: (response: APIResponse<Res>, error?: any) => void
     ) => {
       const { definition, params, body, save } = getHookOptions(options);
       const postURL = definition.postURL;
@@ -96,7 +96,7 @@ export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(
   if (typeof options === 'undefined') {
     return <Res, Req, T extends EntityDefineOptions<any> = any>(
       options: PostOptions<T, Req>,
-      callback: (response: APIResponse<Res>, error?: any) => void
+      callback?: (response: APIResponse<Res>, error?: any) => void
     ) => {
       post(options, dispatch, callback);
     };

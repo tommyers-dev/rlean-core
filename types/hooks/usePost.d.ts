@@ -19,4 +19,4 @@ import { APIResponse, EntityDefineOptions, PostOptions } from '../types';
  * const post = usePost();
  * post({ definition: Definition, body: { value: 'value' } });
  */
-export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(options?: PostOptions<Def, Req>, callback?: (response: APIResponse<Res>, error?: any) => void): <Res_1, Req_1, T extends EntityDefineOptions<any> = any>(options: Partial<import("../types").Options<T, T extends EntityDefineOptions<infer F> ? F : unknown, Req_1>>, callback: (response: APIResponse<Res_1>, error?: any) => void) => void;
+export default function usePost<Res, Req, Def extends EntityDefineOptions<any>>(options?: PostOptions<Def, Req>, callback?: (response: APIResponse<Res>, error?: any) => void): <Res_1, Req_1, T extends EntityDefineOptions<any> = any>(options: Partial<import("../types").Options<T, T extends EntityDefineOptions<infer F> ? F : unknown, Req_1>>, callback?: (response: APIResponse<Res_1>, error?: any) => void) => void;

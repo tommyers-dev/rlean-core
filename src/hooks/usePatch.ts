@@ -15,7 +15,7 @@ import { StateSingleton } from '../StateSingleton';
  */
 export default function usePatch<Res, Req, T extends EntityDefineOptions<any>>(
   options?: PatchOptions<T, Req>,
-  _callback: (response: APIResponse<Res>, error?: any) => void = () => {}
+  callback: (response: APIResponse<Res>, error?: any) => void = () => {}
 ) {
   const dispatch = StateSingleton.getInstance().zustand(s => s.dispatch);
 
@@ -29,7 +29,7 @@ export default function usePatch<Res, Req, T extends EntityDefineOptions<any>>(
   const patch = async (
     options: any,
     dispatch: any,
-    callback: Function | null
+    callback?: Function | null
   ) => {
     const { definition, params, body, save } = getHookOptions(options);
     const patchURL = definition.patchURL;
@@ -78,13 +78,13 @@ export default function usePatch<Res, Req, T extends EntityDefineOptions<any>>(
   if (typeof options === 'undefined') {
     return <Res, Req, T extends EntityDefineOptions<any>>(
       options: PatchOptions<T, Req> | undefined,
-      callback: (response: APIResponse<Res>, error?: any) => void
+      callback?: (response: APIResponse<Res>, error?: any) => void
     ) => {
       patch(options, dispatch, callback);
     };
   }
 
   useEffect(() => {
-    patch(options, dispatch, _callback);
+    patch(options, dispatch, callback);
   }, []);
 }

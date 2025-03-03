@@ -12,7 +12,7 @@ import { EntityDefineOptions, Options } from '../types';
 const remove = async <T extends EntityDefineOptions<any>>(
   options: Partial<Options<T>>,
   dispatch: (updateState: any) => void,
-  callback: Function
+  callback?: Function | null
 ) => {
   if (typeof options === 'undefined') {
     return;
@@ -46,7 +46,7 @@ const remove = async <T extends EntityDefineOptions<any>>(
  */
 export default function useRemove<T extends EntityDefineOptions<any>>(
   options?: Partial<Options<T>>,
-  callback: Function = () => {}
+  callback?: Function | null
 ) {
   const dispatch = StateSingleton.getInstance().zustand(s => s.dispatch);
 

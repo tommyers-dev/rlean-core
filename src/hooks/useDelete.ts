@@ -18,7 +18,7 @@ import { StateSingleton } from '../StateSingleton';
  */
 export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
   options?: Partial<DeleteOptions<T, Req>>,
-  callback: (response: APIResponse<Res>, error?: any) => void = () => {}
+  callback?: (response: APIResponse<Res>, error?: any) => void
 ) {
   const dispatch = StateSingleton.getInstance().zustand((s: any) => s.dispatch);
 
@@ -80,7 +80,7 @@ export default function useDelete<Res, Req, T extends EntityDefineOptions<any>>(
   if (typeof options === 'undefined') {
     return <Res, Req, T extends EntityDefineOptions<any>>(
       options: DeleteOptions<T, Req> | undefined,
-      callback: (response: APIResponse<Res>, error?: any) => void
+      callback?: (response: APIResponse<Res>, error?: any) => void
     ) => {
       del(options, dispatch, callback);
     };
